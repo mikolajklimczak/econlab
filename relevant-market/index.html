@@ -1,1 +1,2339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EconLab - Relevant Market Identification | Wyznaczanie rynku właściwego</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+            },
+            market: '#16a34a',
+            segment: '#2563eb',
+            industry: '#d97706',
+            danger: '#dc2626',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@700;800&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .custom-range {
+      accent-color: #4f46e5;
+    }
+    .custom-range-green {
+      accent-color: #16a34a;
+    }
+    .custom-range-cyan {
+      accent-color: #0284c7;
+    }
+    .custom-range-amber {
+      accent-color: #d97706;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col antialiased selection:bg-indigo-500 selection:text-white">
 
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-16 py-2.5 sm:py-0 flex flex-wrap sm:flex-nowrap items-center justify-between gap-3">
+      
+      <div class="flex items-center space-x-3.5">
+        <a href="#" onclick="switchTab('intro'); return false;" class="shrink-0 block hover:opacity-95 transition" aria-label="EconLab Home">
+          <img src="econlab_poziomo_v2.png" alt="EconLab Logo" class="h-9 sm:h-10 w-auto max-h-11 object-contain" onerror="this.onerror=null; this.src='https://placehold.co/240x60/ffffff/0e2b46?text=EconLab';">
+        </a>
+
+        <div class="border-l border-slate-200 pl-3">
+          <p class="text-sm font-semibold text-slate-800 leading-tight" data-i18n="subtitle">
+            Relevant market identification
+          </p>
+          <p class="text-[11px] text-slate-400 mt-0.5 flex items-center gap-1.5 flex-wrap">
+            <span><strong class="text-slate-600 font-semibold" data-i18n="author_lbl">Author:</strong> 
+              <a href="https://orcid.org/0000-0003-4761-3421" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 font-semibold hover:underline inline-flex items-center gap-1">
+                <span>Mikołaj Klimczak</span>
+                <svg class="w-3 h-3 text-emerald-600 inline" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.041-2.062 4.041-3.722 0-2.016-1.078-3.722-3.844-3.722h-2.494z"/>
+                </svg>
+              </a>
+            </span>
+            <span class="text-slate-300">•</span>
+            <span class="text-indigo-600/90 font-medium" data-i18n="ai_collab">AI implementation support: Gemini</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-2 sm:space-x-3">
+        <div class="bg-slate-100 p-1 rounded-xl flex text-xs font-semibold overflow-x-auto">
+          <button id="tab-intro" onclick="switchTab('intro')" class="px-3 py-1.5 rounded-lg bg-white shadow-sm text-indigo-600 font-bold transition whitespace-nowrap">
+            <span data-i18n="nav_intro">Introduction</span>
+          </button>
+          <button id="tab-lab" onclick="switchTab('lab')" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition whitespace-nowrap">
+            <span data-i18n="nav_lab">Laboratory</span>
+          </button>
+          <button id="tab-distinction" onclick="switchTab('distinction')" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition whitespace-nowrap">
+            <span data-i18n="nav_concept">Concepts</span>
+          </button>
+          <button id="tab-quiz" onclick="switchTab('quiz')" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition whitespace-nowrap">
+            <span data-i18n="nav_quiz">Quiz</span>
+          </button>
+        </div>
+
+        <button id="lang-btn" onclick="toggleLanguage()" title="Switch language / Zmień język (EN / PL)" aria-label="Switch language / Zmień język" class="p-2 bg-slate-100 hover:bg-slate-200 border border-slate-200 text-indigo-600 hover:text-indigo-700 rounded-xl transition active:scale-95 flex items-center justify-center">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 w-full">
+
+    <section id="view-intro" class="space-y-6">
+      
+      <div class="bg-gradient-to-r from-indigo-700 via-indigo-600 to-blue-600 text-white rounded-2xl p-6 sm:p-8 shadow-sm">
+        <div class="max-w-3xl space-y-3">
+          <div class="inline-flex items-center gap-2 bg-white/15 px-3 py-1 rounded-full text-xs font-semibold tracking-wide">
+            <span data-i18n="intro_hero_tag">Competition economics & antitrust policy</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight" data-i18n="intro_hero_title">
+            Relevant market identification and the SSNIP test
+          </h2>
+          <p class="text-sm sm:text-base text-indigo-100 leading-relaxed" data-i18n="intro_hero_desc">
+            Before competition authorities evaluate market power, concentration ratios, or mergers, they determine the boundary of the relevant market. A market is neither an entire industry nor an isolated product variant. It is the boundary where direct demand and supply substitution occur.
+          </p>
+          <div class="pt-2 flex flex-wrap gap-3">
+            <button onclick="switchTab('lab')" class="px-4 py-2 bg-white text-indigo-700 font-bold rounded-xl text-xs shadow hover:bg-indigo-50 transition flex items-center gap-1.5">
+              <span data-i18n="intro_hero_btn_lab">Open laboratory</span>
+              <span>→</span>
+            </button>
+            <button onclick="switchTab('distinction')" class="px-4 py-2 bg-indigo-500/30 text-white font-semibold rounded-xl text-xs border border-white/20 hover:bg-white/10 transition">
+              <span data-i18n="intro_hero_btn_concept">Concepts</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
+        <div class="border-b border-slate-100 pb-3">
+          <h3 class="text-base sm:text-lg font-bold text-slate-900" data-i18n="intro_ladder_title">Conceptual levels in economics</h3>
+          <p class="text-xs text-slate-500 mt-0.5" data-i18n="intro_ladder_sub">Economic aggregation from macroeconomy to specific product segments</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-3 pt-2">
+          
+          <div class="p-3.5 bg-slate-50 border border-slate-200 rounded-xl text-xs space-y-1">
+            <span class="text-[10px] font-mono font-bold text-slate-400 block uppercase" data-i18n="intro_lvl1_tag">Level 1</span>
+            <strong class="text-slate-900 block" data-i18n="intro_ladder_1_h">1. Economy</strong>
+            <p class="text-slate-600 leading-relaxed" data-i18n="intro_ladder_1_p">All production, trade, and service activities across a country or single market area.</p>
+          </div>
+
+          <div class="p-3.5 bg-slate-50 border border-slate-200 rounded-xl text-xs space-y-1">
+            <span class="text-[10px] font-mono font-bold text-slate-400 block uppercase" data-i18n="intro_lvl2_tag">Level 2</span>
+            <strong class="text-slate-900 block" data-i18n="intro_ladder_2_h">2. Sector</strong>
+            <p class="text-slate-600 leading-relaxed" data-i18n="intro_ladder_2_p">Three broad groups: agriculture and raw materials (I), manufacturing (II), services (III).</p>
+          </div>
+
+          <div class="p-3.5 bg-amber-50/70 border border-amber-200 rounded-xl text-xs space-y-1">
+            <span class="text-[10px] font-mono font-bold text-amber-600 block uppercase" data-i18n="intro_lvl3_tag">Level 3</span>
+            <strong class="text-amber-950 block" data-i18n="intro_ladder_3_h">3. Industry (PKD / NACE)</strong>
+            <p class="text-slate-600 leading-relaxed" data-i18n="intro_ladder_3_p">Enterprises sharing manufacturing technology or statistical codes. This is too broad to assess consumer pricing power.</p>
+          </div>
+
+          <div class="p-3.5 bg-emerald-50 border-2 border-emerald-400 rounded-xl text-xs space-y-1">
+            <span class="text-[10px] font-mono font-bold text-emerald-700 block uppercase" data-i18n="intro_lvl4_tag">Level 4 • Focus</span>
+            <strong class="text-emerald-950 block font-extrabold" data-i18n="intro_ladder_4_h">4. Relevant market</strong>
+            <p class="text-slate-700 leading-relaxed" data-i18n="intro_ladder_4_p">The smallest group of products and geographic area that a hypothetical monopolist could profitably monopolize under a 5–10% price rise.</p>
+          </div>
+
+          <div class="p-3.5 bg-blue-50/70 border border-blue-200 rounded-xl text-xs space-y-1">
+            <span class="text-[10px] font-mono font-bold text-blue-600 block uppercase" data-i18n="intro_lvl5_tag">Level 5</span>
+            <strong class="text-blue-950 block" data-i18n="intro_ladder_5_h">5. Product segment</strong>
+            <p class="text-slate-600 leading-relaxed" data-i18n="intro_ladder_5_p">A narrow product variant (such as cut red roses or strawberry yogurt). This is too narrow because buyers switch or competitors adjust production immediately.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
+        <div class="border-b border-slate-100 pb-3">
+          <h3 class="text-base sm:text-lg font-bold text-slate-900" data-i18n="intro_dims_title">Three dimensions of a relevant market</h3>
+          <p class="text-xs text-slate-500 mt-0.5" data-i18n="intro_dims_sub">Each market definition relies on product, geographic, and temporal boundaries</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1">
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 space-y-1.5 text-xs">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-indigo-600 inline-block"></span>
+              <strong class="text-slate-900 text-sm font-bold" data-i18n="intro_dim_prod_h">Product market</strong>
+            </div>
+            <p class="text-slate-600 leading-relaxed" data-i18n="intro_dim_prod_p">
+              Includes all products regarded as interchangeable by buyers based on characteristics, prices, and intended use. It also accounts for rival suppliers that can switch production quickly without high sunk costs.
+            </p>
+          </div>
+
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 space-y-1.5 text-xs">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-600 inline-block"></span>
+              <strong class="text-slate-900 text-sm font-bold" data-i18n="intro_dim_geo_h">Geographic market</strong>
+            </div>
+            <p class="text-slate-600 leading-relaxed" data-i18n="intro_dim_geo_p">
+              The territory where conditions of competition are sufficiently similar (for example, local delivery radiuses for wet concrete, national territories for retail goods, and worldwide areas for commercial aircraft).
+            </p>
+          </div>
+
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 space-y-1.5 text-xs">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-amber-600 inline-block"></span>
+              <strong class="text-slate-900 text-sm font-bold" data-i18n="intro_dim_temp_h">Temporal dimension</strong>
+            </div>
+            <p class="text-slate-600 leading-relaxed" data-i18n="intro_dim_temp_p">
+              Differences across time periods when shifting consumption across hours or seasons is impossible or costly (such as electricity in peak hours versus off-peak hours).
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex flex-wrap items-center justify-between border-b border-slate-100 pb-3 gap-2">
+          <div>
+            <h3 class="text-base sm:text-lg font-bold text-slate-900" data-i18n="intro_ssnip_title">The SSNIP test</h3>
+            <p class="text-xs text-slate-500 mt-0.5" data-i18n="intro_ssnip_sub">Small but Significant Non-Transitory Increase in Price</p>
+          </div>
+          <span class="text-[11px] font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 px-2.5 py-1 rounded-full">
+            SSNIP: 5–10%
+          </span>
+        </div>
+
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed" data-i18n="intro_ssnip_desc">
+          The test asks: could a hypothetical monopolist controlling a candidate product basket implement a profitable, permanent price increase of 5% to 10%?
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs pt-1">
+          <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50 space-y-1">
+            <strong class="text-slate-900 font-bold block" data-i18n="ssnip_step1_h">Step 1: narrow candidate</strong>
+            <p class="text-slate-600" data-i18n="ssnip_step1_p">Start with a single product or narrow product group.</p>
+          </div>
+          <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50 space-y-1">
+            <strong class="text-slate-900 font-bold block" data-i18n="ssnip_step2_h">Step 2: price increase</strong>
+            <p class="text-slate-600" data-i18n="ssnip_step2_p">Assume a price rise of 5% to 10%, keeping other prices constant.</p>
+          </div>
+          <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50 space-y-1">
+            <strong class="text-slate-900 font-bold block" data-i18n="ssnip_step3_h">Step 3: substitution analysis</strong>
+            <p class="text-slate-600" data-i18n="ssnip_step3_p">Measure buyer sales loss (demand substitution) and rival producer responses (supply substitution).</p>
+          </div>
+          <div class="p-3.5 rounded-xl border border-emerald-300 bg-emerald-50/60 space-y-1">
+            <strong class="text-emerald-950 font-bold block" data-i18n="ssnip_step4_h">Step 4: basket expansion or stop</strong>
+            <p class="text-slate-700" data-i18n="ssnip_step4_p">If the price rise is unprofitable, the candidate is too narrow. Add the closest substitute and test again. When the price rise becomes profitable, stop: the relevant market is established.</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <section id="view-lab" class="hidden space-y-6">
+      
+      <div class="bg-white rounded-2xl p-2 sm:p-2.5 border border-slate-200 shadow-xs flex flex-wrap gap-2 items-center justify-between">
+        <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+          <button id="btn-sublab-1" onclick="switchLabTask(1)" class="px-3.5 py-2 rounded-xl text-xs font-bold transition bg-indigo-600 text-white shadow-xs">
+            <span data-i18n="sublab_tab1">Zadanie 1: Krytyczna utrata sprzedaży</span>
+          </button>
+          <button id="btn-sublab-2" onclick="switchLabTask(2)" class="px-3.5 py-2 rounded-xl text-xs font-bold transition bg-slate-100 hover:bg-slate-200 text-slate-700">
+            <span data-i18n="sublab_tab2">Zadanie 2: Mapa substytucji i granice rynku</span>
+          </button>
+          <button id="btn-sublab-3" onclick="switchLabTask(3)" class="px-3.5 py-2 rounded-xl text-xs font-bold transition bg-slate-100 hover:bg-slate-200 text-slate-700">
+            <span data-i18n="sublab_tab3">Zadanie 3: Symulator monopolisty</span>
+          </button>
+        </div>
+        <div class="hidden sm:block text-[11px] font-medium text-slate-400 px-2" id="sublab-badge-info">
+          SSNIP &amp; Critical Loss
+        </div>
+      </div>
+
+      <!-- Task 1: Critical loss -->
+      <div id="sublab-task-1" class="space-y-6">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          
+          <div class="lg:col-span-7 space-y-5">
+            <div class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm space-y-5">
+              <div class="border-b border-slate-100 pb-3">
+                <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider" data-i18n="t1_badge">Warunek opłacalności</span>
+                <h3 class="text-lg font-bold text-slate-900 mt-0.5" data-i18n="t1_title">Krytyczna utrata sprzedaży a rzeczywisty odpływ</h3>
+                <p class="text-xs text-slate-500 mt-1" data-i18n="t1_subtitle">
+                  Porównaj próg dopuszczalnego spadku wolumenu z realną ucieczką klientów i reakcją podaży rywali.
+                </p>
+              </div>
+
+              <div class="space-y-4">
+                
+                <div class="space-y-1">
+                  <div class="flex justify-between items-center text-xs">
+                    <span class="font-semibold text-slate-700" data-i18n="t1_slider_margin">Marża początkowa (m = (P - MC)/P):</span>
+                    <span id="t1-val-m" class="font-mono font-bold bg-amber-50 text-amber-700 px-2 py-0.5 rounded">40%</span>
+                  </div>
+                  <input type="range" id="t1-range-m" min="5" max="90" value="40" step="5" class="w-full custom-range-amber cursor-pointer" oninput="updateTask1()">
+                  <div class="flex justify-between text-[10px] text-slate-400">
+                    <span data-i18n="t1_m_low">5% (niska marża)</span>
+                    <span>50%</span>
+                    <span data-i18n="t1_m_high">90% (wysoka marża)</span>
+                  </div>
+                </div>
+
+                <div class="space-y-1">
+                  <div class="flex justify-between items-center text-xs">
+                    <span class="font-semibold text-slate-700" data-i18n="t1_slider_ssnip">Podwyżka w teście SSNIP (X = ΔP/P):</span>
+                    <span id="t1-val-x" class="font-mono font-bold bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded">+5%</span>
+                  </div>
+                  <input type="range" id="t1-range-x" min="1" max="20" value="5" step="1" class="w-full custom-range cursor-pointer" oninput="updateTask1()">
+                  <div class="flex justify-between text-[10px] text-slate-400">
+                    <span>1%</span>
+                    <span class="font-semibold text-indigo-600 cursor-pointer" onclick="document.getElementById('t1-range-x').value=5; updateTask1();">+5% (standard UE)</span>
+                    <span class="font-semibold text-indigo-600 cursor-pointer" onclick="document.getElementById('t1-range-x').value=10; updateTask1();">+10% (standard)</span>
+                    <span>20%</span>
+                  </div>
+                </div>
+
+                <div class="space-y-1">
+                  <div class="flex justify-between items-center text-xs">
+                    <span class="font-semibold text-emerald-800" data-i18n="t1_slider_eps">Cenowa elastyczność popytu (|ε<sub>D</sub>|):</span>
+                    <span id="t1-val-eps" class="font-mono font-bold bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded">1.50</span>
+                  </div>
+                  <input type="range" id="t1-range-eps" min="0.1" max="6.0" value="1.5" step="0.1" class="w-full custom-range-green cursor-pointer" oninput="updateTask1()">
+                  <div class="flex justify-between text-[10px] text-slate-400">
+                    <span data-i18n="t1_eps_inelastic">0.1 (sztywny popyt)</span>
+                    <span>|ε| = 1.0</span>
+                    <span data-i18n="t1_eps_elastic">6.0 (elastyczny popyt)</span>
+                  </div>
+                </div>
+
+                <div class="space-y-1">
+                  <div class="flex justify-between items-center text-xs">
+                    <span class="font-semibold text-sky-800" data-i18n="t1_slider_sup">Substytucyjność podaży (wejście / przestawienie linii rywali):</span>
+                    <span id="t1-val-sup" class="font-mono font-bold bg-sky-50 text-sky-700 px-2 py-0.5 rounded">20%</span>
+                  </div>
+                  <input type="range" id="t1-range-sup" min="0" max="80" value="20" step="5" class="w-full custom-range-cyan cursor-pointer" oninput="updateTask1()">
+                  <div class="flex justify-between text-[10px] text-slate-400">
+                    <span data-i18n="t1_sup_low">0% (brak wejścia / patent)</span>
+                    <span data-i18n="t1_sup_high">80% (szybkie przestawienie linii)</span>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                <div class="flex justify-between items-center text-xs">
+                  <span class="font-bold text-slate-800" data-i18n="t1_bars_title">Porównanie utraty sprzedaży:</span>
+                  <span class="text-[11px] font-mono text-slate-500" id="t1-bars-status">AL &lt; CL</span>
+                </div>
+
+                <div class="space-y-1">
+                  <div class="flex justify-between text-xs">
+                    <span class="font-semibold text-indigo-700 flex items-center gap-1">
+                      <span class="w-2.5 h-2.5 rounded-full bg-indigo-600 inline-block"></span>
+                      <span data-i18n="t1_bar_cl_lbl">Krytyczna utrata sprzedaży (CL = X / (X + m)):</span>
+                    </span>
+                    <span id="t1-cl-num" class="font-mono font-bold text-indigo-700">11.1%</span>
+                  </div>
+                  <div class="w-full bg-slate-200 h-4 rounded-full overflow-hidden">
+                    <div id="t1-bar-cl" class="bg-indigo-600 h-full rounded-full transition-all duration-300" style="width: 11.1%;"></div>
+                  </div>
+                </div>
+
+                <div class="space-y-1">
+                  <div class="flex justify-between text-xs">
+                    <span class="font-semibold flex items-center gap-1" id="t1-al-label">
+                      <span class="w-2.5 h-2.5 rounded-full bg-emerald-600 inline-block" id="t1-al-dot"></span>
+                      <span data-i18n="t1_bar_al_lbl">Rzeczywista utrata sprzedaży (AL = |ε|·X + S·X):</span>
+                    </span>
+                    <span id="t1-al-num" class="font-mono font-bold text-emerald-600">8.5%</span>
+                  </div>
+                  <div class="w-full bg-slate-200 h-4 rounded-full overflow-hidden">
+                    <div id="t1-bar-al" class="bg-emerald-600 h-full rounded-full transition-all duration-300" style="width: 8.5%;"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-3 gap-3">
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                  <span class="text-[10px] font-bold text-slate-500 uppercase block" data-i18n="t1_out_profit">Wpływ na zysk (ΔΠ):</span>
+                  <div id="t1-res-profit" class="text-base sm:text-lg font-mono font-bold text-emerald-600 mt-0.5">+4.2%</div>
+                  <span id="t1-res-profit-sub" class="text-[10px] text-slate-400">Podwyżka zyskowna</span>
+                </div>
+
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                  <span class="text-[10px] font-bold text-slate-500 uppercase block" data-i18n="t1_out_eps_crit">Graniczna elastyczność (|ε<sub>crit</sub>|):</span>
+                  <div id="t1-res-crit-eps" class="text-base sm:text-lg font-mono font-bold text-indigo-700 mt-0.5">2.22</div>
+                  <span class="text-[10px] text-slate-400" data-i18n="t1_out_eps_sub">Próg opłacalności</span>
+                </div>
+
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                  <span class="text-[10px] font-bold text-slate-500 uppercase block" data-i18n="t1_out_verdict">Werdykt SSNIP:</span>
+                  <div id="t1-res-verdict" class="text-xs sm:text-sm font-bold text-emerald-700 mt-1">ZDAŁ (RYNEK)</div>
+                  <span id="t1-res-verdict-sub" class="text-[10px] text-slate-400">Tworzy rynek właściwy</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 space-y-4">
+            <div class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm space-y-4">
+              <div class="border-b border-slate-100 pb-2.5">
+                <span class="text-xs font-bold text-amber-600 uppercase tracking-wider" data-i18n="t1_chal_tag">Wyzwanie analityczne</span>
+                <h3 class="text-base font-bold text-slate-900 mt-0.5" data-i18n="t1_chal_title">5 Scenariuszy rynkowych</h3>
+                <p class="text-xs text-slate-500 mt-1" data-i18n="t1_chal_desc">
+                  Wybierz przypadek, oceń opłacalność podwyżki, a następnie zweryfikuj wynik za pomocą suwaków.
+                </p>
+              </div>
+
+              <div class="space-y-2" id="t1-scenario-list"></div>
+
+              <div id="t1-prediction-panel" class="p-4 rounded-xl border bg-slate-50 border-slate-200 space-y-3">
+                <div class="text-xs font-bold text-slate-800" id="t1-active-scen-title">1. Lek na receptę z patentem</div>
+                <p class="text-[11px] text-slate-600 leading-relaxed" id="t1-active-scen-text">
+                  Chorzy kupują z konieczności leczenia; wysoka marża (m=80%), brak leczenia zamiennego (|ε|=0.6), brak reakcji podaży rywali (S=0%).
+                </p>
+
+                <div class="space-y-1.5 pt-1">
+                  <span class="text-[11px] font-semibold text-slate-700 block" data-i18n="t1_pred_question">Czy podwyżka o 5% będzie opłacalna?</span>
+                  <div class="grid grid-cols-2 gap-2">
+                    <button onclick="submitT1Prediction(true)" id="btn-pred-yes" class="py-2 px-3 rounded-lg border border-slate-200 bg-white hover:bg-emerald-50 hover:border-emerald-300 text-xs font-semibold text-slate-700 transition">
+                      <span data-i18n="t1_pred_yes">Tak, opłacalna</span>
+                    </button>
+                    <button onclick="submitT1Prediction(false)" id="btn-pred-no" class="py-2 px-3 rounded-lg border border-slate-200 bg-white hover:bg-rose-50 hover:border-rose-300 text-xs font-semibold text-slate-700 transition">
+                      <span data-i18n="t1_pred_no">Nie, nieopłacalna</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div id="t1-pred-feedback" class="hidden p-3 rounded-lg text-xs leading-relaxed space-y-2"></div>
+
+                <button onclick="applyScenarioToSliders()" id="btn-apply-scen" class="w-full py-2 px-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-xs transition shadow-xs flex items-center justify-center gap-1.5">
+                  <span data-i18n="t1_btn_apply">Ustaw parametry na suwakach</span>
+                  <span>→</span>
+                </button>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Task 2: Substitution Map -->
+      <div id="sublab-task-2" class="hidden space-y-6">
+        <div class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm space-y-5">
+          <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3">
+            <div>
+              <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider" data-i18n="t2_badge">Granice rynku</span>
+              <h3 class="text-lg font-bold text-slate-900 mt-0.5" data-i18n="t2_title">Mapa substytucji i relacje produktowe</h3>
+              <p class="text-xs text-slate-500 mt-0.5" data-i18n="t2_subtitle">
+                Włączaj obiekty do badanego koszyka. Sprawdź, kiedy uzyskujesz rynek właściwy, a kiedy włączasz całą branżę.
+              </p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="resetTask2()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg transition" data-i18n="t2_btn_reset">
+                Zresetuj koszyk
+              </button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            
+            <div class="lg:col-span-8 bg-slate-50 rounded-2xl p-4 border border-slate-200 flex flex-col items-center">
+              <div class="w-full flex justify-between items-center text-xs mb-2 px-1">
+                <span class="font-bold text-slate-700" data-i18n="t2_orbit_title">Trasa podróży: Warszawa – Gdańsk / Trójmiasto</span>
+                <span class="text-[11px] text-slate-500" data-i18n="t2_click_hint">Kliknij węzeł, aby dodać lub usunąć go z koszyka</span>
+              </div>
+
+              <div class="w-full overflow-hidden flex justify-center">
+                <svg id="t2-map-svg" viewBox="0 0 660 420" class="w-full max-w-[660px] h-auto select-none font-sans"></svg>
+              </div>
+
+              <div class="flex flex-wrap items-center justify-center gap-4 text-xs mt-3 pt-2 border-t border-slate-200 w-full text-slate-600">
+                <span class="flex items-center gap-1.5">
+                  <span class="w-3 h-3 rounded-full bg-indigo-600 inline-block"></span>
+                  <span data-i18n="t2_leg_core">Produkt wyjściowy</span>
+                </span>
+                <span class="flex items-center gap-1.5">
+                  <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
+                  <span data-i18n="t2_leg_in">W koszyku</span>
+                </span>
+                <span class="flex items-center gap-1.5">
+                  <span class="w-3 h-3 rounded-full bg-slate-300 inline-block"></span>
+                  <span data-i18n="t2_leg_out">Poza koszykiem</span>
+                </span>
+              </div>
+            </div>
+
+            <div class="lg:col-span-4 space-y-4">
+              <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2.5 text-xs">
+                <span class="font-bold text-slate-800 uppercase text-[10px] tracking-wider block" data-i18n="t2_cart_title">Aktualna zawartość koszyka:</span>
+                <div id="t2-cart-items" class="space-y-1.5"></div>
+              </div>
+
+              <div id="t2-verdict-box" class="p-4 rounded-xl border transition space-y-2.5 text-xs"></div>
+
+              <div class="p-3 rounded-xl bg-amber-50/70 border border-amber-200 text-amber-950 text-[11px] leading-relaxed">
+                <strong class="block font-semibold mb-0.5" data-i18n="t2_rule_title">Kryterium najmniejszego rynku:</strong>
+                <span data-i18n="t2_rule_desc">Gdy podwyżka na danym koszyku staje się zyskowna, zatrzymujemy procedurę. Dalsze dołączanie alternatyw rozmywa udziały rynkowe.</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Task 3: Monopoly simulator -->
+      <div id="sublab-task-3" class="hidden space-y-6">
+        <div class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm space-y-5">
+          
+          <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3">
+            <div>
+              <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider" data-i18n="t3_badge">Ćwiczenie decyzyjne</span>
+              <h3 class="text-lg font-bold text-slate-900 mt-0.5" data-i18n="t3_title">Symulator monopolisty: podwyżka ceny</h3>
+              <p class="text-xs text-slate-500 mt-0.5" data-i18n="t3_subtitle">
+                Zarządzasz producentem róż szklarniowych. Masz 100 mln zł budżetu na fuzje. Zbuduj koszyk, który utrzyma 10% podwyżkę cen.
+              </p>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="bg-indigo-50 border border-indigo-200 px-3 py-1.5 rounded-xl text-xs font-mono font-bold text-indigo-700">
+                <span data-i18n="t3_budget_lbl">Budżet:</span> <span id="t3-budget-val">100 mln zł</span>
+              </div>
+              <button onclick="resetTask3()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg transition" data-i18n="t3_btn_restart">
+                Od nowa
+              </button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            
+            <div class="lg:col-span-7 space-y-3">
+              <div class="flex justify-between items-center text-xs">
+                <span class="font-bold text-slate-700 uppercase text-[10px] tracking-wider" data-i18n="t3_acq_title">Dostępne podmioty do przejęcia:</span>
+                <span class="text-[11px] text-slate-400" data-i18n="t3_acq_sub">Nie każdy zakup ogranicza ucieczkę klientów.</span>
+              </div>
+
+              <div class="space-y-2.5" id="t3-targets-container"></div>
+
+              <div class="pt-2">
+                <button onclick="runTask3Simulation()" id="t3-btn-simulate" class="w-full py-3 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-xs transition shadow-md flex items-center justify-center gap-2">
+                  <span data-i18n="t3_btn_run">Podnieś cenę o +10% (SSNIP)</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="lg:col-span-5 space-y-4">
+              <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-3 text-xs">
+                <span class="font-bold text-slate-800 uppercase text-[10px] tracking-wider block" data-i18n="t3_report_title">Wynik testu:</span>
+                
+                <div id="t3-report-feed" class="space-y-2 text-[11px] text-slate-600 leading-relaxed min-h-[140px]">
+                  <p class="text-slate-400" data-i18n="t3_report_intro">
+                    Zaznacz podmioty do włączenia, po czym uruchom podwyżkę ceny o 10%. Zobaczysz reakcję popytu oraz wejście podaży rywali.
+                  </p>
+                </div>
+
+                <div id="t3-financial-card" class="hidden p-3 rounded-lg border transition space-y-1"></div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <section id="view-distinction" class="hidden space-y-6">
+      
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+          <div>
+            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider" data-i18n="dist_badge">Podstawowe pojęcia</span>
+            <h2 class="text-xl font-bold text-slate-900" data-i18n="dist_main_title">Branża, rynek właściwy i segment produktowy</h2>
+          </div>
+          <span class="text-[11px] font-bold text-amber-800 bg-amber-50 px-2.5 py-1 rounded-full border border-amber-200" data-i18n="dist_hierarchy_tag">
+            Hierarchia pojęć
+          </span>
+        </div>
+
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed" data-i18n="dist_intro">
+          Częstym błędem analiz jest mylenie branży (struktury zbyt szerokiej) z rynkiem właściwym oraz rynku z segmentem produktowym (strukturą zbyt wąską).
+        </p>
+
+        <div class="overflow-x-auto pt-2">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-slate-200 bg-slate-50 text-slate-700 font-bold">
+                <th class="p-3 rounded-l-xl" data-i18n="dist_table_h_dim">Kryterium porównania</th>
+                <th class="p-3 text-amber-900" data-i18n="dist_table_h_ind">Branża (industry / PKD / NACE)</th>
+                <th class="p-3 text-emerald-900 bg-emerald-50/50" data-i18n="dist_table_h_mkt">Rynek właściwy (relevant market)</th>
+                <th class="p-3 rounded-r-xl text-blue-900" data-i18n="dist_table_h_seg">Segment produktowy (product segment)</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 text-slate-600">
+              <tr>
+                <td class="p-3 font-semibold text-slate-900" data-i18n="dist_tab_r1_c1">Perspektywa analizy</td>
+                <td class="p-3 text-amber-950" data-i18n="dist_tab_r1_c2">Technologiczna: wspólny proces produkcji, surowce i maszyny.</td>
+                <td class="p-3 bg-emerald-50/30 text-emerald-950 font-semibold" data-i18n="dist_tab_r1_c3">Popytowa i podażowa: zastępowalność u nabywców oraz natychmiastowe przestawienie linii.</td>
+                <td class="p-3 text-blue-950" data-i18n="dist_tab_r1_c4">Marketingowa: warianty kolorystyczne, smakowe lub opakowaniowe.</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-semibold text-slate-900" data-i18n="dist_tab_r2_c1">Definicja formalna</td>
+                <td class="p-3 text-amber-950" data-i18n="dist_tab_r2_c2">Grupa firm o wspólnym kodzie statystycznym (np. PKD 01.30: rozmnażanie roślin).</td>
+                <td class="p-3 bg-emerald-50/30 text-emerald-950 font-semibold" data-i18n="dist_tab_r2_c3">Najmniejsza grupa produktów i obszar dające się z zyskiem zmonopolizować.</td>
+                <td class="p-3 text-blue-950" data-i18n="dist_tab_r2_c4">Wąska odmiana asortymentowa (np. produkcja wyłącznie czerwonych róż ciętych).</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-semibold text-slate-900" data-i18n="dist_tab_r3_c1">Zastosowanie</td>
+                <td class="p-3 text-amber-950" data-i18n="dist_tab_r3_c2">GUS, Eurostat, ministerstwa (analiza makroekonomiczna, statystyka PKB).</td>
+                <td class="p-3 bg-emerald-50/30 text-emerald-950 font-semibold" data-i18n="dist_tab_r3_c3">UOKiK, Komisja Europejska, sądy (kontrola fuzji, badanie pozycji dominującej).</td>
+                <td class="p-3 text-blue-950" data-i18n="dist_tab_r3_c4">Działy sprzedaży (kampanie reklamowe, pozycjonowanie marek).</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-semibold text-slate-900" data-i18n="dist_tab_r4_c1">Skutek błędu definicyjnego</td>
+                <td class="p-3 text-amber-950" data-i18n="dist_tab_r4_c2">Sztuczne zaniżenie udziałów rynkowych i ukrycie pozycji dominującej.</td>
+                <td class="p-3 bg-emerald-50/30 text-emerald-950 font-semibold" data-i18n="dist_tab_r4_c3">Prawidłowy punkt odniesienia do obliczenia rzeczywistej siły rynkowej.</td>
+                <td class="p-3 text-blue-950" data-i18n="dist_tab_r4_c4">Sztuczne zawyżenie udziałów i bezpodstawny zarzut monopolu w wąskim wariancie.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
+        <div class="border-b border-slate-100 pb-3">
+          <h3 class="text-base sm:text-lg font-bold text-slate-900" data-i18n="dist_cases_title">Przykłady rynkowe</h3>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+          
+          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+            <strong class="text-slate-900 font-bold block text-sm" data-i18n="case1_h">1. Produkcja roślin ozdobnych</strong>
+            <div class="p-2.5 rounded-lg bg-amber-50 border border-amber-200 text-amber-950" data-i18n="case1_ind">
+              Branża: ogrodnictwo ogółem (PKD 01.30 — zbyt szeroka, obejmuje sadzonki drzew leśnych i krzewów).
+            </div>
+            <div class="p-2.5 rounded-lg bg-emerald-50 border border-emerald-300 text-emerald-950 font-semibold" data-i18n="case1_mkt">
+              Rynek właściwy: produkcja szklarniowych roślin ozdobnych (kwiaty cięte, doniczkowe i sadzonki tworzą jeden rynek ze względu na elastyczność przestawienia stołów uprawnych).
+            </div>
+            <div class="p-2.5 rounded-lg bg-blue-50 border border-blue-200 text-blue-950" data-i18n="case1_seg">
+              Segment: produkcja wyłącznie czerwonych róż ciętych (zbyt wąski — podaż innych szklarni dyscyplinuje cenę).
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+            <strong class="text-slate-900 font-bold block text-sm" data-i18n="case2_h">2. Przewozy pasażerskie punkt-punkt (O&D)</strong>
+            <div class="p-2.5 rounded-lg bg-amber-50 border border-amber-200 text-amber-950" data-i18n="case2_ind">
+              Branża: przewozy pasażerskie ogółem (PKD 49.3 — zbyt szeroka, łączy tramwaje, autobusy i taksówki).
+            </div>
+            <div class="p-2.5 rounded-lg bg-emerald-50 border border-emerald-300 text-emerald-950 font-semibold" data-i18n="case2_mkt">
+              Rynek właściwy: szybki transport pasażerski Warszawa–Trójmiasto (Pendolino i loty bezpośrednie o czasie podróży poniżej 3h wzajemnie dyscyplinują swoje ceny).
+            </div>
+            <div class="p-2.5 rounded-lg bg-blue-50 border border-blue-200 text-blue-950" data-i18n="case2_seg">
+              Segment: wyłącznie przeloty lotnicze na trasie WAW–GDN (zbyt wąski — podwyżka cen przenosi pasażerów biznesowych do pociągów).
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+            <strong class="text-slate-900 font-bold block text-sm" data-i18n="case3_h">3. Samochody osobowe</strong>
+            <div class="p-2.5 rounded-lg bg-amber-50 border border-amber-200 text-amber-950" data-i18n="case3_ind">
+              Branża: produkcja pojazdów samochodowych (PKD 29.10 — łączy ciągniki siodłowe, autobusy i małe auta miejskie).
+            </div>
+            <div class="p-2.5 rounded-lg bg-emerald-50 border border-emerald-300 text-emerald-950 font-semibold" data-i18n="case3_mkt">
+              Rynek właściwy: miejskie samochody osobowe segmentu B (nabywca małego auta nie kupi ciągnika siodłowego).
+            </div>
+            <div class="p-2.5 rounded-lg bg-blue-50 border border-blue-200 text-blue-950" data-i18n="case3_seg">
+              Segment: czerwone hatchbacki z silnikiem 1.0 (kolor lakieru nie tworzy odrębnego rynku właściwego).
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
+        <div class="border-b border-slate-100 pb-3">
+          <h3 class="text-base sm:text-lg font-bold text-slate-900" data-i18n="dist_digital_title">Rynki cyfrowe i konkurencja pozacenowa</h3>
+          <p class="text-xs text-slate-500 mt-0.5" data-i18n="dist_digital_sub">Gdy nominalna cena wynosi 0 zł: test SSNDQ i platformy wielostronne</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-150 space-y-2">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-indigo-600"></span>
+              <strong class="text-slate-900 font-bold text-sm" data-i18n="dist_ssndq_h">Test SSNDQ (spadek jakości zamiast ceny)</strong>
+            </div>
+            <p class="text-slate-600 leading-relaxed" data-i18n="dist_ssndq_p">
+              W bezpłatnych usługach cyfrowych (Google Search, YouTube, TikTok) użytkownik płaci uwagą i danymi. Tradycyjny test SSNIP nie ma zastosowania, ponieważ wzrost o 5% od 0 zł to nadal zero. Stosuje się test SSNDQ (Small but Significant Non-Transitory Decrease in Quality), badający reakcję użytkowników na trwałe pogorszenie jakości (np. więcej reklam, gorsze wyniki wyszukiwania).
+            </p>
+          </div>
+
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-150 space-y-2">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
+              <strong class="text-slate-900 font-bold text-sm" data-i18n="dist_multi_h">Platformy wielostronne</strong>
+            </div>
+            <p class="text-slate-600 leading-relaxed" data-i18n="dist_multi_p">
+              Platformy łączą dwie lub więcej grup użytkowników (np. czytelnicy i reklamodawcy; pasażerowie i kierowcy). Rynek bada się łącznie ze względu na pośrednie efekty sieciowe: zmiana warunków po jednej stronie wpływa na liczbę użytkowników po drugiej stronie.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
+        <div class="border-b border-slate-100 pb-3">
+          <h3 class="text-sm sm:text-base font-bold text-slate-900 uppercase tracking-wider" data-i18n="dist_mini_title">Przykłady klasyfikacji</h3>
+          <p class="text-xs text-slate-500 mt-0.5" data-i18n="dist_mini_sub">Wybierz przypadek, aby sprawdzić uzasadnienie klasyfikacji:</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+          <button onclick="showMiniFact(1)" class="p-3.5 rounded-xl border border-slate-200 hover:border-indigo-400 bg-slate-50 hover:bg-white text-left transition space-y-1">
+            <span class="font-bold text-slate-800 block" data-i18n="mini_q1_h">A. Samochody miejskie segmentu B</span>
+            <span class="text-slate-500 block" data-i18n="mini_q1_p">Jaka jest granica rynku właściwego?</span>
+          </button>
+          <button onclick="showMiniFact(2)" class="p-3.5 rounded-xl border border-slate-200 hover:border-indigo-400 bg-slate-50 hover:bg-white text-left transition space-y-1">
+            <span class="font-bold text-slate-800 block" data-i18n="mini_q2_h">B. Usługi stomatologiczne</span>
+            <span class="text-slate-500 block" data-i18n="mini_q2_p">Jak zaklasyfikować te usługi?</span>
+          </button>
+          <button onclick="showMiniFact(3)" class="p-3.5 rounded-xl border border-slate-200 hover:border-indigo-400 bg-slate-50 hover:bg-white text-left transition space-y-1">
+            <span class="font-bold text-slate-800 block" data-i18n="mini_q3_h">C. Produkcja roślin ozdobnych</span>
+            <span class="text-slate-500 block" data-i18n="mini_q3_p">Dlaczego kwiaty i sadzonki tworzą jeden rynek?</span>
+          </button>
+          <button onclick="showMiniFact(4)" class="p-3.5 rounded-xl border border-slate-200 hover:border-indigo-400 bg-slate-50 hover:bg-white text-left transition space-y-1">
+            <span class="font-bold text-slate-800 block" data-i18n="mini_q4_h">D. Kruszywa budowlane i piasek</span>
+            <span class="text-slate-500 block" data-i18n="mini_q4_p">Co wyznacza zasięg geograficzny?</span>
+          </button>
+        </div>
+
+        <div id="mini-fact-result" class="hidden p-4 rounded-xl text-xs leading-relaxed border transition"></div>
+      </div>
+
+    </section>
+
+    <section id="view-quiz" class="hidden space-y-6">
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm max-w-3xl mx-auto">
+        
+        <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+          <div>
+            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider" data-i18n="quiz_tag">Weryfikacja wiedzy</span>
+            <h2 class="text-xl font-bold text-slate-900" data-i18n="quiz_title">Pytania testowe: wyznaczanie rynku właściwego</h2>
+          </div>
+          <div class="text-right">
+            <span class="text-xs text-slate-400" data-i18n="quiz_score_label">Twój wynik:</span>
+            <div class="text-lg font-mono font-bold text-indigo-600" id="quiz-score">0 / 0</div>
+          </div>
+        </div>
+
+        <div class="py-6 space-y-5">
+          <div class="flex items-center gap-2">
+            <span id="quiz-step" class="text-xs font-bold px-2 py-1 rounded bg-indigo-100 text-indigo-800">Pytanie 1/16</span>
+            <span id="quiz-category" class="text-xs text-slate-400">Rynek właściwy &amp; SSNIP</span>
+          </div>
+
+          <p id="quiz-question-text" class="text-base font-semibold text-slate-800 leading-snug">
+            Ładowanie pytania...
+          </p>
+
+          <div id="quiz-options-container" class="space-y-2.5"></div>
+
+          <div id="quiz-feedback" class="hidden p-4 rounded-xl text-xs leading-relaxed border"></div>
+        </div>
+
+        <div class="border-t border-slate-100 pt-4 flex justify-between items-center">
+          <button onclick="resetQuiz()" class="text-xs text-slate-500 hover:text-slate-800 font-semibold" data-i18n="quiz_btn_reset">
+            Rozpocznij od nowa
+          </button>
+          <button id="quiz-next-btn" onclick="nextQuizQuestion()" class="hidden bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2 rounded-xl transition shadow-md shadow-indigo-100">
+            <span data-i18n="quiz_btn_next">Następne pytanie →</span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-white border-t border-slate-200 py-4 mt-8">
+    <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-400">
+      <span data-i18n="footer_text">EconLab — Interactive Economics Simulator for Students. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+  let currentLang = 'en';
+  let activeLabTask = 1;
+  let currentMiniFactId = null;
+
+  let t1ActiveScenarioId = 'pharma';
+  let t1UserPrediction = null;
+
+  const task1Scenarios = {
+    "pharma": {
+      id: "pharma",
+      title_pl: "1. Lek na receptę z patentem",
+      title_en: "1. Prescription drug with patent",
+      desc_pl: "Chorzy kupują lek z konieczności leczenia; brak zamienników terapeutycznych. Wysoka marża (m=80%), sztywny popyt (|ε|=0.6), brak reakcji podaży rywali (S=0% z uwagi na bariery rejestracyjne).",
+      desc_en: "Patients buy the drug out of medical need; therapeutic substitutes do not exist. High gross margin (m=80%), inelastic demand (|ε|=0.6), zero rival supply entry (S=0% due to regulatory barriers).",
+      m: 80,
+      x: 5,
+      eps: 0.6,
+      sup: 0,
+      expectedProfitable: true,
+      explanation_pl: "Marża m=80% daje próg straty krytycznej CL = 5.9%. Sztywny popyt (|ε|=0.6) i brak wejścia rywali (S=0%) oznaczają rzeczywisty odpływ 3.0%. Podwyżka jest opłacalna.",
+      explanation_en: "A margin of m=80% gives a critical loss threshold of CL = 5.9%. Inelastic demand (|ε|=0.6) and zero rival supply entry (S=0%) yield a volume loss of 3.0%. The price increase is profitable."
+    },
+    "fuel": {
+      id: "fuel",
+      title_pl: "2. Paliwo na miejskiej stacji benzynowej",
+      title_en: "2. Urban petrol station retail fuel",
+      desc_pl: "Niska marża detaliczna (m=15%), widoczne pylony cenowe przy drodze. Wysoka elastyczność (|ε|=6.0) oraz szybkie przejęcie kierowców przez sąsiednie stacje (S=20%).",
+      desc_en: "Low retail margin (m=15%) and transparent pricing on roadside signs. High elasticity (|ε|=6.0) and rapid rival station response (S=20%).",
+      m: 15,
+      x: 5,
+      eps: 6.0,
+      sup: 20,
+      expectedProfitable: false,
+      explanation_pl: "Próg krytyczny wynosi CL = 25.0%. Wysoka elastyczność i natychmiastowa reakcja sąsiednich stacji powodują utratę sprzedaży przekraczającą 30%. Podwyżka przynosi straty.",
+      explanation_en: "Critical loss threshold is CL = 25.0%. High elasticity and fast competitor response cause a sales loss above 30%. The price increase is unprofitable."
+    },
+    "streaming": {
+      id: "streaming",
+      title_pl: "3. Subskrypcja serwisu streamingowego (SVOD)",
+      title_en: "3. Subscription video streaming service (SVOD)",
+      desc_pl: "Wysoka marża brutto (m=60%), umiarkowana wrażliwość subskrybentów (|ε|=1.8), ograniczona w krótkim czasie reakcja rywali z uwagi na czas produkcji filmów (S=10%).",
+      desc_en: "High gross margin (m=60%), moderate subscriber sensitivity (|ε|=1.8), and limited short-run rival capacity expansion due to content lead times (S=10%).",
+      m: 60,
+      x: 5,
+      eps: 1.8,
+      sup: 10,
+      expectedProfitable: false,
+      explanation_pl: "Przy marży m=60% próg wynosi CL = 7.7%, podczas gdy łączny odpływ sprzedaży wynosi 9.5%. Podwyżka pojedynczego serwisu jest nieopłacalna, ponieważ widzowie wstrzymują subskrypcję i przechodzą do konkurencji.",
+      explanation_en: "With a margin of m=60%, the critical threshold is CL = 7.7%, while total volume loss reaches 9.5%. An isolated price increase is unprofitable because subscribers cancel and switch to competitors."
+    },
+    "cement": {
+      id: "cement",
+      title_pl: "4. Cement z lokalnej cementowni",
+      title_en: "4. Cement from a local kiln",
+      desc_pl: "Marża m=30%, transport drogowy ogranicza alternatywy (|ε|=1.0), znikoma podaż z odległych cementowni ze względu na koszt frachtu (S=15%).",
+      desc_en: "Gross margin m=30%, road freight costs limit alternatives (|ε|=1.0), and distant cement kilns do not supply the local market profitably (S=15%).",
+      m: 30,
+      x: 5,
+      eps: 1.0,
+      sup: 15,
+      expectedProfitable: true,
+      explanation_pl: "Próg wynosi CL = 14.3%. Rzeczywisty spadek wolumenu to 5.75% z uwagi na wysokie koszty transportu. Podwyżka jest opłacalna, a lokalny obszar tworzy rynek właściwy.",
+      explanation_en: "Critical loss is CL = 14.3%. Actual volume loss is 5.75% due to high freight costs. The price increase is profitable, confirming that the local radius forms the relevant geographic market."
+    },
+    "mortgage": {
+      id: "mortgage",
+      title_pl: "5. Kredyt hipoteczny w banku detalicznym",
+      title_en: "5. Retail bank residential mortgage",
+      desc_pl: "Marża bankowa m=45%, łatwe porównywanie ofert w internecie (|ε|=3.2), a inne banki oferują refinansowanie kredytu (S=40%).",
+      desc_en: "Banking margin m=45%, online comparison shopping (|ε|=3.2), and rival retail banks offering refinancing facilities (S=40%).",
+      m: 45,
+      x: 5,
+      eps: 3.2,
+      sup: 40,
+      expectedProfitable: false,
+      explanation_pl: "Próg krytyczny to CL = 10.0%, natomiast rzeczywisty odpływ wynosi 18.0%. Konkurencyjne banki przejmują kredytobiorców, przez co pojedynczy bank nie ma siły rynkowej.",
+      explanation_en: "Critical loss is CL = 10.0%, but actual loss reaches 18.0%. Rival banks capture borrowers, which means a single bank cannot sustain a unilateral price increase."
+    }
+  };
+
+  const task2Nodes = [
+    { id: "rail_pendolino", name_pl: "Pendolino Express (PKP IC)", name_en: "Pendolino High-Speed Rail", time: "2h 30m", price: 169, type: "core", x: 330, y: 210, r: 36, included: true },
+    { id: "air_direct", name_pl: "Lot bezpośredni WAW–GDN", name_en: "Direct Flight WAW–GDN", time: "55m (+ dojazd)", price: 340, type: "close", x: 230, y: 130, r: 30, included: false },
+    { id: "rail_ic", name_pl: "Pociąg pospieszny IC", name_en: "Standard IC Train", time: "3h 25m", price: 72, type: "close", x: 430, y: 130, r: 30, included: false },
+    { id: "car_highway", name_pl: "Samochód (A1/S7)", name_en: "Car (Highway A1)", time: "3h 40m", price: 190, type: "mid", x: 330, y: 335, r: 28, included: false },
+    { id: "bus_slow", name_pl: "Autokar rejsowy", name_en: "Slow Coach", time: "5h 15m", price: 49, type: "distant", x: 130, y: 290, r: 24, included: false },
+    { id: "freight_train", name_pl: "Pociąg towarowy", name_en: "Freight Train", time: "18h", price: 15, type: "distant", x: 530, y: 290, r: 24, included: false },
+  ];
+
+  let t3Budget = 100;
+  const task3Targets = [
+    {
+      id: "greenhouse_rivals",
+      name_pl: "Przejęcie rywalizujących szklarni z kwiatami i roślinami doniczkowymi",
+      name_en: "Acquisition of rival greenhouse cut flowers & potted plant growers",
+      cost: 55,
+      bought: false,
+      impact_pl: "Neutralizuje substytucję podażową (ogrodnicy nie przestawią uprawy na róże) i przejmuje 45% odpływu popytu konsumentów.",
+      impact_en: "Neutralizes supply switching by competitors and captures 45% of consumer demand diversion.",
+      isRelevant: true
+    },
+    {
+      id: "ecommerce_florist",
+      name_pl: "Sieć kwiaciarni internetowych i dystrybucji kwiatów ciętych",
+      name_en: "Online florist marketplace & cold-chain distribution network",
+      cost: 30,
+      bought: false,
+      impact_pl: "Zapewnia wyłączność kanału sprzedaży detalicznej, zatrzymując 25% odpływu klientów do innych kwiatów.",
+      impact_en: "Secures retail distribution channels, capturing 25% of buyer diversion toward other bouquets.",
+      isRelevant: true
+    },
+    {
+      id: "forestry_nursery",
+      name_pl: "Szkółka leśna sadzonek sosen i dębów (inna branża)",
+      name_en: "Forestry nursery growing pine & oak tree saplings (unrelated industry)",
+      cost: 50,
+      bought: false,
+      impact_pl: "Brak wpływu na popyt i podaż róż. Nabywca bukietu róż nie kupi sadzonki sosny.",
+      impact_en: "No substitution impact. A flower bouquet buyer does not substitute with pine saplings.",
+      isRelevant: false
+    },
+    {
+      id: "plastic_pots",
+      name_pl: "Wytwórnia plastikowych doniczek i nawozów ogrodniczych",
+      name_en: "Plastic flower pot & horticultural fertilizer factory",
+      cost: 25,
+      bought: false,
+      impact_pl: "Rynek wertykalny, nie poziomy. Nie zatrzymuje odpływu klientów do innych kwiatów.",
+      impact_en: "Upstream supply input. Does not prevent consumer substitution toward other flowers.",
+      isRelevant: false
+    }
+  ];
+
+  function switchLabTask(taskNumber) {
+    activeLabTask = taskNumber;
+    [1, 2, 3].forEach(num => {
+      const view = document.getElementById(`sublab-task-${num}`);
+      const btn = document.getElementById(`btn-sublab-${num}`);
+      if (!view || !btn) return;
+
+      if (num === taskNumber) {
+        view.classList.remove('hidden');
+        btn.className = "px-3.5 py-2 rounded-xl text-xs font-bold transition bg-indigo-600 text-white shadow-xs";
+      } else {
+        view.classList.add('hidden');
+        btn.className = "px-3.5 py-2 rounded-xl text-xs font-bold transition bg-slate-100 hover:bg-slate-200 text-slate-700";
+      }
+    });
+
+    const badge = document.getElementById('sublab-badge-info');
+    if (badge) {
+      if (taskNumber === 1) badge.textContent = "Task 1: SSNIP & Critical Loss";
+      else if (taskNumber === 2) badge.textContent = "Task 2: Substitution Space";
+      else badge.textContent = "Task 3: Monopoly Sim";
+    }
+
+    if (taskNumber === 1) updateTask1();
+    else if (taskNumber === 2) renderTask2();
+    else if (taskNumber === 3) renderTask3();
+  }
+
+  function updateTask1() {
+    const isEn = currentLang === 'en';
+    const m = parseFloat(document.getElementById('t1-range-m').value) / 100;
+    const x = parseFloat(document.getElementById('t1-range-x').value) / 100;
+    const eps = parseFloat(document.getElementById('t1-range-eps').value);
+    const sup = parseFloat(document.getElementById('t1-range-sup').value) / 100;
+
+    document.getElementById('t1-val-m').textContent = `${Math.round(m * 100)}%`;
+    document.getElementById('t1-val-x').textContent = `+${Math.round(x * 100)}%`;
+    document.getElementById('t1-val-eps').textContent = eps.toFixed(1);
+    document.getElementById('t1-val-sup').textContent = `${Math.round(sup * 100)}%`;
+
+    const CL = (x + m > 0) ? (x / (x + m)) : 0;
+    const demandLoss = eps * x;
+    const supplyLoss = sup * x;
+    const AL = Math.min(1.0, demandLoss + supplyLoss);
+    const epsCrit = (x > 0) ? (CL / x) : 0;
+    const profitDeltaPct = m > 0 ? (((m + x) * (1 - AL) - m) / m) * 100 : 0;
+
+    const clPct = (CL * 100).toFixed(1);
+    const alPct = (AL * 100).toFixed(1);
+
+    document.getElementById('t1-cl-num').textContent = `${clPct}%`;
+    document.getElementById('t1-al-num').textContent = `${alPct}%`;
+
+    const clBarWidth = Math.min(100, Math.max(2, CL * 100));
+    const alBarWidth = Math.min(100, Math.max(2, AL * 100));
+
+    document.getElementById('t1-bar-cl').style.width = `${clBarWidth}%`;
+    
+    const alBar = document.getElementById('t1-bar-al');
+    const alDot = document.getElementById('t1-al-dot');
+    const alNum = document.getElementById('t1-al-num');
+    const barStatus = document.getElementById('t1-bars-status');
+
+    alBar.style.width = `${alBarWidth}%`;
+    const isProfitable = (AL <= CL);
+
+    if (isProfitable) {
+      alBar.className = "bg-emerald-600 h-full rounded-full transition-all duration-300";
+      alDot.className = "w-2.5 h-2.5 rounded-full bg-emerald-600 inline-block";
+      alNum.className = "font-mono font-bold text-emerald-600";
+      barStatus.innerHTML = `<span class="text-emerald-700 font-bold font-mono">AL (${alPct}%) ≤ CL (${clPct}%)</span>`;
+    } else {
+      alBar.className = "bg-rose-600 h-full rounded-full transition-all duration-300";
+      alDot.className = "w-2.5 h-2.5 rounded-full bg-rose-600 inline-block";
+      alNum.className = "font-mono font-bold text-rose-600";
+      barStatus.innerHTML = `<span class="text-rose-700 font-bold font-mono">AL (${alPct}%) > CL (${clPct}%)</span>`;
+    }
+
+    const profEl = document.getElementById('t1-res-profit');
+    const profSub = document.getElementById('t1-res-profit-sub');
+    if (profitDeltaPct >= 0) {
+      profEl.textContent = `+${profitDeltaPct.toFixed(1)}%`;
+      profEl.className = "text-base sm:text-lg font-mono font-bold text-emerald-600 mt-0.5";
+      profSub.textContent = isEn ? "Profitable price rise" : "Podwyżka zyskowna";
+    } else {
+      profEl.textContent = `${profitDeltaPct.toFixed(1)}%`;
+      profEl.className = "text-base sm:text-lg font-mono font-bold text-rose-600 mt-0.5";
+      profSub.textContent = isEn ? "Unprofitable price rise" : "Podwyżka stratna";
+    }
+
+    document.getElementById('t1-res-crit-eps').textContent = epsCrit.toFixed(2);
+
+    const verdEl = document.getElementById('t1-res-verdict');
+    const verdSub = document.getElementById('t1-res-verdict-sub');
+    if (isProfitable) {
+      verdEl.textContent = isEn ? "PASSED (MARKET)" : "ZDAŁ (RYNEK)";
+      verdEl.className = "text-xs sm:text-sm font-bold text-emerald-700 mt-1";
+      verdSub.textContent = isEn ? "Forms a relevant market" : "Tworzy rynek właściwy";
+    } else {
+      verdEl.textContent = isEn ? "FAILED (SEGMENT)" : "NIE ZDAŁ (SEGMENT)";
+      verdEl.className = "text-xs sm:text-sm font-bold text-rose-700 mt-1";
+      verdSub.textContent = isEn ? "Too narrow: expand basket" : "Za wąski: poszerz koszyk";
+    }
+  }
+
+  function renderTask1Scenarios() {
+    const isEn = currentLang === 'en';
+    const container = document.getElementById('t1-scenario-list');
+    if (!container) return;
+    container.innerHTML = '';
+
+    Object.keys(task1Scenarios).forEach(key => {
+      const s = task1Scenarios[key];
+      const isActive = (key === t1ActiveScenarioId);
+      const btn = document.createElement('button');
+      btn.className = `w-full text-left p-2.5 rounded-xl text-xs font-semibold border transition flex items-center justify-between ${
+        isActive 
+          ? 'bg-indigo-50/80 border-indigo-300 text-indigo-950 font-bold' 
+          : 'bg-slate-50 hover:bg-slate-100 border-slate-200 text-slate-700'
+      }`;
+      btn.innerHTML = `
+        <span class="truncate">${isEn ? s.title_en : s.title_pl}</span>
+        <span class="w-2 h-2 rounded-full ${isActive ? 'bg-indigo-600' : 'bg-transparent'}"></span>
+      `;
+      btn.onclick = () => selectTask1Scenario(key);
+      container.appendChild(btn);
+    });
+
+    const activeScen = task1Scenarios[t1ActiveScenarioId];
+    if (activeScen) {
+      document.getElementById('t1-active-scen-title').textContent = isEn ? activeScen.title_en : activeScen.title_pl;
+      document.getElementById('t1-active-scen-text').textContent = isEn ? activeScen.desc_en : activeScen.desc_pl;
+    }
+
+    t1UserPrediction = null;
+    const fb = document.getElementById('t1-pred-feedback');
+    fb.classList.add('hidden');
+    document.getElementById('btn-pred-yes').className = "py-2 px-3 rounded-lg border border-slate-200 bg-white hover:bg-emerald-50 hover:border-emerald-300 text-xs font-semibold text-slate-700 transition";
+    document.getElementById('btn-pred-no').className = "py-2 px-3 rounded-lg border border-slate-200 bg-white hover:bg-rose-50 hover:border-rose-300 text-xs font-semibold text-slate-700 transition";
+  }
+
+  function selectTask1Scenario(scenKey) {
+    t1ActiveScenarioId = scenKey;
+    renderTask1Scenarios();
+  }
+
+  function submitT1Prediction(choice) {
+    t1UserPrediction = choice;
+    const isEn = currentLang === 'en';
+    const s = task1Scenarios[t1ActiveScenarioId];
+    const isCorrect = (choice === s.expectedProfitable);
+
+    const btnYes = document.getElementById('btn-pred-yes');
+    const btnNo = document.getElementById('btn-pred-no');
+
+    if (choice === true) {
+      btnYes.className = "py-2 px-3 rounded-lg border-2 border-indigo-600 bg-indigo-50 text-xs font-bold text-indigo-900";
+      btnNo.className = "py-2 px-3 rounded-lg border border-slate-200 bg-white text-xs text-slate-400 opacity-60";
+    } else {
+      btnNo.className = "py-2 px-3 rounded-lg border-2 border-indigo-600 bg-indigo-50 text-xs font-bold text-indigo-900";
+      btnYes.className = "py-2 px-3 rounded-lg border border-slate-200 bg-white text-xs text-slate-400 opacity-60";
+    }
+
+    const fb = document.getElementById('t1-pred-feedback');
+    fb.classList.remove('hidden');
+
+    if (isCorrect) {
+      fb.className = "p-3 rounded-lg text-xs leading-relaxed space-y-1 bg-emerald-50 border border-emerald-200 text-emerald-950";
+      fb.innerHTML = `
+        <strong>${isEn ? 'Correct prediction.' : 'Trafna prognoza.'}</strong>
+        <p>${isEn ? s.explanation_en : s.explanation_pl}</p>
+      `;
+    } else {
+      fb.className = "p-3 rounded-lg text-xs leading-relaxed space-y-1 bg-rose-50 border border-rose-200 text-rose-950";
+      fb.innerHTML = `
+        <strong>${isEn ? 'Incorrect prediction.' : 'Nietrafna prognoza.'}</strong>
+        <p>${isEn ? s.explanation_en : s.explanation_pl}</p>
+      `;
+    }
+  }
+
+  function applyScenarioToSliders() {
+    const s = task1Scenarios[t1ActiveScenarioId];
+    if (!s) return;
+    document.getElementById('t1-range-m').value = s.m;
+    document.getElementById('t1-range-x').value = s.x;
+    document.getElementById('t1-range-eps').value = s.eps;
+    document.getElementById('t1-range-sup').value = s.sup;
+    updateTask1();
+  }
+
+  function renderTask2() {
+    const isEn = currentLang === 'en';
+    const svg = document.getElementById('t2-map-svg');
+    if (!svg) return;
+
+    let linesHtml = "";
+    let nodesHtml = "";
+    const coreNode = task2Nodes.find(n => n.id === "rail_pendolino");
+
+    task2Nodes.forEach(node => {
+      if (node.id !== "rail_pendolino") {
+        const isConnected = node.included;
+        const strokeColor = isConnected ? "#16a34a" : "#cbd5e1";
+        const strokeW = isConnected ? "3" : "1.5";
+        const strokeDash = isConnected ? "none" : "4,4";
+
+        linesHtml += `
+          <line x1="${coreNode.x}" y1="${coreNode.y}" x2="${node.x}" y2="${node.y}" 
+                stroke="${strokeColor}" stroke-width="${strokeW}" stroke-dasharray="${strokeDash}" />
+        `;
+      }
+    });
+
+    task2Nodes.forEach(node => {
+      const isCore = node.type === 'core';
+      const isIncluded = node.included;
+
+      let fill = isCore ? "#4f46e5" : (isIncluded ? "#16a34a" : "#ffffff");
+      let stroke = isCore ? "#4338ca" : (isIncluded ? "#15803d" : "#94a3b8");
+      let textFill = (isCore || isIncluded) ? "#ffffff" : "#1e293b";
+
+      nodesHtml += `
+        <g class="cursor-pointer" onclick="toggleTask2Node('${node.id}')" transform="translate(${node.x}, ${node.y})">
+          <circle r="${node.r}" fill="${fill}" stroke="${stroke}" stroke-width="2.5" class="transition hover:opacity-90 shadow-sm" />
+          <text y="-4" font-size="9" font-weight="bold" fill="${textFill}" text-anchor="middle">
+            ${isEn ? (node.name_en.length > 18 ? node.name_en.substring(0, 17) + '…' : node.name_en) : (node.name_pl.length > 18 ? node.name_pl.substring(0, 17) + '…' : node.name_pl)}
+          </text>
+          <text y="9" font-size="8" fill="${textFill}" opacity="0.85" text-anchor="middle">
+            ${node.time}
+          </text>
+          <text y="21" font-size="8.5" font-weight="800" font-family="monospace" fill="${textFill}" text-anchor="middle">
+            ${node.price} zł
+          </text>
+        </g>
+      `;
+    });
+
+    svg.innerHTML = `
+      <circle cx="330" cy="210" r="115" fill="none" stroke="#e2e8f0" stroke-width="1.5" stroke-dasharray="6,4" />
+      <text x="330" y="88" font-size="8.5" font-weight="bold" fill="#94a3b8" text-anchor="middle">
+        ${isEn ? "DIRECT SUBSTITUTES ORBIT" : "ORBITA BEZPOŚREDNICH ZAMIENNIKÓW"}
+      </text>
+
+      <circle cx="330" cy="210" r="190" fill="none" stroke="#f1f5f9" stroke-width="2" stroke-dasharray="8,6" />
+      <text x="330" y="16" font-size="8.5" font-weight="bold" fill="#cbd5e1" text-anchor="middle">
+        ${isEn ? "INDUSTRY ORBIT" : "ORBITA BRANŻY"}
+      </text>
+
+      ${linesHtml}
+      ${nodesHtml}
+    `;
+
+    updateTask2Analytics();
+  }
+
+  function toggleTask2Node(id) {
+    const node = task2Nodes.find(n => n.id === id);
+    if (!node || node.type === 'core') return;
+    node.included = !node.included;
+    renderTask2();
+  }
+
+  function resetTask2() {
+    task2Nodes.forEach(n => {
+      n.included = (n.type === 'core');
+    });
+    renderTask2();
+  }
+
+  function updateTask2Analytics() {
+    const isEn = currentLang === 'en';
+    const container = document.getElementById('t2-cart-items');
+    if (!container) return;
+    container.innerHTML = '';
+
+    const includedNodes = task2Nodes.filter(n => n.included);
+    includedNodes.forEach(n => {
+      const el = document.createElement('div');
+      el.className = "flex items-center justify-between p-2 rounded-lg bg-white border border-slate-200 text-xs";
+      el.innerHTML = `
+        <span class="font-semibold text-slate-800">${isEn ? n.name_en : n.name_pl}</span>
+        <span class="text-[10px] font-mono px-1.5 py-0.5 rounded ${n.type === 'core' ? 'bg-indigo-50 text-indigo-700' : 'bg-emerald-50 text-emerald-700'}">
+          ${n.type === 'core' ? 'Core' : 'Added'}
+        </span>
+      `;
+      container.appendChild(el);
+    });
+
+    const hasFlight = task2Nodes.find(n => n.id === "air_direct").included;
+    const hasStandardRail = task2Nodes.find(n => n.id === "rail_ic").included;
+    const hasDistant = task2Nodes.some(n => n.type === 'distant' && n.included);
+    const vBox = document.getElementById('t2-verdict-box');
+
+    if (includedNodes.length === 1) {
+      vBox.className = "p-4 rounded-xl border border-rose-200 bg-rose-50 text-rose-950 space-y-1.5 text-xs";
+      vBox.innerHTML = `
+        <div class="flex items-center justify-between font-bold">
+          <span>${isEn ? "Candidate is too narrow (Segment)" : "Koszyk za wąski (Segment)"}</span>
+          <span class="bg-rose-200 text-rose-900 px-2 py-0.5 rounded text-[10px] font-mono">ΔΠ: -8.5%</span>
+        </div>
+        <p class="text-[11px] leading-relaxed text-rose-900/90">
+          ${isEn 
+            ? "When Pendolino raises ticket prices by 5%, 35% of passengers switch to flights and 30% to standard IC trains. The price increase is unprofitable. Include nearby options on the map."
+            : "Gdy Pendolino podnosi ceny o 5%, 35% pasażerów wybiera samoloty, a 30% pociągi IC. Podwyżka przynosi straty. Dodaj pobliskie węzły do koszyka."
+          }
+        </p>
+      `;
+    } else if (hasFlight && hasStandardRail && !hasDistant) {
+      vBox.className = "p-4 rounded-xl border border-emerald-300 bg-emerald-50 text-emerald-950 space-y-1.5 text-xs";
+      vBox.innerHTML = `
+        <div class="flex items-center justify-between font-bold">
+          <span>${isEn ? "Relevant market correctly defined" : "Rynek właściwy poprawnie wyznaczony"}</span>
+          <span class="bg-emerald-200 text-emerald-900 px-2 py-0.5 rounded text-[10px] font-mono">ΔΠ: +4.8%</span>
+        </div>
+        <p class="text-[11px] leading-relaxed text-emerald-900/90">
+          ${isEn 
+            ? "The basket includes transit alternatives with travel times under 3.5 hours. A 5% price increase is profitable. This is the smallest profitable market."
+            : "Koszyk obejmuje szybkie połączenia o czasie poniżej 3,5 h. Podwyżka o 5% jest opłacalna. To najmniejszy zbiór tworzący rynek właściwy."
+          }
+        </p>
+      `;
+    } else if (hasDistant) {
+      vBox.className = "p-4 rounded-xl border border-amber-300 bg-amber-50 text-amber-950 space-y-1.5 text-xs";
+      vBox.innerHTML = `
+        <div class="flex items-center justify-between font-bold">
+          <span>${isEn ? "Overly broad (Industry)" : "Zbyt szeroki zbiór (Branża)"}</span>
+          <span class="bg-amber-200 text-amber-900 px-2 py-0.5 rounded text-[10px] font-mono">NACE ERROR</span>
+        </div>
+        <p class="text-[11px] leading-relaxed text-amber-900/90">
+          ${isEn 
+            ? "You added slow buses or freight transport. Express travelers do not switch to 18-hour freight trains. This violates the smallest market criterion."
+            : "Włączono autokar lub pociąg towarowy. Pasażer jadący na spotkanie nie wybierze 18-godzinnego składu towarowego. Narusza to kryterium najmniejszego rynku."
+          }
+        </p>
+      `;
+    } else {
+      vBox.className = "p-4 rounded-xl border border-blue-200 bg-blue-50 text-blue-950 space-y-1.5 text-xs";
+      vBox.innerHTML = `
+        <div class="flex items-center justify-between font-bold">
+          <span>${isEn ? "Partially internalized" : "Częściowo zinternalizowany"}</span>
+          <span class="bg-blue-200 text-blue-900 px-2 py-0.5 rounded text-[10px] font-mono">ΔΠ: -1.2%</span>
+        </div>
+        <p class="text-[11px] leading-relaxed text-blue-900/90">
+          ${isEn 
+            ? "You captured one substitute, but volume still leaks to the remaining direct travel option."
+            : "Dołączono jeden substytut, ale część pasażerów nadal ucieka do pozostałej bezpośredniej alternatywy."
+          }
+        </p>
+      `;
+    }
+  }
+
+  function renderTask3() {
+    const isEn = currentLang === 'en';
+    const container = document.getElementById('t3-targets-container');
+    if (!container) return;
+    container.innerHTML = '';
+
+    document.getElementById('t3-budget-val').textContent = `${t3Budget} mln zł`;
+
+    task3Targets.forEach(t => {
+      const card = document.createElement('div');
+      card.className = `p-3.5 rounded-xl border transition flex items-start justify-between gap-3 ${
+        t.bought ? 'bg-indigo-50 border-indigo-300' : 'bg-slate-50 border-slate-200'
+      }`;
+
+      card.innerHTML = `
+        <div class="space-y-1 flex-1">
+          <div class="flex items-center gap-2">
+            <span class="font-bold text-slate-800 text-xs">${isEn ? t.name_en : t.name_pl}</span>
+            <span class="font-mono text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-200 text-slate-700">${t.cost} mln zł</span>
+          </div>
+          <p class="text-[11px] text-slate-500 leading-relaxed">${isEn ? t.impact_en : t.impact_pl}</p>
+        </div>
+        <button onclick="toggleTask3Target('${t.id}')" class="shrink-0 px-3 py-1.5 rounded-lg text-xs font-bold transition ${
+          t.bought ? 'bg-rose-600 hover:bg-rose-700 text-white' : 'bg-indigo-600 hover:bg-indigo-700 text-white'
+        }">
+          ${t.bought ? (isEn ? 'Sell' : 'Sprzedaj') : (isEn ? 'Buy' : 'Kup')}
+        </button>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  function toggleTask3Target(id) {
+    const t = task3Targets.find(item => item.id === id);
+    if (!t) return;
+
+    if (!t.bought) {
+      if (t3Budget < t.cost) {
+        return;
+      }
+      t3Budget -= t.cost;
+      t.bought = true;
+    } else {
+      t3Budget += t.cost;
+      t.bought = false;
+    }
+
+    renderTask3();
+  }
+
+  function runTask3Simulation() {
+    const isEn = currentLang === 'en';
+    const feed = document.getElementById('t3-report-feed');
+    const card = document.getElementById('t3-financial-card');
+    card.classList.remove('hidden');
+
+    const hasGreenhouse = task3Targets.find(t => t.id === 'greenhouse_rivals').bought;
+    const hasFlorist = task3Targets.find(t => t.id === 'ecommerce_florist').bought;
+    const hasForestry = task3Targets.find(t => t.id === 'forestry_nursery').bought;
+
+    let baseDemandLoss = 0.40;
+    let baseSupplyLoss = 0.35;
+
+    if (hasGreenhouse) {
+      baseDemandLoss -= 0.25;
+      baseSupplyLoss -= 0.30;
+    }
+    if (hasFlorist) {
+      baseDemandLoss -= 0.12;
+    }
+
+    const netLoss = Math.max(0.04, baseDemandLoss + baseSupplyLoss);
+    const margin = 0.40;
+    const ssnip = 0.10;
+    const profitDeltaPct = (((margin + ssnip) * (1 - netLoss) - margin) / margin) * 100;
+
+    let reportHtml = "";
+    if (!hasGreenhouse) {
+      reportHtml += `<p class="text-rose-700"><strong>${isEn ? 'Supply reaction:' : 'Reakcja podaży:'}</strong> ${isEn ? 'Nearby greenhouse growers adjusted production beds to roses, reducing prices.' : 'Okoliczni ogrodnicy szklarniowi przestawili uprawę na róże, zbijając cenę.'}</p>`;
+    } else {
+      reportHtml += `<p class="text-emerald-700"><strong>${isEn ? 'Supply controlled:' : 'Podaż pod kontrolą:'}</strong> ${isEn ? 'Competitor greenhouse capacity is internalized.' : 'Przejęto moce produkcyjne szklarni, co powstrzymało wejście rywali.'}</p>`;
+    }
+
+    if (!hasFlorist && !hasGreenhouse) {
+      reportHtml += `<p class="text-rose-700"><strong>${isEn ? 'Demand diversion:' : 'Odpływ popytu:'}</strong> ${isEn ? 'Consumers shifted to alternative flowers.' : 'Klienci kwiaciarni kupują inne gatunki kwiatów.'}</p>`;
+    } else {
+      reportHtml += `<p class="text-emerald-700"><strong>${isEn ? 'Demand recaptured:' : 'Popyt zatrzymany:'}</strong> ${isEn ? 'Most buyers switching to other flowers purchase within your group.' : 'Klienci wybierający inne kwiaty kupują w Twojej sieci.'}</p>`;
+    }
+
+    if (hasForestry) {
+      reportHtml += `<p class="text-amber-700"><strong>${isEn ? 'Capital misallocation:' : 'Błędny zakup:'}</strong> ${isEn ? 'You spent 50M PLN on forestry tree saplings. Flower shoppers do not buy pine seedlings.' : 'Wydano 50 mln zł na sadzonki sosen. Klienci szukający kwiatów nie kupują sadzonek leśnych.'}</p>`;
+    }
+
+    feed.innerHTML = reportHtml;
+
+    if (profitDeltaPct > 0 && !hasForestry) {
+      card.className = "p-3 rounded-lg border bg-emerald-50 border-emerald-300 text-emerald-950 space-y-1";
+      card.innerHTML = `
+        <strong class="block text-xs font-bold">${isEn ? "Result: Market defined profitably" : "Wynik: Rynek wyznaczony opłacalnie"}</strong>
+        <p class="text-[11px]">${isEn ? `Profit changed by <strong>+${profitDeltaPct.toFixed(1)}%</strong>. You controlled the smallest group of products supporting a price increase.` : `Zysk zmienił się o <strong>+${profitDeltaPct.toFixed(1)}%</strong>. Kontrolujesz najmniejszą grupę produktów tworzącą rynek właściwy roślin ozdobnych.`}</p>
+      `;
+    } else {
+      card.className = "p-3 rounded-lg border bg-rose-50 border-rose-300 text-rose-950 space-y-1";
+      card.innerHTML = `
+        <strong class="block text-xs font-bold">${isEn ? "Result: Price increase unprofitable" : "Wynik: Podwyżka nieopłacalna"}</strong>
+        <p class="text-[11px]">${isEn ? `Profit changed by <strong>${profitDeltaPct.toFixed(1)}%</strong>. Rival supply expanded or capital was spent on unrelated forestry assets.` : `Zysk zmienił się o <strong>${profitDeltaPct.toFixed(1)}%</strong>. Rywale dostarczyli zamienniki lub środki wydano na obcą branżę leśną.`}</p>
+      `;
+    }
+  }
+
+  function resetTask3() {
+    t3Budget = 100;
+    task3Targets.forEach(t => t.bought = false);
+    document.getElementById('t3-financial-card').classList.add('hidden');
+    document.getElementById('t3-report-feed').innerHTML = `
+      <p class="text-slate-400">
+        ${currentLang === 'en' 
+          ? 'Select targets to acquire, then execute the 10% price rise to observe demand and supply reactions.' 
+          : 'Zaznacz podmioty do włączenia, po czym uruchom podwyżkę ceny o 10%. Zobaczysz reakcję popytu oraz wejście podaży rywali.'}
+      </p>
+    `;
+    renderTask3();
+  }
+
+  const rawQuizQuestions = [
+    {
+      q_pl: "Dlaczego w analizie produkcji dekoracyjnych roślin ozdobnych kwiaty cięte, rośliny doniczkowe oraz sadzonki kwiatowe zalicza się do tego samego rynku właściwego wytwarzania, mimo że konsument w kwiaciarni nie kupi sadzonki zamiast bukietu róż?",
+      q_en: "Why are cut flowers, potted plants, and flower seedlings grouped into the same manufacturing market, even though a retail customer will not buy a seedling instead of a bouquet of roses?",
+      options_pl: [
+        "Z powodu substytucyjności po stronie podaży: ogrodnicy szklarniowi mogą bez dużych nakładów przestawić stoły uprawne na inny asortyment.",
+        "Ponieważ kwiaty i sadzonki są objęte identyczną stawką akcyzy.",
+        "Ponieważ konsumenci traktują wszystkie rośliny jako identyczne zamienniki popytowe.",
+        "Jest to błąd, ponieważ definicja rynku musi opierać się wyłącznie na preferencjach konsumentów."
+      ],
+      options_en: [
+        "Because of supply substitution: greenhouse growers can retool nursery beds to switch crops quickly without large costs.",
+        "Because cut flowers and seedlings carry the identical excise tax bracket.",
+        "Because end consumers treat all plants as identical demand substitutes.",
+        "It is an error, because market definition must depend only on retail consumer preferences."
+      ],
+      correct: 0,
+      explanation_pl: "Substytucyjność po stronie podaży ogranicza swobodę cenową. Gdy podwyżka cen róż skłania innych producentów szklarniowych do szybkiego przestawienia uprawy na róże, dobra te tworzą jeden rynek wytwarzania.",
+      explanation_en: "Supply substitution constrains pricing power. When a price increase in roses prompts rival greenhouse growers to switch nursery beds to roses, the goods form a single manufacturing market."
+    },
+    {
+      q_pl: "Urząd bada fuzję przewoźników na trasie Warszawa–Gdańsk. Dlaczego włączenie do jednego rynku szybkiej kolei (Pendolino) i lotów bezpośrednich jest uzasadnione, a dołączenie wolnych autokarów stanowi błąd?",
+      q_en: "An authority examines a passenger travel merger on the Warsaw–Gdansk corridor. Why does grouping high-speed rail and direct flights make sense, while adding slow coaches is an error?",
+      options_pl: [
+        "Rynek wyznacza trasa O&D dla pasażerów ceniących czas podróży (< 3h); powolne busy nie są zamiennikiem dla podróżnych biznesowych.",
+        "Pociągi i samoloty należą do tego samego kodu PKD w klasyfikacji statystycznej.",
+        "Bilety kolejowe i lotnicze są sprzedawane w tych samych kasach.",
+        "Autokary są ustawowo wyłączone z prawa konkurencji."
+      ],
+      options_en: [
+        "The market is bounded by the route (O&D) for time-sensitive travelers (< 3h); slow buses do not constrain pricing for business commuters.",
+        "Trains and aircraft share the exact statistical NACE code.",
+        "Train and plane tickets are sold through identical ticket counters.",
+        "Buses are statutorily exempt from competition law."
+      ],
+      correct: 0,
+      explanation_pl: "Dla pasażerów wrażliwych na czas podróży pociąg ekspresowy i samolot są bezpośrednimi zamiennikami, podczas gdy 5-godzinna podróż autokarem nie dyscyplinuje cen Pendolino.",
+      explanation_en: "For time-sensitive commuters, high-speed rail and direct flights are direct substitutes, whereas a 5-hour coach trip does not discipline express train fares."
+    },
+    {
+      q_pl: "Dystrybutor argumentuje, że działa na jednolitym rynku obejmującym: sadzonki tui do ogrodu, cięte róże w kwiaciarniach oraz kwitnące storczyki doniczkowe. Dlaczego takie ujęcie jest błędne?",
+      q_en: "A distributor claims to operate in a single market encompassing outdoor hedge seedlings, cut roses, and indoor orchids. Why is this flawed in competition economics?",
+      options_pl: [
+        "Przedsiębiorca wskazał branżę (wspólny profil uprawy), a nie rynek właściwy: cięte róże nie są zamiennikiem sadzonek krzewów ogrodowych.",
+        "Sadzonki krzewów i kwiaty cięte mają inne stawki VAT, co uniemożliwia ich łączenie.",
+        "Rynek musi zawsze ograniczać się do pojedynczego gatunku biologicznego.",
+        "Storczyki doniczkowe są dobrem komplementarnym wobec sadzonek iglaków."
+      ],
+      options_en: [
+        "The firm described an industry rather than a relevant market: cut roses do not substitute for outdoor landscaping seedlings.",
+        "Seedlings and cut flowers carry different VAT brackets, which legally prevents joint analysis.",
+        "A relevant market must strictly correspond to a single botanical species.",
+        "Potted orchids act as economic complements to outdoor hedge nursery plants."
+      ],
+      correct: 0,
+      explanation_pl: "Łączenie produktów wyłącznie ze względu na profil uprawy to definicja branży. Dla nabywców kwiaty cięte i krzewy ogrodowe zaspokajają odmienne potrzeby i nie zastępują się przy 5–10% zmianie cen.",
+      explanation_en: "Grouping goods solely by production background defines an industry. For buyers, cut flowers and garden shrubs serve different needs and show zero cross-price substitution."
+    },
+    {
+      q_pl: "Rynek kruszyw budowlanych (piasek, żwir) ma zasięg lokalny (promień 30–50 km od żwirowni). Co decyduje o takich granicach geograficznych?",
+      q_en: "The relevant market for construction aggregates (sand, gravel) is local (30–50 km radius). What factor determines this boundary?",
+      options_pl: [
+        "Wysoki udział kosztów transportu drogowego w cenie produktu o niskiej wartości jednostkowej.",
+        "Przepisy prawa budowlanego zabraniające wywożenia piasku poza granice powiatu.",
+        "Brak maszyn budowlanych w sąsiednich regionach.",
+        "Piasek z różnych kopalni posiada odmienny skład chemiczny uniemożliwiający zastępowanie."
+      ],
+      options_en: [
+        "High road freight costs relative to the low unit value of heavy aggregates.",
+        "Building codes prohibiting hauling sand across administrative county borders.",
+        "A lack of heavy machinery in neighbouring districts.",
+        "Chemical differences that prevent interchangeability between quarries."
+      ],
+      correct: 0,
+      explanation_pl: "Kruszywa to ciężkie towary o niskiej wartości. Koszt przewozu ciężarówką powyżej 40–50 km przewyższa wartość surowca, co wyklucza arbitraż geograficzny.",
+      explanation_en: "Aggregates are heavy goods with low unit values. Trucking costs beyond 40–50 km exceed material value, ruling out geographic substitution."
+    },
+    {
+      q_pl: "Koncern planuje przejąć regionalnego producenta wody mineralnej. Obrońcy twierdzą, że rynek obejmuje wszystkie napoje bezalkoholowe, w tym słodzone napoje gazowane. Badania wykazują, że przy podwyżce cen wody o 5–10% konsumenci przechodzą na inną wodę pitną, ale nie na napoje słodzone. Jaki jest właściwy rynek?",
+      q_en: "A firm plans to acquire a mineral water bottler, arguing the market spans all soft drinks including sugary sodas. Studies show that when water prices rise by 5–10%, consumers switch to other bottled waters, not sodas. What is the relevant market?",
+      options_pl: [
+        "Rynek butelkowanej wody pitnej (napoje słodzone tworzą odrębny rynek ze względu na inną potrzebę konsumpcyjną).",
+        "Branża napojowa w ujęciu całościowym.",
+        "Wyłącznie segment wody niegazowanej w butelkach 1.5L.",
+        "Rynek opakowań z tworzyw sztucznych PET."
+      ],
+      options_en: [
+        "The market for bottled drinking water (sweetened sodas form a separate market due to different consumer needs).",
+        "The non-alcoholic beverage industry as a whole.",
+        "Strictly the 1.5L still water bottle segment.",
+        "The upstream PET packaging market."
+      ],
+      correct: 0,
+      explanation_pl: "Woda pitna zaspokaja potrzebę nawodnienia. Słodzone napoje gazowane służą zaspokojeniu potrzeby smaku. Brak substytucji oznacza odrębny rynek wody.",
+      explanation_en: "Drinking water satisfies basic hydration. Sweet sodas satisfy taste. The absence of substitution means bottled water forms its own relevant market."
+    },
+    {
+      q_pl: "Czy krótkie formy wideo (TikTok, YouTube Shorts) oraz serwisy subskrypcyjne (Netflix, Disney+) tworzą jeden rynek właściwy?",
+      q_en: "Do short-form video services (TikTok, YouTube Shorts) and subscription video platforms (Netflix, Disney+) form a single relevant market?",
+      options_pl: [
+        "Nie: krótkie klipy służą do doraźnej rozrywki na telefonie, a serwisy VOD do zaplanowanych, długich seansów domowych.",
+        "Tak: wszystkie wyświetlają obraz i konkurują o czas wolny.",
+        "Tak: ponieważ studia filmowe publikują zwiastuny na TikToku.",
+        "Nie: ponieważ bezpłatne aplikacje nie podlegają prawu konkurencji."
+      ],
+      options_en: [
+        "No: short clips serve mobile breaks during the day, while SVOD serves planned, long-form viewing at home.",
+        "Yes: all display video on screens and compete for leisure time.",
+        "Yes: because film studios post movie trailers on short-form platforms.",
+        "No: because zero-price services are exempt from competition law."
+      ],
+      correct: 0,
+      explanation_pl: "W praktyce antymonopolowej krótkie wideo algorytmiczne tworzy odrębny rynek od platform filmowych VOD ze względu na inny kontekst i czas trwania sesji.",
+      explanation_en: "In antitrust practice, short algorithmic video constitutes a distinct market from long-form SVOD streaming due to differing context and session lengths."
+    },
+    {
+      q_pl: "Dlaczego wyodrębnienie pojedynczego smaku jogurtu jako niezależnego rynku jest błędem?",
+      q_en: "Why is treating a single yogurt flavor as an independent market an error?",
+      options_pl: [
+        "Pojedynczy smak to segment produktowy; podwyżka ceny o 5% wywoła odpływ klientów do innych smaków jogurtów owocowych.",
+        "Truskawki są owocem sezonowym, więc rynek istniałby tylko przez dwa miesiące.",
+        "Produkcja jogurtów truskawkowych jest prawnie zastrzeżona dla spółdzielni.",
+        "Pojęcie rynku właściwego stosuje się wyłącznie do surowców przemysłowych."
+      ],
+      options_en: [
+        "A single flavor is a product segment; a 5% price increase causes buyers to switch to other fruit yogurt flavors.",
+        "Strawberries are seasonal, so such a market would only exist for two months.",
+        "Yogurt manufacturing is legally restricted to agricultural cooperatives.",
+        "The concept of relevant markets applies only to raw industrial materials."
+      ],
+      correct: 0,
+      explanation_pl: "Monopolista pojedynczego smaku nie utrzyma podwyżki o 5–10%, bo konsumenci wybiorą inne smaki jogurtów. Rynkiem właściwym jest rynek jogurtów owocowych lub jogurtów ogółem.",
+      explanation_en: "A monopolist over a single fruit flavor cannot sustain a 5–10% price rise because shoppers switch to other flavors. The relevant market is fruit yogurts or yogurts as a whole."
+    },
+    {
+      q_pl: "W jaki sposób organy konkurencji wyznaczają rynek właściwy dla bezpłatnych usług cyfrowych, gdzie cena wynosi 0 zł?",
+      q_en: "How do competition authorities delineate markets for zero-price digital services where monetary prices are $0?",
+      options_pl: [
+        "Stosują test SSNDQ, badając reakcję użytkowników na trwałe obniżenie jakości usługi (np. więcej reklam, gorsze wyniki).",
+        "Dzielą zero przez 10% i przyjmują podwyżkę o 1 grosz.",
+        "Uznają, że usługi bezpłatne nie podlegają prawu konkurencji.",
+        "Opierają się na sprawozdaniach finansowych zamiast zachowań użytkowników."
+      ],
+      options_en: [
+        "They use the SSNDQ test, examining user diversion after a degradation in service quality (such as more ad clutter or worse search results).",
+        "They divide zero by 10% and assume a price rise of one cent.",
+        "They declare that zero-price services fall outside competition law.",
+        "They review corporate financial statements instead of user substitution."
+      ],
+      correct: 0,
+      explanation_pl: "W wytycznych Komisji Europejskiej standardem dla usług o cenie 0 zł jest test SSNDQ (Small but Significant Non-Transitory Decrease in Quality).",
+      explanation_en: "Under European Commission guidance, the standard for zero-price digital services is the SSNDQ test (Small but Significant Non-Transitory Decrease in Quality)."
+    },
+    {
+      q_pl: "Rynek betonu towarowego wyznacza promień 20–30 km od węzła betoniarskiego, a rynek samolotów pasażerskich ma zasięg globalny. Co jest przyczyną tej różnicy?",
+      q_en: "Ready-mix concrete has a 20–30 km market radius, while commercial aircraft have a worldwide market. What explains this difference?",
+      options_pl: [
+        "Krótki czas wiązania betonu i wysoki koszt transportu w relacji do wartości, w przeciwieństwie do znikomych kosztów relokacji samolotu.",
+        "Przepisy budowlane zabraniające wywożenia betonu poza powiat.",
+        "Zasada, że samoloty pasażerskie kupują wyłącznie rządy.",
+        "Beton jest usługą, a samolot towarem trwałym."
+      ],
+      options_en: [
+        "Concrete setting times and transport costs relative to value, compared to low relocation costs for aircraft relative to price.",
+        "Zoning rules prohibiting transport across administrative lines.",
+        "Rules stating that aircraft may only be acquired by governments.",
+        "Concrete is classified as a service, whereas aircraft are durable goods."
+      ],
+      correct: 0,
+      explanation_pl: "Świeży beton zastyga w ciągu 1–2 godzin, a jego masa ogranicza transport do strefy lokalnej. Samolot przelatuje tysiące kilometrów przy minimalnym udziale kosztu dolotu w cenie maszyny.",
+      explanation_en: "Wet concrete sets within 1–2 hours and is heavy, restricting freight to a local zone. An aircraft flies thousands of kilometers with negligible relocation costs relative to its price."
+    },
+    {
+      q_pl: "W analizie rynku energii elektrycznej wyodrębnia się odrębne rynki dla godzin szczytu i doliny nocnej. Jaki wymiar rynku jest tutaj podstawą?",
+      q_en: "In wholesale electricity markets, peak and off-peak hours form separate markets. Which market dimension governs this distinction?",
+      options_pl: [
+        "Wymiar czasowy: brak taniego magazynowania energii uniemożliwia zastąpienie prądu w szczycie energią z nocy.",
+        "Wymiar geograficzny: prąd nocny płynie z innych elektrowni.",
+        "Wymiar asortymentowy: prąd w dzień ma inne napięcie.",
+        "Wymiar branżowy: prąd w nocy wytwarzają inne sektory."
+      ],
+      options_en: [
+        "The temporal dimension: the lack of cheap power storage prevents night electricity from substituting for peak midday demand.",
+        "The geographic dimension: nighttime electricity comes from different stations.",
+        "The product dimension: daytime grid power operates on different voltages.",
+        "The industry dimension: night power is generated by different economic sectors."
+      ],
+      correct: 0,
+      explanation_pl: "Gdy towaru nie można tanio magazynować, a zapotrzebowanie zależy od pory dnia, godziny szczytowe tworzą odrębny rynek w wymiarze czasowym.",
+      explanation_en: "When storage is costly and demand depends on time of day, peak hours form an independent market along the temporal dimension."
+    },
+    {
+      q_pl: "Jeżeli organ zdefiniuje rynek zbyt szeroko jako całą branżę (np. produkcję pojazdów zamiast miejskich aut osobowych), jaki popełni błąd?",
+      q_en: "If a regulator defines a market too broadly as an industry (such as vehicle manufacturing instead of city cars), what distortion occurs?",
+      options_pl: [
+        "Sztucznie zaniży udziały rynkowe łączących się firm i niedoszacuje ich siły rynkowej.",
+        "Sztucznie zawyży udziały firm i bezpodstawnie zablokuje fuzję.",
+        "Unieważni przepisy kodeksu spółek handlowych.",
+        "Nie wpłynie to na obliczenie wskaźnika HHI."
+      ],
+      options_en: [
+        "It artificially lowers the merging firms' market shares and underestimates their market power.",
+        "It inflates market shares and blocks a benign merger.",
+        "It invalidates corporate statutory law.",
+        "It leaves the computed HHI unaffected."
+      ],
+      correct: 0,
+      explanation_pl: "Zbyt szeroki rynek powiększa mianownik ułamka udziału. Udział łączących się firm wygląda na skromny, co może ukryć dominację w rzeczywistym segmencie aut miejskich.",
+      explanation_en: "An overbroad market inflates the share calculation denominator. The merging firms appear small, masking dominant positions in the narrower city car market."
+    },
+    {
+      q_pl: "W teście SSNIP podwyżka ceny wynosi X = 5%, a marża monopolisty m = 40%. Jaki jest próg straty krytycznej (CL = X / (m + X)) i co oznacza rzeczywisty odpływ AL = 16%?",
+      q_en: "In a SSNIP test, price rise X = 5% and margin m = 40%. What is Critical Loss (CL = X / (m + X)), and what does an actual loss AL = 16% imply?",
+      options_pl: [
+        "CL = 11.1%; ponieważ rzeczywista strata AL (16%) przewyższa próg krytyczny, podwyżka przynosi straty, a koszyk jest za wąski.",
+        "CL = 20.0%; podwyżka jest opłacalna.",
+        "CL = 5.0%; monopolista osiąga maksymalny zysk.",
+        "CL = 0.0%; test SSNIP nie zależy od marży."
+      ],
+      options_en: [
+        "CL = 11.1%; because actual volume loss (16%) exceeds the critical threshold, the price rise is unprofitable and the basket is too narrow.",
+        "CL = 20.0%; the price rise is profitable.",
+        "CL = 5.0%; the monopolist maximizes profit.",
+        "CL = 0.0%; the SSNIP test does not depend on margin."
+      ],
+      correct: 0,
+      explanation_pl: "CL = 0.05 / (0.40 + 0.05) = 11.11%. Rzeczywista strata 16% przekracza próg opłacalności. Koszyk jest za wąski i wymaga włączenia najbliższego substytutu.",
+      explanation_en: "CL = 0.05 / (0.40 + 0.05) = 11.11%. Actual volume loss of 16% exceeds the break-even threshold. The basket is too narrow and must be expanded."
+    },
+    {
+      q_pl: "Na czym polega paradoks celofanowy (sprawa DuPont, 1956 r.)?",
+      q_en: "What is the cellophane fallacy (DuPont case, 1956)?",
+      options_pl: [
+        "Na przeprowadzeniu testu SSNIP od istniejącej ceny monopolistycznej: przy zawyżonej cenie klienci kupują odległe zamienniki, co fałszywie poszerza rynek.",
+        "Na założeniu, że celofan zastępuje papier toaletowy we wszystkich zastosowaniach.",
+        "Na odrzuceniu testu SSNIP na rzecz badania wyłącznie kosztów księgowych.",
+        "Na założeniu, że monopolista zawsze ustala cenę poniżej kosztu krańcowego."
+      ],
+      options_en: [
+        "Applying the SSNIP test starting from an already elevated monopoly price, which drives consumers to distant substitutes and makes the market seem too broad.",
+        "Assuming that cellophane substitutes for paper tissue across household uses.",
+        "Rejecting the SSNIP test in favor of accounting costs.",
+        "Assuming that a monopolist always prices below marginal cost."
+      ],
+      correct: 0,
+      explanation_pl: "DuPont pobierał cenę monopolistyczną za celofan. Przy tak wysokiej cenie klienci zaczęli kupować papier woskowany i folię. Sąd błędnie uznał te materiały za jeden rynek, myląc skutek monopolu z konkurencją.",
+      explanation_en: "DuPont charged monopoly prices for cellophane. At that price, buyers substituted with wax paper and foil. The court incorrectly aggregated these into one market, confusing monopoly pricing with competitive substitution."
+    },
+    {
+      q_pl: "Dlaczego przy platformach wielostronnych analiza rynku musi uwzględniać obie strony platformy?",
+      q_en: "Why must antitrust analysis of multi-sided platforms consider both sides?",
+      options_pl: [
+        "Występują pośrednie efekty sieciowe: zmiana opłat po jednej stronie wpływa na liczbę użytkowników, co zmienia popyt po drugiej stronie.",
+        "Prawo nakazuje pobieranie jednakowych opłat od obu grup użytkowników.",
+        "Obie strony platformy sprzedają identyczne towary fizyczne.",
+        "Użytkownicy po obu stronach są bezpośrednimi konkurentami."
+      ],
+      options_en: [
+        "Indirect network effects connect both sides: changing fees on one side alters user numbers, which directly shifts demand on the other side.",
+        "Law requires charging identical fees to both user demographics.",
+        "Both sides of the platform transact identical physical products.",
+        "Users on both sides compete horizontally with one another."
+      ],
+      correct: 0,
+      explanation_pl: "Im więcej ogłoszeń po jednej stronie, tym większa wartość dla poszukujących po drugiej. Podwyższenie opłat dla jednej grupy może zmniejszyć aktywność całej platformy.",
+      explanation_en: "More listings on one side create value for seekers on the other. Raising prices on one side can reduce participation across the entire platform."
+    },
+    {
+      q_pl: "Kiedy substytucja po stronie podaży uzasadnia włączenie do jednego rynku produktów, które dla konsumenta nie są zamiennikami?",
+      q_en: "When does supply substitution justify grouping goods that consumers do not view as interchangeable into one market?",
+      options_pl: [
+        "Gdy producenci innych dóbr mogą natychmiast i bez znaczących kosztów przestawić linie na dany produkt w reakcji na niewielki wzrost jego ceny.",
+        "Gdy konsumenci mogą sami wyprodukować dany produkt w domu w kilka minut.",
+        "Gdy państwo dopłaca do zakupu maszyn produkcyjnych.",
+        "Gdy oba towary dostarcza ta sama firma kurierska."
+      ],
+      options_en: [
+        "When rival producers can switch lines to the product quickly and without significant costs in response to a small price increase.",
+        "When consumers can manufacture the product at home in minutes.",
+        "When governments subsidize capital machinery.",
+        "When both goods are transported by the same courier firm."
+      ],
+      correct: 0,
+      explanation_pl: "Gdy fabryka produkująca papier innego typu może bez kosztów zacząć dostarczać papier, którego cena wzrosła o 5%, elastyczność ta ogranicza siłę monopolisty.",
+      explanation_en: "When a paper mill can switch production lines cheaply to supply a paper grade facing a 5% price rise, that supply response disciplines market power."
+    },
+    {
+      q_pl: "Dlaczego po znalezieniu koszyka, dla którego test SSNIP kończy się sukcesem, nie wolno rozszerzać rynku o kolejne produkty?",
+      q_en: "Why must the authority stop expanding the market once a candidate basket passes the SSNIP test?",
+      options_pl: [
+        "Rynek właściwy to najmniejsza grupa produktów dająca się z zyskiem zmonopolizować; dalsze rozszerzanie zamienia rynek w branżę.",
+        "Dalsze rozszerzanie wymaga każdorazowo zgody parlamentu.",
+        "Żaden monopolista nie wytwarza więcej niż dwóch produktów.",
+        "Dalsze rozszerzanie obniża ceny produktów do zera."
+      ],
+      options_en: [
+        "The relevant market is the smallest group of products that can be profitably monopolized; expanding further creates an industry.",
+        "Further expansion requires statutory parliamentary approval.",
+        "Monopolists never produce more than two product variations.",
+        "Expanding further forces equilibrium prices to zero."
+      ],
+      correct: 0,
+      explanation_pl: "Kryterium najmniejszego rynku nakazuje zatrzymać procedurę w pierwszym momencie opłacalności monopolizacji. Dalsze włączanie dóbr rozmywa udziały i utrudnia ocenę siły rynkowej.",
+      explanation_en: "The smallest market rule stops the procedure at the first basket where monopolization is profitable. Adding more goods dilutes shares and obscures market power."
+    }
+  ];
+
+  let activeQuizQuestions = [];
+  let currentQuestionIndex = 0;
+  let score = 0;
+  let answered = false;
+  let selectedAnswerIndex = null;
+
+  function shuffleArray(arr) {
+    const array = [...arr];
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
+  function initializeQuizSession() {
+    activeQuizQuestions = rawQuizQuestions.map(q => {
+      const indices = shuffleArray([0, 1, 2, 3]);
+      return {
+        ...q,
+        options_pl: indices.map(i => q.options_pl[i]),
+        options_en: indices.map(i => q.options_en[i]),
+        correct: indices.indexOf(q.correct)
+      };
+    });
+  }
+
+  function renderQuizQuestion() {
+    if (!activeQuizQuestions || activeQuizQuestions.length === 0) {
+      initializeQuizSession();
+    }
+
+    if (currentQuestionIndex >= activeQuizQuestions.length) {
+      showQuizCompletion();
+      return;
+    }
+
+    const isEn = currentLang === 'en';
+    const qData = activeQuizQuestions[currentQuestionIndex];
+    if (!qData) return;
+
+    const stepEl = document.getElementById('quiz-step');
+    if (stepEl) {
+      stepEl.textContent = isEn 
+        ? `Question ${currentQuestionIndex + 1}/${activeQuizQuestions.length}`
+        : `Pytanie ${currentQuestionIndex + 1}/${activeQuizQuestions.length}`;
+    }
+
+    const categoryEl = document.getElementById('quiz-category');
+    if (categoryEl) {
+      categoryEl.textContent = isEn ? "Relevant market & SSNIP" : "Rynek właściwy & SSNIP";
+    }
+
+    const scoreEl = document.getElementById('quiz-score');
+    if (scoreEl) {
+      scoreEl.textContent = `${score} / ${activeQuizQuestions.length}`;
+    }
+
+    const qTextEl = document.getElementById('quiz-question-text');
+    if (qTextEl) {
+      qTextEl.innerHTML = isEn ? qData.q_en : qData.q_pl;
+    }
+
+    const options = isEn ? qData.options_en : qData.options_pl;
+    const container = document.getElementById('quiz-options-container');
+    if (!container) return;
+    container.innerHTML = '';
+
+    const feedback = document.getElementById('quiz-feedback');
+    if (feedback) feedback.classList.add('hidden');
+    const nextBtn = document.getElementById('quiz-next-btn');
+    if (nextBtn) nextBtn.classList.add('hidden');
+
+    const wasAnswered = answered;
+    const prevSelected = selectedAnswerIndex;
+
+    options.forEach((optText, index) => {
+      const btn = document.createElement('button');
+      btn.className = "w-full text-left p-3.5 rounded-xl border border-slate-200 hover:border-indigo-400 bg-slate-50 hover:bg-white text-xs font-medium text-slate-800 transition flex items-center justify-between";
+      btn.innerHTML = `
+        <span class="pr-2 leading-relaxed">${optText}</span>
+        <span class="w-5 h-5 rounded-full border border-slate-300 flex items-center justify-center text-[10px] font-bold text-slate-400 shrink-0">${String.fromCharCode(65 + index)}</span>
+      `;
+      btn.onclick = () => selectQuizAnswer(index);
+      container.appendChild(btn);
+    });
+
+    if (wasAnswered && prevSelected !== null) {
+      const isCorrect = (prevSelected === qData.correct);
+      const buttons = container.querySelectorAll('button');
+      buttons.forEach((btn, idx) => {
+        btn.disabled = true;
+        if (idx === qData.correct) {
+          btn.className = "w-full text-left p-3.5 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-xs font-bold text-emerald-900 flex items-center justify-between";
+        } else if (idx === prevSelected && !isCorrect) {
+          btn.className = "w-full text-left p-3.5 rounded-xl border-2 border-rose-500 bg-rose-50 text-xs font-bold text-rose-900 flex items-center justify-between";
+        } else {
+          btn.className = "w-full text-left p-3.5 rounded-xl border border-slate-200 bg-slate-100 text-xs text-slate-400 opacity-60 flex items-center justify-between";
+        }
+      });
+
+      if (feedback) {
+        feedback.classList.remove('hidden');
+        if (isCorrect) {
+          feedback.className = "p-4 rounded-xl text-xs leading-relaxed border bg-emerald-50 border-emerald-200 text-emerald-900";
+          feedback.innerHTML = `<strong>${isEn ? 'Correct answer.' : 'Prawidłowa odpowiedź.'}</strong> ${isEn ? qData.explanation_en : qData.explanation_pl}`;
+        } else {
+          feedback.className = "p-4 rounded-xl text-xs leading-relaxed border bg-rose-50 border-rose-200 text-rose-900";
+          feedback.innerHTML = `<strong>${isEn ? 'Incorrect answer.' : 'Niepoprawna odpowiedź.'}</strong> ${isEn ? qData.explanation_en : qData.explanation_pl}`;
+        }
+      }
+      if (nextBtn) nextBtn.classList.remove('hidden');
+    }
+  }
+
+  function selectQuizAnswer(selectedIndex) {
+    if (answered) return;
+    answered = true;
+    selectedAnswerIndex = selectedIndex;
+
+    const isEn = currentLang === 'en';
+    const qData = activeQuizQuestions[currentQuestionIndex];
+    const buttons = document.querySelectorAll('#quiz-options-container button');
+    const feedback = document.getElementById('quiz-feedback');
+    const isCorrect = (selectedIndex === qData.correct);
+
+    if (isCorrect) {
+      score++;
+      const scoreEl = document.getElementById('quiz-score');
+      if (scoreEl) scoreEl.textContent = `${score} / ${activeQuizQuestions.length}`;
+    }
+
+    buttons.forEach((btn, idx) => {
+      btn.disabled = true;
+      if (idx === qData.correct) {
+        btn.className = "w-full text-left p-3.5 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-xs font-bold text-emerald-900 flex items-center justify-between";
+      } else if (idx === selectedIndex && !isCorrect) {
+        btn.className = "w-full text-left p-3.5 rounded-xl border-2 border-rose-500 bg-rose-50 text-xs font-bold text-rose-900 flex items-center justify-between";
+      } else {
+        btn.className = "w-full text-left p-3.5 rounded-xl border border-slate-200 bg-slate-100 text-xs text-slate-400 opacity-60 flex items-center justify-between";
+      }
+    });
+
+    if (feedback) {
+      feedback.classList.remove('hidden');
+      if (isCorrect) {
+        feedback.className = "p-4 rounded-xl text-xs leading-relaxed border bg-emerald-50 border-emerald-200 text-emerald-900";
+        feedback.innerHTML = `<strong>${isEn ? 'Correct answer.' : 'Prawidłowa odpowiedź.'}</strong> ${isEn ? qData.explanation_en : qData.explanation_pl}`;
+      } else {
+        feedback.className = "p-4 rounded-xl text-xs leading-relaxed border bg-rose-50 border-rose-200 text-rose-900";
+        feedback.innerHTML = `<strong>${isEn ? 'Incorrect answer.' : 'Niepoprawna odpowiedź.'}</strong> ${isEn ? qData.explanation_en : qData.explanation_pl}`;
+      }
+    }
+
+    const nextBtn = document.getElementById('quiz-next-btn');
+    if (nextBtn) nextBtn.classList.remove('hidden');
+  }
+
+  function nextQuizQuestion() {
+    currentQuestionIndex++;
+    answered = false;
+    selectedAnswerIndex = null;
+    if (currentQuestionIndex >= activeQuizQuestions.length) {
+      showQuizCompletion();
+    } else {
+      renderQuizQuestion();
+    }
+  }
+
+  function showQuizCompletion() {
+    const isEn = currentLang === 'en';
+    const container = document.getElementById('quiz-options-container');
+    const feedback = document.getElementById('quiz-feedback');
+    const total = activeQuizQuestions.length || rawQuizQuestions.length;
+    const pct = Math.round((score / total) * 100);
+
+    const qTextEl = document.getElementById('quiz-question-text');
+    if (qTextEl) {
+      qTextEl.textContent = isEn 
+        ? `Quiz finished. Your score: ${score} of ${total}`
+        : `Koniec pytań. Twój wynik: ${score} z ${total}`;
+    }
+
+    if (container) {
+      container.innerHTML = `
+        <div class="p-6 bg-indigo-50 border border-indigo-200 rounded-2xl text-center space-y-3">
+          <div class="text-4xl font-extrabold text-indigo-700 font-mono">${pct}%</div>
+          <p class="text-xs text-slate-600">
+            ${score === total 
+              ? (isEn ? "All answers correct." : "Wszystkie odpowiedzi poprawne.")
+              : (isEn ? "Review the concepts tab and try again." : "Przejrzyj zakładkę pojęć i spróbuj ponownie.")
+            }
+          </p>
+        </div>
+      `;
+    }
+    if (feedback) feedback.classList.add('hidden');
+    const nextBtn = document.getElementById('quiz-next-btn');
+    if (nextBtn) nextBtn.classList.add('hidden');
+  }
+
+  function resetQuiz() {
+    initializeQuizSession();
+    currentQuestionIndex = 0;
+    score = 0;
+    answered = false;
+    selectedAnswerIndex = null;
+    renderQuizQuestion();
+  }
+
+  function showMiniFact(id) {
+    currentMiniFactId = id;
+    const resBox = document.getElementById('mini-fact-result');
+    if (!resBox) return;
+    const isEn = currentLang === 'en';
+    resBox.classList.remove('hidden');
+
+    if (id === 1) {
+      resBox.className = "mt-4 p-4 rounded-xl text-xs leading-relaxed border bg-emerald-50 border-emerald-200 text-emerald-950";
+      resBox.innerHTML = `
+        <strong class="font-bold text-sm block mb-1">${isEn ? "City cars (B-segment) = Relevant market" : "Samochody miejskie segmentu B = Rynek właściwy"}</strong>
+        <p>${isEn 
+          ? "The automotive industry (PKD 29.10) is an industry (trucks and city cars do not substitute). Red 1.0L hatchbacks is a segment (paint color does not define a market). B-segment city cars form the relevant market." 
+          : "Branża motoryzacyjna to cała branża (samochód ciężarowy nie zastąpi auta miejskiego). Czerwone hatchbacki 1.0 to segment (kolor lakieru nie tworzy rynku). Rynkiem właściwym są miejskie auta segmentu B."
+        }</p>
+      `;
+    } else if (id === 2) {
+      resBox.className = "mt-4 p-4 rounded-xl text-xs leading-relaxed border bg-indigo-50 border-indigo-200 text-indigo-950";
+      resBox.innerHTML = `
+        <strong class="font-bold text-sm block mb-1">${isEn ? "Dental clinic services = Relevant market" : "Usługi stomatologiczne = Rynek właściwy"}</strong>
+        <p>${isEn 
+          ? "Healthcare is an industry. Laser teeth whitening is a marketing segment. General dental services form the relevant market." 
+          : "Ochrona zdrowia to branża. Laserowe wybielanie zębów to segment usług estetycznych. Rynek ogólnych usług stomatologicznych to rynek właściwy."
+        }</p>
+      `;
+    } else if (id === 3) {
+      resBox.className = "mt-4 p-4 rounded-xl text-xs leading-relaxed border bg-emerald-50 border-emerald-200 text-emerald-950";
+      resBox.innerHTML = `
+        <strong class="font-bold text-sm block mb-1">${isEn ? "Decorative greenhouse plants = Relevant market (Supply substitution)" : "Szklarniowe rośliny ozdobne = Rynek właściwy (Substytucja podaży)"}</strong>
+        <p>${isEn 
+          ? "Although buyers will not replace a bouquet with potted plants, growers switch greenhouse beds quickly when prices rise by 5%. Supply-side flexibility groups them into a single manufacturing market." 
+          : "Chociaż klient nie kupi sadzonki zamiast bukietu, ogrodnicy przestawiają stoły uprawne przy podwyżce cen o 5%. Gotowość podaży łączy te produkty w jeden rynek wytwarzania."
+        }</p>
+      `;
+    } else if (id === 4) {
+      resBox.className = "mt-4 p-4 rounded-xl text-xs leading-relaxed border bg-amber-50 border-amber-200 text-amber-950";
+      resBox.innerHTML = `
+        <strong class="font-bold text-sm block mb-1">${isEn ? "Local aggregates within freight radius = Relevant market" : "Lokalne kruszywa w promieniu transportu = Rynek właściwy"}</strong>
+        <p>${isEn 
+          ? "Heavy aggregates have low unit value. Road freight costs limit substitution to a 30–50 km radius around the quarry." 
+          : "Kruszywa to towary masowe o niskiej wartości jednostkowej. Koszt transportu ciężarówką ogranicza substytucję do promienia 30–50 km."
+        }</p>
+      `;
+    }
+  }
+
+  const translations = {
+    "pl": {
+      subtitle: "Wyznaczanie rynku właściwego",
+      author_lbl: "Autor:",
+      ai_collab: "Wsparcie w implementacji AI: Gemini",
+      nav_intro: "Wprowadzenie",
+      nav_lab: "Laboratorium",
+      nav_concept: "Pojęcia",
+      nav_quiz: "Quiz",
+      intro_hero_tag: "Ekonomia konkurencji i polityka antymonopolowa",
+      intro_hero_title: "Wyznaczanie rynku właściwego i test SSNIP",
+      intro_hero_desc: "Zanim organy ochrony konkurencji ocenią siłę rynkową, wskaźniki koncentracji czy fuzje przedsiębiorstw, ustalają granice rynku właściwego. Rynek nie jest ani całą branżą, ani pojedynczym wariantem produktu. Jest obszarem, w którym zachodzi bezpośrednia substytucja popytowa i podażowa.",
+      intro_hero_btn_lab: "Otwórz laboratorium",
+      intro_hero_btn_concept: "Pojęcia",
+      intro_ladder_title: "Poziomy pojęciowe w ekonomii",
+      intro_ladder_sub: "Agregacja struktur gospodarczych od makroekonomii do segmentu",
+      intro_lvl1_tag: "Poziom 1",
+      intro_ladder_1_h: "1. Gospodarka",
+      intro_ladder_1_p: "Całokształt działalności wytwórczej, handlowej i usługowej w kraju lub na wspólnym rynku.",
+      intro_lvl2_tag: "Poziom 2",
+      intro_ladder_2_h: "2. Sektor",
+      intro_ladder_2_p: "Trzy główne działy: rolnictwo i surowce (I), przemysł przetwórczy (II), usługi (III).",
+      intro_lvl3_tag: "Poziom 3",
+      intro_ladder_3_h: "3. Branża (PKD / NACE)",
+      intro_ladder_3_p: "Przedsiębiorstwa o zbliżonej technologii lub kodzie statystycznym. Zbiór zbyt szeroki do oceny siły rynkowej wobec konsumenta.",
+      intro_lvl4_tag: "Poziom 4 • Cel",
+      intro_ladder_4_h: "4. Rynek właściwy",
+      intro_ladder_4_p: "Najmniejsza grupa produktów i obszar geograficzny, który hipotetyczny monopolista mógłby z zyskiem opanować przy wzroście cen o 5–10%.",
+      intro_lvl5_tag: "Poziom 5",
+      intro_ladder_5_h: "5. Segment produktowy",
+      intro_ladder_5_p: "Wąski wariant produktu (np. cięte czerwone róże lub jogurt truskawkowy). Zbyt wąski na rynek ze względu na ucieczkę klientów lub szybkie przestawienie produkcji rywali.",
+      intro_dims_title: "Trzy wymiary rynku właściwego",
+      intro_dims_sub: "Każda definicja rynku opiera się na granicach asortymentowych, geograficznych i czasowych",
+      intro_dim_prod_h: "Rynek produktowy",
+      intro_dim_prod_p: "Obejmuje produkty uznawane przez nabywców za zamienniki pod względem cech, cen i przeznaczenia. Uwzględnia też producentów, którzy mogą szybko i bez dużych nakładów przestawić linie wytwórcze.",
+      intro_dim_geo_h: "Rynek geograficzny",
+      intro_dim_geo_p: "Obszar o zbliżonych warunkach konkurencji (np. promień dostaw dla świeżego betonu, rynek krajowy dla prasy, rynek globalny dla samolotów pasażerskich).",
+      intro_dim_temp_h: "Wymiar czasowy",
+      intro_dim_temp_p: "Różnice warunków w czasie, gdy przesunięcie zakupu na inny okres jest niemożliwe lub kosztowne (np. energia elektryczna w godzinach szczytu wobec nocy).",
+      intro_ssnip_title: "Test SSNIP",
+      intro_ssnip_sub: "Niewielki, lecz znaczący i nietymczasowy wzrost cen",
+      intro_ssnip_desc: "Test odpowiada na pytanie: czy hipotetyczny monopolista kontrolujący dany koszyk produktów mógłby z zyskiem wprowadzić trwałą podwyżkę cen o 5% do 10%?",
+      ssnip_step1_h: "Krok 1: wąski kandydat",
+      ssnip_step1_p: "Rozpoczynamy od pojedynczego dobra lub wąskiej grupy produktów.",
+      ssnip_step2_h: "Krok 2: podwyżka ceny",
+      ssnip_step2_p: "Przyjmujemy podwyżkę ceny o 5% do 10% przy stałych cenach pozostałych dóbr.",
+      ssnip_step3_h: "Krok 3: analiza substytucji",
+      ssnip_step3_p: "Mierzymy ucieczkę klientów (substytucja popytu) oraz reakcję innych wytwórców (substytucja podaży).",
+      ssnip_step4_h: "Krok 4: rozszerzenie koszyka lub stop",
+      ssnip_step4_p: "Jeśli podwyżka przynosi straty, kandydat jest za wąski. Dodajemy najbliższy zamiennik i powtarzamy test. Gdy podwyżka staje się zyskowna, zatrzymujemy procedurę: rynek właściwy został wyznaczony.",
+      sublab_tab1: "Zadanie 1: Krytyczna utrata sprzedaży",
+      sublab_tab2: "Zadanie 2: Mapa substytucji i granice rynku",
+      sublab_tab3: "Zadanie 3: Symulator monopolisty",
+      t1_badge: "Warunek opłacalności",
+      t1_title: "Krytyczna utrata sprzedaży a rzeczywisty odpływ",
+      t1_subtitle: "Porównaj próg dopuszczalnego spadku wolumenu z realną ucieczką klientów i reakcją podaży rywali.",
+      t1_slider_margin: "Marża początkowa (m = (P - MC)/P):",
+      t1_slider_ssnip: "Podwyżka w teście SSNIP (X = ΔP/P):",
+      t1_slider_eps: "Cenowa elastyczność popytu (|εD|):",
+      t1_slider_sup: "Substytucyjność podaży (wejście / przestawienie linii rywali):",
+      t1_m_low: "5% (niska marża)",
+      t1_m_high: "90% (wysoka marża)",
+      t1_eps_inelastic: "0.1 (sztywny popyt)",
+      t1_eps_elastic: "6.0 (elastyczny popyt)",
+      t1_sup_low: "0% (brak wejścia / patent)",
+      t1_sup_high: "80% (szybkie przestawienie linii)",
+      t1_bars_title: "Porównanie utraty sprzedaży:",
+      t1_bar_cl_lbl: "Krytyczna utrata sprzedaży (CL = X / (X + m)):",
+      t1_bar_al_lbl: "Rzeczywista utrata sprzedaży (AL = |ε|·X + S·X):",
+      t1_out_profit: "Wpływ na zysk (ΔΠ):",
+      t1_out_eps_crit: "Graniczna elastyczność (|εcrit|):",
+      t1_out_eps_sub: "Próg opłacalności",
+      t1_out_verdict: "Werdykt SSNIP:",
+      t1_chal_tag: "Wyzwanie analityczne",
+      t1_chal_title: "5 Scenariuszy rynkowych",
+      t1_chal_desc: "Wybierz przypadek, oceń opłacalność podwyżki, a następnie zweryfikuj wynik za pomocą suwaków.",
+      t1_pred_question: "Czy podwyżka o 5% będzie opłacalna?",
+      t1_pred_yes: "Tak, opłacalna",
+      t1_pred_no: "Nie, nieopłacalna",
+      t1_btn_apply: "Ustaw parametry na suwakach",
+      t2_badge: "Granice rynku",
+      t2_title: "Mapa substytucji i relacje produktowe",
+      t2_subtitle: "Włączaj obiekty do badanego koszyka. Sprawdź, kiedy uzyskujesz rynek właściwy, a kiedy włączasz całą branżę.",
+      t2_btn_reset: "Zresetuj koszyk",
+      t2_orbit_title: "Trasa podróży: Warszawa – Gdańsk / Trójmiasto",
+      t2_click_hint: "Kliknij węzeł, aby dodać lub usunąć go z koszyka",
+      t2_leg_core: "Produkt wyjściowy",
+      t2_leg_in: "W koszyku",
+      t2_leg_out: "Poza koszykiem",
+      t2_cart_title: "Aktualna zawartość koszyka:",
+      t2_rule_title: "Kryterium najmniejszego rynku:",
+      t2_rule_desc: "Gdy podwyżka na danym koszyku staje się zyskowna, zatrzymujemy procedurę. Dalsze dołączanie alternatyw rozmywa udziały rynkowe.",
+      t3_badge: "Ćwiczenie decyzyjne",
+      t3_title: "Symulator monopolisty: podwyżka ceny",
+      t3_subtitle: "Zarządzasz producentem róż szklarniowych. Masz 100 mln zł budżetu na fuzje. Zbuduj koszyk, który utrzyma 10% podwyżkę cen.",
+      t3_budget_lbl: "Budżet:",
+      t3_btn_restart: "Od nowa",
+      t3_acq_title: "Dostępne podmioty do przejęcia:",
+      t3_acq_sub: "Nie każdy zakup ogranicza ucieczkę klientów.",
+      t3_btn_run: "Podnieś cenę o +10% (SSNIP)",
+      t3_report_title: "Wynik testu:",
+      t3_report_intro: "Zaznacz podmioty do włączenia, po czym uruchom podwyżkę ceny o 10%. Zobaczysz reakcję popytu oraz wejście podaży rywali.",
+      dist_badge: "Podstawowe pojęcia",
+      dist_main_title: "Branża, rynek właściwy i segment produktowy",
+      dist_hierarchy_tag: "Hierarchia pojęć",
+      dist_intro: "Częstym błędem analiz jest mylenie branży (struktury zbyt szerokiej) z rynkiem właściwym oraz rynku z segmentem produktowym (strukturą zbyt wąską).",
+      dist_table_h_dim: "Kryterium porównania",
+      dist_table_h_ind: "Branża (industry / PKD / NACE)",
+      dist_table_h_mkt: "Rynek właściwy (relevant market)",
+      dist_table_h_seg: "Segment produktowy (product segment)",
+      dist_tab_r1_c1: "Perspektywa analizy",
+      dist_tab_r1_c2: "Technologiczna: wspólny proces produkcji, surowce i maszyny.",
+      dist_tab_r1_c3: "Popytowa i podażowa: zastępowalność u nabywców oraz natychmiastowe przestawienie linii.",
+      dist_tab_r1_c4: "Marketingowa: warianty kolorystyczne, smakowe lub opakowaniowe.",
+      dist_tab_r2_c1: "Definicja formalna",
+      dist_tab_r2_c2: "Grupa firm o wspólnym kodzie statystycznym (np. PKD 01.30: rozmnażanie roślin).",
+      dist_tab_r2_c3: "Najmniejsza grupa produktów i obszar dające się z zyskiem zmonopolizować.",
+      dist_tab_r2_c4: "Wąska odmiana asortymentowa (np. produkcja wyłącznie czerwonych róż ciętych).",
+      dist_tab_r3_c1: "Zastosowanie",
+      dist_tab_r3_c2: "GUS, Eurostat, ministerstwa (analiza makroekonomiczna, statystyka PKB).",
+      dist_tab_r3_c3: "UOKiK, Komisja Europejska, sądy (kontrola fuzji, badanie pozycji dominującej).",
+      dist_tab_r3_c4: "Działy sprzedaży (kampanie reklamowe, pozycjonowanie marek).",
+      dist_tab_r4_c1: "Skutek błędu definicyjnego",
+      dist_tab_r4_c2: "Sztuczne zaniżenie udziałów rynkowych i ukrycie pozycji dominującej.",
+      dist_tab_r4_c3: "Prawidłowy punkt odniesienia do obliczenia rzeczywistej siły rynkowej.",
+      dist_tab_r4_c4: "Sztuczne zawyżenie udziałów i bezpodstawny zarzut monopolu w wąskim wariancie.",
+      dist_cases_title: "Przykłady rynkowe",
+      case1_h: "1. Produkcja roślin ozdobnych",
+      case1_ind: "Branża: ogrodnictwo ogółem (PKD 01.30 — zbyt szeroka, obejmuje sadzonki drzew leśnych i krzewów).",
+      case1_mkt: "Rynek właściwy: produkcja szklarniowych roślin ozdobnych (kwiaty cięte, doniczkowe i sadzonki tworzą jeden rynek ze względu na elastyczność przestawienia stołów uprawnych).",
+      case1_seg: "Segment: produkcja wyłącznie czerwonych róż ciętych (zbyt wąski — podaż innych szklarni dyscyplinuje cenę).",
+      case2_h: "2. Przewozy pasażerskie punkt-punkt (O&D)",
+      case2_ind: "Branża: przewozy pasażerskie ogółem (PKD 49.3 — zbyt szeroka, łączy tramwaje, autobusy i taksówki).",
+      case2_mkt: "Rynek właściwy: szybki transport pasażerski Warszawa–Trójmiasto (Pendolino i loty bezpośrednie o czasie podróży poniżej 3h wzajemnie dyscyplinują swoje ceny).",
+      case2_seg: "Segment: wyłącznie przeloty lotnicze na trasie WAW–GDN (zbyt wąski — podwyżka cen przenosi pasażerów biznesowych do pociągów).",
+      case3_h: "3. Samochody osobowe",
+      case3_ind: "Branża: produkcja pojazdów samochodowych (PKD 29.10 — łączy ciągniki siodłowe, autobusy i małe auta miejskie).",
+      case3_mkt: "Rynek właściwy: miejskie samochody osobowe segmentu B (nabywca małego auta nie kupi ciągnika siodłowego).",
+      case3_seg: "Segment: czerwone hatchbacki z silnikiem 1.0 (kolor lakieru nie tworzy odrębnego rynku właściwego).",
+      dist_digital_title: "Rynki cyfrowe i konkurencja pozacenowa",
+      dist_digital_sub: "Gdy nominalna cena wynosi 0 zł: test SSNDQ i platformy wielostronne",
+      dist_ssndq_h: "Test SSNDQ (spadek jakości zamiast ceny)",
+      dist_ssndq_p: "W bezpłatnych usługach cyfrowych (Google Search, YouTube, TikTok) użytkownik płaci uwagą i danymi. Tradycyjny test SSNIP nie ma zastosowania, ponieważ wzrost o 5% od 0 zł to nadal zero. Stosuje się test SSNDQ (Small but Significant Non-Transitory Decrease in Quality), badający reakcję użytkowników na trwałe pogorszenie jakości (np. więcej reklam, gorsze wyniki wyszukiwania).",
+      dist_multi_h: "Platformy wielostronne",
+      dist_multi_p: "Platformy łączą dwie lub więcej grup użytkowników (np. czytelnicy i reklamodawcy; pasażerowie i kierowcy). Rynek bada się łącznie ze względu na pośrednie efekty sieciowe: zmiana warunków po jednej stronie wpływa na liczbę użytkowników po drugiej stronie.",
+      dist_mini_title: "Przykłady klasyfikacji",
+      dist_mini_sub: "Wybierz przypadek, aby sprawdzić uzasadnienie klasyfikacji:",
+      mini_q1_h: "A. Samochody miejskie segmentu B",
+      mini_q1_p: "Jaka jest granica rynku właściwego?",
+      mini_q2_h: "B. Usługi stomatologiczne",
+      mini_q2_p: "Jak zaklasyfikować te usługi?",
+      mini_q3_h: "C. Produkcja roślin ozdobnych",
+      mini_q3_p: "Dlaczego kwiaty i sadzonki tworzą jeden rynek?",
+      mini_q4_h: "D. Kruszywa budowlane i piasek",
+      mini_q4_p: "Co wyznacza zasięg geograficzny?",
+      quiz_tag: "Weryfikacja wiedzy",
+      quiz_title: "Pytania testowe: wyznaczanie rynku właściwego",
+      quiz_score_label: "Twój wynik:",
+      quiz_btn_reset: "Rozpocznij od nowa",
+      quiz_btn_next: "Następne pytanie →",
+      footer_text: "EconLab — Interactive Economics Simulator for Students. All rights reserved."
+    },
+    "en": {
+      subtitle: "Relevant market identification",
+      author_lbl: "Author:",
+      ai_collab: "AI implementation support: Gemini",
+      nav_intro: "Introduction",
+      nav_lab: "Laboratory",
+      nav_concept: "Concepts",
+      nav_quiz: "Quiz",
+      intro_hero_tag: "Competition economics & antitrust policy",
+      intro_hero_title: "Relevant market identification and the SSNIP test",
+      intro_hero_desc: "Before competition authorities evaluate market power, concentration ratios, or mergers, they determine the boundary of the relevant market. A market is neither an entire industry nor an isolated product variant. It is the boundary where direct demand and supply substitution occur.",
+      intro_hero_btn_lab: "Open laboratory",
+      intro_hero_btn_concept: "Concepts",
+      intro_ladder_title: "Conceptual levels in economics",
+      intro_ladder_sub: "Economic aggregation from macroeconomy to specific product segments",
+      intro_lvl1_tag: "Level 1",
+      intro_ladder_1_h: "1. Economy",
+      intro_ladder_1_p: "All production, trade, and service activities across a country or single market area.",
+      intro_lvl2_tag: "Level 2",
+      intro_ladder_2_h: "2. Sector",
+      intro_ladder_2_p: "Three broad groups: agriculture and raw materials (I), manufacturing (II), services (III).",
+      intro_lvl3_tag: "Level 3",
+      intro_ladder_3_h: "3. Industry (PKD / NACE)",
+      intro_ladder_3_p: "Enterprises sharing manufacturing technology or statistical codes. This is too broad to assess consumer pricing power.",
+      intro_lvl4_tag: "Level 4 • Focus",
+      intro_ladder_4_h: "4. Relevant market",
+      intro_ladder_4_p: "The smallest group of products and geographic area that a hypothetical monopolist could profitably monopolize under a 5–10% price rise.",
+      intro_lvl5_tag: "Level 5",
+      intro_ladder_5_h: "5. Product segment",
+      intro_ladder_5_p: "A narrow product variant (such as cut red roses or strawberry yogurt). This is too narrow because buyers switch or competitors adjust production immediately.",
+      intro_dims_title: "Three dimensions of a relevant market",
+      intro_dims_sub: "Each market definition relies on product, geographic, and temporal boundaries",
+      intro_dim_prod_h: "Product market",
+      intro_dim_prod_p: "Includes all products regarded as interchangeable by buyers based on characteristics, prices, and intended use. It also accounts for rival suppliers that can switch production quickly without high sunk costs.",
+      intro_dim_geo_h: "Geographic market",
+      intro_dim_geo_p: "The territory where conditions of competition are sufficiently similar (for example, local delivery radiuses for wet concrete, national territories for retail goods, and worldwide areas for commercial aircraft).",
+      intro_dim_temp_h: "Temporal dimension",
+      intro_dim_temp_p: "Differences across time periods when shifting consumption across hours or seasons is impossible or costly (such as electricity in peak hours versus off-peak hours).",
+      intro_ssnip_title: "The SSNIP test",
+      intro_ssnip_sub: "Small but Significant Non-Transitory Increase in Price",
+      intro_ssnip_desc: "The test asks: could a hypothetical monopolist controlling a candidate product basket implement a profitable, permanent price increase of 5% to 10%?",
+      ssnip_step1_h: "Step 1: narrow candidate",
+      ssnip_step1_p: "Start with a single product or narrow product group.",
+      ssnip_step2_h: "Step 2: price increase",
+      ssnip_step2_p: "Assume a price rise of 5% to 10%, keeping other prices constant.",
+      ssnip_step3_h: "Step 3: substitution analysis",
+      ssnip_step3_p: "Measure buyer sales loss (demand substitution) and rival producer responses (supply substitution).",
+      ssnip_step4_h: "Step 4: basket expansion or stop",
+      ssnip_step4_p: "If the price rise is unprofitable, the candidate is too narrow. Add the closest substitute and test again. When the price rise becomes profitable, stop: the relevant market is established.",
+      sublab_tab1: "Task 1: Critical loss analysis",
+      sublab_tab2: "Task 2: Substitution map",
+      sublab_tab3: "Task 3: Monopoly simulator",
+      t1_badge: "Profitability condition",
+      t1_title: "Critical loss vs actual sales loss",
+      t1_subtitle: "Compare allowable volume loss with buyer diversion and rival supply switching.",
+      t1_slider_margin: "Initial gross margin (m = (P - MC)/P):",
+      t1_slider_ssnip: "SSNIP price increase (X = ΔP/P):",
+      t1_slider_eps: "Demand price elasticity (|εD|):",
+      t1_slider_sup: "Supply substitution (rival entry / line retooling):",
+      t1_m_low: "5% (low margin)",
+      t1_m_high: "90% (high margin)",
+      t1_eps_inelastic: "0.1 (inelastic demand)",
+      t1_eps_elastic: "6.0 (elastic demand)",
+      t1_sup_low: "0% (no entry / patent)",
+      t1_sup_high: "80% (fast line retooling)",
+      t1_bars_title: "Sales loss comparison:",
+      t1_bar_cl_lbl: "Critical loss (CL = X / (X + m)):",
+      t1_bar_al_lbl: "Actual sales loss (AL = |ε|·X + S·X):",
+      t1_out_profit: "Profit effect (ΔΠ):",
+      t1_out_eps_crit: "Critical elasticity (|εcrit|):",
+      t1_out_eps_sub: "Break-even threshold",
+      t1_out_verdict: "SSNIP verdict:",
+      t1_chal_tag: "Analytical challenge",
+      t1_chal_title: "5 Market scenarios",
+      t1_chal_desc: "Pick a case, predict if the price rise is profitable, then verify using the sliders.",
+      t1_pred_question: "Will a 5% price increase be profitable?",
+      t1_pred_yes: "Yes, profitable",
+      t1_pred_no: "No, unprofitable",
+      t1_btn_apply: "Load parameters into sliders",
+      t2_badge: "Market boundaries",
+      t2_title: "Substitution map and product relations",
+      t2_subtitle: "Add objects to the candidate basket. Observe when you reach the market boundary without absorbing the whole industry.",
+      t2_btn_reset: "Reset basket",
+      t2_orbit_title: "Corridor: Warsaw – Gdansk",
+      t2_click_hint: "Click a node to include or remove it from the basket",
+      t2_leg_core: "Baseline product",
+      t2_leg_in: "In basket",
+      t2_leg_out: "Outside basket",
+      t2_cart_title: "Basket contents:",
+      t2_rule_title: "Smallest market criterion:",
+      t2_rule_desc: "Once a price rise on a candidate basket becomes profitable, stop expanding. Adding further alternatives dilutes market shares into an industry.",
+      t3_badge: "Decision exercise",
+      t3_title: "Monopoly simulator: price increase",
+      t3_subtitle: "You lead a greenhouse rose grower with a 100M PLN budget. Build a basket that sustains a 10% price rise.",
+      t3_budget_lbl: "Budget:",
+      t3_btn_restart: "Restart",
+      t3_acq_title: "Available acquisition targets:",
+      t3_acq_sub: "Not every acquisition constrains consumer diversion.",
+      t3_btn_run: "Raise price by +10% (SSNIP)",
+      t3_report_title: "Test report:",
+      t3_report_intro: "Select targets to acquire, then execute the 10% price rise to observe demand and supply reactions.",
+      dist_badge: "Basic concepts",
+      dist_main_title: "Industry, relevant market, and product segment",
+      dist_hierarchy_tag: "Hierarchy of concepts",
+      dist_intro: "A frequent error in economic analyses is confusing an industry (too broad) with a relevant market, or a market with a product segment (too narrow).",
+      dist_table_h_dim: "Comparison dimension",
+      dist_table_h_ind: "Industry (NACE / PKD)",
+      dist_table_h_mkt: "Relevant market",
+      dist_table_h_seg: "Product segment",
+      dist_tab_r1_c1: "Perspective of analysis",
+      dist_tab_r1_c2: "Technological: shared production processes, inputs, and machinery.",
+      dist_tab_r1_c3: "Demand and supply: customer substitution and quick rival capacity switching.",
+      dist_tab_r1_c4: "Marketing: color variants, flavors, or packaging differences.",
+      dist_tab_r2_c1: "Formal definition",
+      dist_tab_r2_c2: "A group of companies sharing a statistical classification code (e.g. NACE 01.30).",
+      dist_tab_r2_c3: "The smallest group of products and area that can be profitably monopolized.",
+      dist_tab_r2_c4: "A narrow assortment variant (such as cut red roses).",
+      dist_tab_r3_c1: "Application",
+      dist_tab_r3_c2: "Statistical offices and ministries (macroeconomics, GDP statistics).",
+      dist_tab_r3_c3: "Antitrust agencies and courts (mergers, dominance evaluations).",
+      dist_tab_r3_c4: "Sales departments (marketing campaigns, product positioning).",
+      dist_tab_r4_c1: "Consequence of definition error",
+      dist_tab_r4_c2: "Artificial dilution of market shares and concealed market power.",
+      dist_tab_r4_c3: "Sound reference point for evaluating effective market power.",
+      dist_tab_r4_c4: "Artificial inflation of market shares and false allegations of dominance.",
+      dist_cases_title: "Market examples",
+      case1_h: "1. Decorative plant production",
+      case1_ind: "Industry: horticulture and plant propagation (NACE 01.30 — too broad; groups forestry trees and shrubs).",
+      case1_mkt: "Relevant market: greenhouse decorative plant production (cut flowers, potted plants, and seedlings form one market because growers adjust nursery beds quickly).",
+      case1_seg: "Segment: cut red roses production (too narrow — rival greenhouse supply constrains prices).",
+      case2_h: "2. Point-to-point passenger transport (O&D)",
+      case2_ind: "Industry: passenger transport (NACE 49.3 — too broad; groups trams, buses, and taxis).",
+      case2_mkt: "Relevant market: high-speed transit Warsaw–Gdansk (direct flights and Pendolino express trains constrain each other under 3h).",
+      case2_seg: "Segment: direct flights WAW–GDN (too narrow — a 10% price rise shifts business travelers to trains).",
+      case3_h: "3. Passenger cars",
+      case3_ind: "Industry: motor vehicle manufacturing (NACE 29.10 — groups articulated trucks, city buses, and small cars).",
+      case3_mkt: "Relevant market: B-segment city passenger cars (a small city car buyer will not buy a 40-ton truck).",
+      case3_seg: "Segment: red 1.0L hatchbacks (paint color does not define an independent market).",
+      dist_digital_title: "Digital markets and non-price competition",
+      dist_digital_sub: "When nominal price is $0: SSNDQ test and multi-sided platforms",
+      dist_ssndq_h: "SSNDQ test (quality decrease instead of price)",
+      dist_ssndq_p: "In free digital services (Google Search, YouTube, TikTok), users pay with attention and personal data. Traditional SSNIP does not apply because a 5% increase over $0 remains zero. Authorities use the SSNDQ test (Small but Significant Non-Transitory Decrease in Quality) to evaluate user switching after a permanent drop in service quality (such as higher ad clutter or worse search relevance).",
+      dist_multi_h: "Multi-sided platforms",
+      dist_multi_p: "Platforms connect two or more user groups (e.g. readers and advertisers; passengers and drivers). The market is analyzed jointly due to indirect network effects: changes on one side alter user participation on the other side.",
+      dist_mini_title: "Classification examples",
+      dist_mini_sub: "Select a case to inspect the classification rationale:",
+      mini_q1_h: "A. Subcompact city cars (B-segment)",
+      mini_q1_p: "What defines the relevant market boundary?",
+      mini_q2_h: "B. Dental clinic services",
+      mini_q2_p: "How are these services categorized?",
+      mini_q3_h: "C. Decorative plant production",
+      mini_q3_p: "Why do flowers and seedlings form one market?",
+      mini_q4_h: "D. Construction aggregates and sand",
+      mini_q4_p: "What governs the geographic scope?",
+      quiz_tag: "Knowledge check",
+      quiz_title: "Practice questions: relevant market identification",
+      quiz_score_label: "Your score:",
+      quiz_btn_reset: "Restart",
+      quiz_btn_next: "Next question →",
+      footer_text: "EconLab — Interactive Economics Simulator for Students. All rights reserved."
+    }
+  };
+
+  function switchTab(tabId) {
+    ['intro', 'lab', 'distinction', 'quiz'].forEach(t => {
+      const el = document.getElementById(`view-${t}`);
+      const btn = document.getElementById(`tab-${t}`);
+      if (!el || !btn) return;
+      if (t === tabId) {
+        el.classList.remove('hidden');
+        btn.className = "px-3 py-1.5 rounded-lg bg-white shadow-sm text-indigo-600 font-bold transition whitespace-nowrap";
+      } else {
+        el.classList.add('hidden');
+        btn.className = "px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition whitespace-nowrap";
+      }
+    });
+
+    if (tabId === 'lab') {
+      switchLabTask(activeLabTask);
+    }
+  }
+
+  function toggleLanguage() {
+    currentLang = (currentLang === 'pl') ? 'en' : 'pl';
+    document.documentElement.lang = currentLang;
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (translations[currentLang] && translations[currentLang][key]) {
+        el.innerHTML = translations[currentLang][key];
+      }
+    });
+
+    renderTask1Scenarios();
+    updateTask1();
+    renderTask2();
+    renderTask3();
+
+    if (currentMiniFactId !== null) {
+      showMiniFact(currentMiniFactId);
+    }
+
+    if (currentQuestionIndex >= activeQuizQuestions.length) {
+      showQuizCompletion();
+    } else {
+      renderQuizQuestion();
+    }
+  }
+
+  window.onload = function() {
+    initializeQuizSession();
+
+    document.documentElement.lang = currentLang;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (translations[currentLang] && translations[currentLang][key]) {
+        el.innerHTML = translations[currentLang][key];
+      }
+    });
+
+    renderTask1Scenarios();
+    updateTask1();
+    renderTask2();
+    renderTask3();
+    renderQuizQuestion();
+  };
+  </script>
+
+</body>
+</html>
