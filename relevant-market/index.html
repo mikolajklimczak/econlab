@@ -44,6 +44,20 @@
     .custom-range-amber {
       accent-color: #d97706;
     }
+    @keyframes t2HintPulse {
+      0%, 100% { stroke: #d97706; stroke-width: 2.5; }
+      50% { stroke: #f59e0b; stroke-width: 5; }
+    }
+    .t2-hint-flash circle {
+      animation: t2HintPulse 0.5s ease-in-out 3;
+    }
+    @keyframes t2ErrorFlash {
+      0%, 100% { stroke: #e11d48; stroke-width: 2.5; }
+      50% { stroke: #fb7185; stroke-width: 5; }
+    }
+    .t2-error-flash circle {
+      animation: t2ErrorFlash 0.25s ease-in-out 3;
+    }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col antialiased selection:bg-indigo-500 selection:text-white">
@@ -263,7 +277,6 @@
         </div>
       </div>
 
-      <!-- Task 1: Critical loss -->
       <div id="sublab-task-1" class="space-y-6">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           
@@ -308,13 +321,13 @@
 
                 <div class="space-y-1">
                   <div class="flex justify-between items-center text-xs">
-                    <span class="font-semibold text-emerald-800" data-i18n="t1_slider_eps">Cenowa elastyczność popytu (|ε<sub>D</sub>|):</span>
+                    <span class="font-semibold text-emerald-800" data-i18n="t1_slider_eps">Cenowa elastyczność popytu (e<sub>p</sub> = |E<sub>p</sub>|):</span>
                     <span id="t1-val-eps" class="font-mono font-bold bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded">1.50</span>
                   </div>
                   <input type="range" id="t1-range-eps" min="0.1" max="6.0" value="1.5" step="0.1" class="w-full custom-range-green cursor-pointer" oninput="updateTask1()">
                   <div class="flex justify-between text-[10px] text-slate-400">
                     <span data-i18n="t1_eps_inelastic">0.1 (sztywny popyt)</span>
-                    <span>|ε| = 1.0</span>
+                    <span>e<sub>p</sub> = 1.0</span>
                     <span data-i18n="t1_eps_elastic">6.0 (elastyczny popyt)</span>
                   </div>
                 </div>
@@ -356,7 +369,7 @@
                   <div class="flex justify-between text-xs">
                     <span class="font-semibold flex items-center gap-1" id="t1-al-label">
                       <span class="w-2.5 h-2.5 rounded-full bg-emerald-600 inline-block" id="t1-al-dot"></span>
-                      <span data-i18n="t1_bar_al_lbl">Rzeczywista utrata sprzedaży (AL = |ε|·X + S·X):</span>
+                      <span data-i18n="t1_bar_al_lbl">Rzeczywista utrata sprzedaży (AL = e<sub>p</sub>·X + S·X):</span>
                     </span>
                     <span id="t1-al-num" class="font-mono font-bold text-emerald-600">8.5%</span>
                   </div>
@@ -368,13 +381,13 @@
 
               <div class="grid grid-cols-3 gap-3">
                 <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
-                  <span class="text-[10px] font-bold text-slate-500 uppercase block" data-i18n="t1_out_profit">Wpływ na zysk (ΔΠ):</span>
+                  <span class="text-[10px] font-bold text-slate-500 uppercase block" data-i18n="t1_out_profit">Wpływ na zysk (ΔTP):</span>
                   <div id="t1-res-profit" class="text-base sm:text-lg font-mono font-bold text-emerald-600 mt-0.5">+4.2%</div>
                   <span id="t1-res-profit-sub" class="text-[10px] text-slate-400">Podwyżka zyskowna</span>
                 </div>
 
                 <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
-                  <span class="text-[10px] font-bold text-slate-500 uppercase block" data-i18n="t1_out_eps_crit">Graniczna elastyczność (|ε<sub>crit</sub>|):</span>
+                  <span class="text-[10px] font-bold text-slate-500 uppercase block" data-i18n="t1_out_eps_crit">Graniczna elastyczność (e<sub>p,crit</sub>):</span>
                   <div id="t1-res-crit-eps" class="text-base sm:text-lg font-mono font-bold text-indigo-700 mt-0.5">2.22</div>
                   <span class="text-[10px] text-slate-400" data-i18n="t1_out_eps_sub">Próg opłacalności</span>
                 </div>
@@ -431,73 +444,221 @@
           </div>
 
         </div>
+
+        <!-- Task 1 Notation Box -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-3">
+          <div class="border-b border-slate-100 pb-2.5">
+            <span class="text-[10px] font-mono font-bold text-indigo-600 uppercase tracking-wider" data-i18n="t1_not_tag">Aparatura pojęciowa</span>
+            <h3 class="text-sm font-bold text-slate-900 mt-0.5" data-i18n="t1_not_title">Wykaz oznaczeń i skrótów (Zadanie 1)</h3>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 text-xs">
+            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+              <span class="font-mono font-bold text-indigo-700 text-[11px]">TP, ΔTP</span>
+              <p class="text-[11px] text-slate-600 leading-relaxed" data-i18n="t1_not_tp"><strong>Zysk całkowity</strong> (Total Profit) oraz jego procentowa zmiana po podwyżce cen i spadku sprzedaży.</p>
+            </div>
+            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+              <span class="font-mono font-bold text-indigo-700 text-[11px]">E<sub>p</sub>, e<sub>p</sub></span>
+              <p class="text-[11px] text-slate-600 leading-relaxed" data-i18n="t1_not_ep"><strong>Cenowa elastyczność popytu</strong>; zapis e<sub>p</sub> = |E<sub>p</sub>| oznacza jej wartość bezwzględną.</p>
+            </div>
+            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+              <span class="font-mono font-bold text-indigo-700 text-[11px]">e<sub>p,crit</sub></span>
+              <p class="text-[11px] text-slate-600 leading-relaxed" data-i18n="t1_not_epcrit"><strong>Graniczna elastyczność</strong>; maksymalna wrażliwość popytu, przy której podwyżka ceny nie przynosi strat.</p>
+            </div>
+            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+              <span class="font-mono font-bold text-indigo-700 text-[11px]">m</span>
+              <p class="text-[11px] text-slate-600 leading-relaxed" data-i18n="t1_not_m"><strong>Początkowa marża cenowa</strong>, m = (P - MC) / P, gdzie P to cena, a MC to koszt krańcowy.</p>
+            </div>
+            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+              <span class="font-mono font-bold text-indigo-700 text-[11px]">X</span>
+              <p class="text-[11px] text-slate-600 leading-relaxed" data-i18n="t1_not_x"><strong>Hipotetyczna podwyżka ceny</strong> w teście SSNIP (X = ΔP / P), standardowo przyjmowana jako 5% lub 10%.</p>
+            </div>
+            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+              <span class="font-mono font-bold text-indigo-700 text-[11px]">CL</span>
+              <p class="text-[11px] text-slate-600 leading-relaxed" data-i18n="t1_not_cl"><strong>Krytyczna utrata sprzedaży</strong> (Critical Loss); dopuszczalny spadek wolumenu dający ΔTP = 0: CL = X / (X + m).</p>
+            </div>
+            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+              <span class="font-mono font-bold text-indigo-700 text-[11px]">AL</span>
+              <p class="text-[11px] text-slate-600 leading-relaxed" data-i18n="t1_not_al"><strong>Rzeczywista utrata sprzedaży</strong> (Actual Loss); faktyczny odpływ wolumenu: AL = e<sub>p</sub>·X + S·X.</p>
+            </div>
+            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+              <span class="font-mono font-bold text-indigo-700 text-[11px]">S</span>
+              <p class="text-[11px] text-slate-600 leading-relaxed" data-i18n="t1_not_s"><strong>Substytucyjność podaży</strong>; siła reakcji rywali przestawiających linie wytwórcze w odpowiedzi na podwyżkę.</p>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- Task 2: Substitution Map -->
       <div id="sublab-task-2" class="hidden space-y-6">
         <div class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm space-y-5">
           <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3">
             <div>
-              <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider" data-i18n="t2_badge">Granice rynku</span>
-              <h3 class="text-lg font-bold text-slate-900 mt-0.5" data-i18n="t2_title">Mapa substytucji i relacje produktowe</h3>
+              <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider" data-i18n="t2_badge">Polowanie na najmniejszy rynek</span>
+              <h3 class="text-lg font-bold text-slate-900 mt-0.5" data-i18n="t2_title">Mapa substytucji: dywersja popytowa i podażowa</h3>
               <p class="text-xs text-slate-500 mt-0.5" data-i18n="t2_subtitle">
-                Włączaj obiekty do badanego koszyka. Sprawdź, kiedy uzyskujesz rynek właściwy, a kiedy włączasz całą branżę.
+                Dodawaj produkty do koszyka w kolejności od najbliższego substytutu. Zatrzymaj się, gdy podwyżka ceny o 5% staje się opłacalna.
               </p>
-            </div>
-            <div class="flex items-center gap-2">
-              <button onclick="resetTask2()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg transition" data-i18n="t2_btn_reset">
-                Zresetuj koszyk
-              </button>
             </div>
           </div>
 
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-            
-            <div class="lg:col-span-8 bg-slate-50 rounded-2xl p-4 border border-slate-200 flex flex-col items-center">
-              <div class="w-full flex justify-between items-center text-xs mb-2 px-1">
-                <span class="font-bold text-slate-700" data-i18n="t2_orbit_title">Trasa podróży: Warszawa – Gdańsk / Trójmiasto</span>
-                <span class="text-[11px] text-slate-500" data-i18n="t2_click_hint">Kliknij węzeł, aby dodać lub usunąć go z koszyka</span>
+
+            <div class="lg:col-span-4 space-y-4">
+              <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-3 text-xs">
+                <div>
+                  <div class="flex justify-between items-center mb-1">
+                    <label class="font-bold text-slate-800 uppercase text-[10px] tracking-wider" data-i18n="t2_lbl_ssnip">Podwyżka SSNIP</label>
+                    <span id="t2-val-ssnip" class="font-mono font-bold text-indigo-700">5%</span>
+                  </div>
+                  <input type="range" id="t2-range-ssnip" min="1" max="10" step="1" value="5" oninput="onT2SsnipChange()" class="w-full accent-indigo-600">
+                  <p class="text-[10px] text-slate-500 mt-1 leading-normal" data-i18n="t2_desc_ssnip">
+                    Wielkość hipotetycznej podwyżki cen (standardowo 5–10%), której opłacalność sprawdza test.
+                  </p>
+                </div>
+                <div>
+                  <div class="flex justify-between items-center mb-1">
+                    <label class="font-bold text-slate-800 uppercase text-[10px] tracking-wider" data-i18n="t2_lbl_outside">Siła opcji zewnętrznej</label>
+                    <span id="t2-val-outside" class="font-mono font-bold text-indigo-700">140</span>
+                  </div>
+                  <input type="range" id="t2-range-outside" min="60" max="400" step="10" value="140" oninput="onT2OutsideChange()" class="w-full accent-indigo-600">
+                  <p class="text-[10px] text-slate-500 mt-1 leading-normal" data-i18n="t2_desc_outside">
+                    Skłonność klientów do całkowitej rezygnacji z zakupu lub przejścia do innych kategorii produktów.
+                  </p>
+                </div>
               </div>
 
-              <div class="w-full overflow-hidden flex justify-center">
-                <svg id="t2-map-svg" viewBox="0 0 660 420" class="w-full max-w-[660px] h-auto select-none font-sans"></svg>
+              <div class="flex flex-wrap items-center gap-2">
+                <button onclick="resetTask2()" class="px-3 py-2 min-h-[44px] bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg transition" data-i18n="t2_btn_reset">
+                  Zresetuj
+                </button>
+                <button onclick="useT2Hint()" id="t2-btn-hint" class="px-3 py-2 min-h-[44px] bg-amber-100 hover:bg-amber-200 text-amber-900 text-xs font-semibold rounded-lg transition" data-i18n="t2_btn_hint">
+                  Podpowiedź
+                </button>
+                <label class="flex items-center gap-2 px-3 py-2 min-h-[44px] bg-slate-100 rounded-lg cursor-pointer text-xs font-semibold text-slate-700">
+                  <input type="checkbox" id="t2-chk-showdiv" onchange="toggleT2Diversion()" class="accent-indigo-600">
+                  <span data-i18n="t2_lbl_showdiv">Pokaż dywersję</span>
+                </label>
               </div>
 
-              <div class="flex flex-wrap items-center justify-center gap-4 text-xs mt-3 pt-2 border-t border-slate-200 w-full text-slate-600">
-                <span class="flex items-center gap-1.5">
-                  <span class="w-3 h-3 rounded-full bg-indigo-600 inline-block"></span>
-                  <span data-i18n="t2_leg_core">Produkt wyjściowy</span>
-                </span>
-                <span class="flex items-center gap-1.5">
-                  <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
-                  <span data-i18n="t2_leg_in">W koszyku</span>
-                </span>
-                <span class="flex items-center gap-1.5">
-                  <span class="w-3 h-3 rounded-full bg-slate-300 inline-block"></span>
-                  <span data-i18n="t2_leg_out">Poza koszykiem</span>
-                </span>
+              <div class="p-3 rounded-xl border border-slate-200 bg-white space-y-1.5 text-[11px] text-slate-600">
+                <div class="flex justify-between"><span data-i18n="t2_counter_clicks">Kliknięcia:</span><span id="t2-counter-clicks" class="font-mono font-bold text-slate-800">0</span></div>
+                <div class="flex justify-between"><span data-i18n="t2_counter_errors">Błędy:</span><span id="t2-counter-errors" class="font-mono font-bold text-slate-800">0</span></div>
+                <div class="flex justify-between"><span data-i18n="t2_counter_hints">Podpowiedzi:</span><span id="t2-counter-hints" class="font-mono font-bold text-slate-800">0 / 3</span></div>
+              </div>
+
+              <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2.5 text-xs">
+                <span class="font-bold text-slate-800 uppercase text-[10px] tracking-wider block" data-i18n="t2_cart_title">Koszyk (kolejność dodawania):</span>
+                <div id="t2-cart-items" class="space-y-1.5"></div>
               </div>
             </div>
 
-            <div class="lg:col-span-4 space-y-4">
-              <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2.5 text-xs">
-                <span class="font-bold text-slate-800 uppercase text-[10px] tracking-wider block" data-i18n="t2_cart_title">Aktualna zawartość koszyka:</span>
-                <div id="t2-cart-items" class="space-y-1.5"></div>
+            <div class="lg:col-span-8 space-y-4">
+              <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200 flex flex-col items-center">
+                <div class="w-full flex justify-between items-center text-xs mb-2 px-1">
+                  <span class="font-bold text-slate-700" data-i18n="t2_map_title">Mapa substytucji (d<sub>D</sub>, d<sub>S</sub>)</span>
+                  <span class="text-[11px] text-slate-500" data-i18n="t2_click_hint">Kliknij produkt, aby dodać lub usunąć go z koszyka</span>
+                </div>
+                <div class="w-full overflow-hidden flex justify-center">
+                  <svg id="t2-map-svg" viewBox="0 0 640 520" class="w-full max-w-[640px] h-auto select-none font-sans"></svg>
+                </div>
+                <div class="flex flex-wrap items-center justify-center gap-4 text-xs mt-3 pt-2 border-t border-slate-200 w-full text-slate-600">
+                  <span class="flex items-center gap-1.5">
+                    <span class="w-3 h-3 rounded-full bg-indigo-600 inline-block"></span>
+                    <span data-i18n="t2_leg_core">Produkt wyjściowy</span>
+                  </span>
+                  <span class="flex items-center gap-1.5">
+                    <span class="w-3 h-3 rounded-full bg-emerald-600 inline-block"></span>
+                    <span data-i18n="t2_leg_in">W koszyku</span>
+                  </span>
+                  <span class="flex items-center gap-1.5">
+                    <span class="w-3 h-3 rounded-full bg-white border border-slate-400 inline-block"></span>
+                    <span data-i18n="t2_leg_out">Poza koszykiem</span>
+                  </span>
+                </div>
               </div>
 
-              <div id="t2-verdict-box" class="p-4 rounded-xl border transition space-y-2.5 text-xs"></div>
+              <div class="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
+                <div class="p-2.5 rounded-xl border border-slate-200 bg-white text-center">
+                  <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider" data-i18n="t2_tile_dp">ΔTP(S)</div>
+                  <div id="t2-tile-dp" class="text-base font-mono font-bold mt-0.5">—</div>
+                </div>
+                <div class="p-2.5 rounded-xl border border-slate-200 bg-white text-center">
+                  <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider" data-i18n="t2_tile_cl">CL(S)</div>
+                  <div id="t2-tile-cl" class="text-base font-mono font-bold text-slate-800 mt-0.5">—</div>
+                </div>
+                <div class="p-2.5 rounded-xl border border-slate-200 bg-white text-center">
+                  <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider" data-i18n="t2_tile_al">AL(S)</div>
+                  <div id="t2-tile-al" class="text-base font-mono font-bold text-slate-800 mt-0.5">—</div>
+                </div>
+                <div class="p-2.5 rounded-xl border border-slate-200 bg-white text-center">
+                  <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider" data-i18n="t2_tile_share">Udział</div>
+                  <div id="t2-tile-share" class="text-base font-mono font-bold text-slate-800 mt-0.5">—</div>
+                </div>
+                <div class="p-2.5 rounded-xl border border-slate-200 bg-white text-center">
+                  <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider" data-i18n="t2_tile_n">Produkty</div>
+                  <div id="t2-tile-n" class="text-base font-mono font-bold text-slate-800 mt-0.5">—</div>
+                </div>
+              </div>
 
-              <div class="p-3 rounded-xl bg-amber-50/70 border border-amber-200 text-amber-950 text-[11px] leading-relaxed">
-                <strong class="block font-semibold mb-0.5" data-i18n="t2_rule_title">Kryterium najmniejszego rynku:</strong>
-                <span data-i18n="t2_rule_desc">Gdy podwyżka na danym koszyku staje się zyskowna, zatrzymujemy procedurę. Dalsze dołączanie alternatyw rozmywa udziały rynkowe.</span>
+              <div id="t2-verdict-box" class="p-4 rounded-xl border transition space-y-2 text-xs"></div>
+
+              <div id="t2-event-msg" class="hidden p-3 rounded-xl border text-[11px] leading-relaxed"></div>
+
+              <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2.5 text-xs">
+                <span class="font-bold text-slate-800 uppercase text-[10px] tracking-wider block" data-i18n="t2_steps_title">Obliczenia krok po kroku:</span>
+                <div id="t2-steps" class="space-y-1.5"></div>
+              </div>
+
+              <div class="p-3 rounded-xl bg-blue-50/70 border border-blue-200 text-blue-950 text-[11px] leading-relaxed">
+                <span id="t2-comment" data-i18n="t2_comment_default">Koszyk zawiera tylko produkt wyjściowy. Kliknij najbliższy substytut, aby zacząć badanie rynku.</span>
               </div>
             </div>
 
           </div>
         </div>
+
+        <!-- Task 2 Notation Box -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-3">
+          <div class="border-b border-slate-100 pb-2.5">
+            <span class="text-[10px] font-mono font-bold text-indigo-600 uppercase tracking-wider" data-i18n="t2_not_tag">Aparatura pojęciowa</span>
+            <h3 class="text-sm font-bold text-slate-900 mt-0.5" data-i18n="t2_not_title">Wykaz oznaczeń i skrótów (Zadanie 2)</h3>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 text-xs">
+            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+              <span class="font-mono font-bold text-indigo-700 text-[11px]">S</span>
+              <p class="text-[11px] text-slate-600 leading-relaxed" data-i18n="t2_not_s_basket"><strong>Koszyk kandydacki</strong>; zbiór produktów poddany wspólnemu testowi hipotetycznego monopolisty.</p>
+            </div>
+            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+              <span class="font-mono font-bold text-indigo-700 text-[11px]">TP(S), ΔTP(S)</span>
+              <p class="text-[11px] text-slate-600 leading-relaxed" data-i18n="t2_not_tps"><strong>Zysk koszyka</strong> i jego procentowa zmiana po podwyżce cen na całym koszyku S.</p>
+            </div>
+            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+              <span class="font-mono font-bold text-indigo-700 text-[11px]">d<sub>D</sub>, d<sub>S</sub></span>
+              <p class="text-[11px] text-slate-600 leading-relaxed" data-i18n="t2_not_dist"><strong>Dystans popytowy</strong> (różnica właściwości) oraz <strong>dystans podażowy</strong> (koszt przestawienia linii).</p>
+            </div>
+            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+              <span class="font-mono font-bold text-indigo-700 text-[11px]">D<sub>ij</sub></span>
+              <p class="text-[11px] text-slate-600 leading-relaxed" data-i18n="t2_not_div"><strong>Wskaźnik dywersji</strong> (Diversion Ratio); ułamek klientów porzucających produkt i, którzy wybierają produkt j.</p>
+            </div>
+            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+              <span class="font-mono font-bold text-indigo-700 text-[11px]">m̄(S)</span>
+              <p class="text-[11px] text-slate-600 leading-relaxed" data-i18n="t2_not_mbar"><strong>Średnia ważona marża</strong> produktów tworzących koszyk S, ważona ich wolumenami sprzedaży q<sub>i</sub>.</p>
+            </div>
+            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+              <span class="font-mono font-bold text-indigo-700 text-[11px]">CL(S)</span>
+              <p class="text-[11px] text-slate-600 leading-relaxed" data-i18n="t2_not_cls"><strong>Krytyczna utrata sprzedaży koszyka</strong>; próg dopuszczalnego odpływu: CL(S) = X / (X + m̄(S)).</p>
+            </div>
+            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+              <span class="font-mono font-bold text-indigo-700 text-[11px]">AL(S)</span>
+              <p class="text-[11px] text-slate-600 leading-relaxed" data-i18n="t2_not_als"><strong>Rzeczywisty odpływ sprzedaży</strong> poza koszyk S; popyt przechwycony wewnątrz koszyka nie stanowi straty.</p>
+            </div>
+            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+              <span class="font-mono font-bold text-indigo-700 text-[11px]">W<sub>outside</sub></span>
+              <p class="text-[11px] text-slate-600 leading-relaxed" data-i18n="t2_not_wout"><strong>Siła opcji zewnętrznej</strong>; skłonność klientów do rezygnacji z zakupu lub wyboru dóbr spoza mapy.</p>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- Task 3: Monopoly simulator -->
       <div id="sublab-task-3" class="hidden space-y-6">
         <div class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm space-y-5">
           
@@ -784,82 +945,248 @@
       id: "pharma",
       title_pl: "1. Lek na receptę z patentem",
       title_en: "1. Prescription drug with patent",
-      desc_pl: "Chorzy kupują lek z konieczności leczenia; brak zamienników terapeutycznych. Wysoka marża (m=80%), sztywny popyt (|ε|=0.6), brak reakcji podaży rywali (S=0% z uwagi na bariery rejestracyjne).",
-      desc_en: "Patients buy the drug out of medical need; therapeutic substitutes do not exist. High gross margin (m=80%), inelastic demand (|ε|=0.6), zero rival supply entry (S=0% due to regulatory barriers).",
+      desc_pl: "Chorzy kupują lek z konieczności leczenia; brak zamienników terapeutycznych. Wysoka marża (m=80%), sztywny popyt (e_p = |E_p| = 0.6), brak reakcji podaży rywali (S=0% z uwagi na bariery rejestracyjne).",
+      desc_en: "Patients buy the drug out of medical need; therapeutic substitutes do not exist. High gross margin (m=80%), inelastic demand (e_p = |E_p| = 0.6), zero rival supply entry (S=0% due to regulatory barriers).",
       m: 80,
       x: 5,
       eps: 0.6,
       sup: 0,
       expectedProfitable: true,
-      explanation_pl: "Marża m=80% daje próg straty krytycznej CL = 5.9%. Sztywny popyt (|ε|=0.6) i brak wejścia rywali (S=0%) oznaczają rzeczywisty odpływ 3.0%. Podwyżka jest opłacalna.",
-      explanation_en: "A margin of m=80% gives a critical loss threshold of CL = 5.9%. Inelastic demand (|ε|=0.6) and zero rival supply entry (S=0%) yield a volume loss of 3.0%. The price increase is profitable."
+      explanation_pl: "Marża m=80% daje próg straty krytycznej CL = 5.9%. Sztywny popyt (e_p = 0.6) i brak wejścia rywali (S=0%) oznaczają rzeczywisty odpływ 3.0%. Podwyżka zwiększa zysk całkowity (ΔTP > 0).",
+      explanation_en: "A margin of m=80% gives a critical loss threshold of CL = 5.9%. Inelastic demand (e_p = 0.6) and zero rival supply entry (S=0%) yield a volume loss of 3.0%. The price increase raises total profit (ΔTP > 0)."
     },
     "fuel": {
       id: "fuel",
       title_pl: "2. Paliwo na miejskiej stacji benzynowej",
       title_en: "2. Urban petrol station retail fuel",
-      desc_pl: "Niska marża detaliczna (m=15%), widoczne pylony cenowe przy drodze. Wysoka elastyczność (|ε|=6.0) oraz szybkie przejęcie kierowców przez sąsiednie stacje (S=20%).",
-      desc_en: "Low retail margin (m=15%) and transparent pricing on roadside signs. High elasticity (|ε|=6.0) and rapid rival station response (S=20%).",
+      desc_pl: "Niska marża detaliczna (m=15%), widoczne pylony cenowe przy drodze. Wysoka elastyczność (e_p = |E_p| = 6.0) oraz szybkie przejęcie kierowców przez sąsiednie stacje (S=20%).",
+      desc_en: "Low retail margin (m=15%) and transparent pricing on roadside signs. High elasticity (e_p = |E_p| = 6.0) and rapid rival station response (S=20%).",
       m: 15,
       x: 5,
       eps: 6.0,
       sup: 20,
       expectedProfitable: false,
-      explanation_pl: "Próg krytyczny wynosi CL = 25.0%. Wysoka elastyczność i natychmiastowa reakcja sąsiednich stacji powodują utratę sprzedaży przekraczającą 30%. Podwyżka przynosi straty.",
-      explanation_en: "Critical loss threshold is CL = 25.0%. High elasticity and fast competitor response cause a sales loss above 30%. The price increase is unprofitable."
+      explanation_pl: "Próg krytyczny wynosi CL = 25.0%. Wysoka elastyczność i natychmiastowa reakcja sąsiednich stacji powodują utratę sprzedaży przekraczającą 30%. Zysk całkowity spada (ΔTP < 0).",
+      explanation_en: "Critical loss threshold is CL = 25.0%. High elasticity and fast competitor response cause a sales loss above 30%. Total profit drops (ΔTP < 0)."
     },
     "streaming": {
       id: "streaming",
       title_pl: "3. Subskrypcja serwisu streamingowego (SVOD)",
       title_en: "3. Subscription video streaming service (SVOD)",
-      desc_pl: "Wysoka marża brutto (m=60%), umiarkowana wrażliwość subskrybentów (|ε|=1.8), ograniczona w krótkim czasie reakcja rywali z uwagi na czas produkcji filmów (S=10%).",
-      desc_en: "High gross margin (m=60%), moderate subscriber sensitivity (|ε|=1.8), and limited short-run rival capacity expansion due to content lead times (S=10%).",
+      desc_pl: "Wysoka marża brutto (m=60%), umiarkowana wrażliwość subskrybentów (e_p = |E_p| = 1.8), ograniczona w krótkim czasie reakcja rywali z uwagi na czas produkcji filmów (S=10%).",
+      desc_en: "High gross margin (m=60%), moderate subscriber sensitivity (e_p = |E_p| = 1.8), and limited short-run rival capacity expansion due to content lead times (S=10%).",
       m: 60,
       x: 5,
       eps: 1.8,
       sup: 10,
       expectedProfitable: false,
-      explanation_pl: "Przy marży m=60% próg wynosi CL = 7.7%, podczas gdy łączny odpływ sprzedaży wynosi 9.5%. Podwyżka pojedynczego serwisu jest nieopłacalna, ponieważ widzowie wstrzymują subskrypcję i przechodzą do konkurencji.",
-      explanation_en: "With a margin of m=60%, the critical threshold is CL = 7.7%, while total volume loss reaches 9.5%. An isolated price increase is unprofitable because subscribers cancel and switch to competitors."
+      explanation_pl: "Przy marży m=60% próg wynosi CL = 7.7%, podczas gdy łączny odpływ sprzedaży wynosi 9.5%. Podwyżka pojedynczego serwisu obniża zysk całkowity (ΔTP < 0).",
+      explanation_en: "With a margin of m=60%, the critical threshold is CL = 7.7%, while total volume loss reaches 9.5%. An isolated price increase reduces total profit (ΔTP < 0)."
     },
     "cement": {
       id: "cement",
       title_pl: "4. Cement z lokalnej cementowni",
       title_en: "4. Cement from a local kiln",
-      desc_pl: "Marża m=30%, transport drogowy ogranicza alternatywy (|ε|=1.0), znikoma podaż z odległych cementowni ze względu na koszt frachtu (S=15%).",
-      desc_en: "Gross margin m=30%, road freight costs limit alternatives (|ε|=1.0), and distant cement kilns do not supply the local market profitably (S=15%).",
+      desc_pl: "Marża m=30%, transport drogowy ogranicza alternatywy (e_p = |E_p| = 1.0), znikoma podaż z odległych cementowni ze względu na koszt frachtu (S=15%).",
+      desc_en: "Gross margin m=30%, road freight costs limit alternatives (e_p = |E_p| = 1.0), and distant cement kilns do not supply the local market profitably (S=15%).",
       m: 30,
       x: 5,
       eps: 1.0,
       sup: 15,
       expectedProfitable: true,
-      explanation_pl: "Próg wynosi CL = 14.3%. Rzeczywisty spadek wolumenu to 5.75% z uwagi na wysokie koszty transportu. Podwyżka jest opłacalna, a lokalny obszar tworzy rynek właściwy.",
-      explanation_en: "Critical loss is CL = 14.3%. Actual volume loss is 5.75% due to high freight costs. The price increase is profitable, confirming that the local radius forms the relevant geographic market."
+      explanation_pl: "Próg wynosi CL = 14.3%. Rzeczywisty spadek wolumenu to 5.75% z uwagi na wysokie koszty transportu. Podwyżka zwiększa zysk całkowity (ΔTP > 0).",
+      explanation_en: "Critical loss is CL = 14.3%. Actual volume loss is 5.75% due to high freight costs. The price increase raises total profit (ΔTP > 0)."
     },
     "mortgage": {
       id: "mortgage",
       title_pl: "5. Kredyt hipoteczny w banku detalicznym",
       title_en: "5. Retail bank residential mortgage",
-      desc_pl: "Marża bankowa m=45%, łatwe porównywanie ofert w internecie (|ε|=3.2), a inne banki oferują refinansowanie kredytu (S=40%).",
-      desc_en: "Banking margin m=45%, online comparison shopping (|ε|=3.2), and rival retail banks offering refinancing facilities (S=40%).",
+      desc_pl: "Marża bankowa m=45%, łatwe porównywanie ofert w internecie (e_p = |E_p| = 3.2), a inne banki oferują refinansowanie kredytu (S=40%).",
+      desc_en: "Banking margin m=45%, online comparison shopping (e_p = |E_p| = 3.2), and rival retail banks offering refinancing facilities (S=40%).",
       m: 45,
       x: 5,
       eps: 3.2,
       sup: 40,
       expectedProfitable: false,
-      explanation_pl: "Próg krytyczny to CL = 10.0%, natomiast rzeczywisty odpływ wynosi 18.0%. Konkurencyjne banki przejmują kredytobiorców, przez co pojedynczy bank nie ma siły rynkowej.",
-      explanation_en: "Critical loss is CL = 10.0%, but actual loss reaches 18.0%. Rival banks capture borrowers, which means a single bank cannot sustain a unilateral price increase."
+      explanation_pl: "Próg krytyczny to CL = 10.0%, natomiast rzeczywisty odpływ wynosi 18.0%. Odpływ klientów przewyższa marżę i obniża zysk całkowity (ΔTP < 0).",
+      explanation_en: "Critical loss is CL = 10.0%, but actual loss reaches 18.0%. Volume loss exceeds margin and reduces total profit (ΔTP < 0)."
     }
   };
 
-  const task2Nodes = [
-    { id: "rail_pendolino", name_pl: "Pendolino Express (PKP IC)", name_en: "Pendolino High-Speed Rail", time: "2h 30m", price: 169, type: "core", x: 330, y: 210, r: 36, included: true },
-    { id: "air_direct", name_pl: "Lot bezpośredni WAW–GDN", name_en: "Direct Flight WAW–GDN", time: "55m (+ dojazd)", price: 340, type: "close", x: 230, y: 130, r: 30, included: false },
-    { id: "rail_ic", name_pl: "Pociąg pospieszny IC", name_en: "Standard IC Train", time: "3h 25m", price: 72, type: "close", x: 430, y: 130, r: 30, included: false },
-    { id: "car_highway", name_pl: "Samochód (A1/S7)", name_en: "Car (Highway A1)", time: "3h 40m", price: 190, type: "mid", x: 330, y: 335, r: 28, included: false },
-    { id: "bus_slow", name_pl: "Autokar rejsowy", name_en: "Slow Coach", time: "5h 15m", price: 49, type: "distant", x: 130, y: 290, r: 24, included: false },
-    { id: "freight_train", name_pl: "Pociąg towarowy", name_en: "Freight Train", time: "18h", price: 15, type: "distant", x: 530, y: 290, r: 24, included: false },
+  const T2_CONST = { X_SSNIP: 0.05, LAMBDA: 0.9, KAPPA: 0.6, OUTSIDE_W: 140, TOLERANCE: 0.02 };
+
+  const T2_ORDER = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N'];
+
+  const T2_NAME_POOL = [
+    { letter: 'A', name_pl: 'Aurora', name_en: 'Aurora' },
+    { letter: 'B', name_pl: 'Boreal', name_en: 'Boreal' },
+    { letter: 'C', name_pl: 'Citron Pulse', name_en: 'Citron Pulse' },
+    { letter: 'D', name_pl: 'Driftline', name_en: 'Driftline' },
+    { letter: 'E', name_pl: 'Ember Fizz', name_en: 'Ember Fizz' },
+    { letter: 'F', name_pl: 'Frostbite', name_en: 'Frostbite' },
+    { letter: 'G', name_pl: 'Glowroot', name_en: 'Glowroot' },
+    { letter: 'H', name_pl: 'Horizon Tonic', name_en: 'Horizon Tonic' },
+    { letter: 'I', name_pl: 'Ivory Surge', name_en: 'Ivory Surge' },
+    { letter: 'J', name_pl: 'Jadewave', name_en: 'Jadewave' },
+    { letter: 'K', name_pl: 'Kelpshine', name_en: 'Kelpshine' },
+    { letter: 'L', name_pl: 'Lumenroot', name_en: 'Lumenroot' },
+    { letter: 'M', name_pl: 'Marshlight', name_en: 'Marshlight' },
+    { letter: 'N', name_pl: 'Nightpine', name_en: 'Nightpine' },
+    { letter: 'O', name_pl: 'Oasis Mist', name_en: 'Oasis Mist' },
+    { letter: 'P', name_pl: 'Polar Chill', name_en: 'Polar Chill' },
+    { letter: 'Q', name_pl: 'Quench Boost', name_en: 'Quench Boost' },
+    { letter: 'R', name_pl: 'Ripple Wave', name_en: 'Ripple Wave' },
+    { letter: 'S', name_pl: 'Solar Zap', name_en: 'Solar Zap' },
+    { letter: 'T', name_pl: 'Terra Spark', name_en: 'Terra Spark' },
+    { letter: 'U', name_pl: 'Ultra Zing', name_en: 'Ultra Zing' },
+    { letter: 'V', name_pl: 'Vibe Cold', name_en: 'Vibe Cold' },
+    { letter: 'W', name_pl: 'Wild Bloom', name_en: 'Wild Bloom' },
+    { letter: 'Z', name_pl: 'Zephyr Tonic', name_en: 'Zephyr Tonic' }
   ];
+
+  const T2_PRODUCTS = {
+    A: { id: 'A', letter: 'A', name_pl: 'Aurora', name_en: 'Aurora', x: 0,   y: 0,   q: 100, m: 0.20, eps: 5.5, desc_pl: 'Napój funkcjonalny wyjściowy, wokół którego badamy rynek właściwy.', desc_en: 'The baseline functional drink around which the relevant market is tested.' },
+    B: { id: 'B', letter: 'B', name_pl: 'Boreal', name_en: 'Boreal', x: 1.0, y: 0.8, q: 70,  m: 0.19, eps: 5.8, desc_pl: 'Niemal identyczna receptura o zbliżonym smaku i opakowaniu.', desc_en: 'A nearly identical formula with a comparable taste and packaging.' },
+    C: { id: 'C', letter: 'C', name_pl: 'Citron Pulse', name_en: 'Citron Pulse', x: 1.8, y: 1.2, q: 60, m: 0.18, eps: 5.6, desc_pl: 'Bliski substytut o zbliżonym profilu smakowym.', desc_en: 'A close substitute with a similar flavour profile.' },
+    D: { id: 'D', letter: 'D', name_pl: 'Driftline', name_en: 'Driftline', x: 1.2, y: 2.4, q: 50, m: 0.18, eps: 5.5, desc_pl: 'Podobny efekt funkcjonalny, nieco trudniejszy do podrobienia przez konkurentów.', desc_en: 'A similar functional effect, somewhat harder for rivals to replicate.' },
+    E: { id: 'E', letter: 'E', name_pl: 'Ember Fizz', name_en: 'Ember Fizz', x: 2.8, y: 0.9, q: 45, m: 0.17, eps: 3.5, desc_pl: 'Mocniej gazowany wariant o innym poziomie słodyczy.', desc_en: 'A more carbonated variant with a different sweetness level.' },
+    F: { id: 'F', letter: 'F', name_pl: 'Frostbite', name_en: 'Frostbite', x: 3.6, y: 1.8, q: 65, m: 0.16, eps: 3.2, desc_pl: 'Alternatywny smak i aromat, dalszy substytut popytowy.', desc_en: 'An alternative flavour, a more distant demand substitute.' },
+    G: { id: 'G', letter: 'G', name_pl: 'Glowroot', name_en: 'Glowroot', x: 2.2, y: 3.8, q: 40, m: 0.15, eps: 3.0, desc_pl: 'Oparty na odmiennych ekstraktach, inna linia produkcyjna.', desc_en: 'Based on different extracts, produced on a different line.' },
+    H: { id: 'H', letter: 'H', name_pl: 'Horizon Tonic', name_en: 'Horizon Tonic', x: 4.6, y: 1.6, q: 55, m: 0.14, eps: 2.6, desc_pl: 'Napój tonizujący premium o odmiennym pozycjonowaniu cenowym.', desc_en: 'A premium tonic drink with different price positioning.' },
+    I: { id: 'I', letter: 'I', name_pl: 'Ivory Surge', name_en: 'Ivory Surge', x: 4.0, y: 4.4, q: 50, m: 0.14, eps: 2.6, desc_pl: 'Produkt niszowy o umiarkowanej zamienności popytowej.', desc_en: 'A niche product with moderate demand substitutability.' },
+    J: { id: 'J', letter: 'J', name_pl: 'Jadewave', name_en: 'Jadewave', x: 6.0, y: 2.8, q: 70, m: 0.12, eps: 2.2, desc_pl: 'Masowy napój energetyczny z osobnej kategorii cenowej.', desc_en: 'A mass-market energy drink from a separate price tier.' },
+    K: { id: 'K', letter: 'K', name_pl: 'Kelpshine', name_en: 'Kelpshine', x: 5.2, y: 5.6, q: 45, m: 0.12, eps: 2.2, desc_pl: 'Napój wzbogacany minerałami, odległy substytut funkcjonalny.', desc_en: 'A mineral-enriched drink, a distant functional substitute.' },
+    L: { id: 'L', letter: 'L', name_pl: 'Lumenroot', name_en: 'Lumenroot', x: 7.4, y: 4.2, q: 60, m: 0.11, eps: 2.0, desc_pl: 'Produkt z innej kategorii napojów, słaba zamienność.', desc_en: 'A product from another beverage category with weak substitutability.' },
+    M: { id: 'M', letter: 'M', name_pl: 'Marshlight', name_en: 'Marshlight', x: 6.4, y: 7.2, q: 40, m: 0.11, eps: 2.0, desc_pl: 'Produkowany na odrębnych liniach, niemal bez wpływu na produkt wyjściowy.', desc_en: 'Made on separate lines, with almost no link to the baseline product.' },
+    N: { id: 'N', letter: 'N', name_pl: 'Nightpine', name_en: 'Nightpine', x: 8.4, y: 7.8, q: 50, m: 0.10, eps: 2.0, desc_pl: 'Najdalszy produkt na mapie, reprezentuje inną branżę napojów.', desc_en: 'The most distant product on the map, representing another beverage industry.' },
+  };
+
+  function shuffleT2Names() {
+    const pool = [...T2_NAME_POOL];
+    for (let i = pool.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+    T2_ORDER.forEach((id, index) => {
+      const item = pool[index];
+      T2_PRODUCTS[id].letter = item.letter;
+      T2_PRODUCTS[id].name_pl = item.name_pl;
+      T2_PRODUCTS[id].name_en = item.name_en;
+    });
+  }
+
+  const t2Engine = {
+    dist(i, j) {
+      const pi = T2_PRODUCTS[i], pj = T2_PRODUCTS[j];
+      const dx = pi.x - pj.x;
+      const dy = T2_CONST.KAPPA * (pi.y - pj.y);
+      return Math.sqrt(dx * dx + dy * dy);
+    },
+    diversion(i, j, outsideW) {
+      let sumw = 0;
+      let wij = 0;
+      T2_ORDER.forEach(k => {
+        if (k === i) return;
+        const w = T2_PRODUCTS[k].q * Math.exp(-T2_CONST.LAMBDA * t2Engine.dist(i, k));
+        sumw += w;
+        if (k === j) wij = w;
+      });
+      return wij / (sumw + outsideW);
+    },
+    outShare(S, i, outsideW) {
+      let sum = 0;
+      S.forEach(j => { if (j !== i) sum += t2Engine.diversion(i, j, outsideW); });
+      return 1 - sum;
+    },
+    deltaProfit(S, x, outsideW) {
+      let num = 0, den = 0;
+      S.forEach(i => {
+        const p = T2_PRODUCTS[i];
+        const out = t2Engine.outShare(S, i, outsideW);
+        num += p.q * ((p.m + x) * (1 - p.eps * x * out) - p.m);
+        den += p.q * p.m;
+      });
+      return (num / den) * 100;
+    },
+    critLoss(S, x) {
+      let sumQ = 0, sumQM = 0;
+      S.forEach(i => { const p = T2_PRODUCTS[i]; sumQ += p.q; sumQM += p.q * p.m; });
+      const mBar = sumQM / sumQ;
+      return x / (x + mBar);
+    },
+    actLoss(S, x, outsideW) {
+      let sumQ = 0, sumQAL = 0;
+      S.forEach(i => {
+        const p = T2_PRODUCTS[i];
+        const out = t2Engine.outShare(S, i, outsideW);
+        sumQ += p.q;
+        sumQAL += p.q * (p.eps * x * out);
+      });
+      return sumQAL / sumQ;
+    },
+    aggDiv(S, j, outsideW) {
+      let num = 0, den = 0;
+      S.forEach(i => {
+        const p = T2_PRODUCTS[i];
+        num += p.q * p.eps * t2Engine.diversion(i, j, outsideW);
+        den += p.q * p.eps;
+      });
+      return num / den;
+    },
+    bestCandidate(S, outsideW) {
+      const candidates = T2_ORDER.filter(id => !S.includes(id));
+      let best = null, bestScore = -Infinity;
+      candidates.forEach(c => {
+        const score = t2Engine.aggDiv(S, c, outsideW);
+        if (score > bestScore) { bestScore = score; best = c; }
+      });
+      return { id: best, score: bestScore };
+    },
+    rankedCandidates(S, outsideW) {
+      return T2_ORDER.filter(id => !S.includes(id))
+        .map(id => ({ id, score: t2Engine.aggDiv(S, id, outsideW) }))
+        .sort((a, b) => b.score - a.score);
+    },
+    validateAdd(j, S, outsideW) {
+      const { score: best } = t2Engine.bestCandidate(S, outsideW);
+      const scoreJ = t2Engine.aggDiv(S, j, outsideW);
+      return scoreJ >= (1 - T2_CONST.TOLERANCE) * best;
+    },
+    replayHistory(candidateHistory, outsideW) {
+      let S = ['A'];
+      const validHistory = [];
+      let cut = candidateHistory.length;
+      for (let k = 0; k < candidateHistory.length; k++) {
+        const id = candidateHistory[k];
+        if (t2Engine.validateAdd(id, S, outsideW)) {
+          S.push(id);
+          validHistory.push(id);
+        } else {
+          cut = k;
+          break;
+        }
+      }
+      return { basket: S, history: validHistory, removed: candidateHistory.slice(cut) };
+    }
+  };
+
+  function selfTestTask2() {
+    const w = T2_CONST.OUTSIDE_W;
+    const x = T2_CONST.X_SSNIP;
+    let S = ['A'];
+    const remaining = T2_ORDER.filter(id => id !== 'A');
+    const path = [{ S: S.slice(), dp: t2Engine.deltaProfit(S, x, w) }];
+    while (remaining.length) {
+      const { id } = t2Engine.bestCandidate(S, w);
+      S = S.concat(id);
+      remaining.splice(remaining.indexOf(id), 1);
+      path.push({ S: S.slice(), dp: t2Engine.deltaProfit(S, x, w) });
+    }
+    console.log('selfTestTask2: OUTSIDE_W =', w);
+    console.log('Greedy path ΔΠ (5%):', path.map(p => `${p.S.join('')}=${p.dp.toFixed(2)}%`).join(' | '));
+  }
+
+  let t2State = { basket: ['A'], history: [], errors: 0, hints: 0, showDiv: false, ssnip: T2_CONST.X_SSNIP, outsideW: T2_CONST.OUTSIDE_W, solved: false, clicks: 0, stepErrorCount: 0, eventMsg: null };
 
   let t3Budget = 100;
   const task3Targets = [
@@ -924,7 +1251,7 @@
     const badge = document.getElementById('sublab-badge-info');
     if (badge) {
       if (taskNumber === 1) badge.textContent = "Task 1: SSNIP & Critical Loss";
-      else if (taskNumber === 2) badge.textContent = "Task 2: Substitution Space";
+      else if (taskNumber === 2) badge.textContent = "Task 2: Minimal Market Hunt";
       else badge.textContent = "Task 3: Monopoly Sim";
     }
 
@@ -1096,166 +1423,365 @@
     updateTask1();
   }
 
+  function t2px(x) { return 55 + (x / 9.5) * 560; }
+  function t2py(y) { return 465 - (y / 8.5) * 440; }
+  function t2Radius(q) { return 9 + ((q - 40) / (100 - 40)) * 15; }
+
+  function t2ConvexHull(points) {
+    if (points.length < 3) return points;
+    const pts = points.slice().sort((a, b) => a.x - b.x || a.y - b.y);
+    const cross = (o, a, b) => (a.x - o.x) * (b.y - o.y) - (a.y - o.y) * (b.x - o.x);
+    const lower = [];
+    for (const p of pts) {
+      while (lower.length >= 2 && cross(lower[lower.length - 2], lower[lower.length - 1], p) <= 0) lower.pop();
+      lower.push(p);
+    }
+    const upper = [];
+    for (let i = pts.length - 1; i >= 0; i--) {
+      const p = pts[i];
+      while (upper.length >= 2 && cross(upper[upper.length - 2], upper[upper.length - 1], p) <= 0) upper.pop();
+      upper.push(p);
+    }
+    lower.pop(); upper.pop();
+    return lower.concat(upper);
+  }
+
   function renderTask2() {
     const isEn = currentLang === 'en';
     const svg = document.getElementById('t2-map-svg');
     if (!svg) return;
 
-    let linesHtml = "";
-    let nodesHtml = "";
-    const coreNode = task2Nodes.find(n => n.id === "rail_pendolino");
+    const basket = t2State.basket;
+    let gridHtml = "", axesHtml = "", hullHtml = "", arrowsHtml = "", nodesHtml = "";
 
-    task2Nodes.forEach(node => {
-      if (node.id !== "rail_pendolino") {
-        const isConnected = node.included;
-        const strokeColor = isConnected ? "#16a34a" : "#cbd5e1";
-        const strokeW = isConnected ? "3" : "1.5";
-        const strokeDash = isConnected ? "none" : "4,4";
+    for (let g = 0; g <= 9; g++) {
+      gridHtml += `<line x1="${t2px(g)}" y1="${t2py(0)}" x2="${t2px(g)}" y2="${t2py(8.5)}" stroke="#eef2f7" stroke-width="1" />`;
+    }
+    for (let g = 0; g <= 8; g++) {
+      gridHtml += `<line x1="${t2px(0)}" y1="${t2py(g)}" x2="${t2px(9.5)}" y2="${t2py(g)}" stroke="#eef2f7" stroke-width="1" />`;
+    }
 
-        linesHtml += `
-          <line x1="${coreNode.x}" y1="${coreNode.y}" x2="${node.x}" y2="${node.y}" 
-                stroke="${strokeColor}" stroke-width="${strokeW}" stroke-dasharray="${strokeDash}" />
+    axesHtml = `
+      <line x1="${t2px(0)}" y1="${t2py(0)}" x2="${t2px(9.3)}" y2="${t2py(0)}" stroke="#94a3b8" stroke-width="1.5" />
+      <line x1="${t2px(0)}" y1="${t2py(0)}" x2="${t2px(0)}" y2="${t2py(8.3)}" stroke="#94a3b8" stroke-width="1.5" />
+      <text x="${t2px(9.3)}" y="${t2py(0) + 16}" font-size="9" font-weight="bold" fill="#64748b" text-anchor="end">${isEn ? 'demand distance (d' : 'dystans popytowy (d'}<tspan baseline-shift="sub" font-size="7">D</tspan>${isEn ? ') →' : ') →'}</text>
+      <text x="${t2px(0) - 42}" y="${t2py(8.3)}" font-size="9" font-weight="bold" fill="#64748b" text-anchor="start">${isEn ? '↑ supply distance (d' : '↑ dystans podażowy (d'}<tspan baseline-shift="sub" font-size="7">S</tspan>)</text>
+    `;
+
+    if (basket.length >= 3) {
+      const hull = t2ConvexHull(basket.map(id => ({ x: t2px(T2_PRODUCTS[id].x), y: t2py(T2_PRODUCTS[id].y) })));
+      const d = "M " + hull.map(p => `${p.x},${p.y}`).join(" L ") + " Z";
+      hullHtml = `<path d="${d}" fill="#16a34a" fill-opacity="0.08" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="5,3" />`;
+    } else if (basket.length === 2) {
+      const p1 = T2_PRODUCTS[basket[0]], p2 = T2_PRODUCTS[basket[1]];
+      hullHtml = `<line x1="${t2px(p1.x)}" y1="${t2py(p1.y)}" x2="${t2px(p2.x)}" y2="${t2py(p2.y)}" stroke="#16a34a" stroke-width="14" stroke-linecap="round" stroke-opacity="0.12" />`;
+    }
+
+    if (t2State.showDiv) {
+      const cx = basket.reduce((s, id) => s + t2px(T2_PRODUCTS[id].x), 0) / basket.length;
+      const cy = basket.reduce((s, id) => s + t2py(T2_PRODUCTS[id].y), 0) / basket.length;
+      const ranked = t2Engine.rankedCandidates(basket, t2State.outsideW).slice(0, 3);
+      ranked.forEach(({ id, score }) => {
+        const p = T2_PRODUCTS[id];
+        const tx = t2px(p.x), ty = t2py(p.y);
+        const w = Math.max(1.5, Math.min(6, score * 25));
+        const midx = (cx + tx) / 2, midy = (cy + ty) / 2;
+        arrowsHtml += `
+          <line x1="${cx}" y1="${cy}" x2="${tx}" y2="${ty}" stroke="#4f46e5" stroke-width="${w}" stroke-opacity="0.55" marker-end="url(#t2arrow)" />
+          <text x="${midx}" y="${midy - 4}" font-size="8" font-weight="800" fill="#4338ca" text-anchor="middle" paint-order="stroke" stroke="#ffffff" stroke-width="3">${(score * 100).toFixed(1)}%</text>
         `;
-      }
-    });
+      });
+    }
 
-    task2Nodes.forEach(node => {
-      const isCore = node.type === 'core';
-      const isIncluded = node.included;
-
-      let fill = isCore ? "#4f46e5" : (isIncluded ? "#16a34a" : "#ffffff");
-      let stroke = isCore ? "#4338ca" : (isIncluded ? "#15803d" : "#94a3b8");
-      let textFill = (isCore || isIncluded) ? "#ffffff" : "#1e293b";
-
+    T2_ORDER.forEach(id => {
+      const p = T2_PRODUCTS[id];
+      const isCore = id === 'A';
+      const inBasket = basket.includes(id);
+      const fill = isCore ? "#4f46e5" : (inBasket ? "#16a34a" : "#ffffff");
+      const stroke = isCore ? "#4338ca" : (inBasket ? "#15803d" : "#94a3b8");
+      const textFill = (isCore || inBasket) ? "#ffffff" : "#1e293b";
+      const r = t2Radius(p.q);
+      const name = isEn ? p.name_en : p.name_pl;
+      const desc = isEn ? p.desc_en : p.desc_pl;
       nodesHtml += `
-        <g class="cursor-pointer" onclick="toggleTask2Node('${node.id}')" transform="translate(${node.x}, ${node.y})">
-          <circle r="${node.r}" fill="${fill}" stroke="${stroke}" stroke-width="2.5" class="transition hover:opacity-90 shadow-sm" />
-          <text y="-4" font-size="9" font-weight="bold" fill="${textFill}" text-anchor="middle">
-            ${isEn ? (node.name_en.length > 18 ? node.name_en.substring(0, 17) + '…' : node.name_en) : (node.name_pl.length > 18 ? node.name_pl.substring(0, 17) + '…' : node.name_pl)}
-          </text>
-          <text y="9" font-size="8" fill="${textFill}" opacity="0.85" text-anchor="middle">
-            ${node.time}
-          </text>
-          <text y="21" font-size="8.5" font-weight="800" font-family="monospace" fill="${textFill}" text-anchor="middle">
-            ${node.price} zł
-          </text>
+        <g id="t2-node-${id}" class="cursor-pointer" role="button" tabindex="0" aria-label="[${p.letter}] ${name}, ${inBasket ? (isEn ? 'in basket' : 'w koszyku') : (isEn ? 'outside basket' : 'poza koszykiem')}" onclick="onT2ProductClick('${id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();onT2ProductClick('${id}');}" transform="translate(${t2px(p.x)}, ${t2py(p.y)})">
+          <title>[${p.letter}] ${name} — q=${p.q}, m=${Math.round(p.m * 100)}%, e_p=${p.eps.toFixed(1)}. ${desc}</title>
+          <circle r="${Math.max(r + 8, 22)}" fill="transparent" />
+          <circle r="${r}" fill="${fill}" stroke="${stroke}" stroke-width="2.5" class="transition hover:opacity-90" />
+          <text y="3" font-size="9.5" font-weight="800" fill="${textFill}" text-anchor="middle">${p.letter}</text>
+          <text y="${r + 11}" font-size="8" font-weight="700" fill="#475569" text-anchor="middle">${name}</text>
         </g>
       `;
     });
 
     svg.innerHTML = `
-      <circle cx="330" cy="210" r="115" fill="none" stroke="#e2e8f0" stroke-width="1.5" stroke-dasharray="6,4" />
-      <text x="330" y="88" font-size="8.5" font-weight="bold" fill="#94a3b8" text-anchor="middle">
-        ${isEn ? "DIRECT SUBSTITUTES ORBIT" : "ORBITA BEZPOŚREDNICH ZAMIENNIKÓW"}
-      </text>
-
-      <circle cx="330" cy="210" r="190" fill="none" stroke="#f1f5f9" stroke-width="2" stroke-dasharray="8,6" />
-      <text x="330" y="16" font-size="8.5" font-weight="bold" fill="#cbd5e1" text-anchor="middle">
-        ${isEn ? "INDUSTRY ORBIT" : "ORBITA BRANŻY"}
-      </text>
-
-      ${linesHtml}
-      ${nodesHtml}
+      <defs>
+        <marker id="t2arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="#4f46e5" />
+        </marker>
+      </defs>
+      ${gridHtml}${axesHtml}${hullHtml}${arrowsHtml}${nodesHtml}
     `;
+
+    if (t2State.eventMsg && t2State.eventMsg.type === 'error') {
+      const el = document.getElementById(`t2-node-${t2State.eventMsg.id}`);
+      if (el) el.classList.add('t2-error-flash');
+    }
 
     updateTask2Analytics();
   }
 
-  function toggleTask2Node(id) {
-    const node = task2Nodes.find(n => n.id === id);
-    if (!node || node.type === 'core') return;
-    node.included = !node.included;
+  function onT2ProductClick(id) {
+    if (id === 'A') return;
+    t2State.clicks++;
+    const inBasket = t2State.basket.includes(id);
+
+    if (inBasket) {
+      const idx = t2State.history.indexOf(id);
+      const candidateHistory = t2State.history.slice(0, idx).concat(t2State.history.slice(idx + 1));
+      const result = t2Engine.replayHistory(candidateHistory, t2State.outsideW);
+      t2State.basket = result.basket;
+      t2State.history = result.history;
+      t2State.stepErrorCount = 0;
+      t2State.eventMsg = result.removed.length > 0
+        ? { type: 'cascade', id, cascaded: result.removed }
+        : { type: 'removed', id };
+    } else {
+      const valid = t2Engine.validateAdd(id, t2State.basket, t2State.outsideW);
+      if (valid) {
+        t2State.basket.push(id);
+        t2State.history.push(id);
+        t2State.stepErrorCount = 0;
+        t2State.eventMsg = { type: 'success', id };
+      } else {
+        t2State.errors++;
+        t2State.stepErrorCount++;
+        t2State.eventMsg = { type: 'error', id, streak: t2State.stepErrorCount };
+      }
+    }
     renderTask2();
   }
 
   function resetTask2() {
-    task2Nodes.forEach(n => {
-      n.included = (n.type === 'core');
-    });
+    shuffleT2Names();
+    t2State = { basket: ['A'], history: [], errors: 0, hints: 0, showDiv: t2State.showDiv, ssnip: T2_CONST.X_SSNIP, outsideW: T2_CONST.OUTSIDE_W, solved: false, clicks: 0, stepErrorCount: 0, eventMsg: null };
+    const ssnipRange = document.getElementById('t2-range-ssnip');
+    const outsideRange = document.getElementById('t2-range-outside');
+    const ssnipVal = document.getElementById('t2-val-ssnip');
+    const outsideVal = document.getElementById('t2-val-outside');
+    if (ssnipRange) ssnipRange.value = 5;
+    if (ssnipVal) ssnipVal.textContent = '5%';
+    if (outsideRange) outsideRange.value = T2_CONST.OUTSIDE_W;
+    if (outsideVal) outsideVal.textContent = T2_CONST.OUTSIDE_W;
     renderTask2();
+  }
+
+  function onT2SsnipChange() {
+    const val = parseFloat(document.getElementById('t2-range-ssnip').value);
+    t2State.ssnip = val / 100;
+    document.getElementById('t2-val-ssnip').textContent = `${val}%`;
+    renderTask2();
+  }
+
+  function onT2OutsideChange() {
+    const val = parseInt(document.getElementById('t2-range-outside').value, 10);
+    t2State.outsideW = val;
+    document.getElementById('t2-val-outside').textContent = val;
+    renderTask2();
+  }
+
+  function toggleT2Diversion() {
+    t2State.showDiv = document.getElementById('t2-chk-showdiv').checked;
+    renderTask2();
+  }
+
+  function useT2Hint() {
+    if (t2State.hints >= 3) return;
+    const { id } = t2Engine.bestCandidate(t2State.basket, t2State.outsideW);
+    if (!id) return;
+    t2State.hints++;
+    t2State.eventMsg = { type: 'hint', id };
+    renderTask2();
+    setTimeout(() => {
+      const el = document.getElementById(`t2-node-${id}`);
+      if (el) {
+        el.classList.add('t2-hint-flash');
+        setTimeout(() => el && el.classList.remove('t2-hint-flash'), 1500);
+      }
+    }, 30);
   }
 
   function updateTask2Analytics() {
     const isEn = currentLang === 'en';
-    const container = document.getElementById('t2-cart-items');
-    if (!container) return;
-    container.innerHTML = '';
+    const basket = t2State.basket;
+    const x = t2State.ssnip;
+    const w = t2State.outsideW;
 
-    const includedNodes = task2Nodes.filter(n => n.included);
-    includedNodes.forEach(n => {
-      const el = document.createElement('div');
-      el.className = "flex items-center justify-between p-2 rounded-lg bg-white border border-slate-200 text-xs";
-      el.innerHTML = `
-        <span class="font-semibold text-slate-800">${isEn ? n.name_en : n.name_pl}</span>
-        <span class="text-[10px] font-mono px-1.5 py-0.5 rounded ${n.type === 'core' ? 'bg-indigo-50 text-indigo-700' : 'bg-emerald-50 text-emerald-700'}">
-          ${n.type === 'core' ? 'Core' : 'Added'}
-        </span>
-      `;
-      container.appendChild(el);
-    });
+    const cartContainer = document.getElementById('t2-cart-items');
+    if (cartContainer) {
+      cartContainer.innerHTML = '';
+      basket.forEach((id, idx) => {
+        const p = T2_PRODUCTS[id];
+        const el = document.createElement('div');
+        el.className = "flex items-center justify-between p-2 rounded-lg bg-white border border-slate-200 text-xs";
+        el.innerHTML = `
+          <span class="font-semibold text-slate-800">${idx + 1}. [${p.letter}] ${isEn ? p.name_en : p.name_pl}</span>
+          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded ${id === 'A' ? 'bg-indigo-50 text-indigo-700' : 'bg-emerald-50 text-emerald-700'}">
+            ${id === 'A' ? (isEn ? 'Base' : 'Baza') : (isEn ? 'Added' : 'Dodany')}
+          </span>
+        `;
+        cartContainer.appendChild(el);
+      });
+    }
 
-    const hasFlight = task2Nodes.find(n => n.id === "air_direct").included;
-    const hasStandardRail = task2Nodes.find(n => n.id === "rail_ic").included;
-    const hasDistant = task2Nodes.some(n => n.type === 'distant' && n.included);
+    const dP = t2Engine.deltaProfit(basket, x, w);
+    const CL = t2Engine.critLoss(basket, x) * 100;
+    const AL = t2Engine.actLoss(basket, x, w) * 100;
+    const totalQ = T2_ORDER.reduce((s, id) => s + T2_PRODUCTS[id].q, 0);
+    const basketQ = basket.reduce((s, id) => s + T2_PRODUCTS[id].q, 0);
+    const share = (basketQ / totalQ) * 100;
+
+    const tileDp = document.getElementById('t2-tile-dp');
+    if (tileDp) {
+      tileDp.textContent = `${dP >= 0 ? '+' : ''}${dP.toFixed(1)}%`;
+      tileDp.className = `text-base font-mono font-bold mt-0.5 ${dP >= 0 ? 'text-emerald-600' : 'text-rose-600'}`;
+    }
+    const tileCl = document.getElementById('t2-tile-cl');
+    if (tileCl) tileCl.textContent = `${CL.toFixed(1)}%`;
+    const tileAl = document.getElementById('t2-tile-al');
+    if (tileAl) {
+      tileAl.textContent = `${AL.toFixed(1)}%`;
+      tileAl.className = `text-base font-mono font-bold mt-0.5 ${AL <= CL ? 'text-emerald-600' : 'text-rose-600'}`;
+    }
+    const tileShare = document.getElementById('t2-tile-share');
+    if (tileShare) tileShare.textContent = `${share.toFixed(0)}%`;
+    const tileN = document.getElementById('t2-tile-n');
+    if (tileN) tileN.textContent = `${basket.length} / 14`;
+
+    let minimalSize = null;
+    let S = ['A'];
+    if (t2Engine.deltaProfit(S, x, w) > 0) minimalSize = 1;
+    for (let k = 0; k < t2State.history.length && minimalSize === null; k++) {
+      S = S.concat(t2State.history[k]);
+      if (t2Engine.deltaProfit(S, x, w) > 0) minimalSize = S.length;
+    }
+    t2State.solved = dP > 0;
+
     const vBox = document.getElementById('t2-verdict-box');
+    const commentEl = document.getElementById('t2-comment');
+    let verdictHtml = "", commentText = "";
+    const basketLetters = basket.map(id => T2_PRODUCTS[id].letter).join(', ');
 
-    if (includedNodes.length === 1) {
+    if (dP <= 0) {
       vBox.className = "p-4 rounded-xl border border-rose-200 bg-rose-50 text-rose-950 space-y-1.5 text-xs";
-      vBox.innerHTML = `
+      verdictHtml = `
         <div class="flex items-center justify-between font-bold">
-          <span>${isEn ? "Candidate is too narrow (Segment)" : "Koszyk za wąski (Segment)"}</span>
-          <span class="bg-rose-200 text-rose-900 px-2 py-0.5 rounded text-[10px] font-mono">ΔΠ: -8.5%</span>
+          <span>${isEn ? "Too narrow (product segment)" : "Koszyk za wąski (segment produktowy)"}</span>
+          <span class="bg-rose-200 text-rose-900 px-2 py-0.5 rounded text-[10px] font-mono">ΔTP ${dP.toFixed(1)}%</span>
         </div>
         <p class="text-[11px] leading-relaxed text-rose-900/90">
-          ${isEn 
-            ? "When Pendolino raises ticket prices by 5%, 35% of passengers switch to flights and 30% to standard IC trains. The price increase is unprofitable. Include nearby options on the map."
-            : "Gdy Pendolino podnosi ceny o 5%, 35% pasażerów wybiera samoloty, a 30% pociągi IC. Podwyżka przynosi straty. Dodaj pobliskie węzły do koszyka."
-          }
+          ${isEn
+            ? `A ${Math.round(x * 100)}% price rise on {${basketLetters}} is unprofitable: too much demand and supply substitution leaks outside the basket. Add the closest remaining substitute.`
+            : `Podwyżka o ${Math.round(x * 100)}% na koszyku {${basketLetters}} jest nieopłacalna: zbyt duża część popytu i podaży ucieka poza koszyk. Dodaj najbliższy pozostały substytut.`}
         </p>
       `;
-    } else if (hasFlight && hasStandardRail && !hasDistant) {
+      commentText = isEn
+        ? (basket.length === 1 ? 'The basket contains only the baseline product. Click the closest substitute to start the test.' : `Basket {${basketLetters}} still fails the SSNIP test.`)
+        : (basket.length === 1 ? 'Koszyk zawiera tylko produkt wyjściowy. Kliknij najbliższy substytut, aby zacząć test.' : `Koszyk {${basketLetters}} nadal nie przechodzi testu SSNIP.`);
+    } else if (minimalSize !== null && basket.length === minimalSize) {
       vBox.className = "p-4 rounded-xl border border-emerald-300 bg-emerald-50 text-emerald-950 space-y-1.5 text-xs";
-      vBox.innerHTML = `
+      verdictHtml = `
         <div class="flex items-center justify-between font-bold">
-          <span>${isEn ? "Relevant market correctly defined" : "Rynek właściwy poprawnie wyznaczony"}</span>
-          <span class="bg-emerald-200 text-emerald-900 px-2 py-0.5 rounded text-[10px] font-mono">ΔΠ: +4.8%</span>
+          <span>${isEn ? "Relevant market found (smallest profitable basket)" : "Rynek właściwy znaleziony (najmniejszy zyskowny koszyk)"}</span>
+          <span class="bg-emerald-200 text-emerald-900 px-2 py-0.5 rounded text-[10px] font-mono">ΔTP +${dP.toFixed(1)}%</span>
         </div>
         <p class="text-[11px] leading-relaxed text-emerald-900/90">
-          ${isEn 
-            ? "The basket includes transit alternatives with travel times under 3.5 hours. A 5% price increase is profitable. This is the smallest profitable market."
-            : "Koszyk obejmuje szybkie połączenia o czasie poniżej 3,5 h. Podwyżka o 5% jest opłacalna. To najmniejszy zbiór tworzący rynek właściwy."
-          }
+          ${isEn
+            ? `A ${Math.round(x * 100)}% price rise on {${basketLetters}} is profitable, and no smaller basket passes the test. Stop here: this is the relevant market.`
+            : `Podwyżka o ${Math.round(x * 100)}% na koszyku {${basketLetters}} jest zyskowna, a żaden mniejszy koszyk nie przechodzi testu. Zatrzymaj się: to jest rynek właściwy.`}
         </p>
       `;
-    } else if (hasDistant) {
+      commentText = isEn
+        ? `Basket {${basketLetters}} passes the SSNIP test — this is the smallest relevant market.`
+        : `Koszyk {${basketLetters}} przechodzi test SSNIP — to najmniejszy rynek właściwy.`;
+    } else {
       vBox.className = "p-4 rounded-xl border border-amber-300 bg-amber-50 text-amber-950 space-y-1.5 text-xs";
-      vBox.innerHTML = `
+      verdictHtml = `
         <div class="flex items-center justify-between font-bold">
-          <span>${isEn ? "Overly broad (Industry)" : "Zbyt szeroki zbiór (Branża)"}</span>
-          <span class="bg-amber-200 text-amber-900 px-2 py-0.5 rounded text-[10px] font-mono">NACE ERROR</span>
+          <span>${isEn ? "Too wide (already an industry)" : "Koszyk zbyt szeroki (już branża)"}</span>
+          <span class="bg-amber-200 text-amber-900 px-2 py-0.5 rounded text-[10px] font-mono">ΔTP +${dP.toFixed(1)}%</span>
         </div>
         <p class="text-[11px] leading-relaxed text-amber-900/90">
-          ${isEn 
-            ? "You added slow buses or freight transport. Express travelers do not switch to 18-hour freight trains. This violates the smallest market criterion."
-            : "Włączono autokar lub pociąg towarowy. Pasażer jadący na spotkanie nie wybierze 18-godzinnego składu towarowego. Narusza to kryterium najmniejszego rynku."
-          }
+          ${isEn
+            ? `A smaller basket of ${minimalSize} product(s) was already profitable. Adding more products dilutes the analysis beyond the smallest market criterion.`
+            : `Mniejszy koszyk (${minimalSize} produktów) był już zyskowny. Dodawanie kolejnych produktów rozmywa analizę ponad kryterium najmniejszego rynku.`}
         </p>
       `;
-    } else {
-      vBox.className = "p-4 rounded-xl border border-blue-200 bg-blue-50 text-blue-950 space-y-1.5 text-xs";
-      vBox.innerHTML = `
-        <div class="flex items-center justify-between font-bold">
-          <span>${isEn ? "Partially internalized" : "Częściowo zinternalizowany"}</span>
-          <span class="bg-blue-200 text-blue-900 px-2 py-0.5 rounded text-[10px] font-mono">ΔΠ: -1.2%</span>
-        </div>
-        <p class="text-[11px] leading-relaxed text-blue-900/90">
-          ${isEn 
-            ? "You captured one substitute, but volume still leaks to the remaining direct travel option."
-            : "Dołączono jeden substytut, ale część pasażerów nadal ucieka do pozostałej bezpośredniej alternatywy."
+      commentText = isEn
+        ? `Basket {${basketLetters}} is profitable but larger than necessary — the smallest relevant market needed only ${minimalSize} product(s).`
+        : `Koszyk {${basketLetters}} jest zyskowny, ale większy niż to konieczne — najmniejszy rynek właściwy wymagał tylko ${minimalSize} produktów.`;
+    }
+    if (vBox) vBox.innerHTML = verdictHtml;
+
+    const evt = t2State.eventMsg;
+    const evtBox = document.getElementById('t2-event-msg');
+    if (evtBox) {
+      if (!evt) {
+        evtBox.classList.add('hidden');
+      } else {
+        evtBox.classList.remove('hidden');
+        if (evt.type === 'error') {
+          evtBox.className = "p-3 rounded-xl border border-rose-200 bg-rose-50 text-rose-950 text-[11px] leading-relaxed";
+          const p = T2_PRODUCTS[evt.id];
+          const name = isEn ? `[${p.letter}] ${p.name_en}` : `[${p.letter}] ${p.name_pl}`;
+          if (evt.streak >= 2) {
+            evtBox.textContent = isEn
+              ? "Not the closest substitute. Hint: look for the product that currently captures the most switching customers from the whole basket."
+              : "To nie jest najbliższy substytut. Podpowiedź: poszukaj produktu, który obecnie przejmuje najwięcej klientów uciekających z całego koszyka.";
+          } else {
+            evtBox.textContent = isEn
+              ? `${name} does not capture enough diversion from the current basket yet. Try the product most similar to what you already hold.`
+              : `${name} nie przejmuje jeszcze wystarczająco dużo dywersji z obecnego koszyka. Spróbuj produktu najbardziej podobnego do tych już wybranych.`;
           }
-        </p>
+        } else if (evt.type === 'cascade') {
+          evtBox.className = "p-3 rounded-xl border border-amber-200 bg-amber-50 text-amber-950 text-[11px] leading-relaxed";
+          const names = evt.cascaded.map(id => `[${T2_PRODUCTS[id].letter}] ${isEn ? T2_PRODUCTS[id].name_en : T2_PRODUCTS[id].name_pl}`).join(', ');
+          evtBox.textContent = isEn
+            ? `Removing the earlier step invalidated the order of inclusion: ${names} no longer qualify and were removed too.`
+            : `Usunięcie wcześniejszego kroku unieważniło kolejność dołączania: ${names} przestały spełniać kryterium i również zostały usunięte.`;
+        } else if (evt.type === 'hint') {
+          evtBox.className = "p-3 rounded-xl border border-amber-200 bg-amber-50 text-amber-950 text-[11px] leading-relaxed";
+          const p = T2_PRODUCTS[evt.id];
+          const name = isEn ? p.name_en : p.name_pl;
+          evtBox.textContent = isEn
+            ? `Hint: [${p.letter}] ${name} currently captures the most diverted demand from the basket.`
+            : `Podpowiedź: [${p.letter}] ${name} przejmuje obecnie najwięcej popytu uciekającego z koszyka.`;
+        } else {
+          evtBox.classList.add('hidden');
+        }
+      }
+    }
+
+    const stepsContainer = document.getElementById('t2-steps');
+    if (stepsContainer) {
+      const mBarNum = basket.reduce((s, id) => s + T2_PRODUCTS[id].q * T2_PRODUCTS[id].m, 0);
+      const mBarDen = basket.reduce((s, id) => s + T2_PRODUCTS[id].q, 0);
+      const mBar = mBarNum / mBarDen;
+      stepsContainer.innerHTML = `
+        <div class="flex justify-between font-mono"><span>${isEn ? 'Weighted avg. margin m̄(S)' : 'Średnia ważona marża m̄(S)'}</span><span class="font-bold">${(mBar * 100).toFixed(1)}%</span></div>
+        <div class="flex justify-between font-mono"><span>CL(S) = X / (X + m̄)</span><span class="font-bold">${CL.toFixed(1)}%</span></div>
+        <div class="flex justify-between font-mono"><span>AL(S) = Σ qᵢ·e<sub>p,i</sub>·X·Outᵢ(S) / Σ qᵢ</span><span class="font-bold">${AL.toFixed(1)}%</span></div>
+        <div class="flex justify-between font-mono"><span>ΔTP(S)</span><span class="font-bold ${dP >= 0 ? 'text-emerald-700' : 'text-rose-700'}">${dP >= 0 ? '+' : ''}${dP.toFixed(1)}%</span></div>
       `;
     }
+
+    if (commentEl) commentEl.textContent = commentText;
+
+    document.getElementById('t2-counter-clicks').textContent = t2State.clicks;
+    document.getElementById('t2-counter-errors').textContent = t2State.errors;
+    document.getElementById('t2-counter-hints').textContent = `${t2State.hints} / 3`;
+    const hintBtn = document.getElementById('t2-btn-hint');
+    if (hintBtn) hintBtn.disabled = t2State.hints >= 3;
   }
 
   function renderTask3() {
@@ -1526,7 +2052,7 @@
         "Opierają się na sprawozdaniach finansowych zamiast zachowań użytkowników."
       ],
       options_en: [
-        "They use the SSNDQ test, examining user diversion after a degradation in service quality (such as more ad clutter or worse search results).",
+        "They use the SSNDQ test, examining user diversion after a degradation in service quality (such as more ad clutter or worse search relevance).",
         "They divide zero by 10% and assume a price rise of one cent.",
         "They declare that zero-price services fall outside competition law.",
         "They review corporate financial statements instead of user substitution."
@@ -2003,7 +2529,7 @@
       t1_subtitle: "Porównaj próg dopuszczalnego spadku wolumenu z realną ucieczką klientów i reakcją podaży rywali.",
       t1_slider_margin: "Marża początkowa (m = (P - MC)/P):",
       t1_slider_ssnip: "Podwyżka w teście SSNIP (X = ΔP/P):",
-      t1_slider_eps: "Cenowa elastyczność popytu (|εD|):",
+      t1_slider_eps: "Cenowa elastyczność popytu (e<sub>p</sub> = |E<sub>p</sub>|):",
       t1_slider_sup: "Substytucyjność podaży (wejście / przestawienie linii rywali):",
       t1_m_low: "5% (niska marża)",
       t1_m_high: "90% (wysoka marża)",
@@ -2013,9 +2539,9 @@
       t1_sup_high: "80% (szybkie przestawienie linii)",
       t1_bars_title: "Porównanie utraty sprzedaży:",
       t1_bar_cl_lbl: "Krytyczna utrata sprzedaży (CL = X / (X + m)):",
-      t1_bar_al_lbl: "Rzeczywista utrata sprzedaży (AL = |ε|·X + S·X):",
-      t1_out_profit: "Wpływ na zysk (ΔΠ):",
-      t1_out_eps_crit: "Graniczna elastyczność (|εcrit|):",
+      t1_bar_al_lbl: "Rzeczywista utrata sprzedaży (AL = e<sub>p</sub>·X + S·X):",
+      t1_out_profit: "Wpływ na zysk (ΔTP):",
+      t1_out_eps_crit: "Graniczna elastyczność (e<sub>p,crit</sub>):",
       t1_out_eps_sub: "Próg opłacalności",
       t1_out_verdict: "Werdykt SSNIP:",
       t1_chal_tag: "Wyzwanie analityczne",
@@ -2025,18 +2551,52 @@
       t1_pred_yes: "Tak, opłacalna",
       t1_pred_no: "Nie, nieopłacalna",
       t1_btn_apply: "Ustaw parametry na suwakach",
-      t2_badge: "Granice rynku",
-      t2_title: "Mapa substytucji i relacje produktowe",
-      t2_subtitle: "Włączaj obiekty do badanego koszyka. Sprawdź, kiedy uzyskujesz rynek właściwy, a kiedy włączasz całą branżę.",
-      t2_btn_reset: "Zresetuj koszyk",
-      t2_orbit_title: "Trasa podróży: Warszawa – Gdańsk / Trójmiasto",
-      t2_click_hint: "Kliknij węzeł, aby dodać lub usunąć go z koszyka",
+      t1_not_tag: "Aparatura pojęciowa",
+      t1_not_title: "Wykaz oznaczeń i skrótów (Zadanie 1)",
+      t1_not_tp: "<strong>Zysk całkowity</strong> (Total Profit) oraz jego procentowa zmiana po podwyżce cen i spadku sprzedaży.",
+      t1_not_ep: "<strong>Cenowa elastyczność popytu</strong>; zapis e<sub>p</sub> = |E<sub>p</sub>| oznacza jej wartość bezwzględną.",
+      t1_not_epcrit: "<strong>Graniczna elastyczność</strong>; maksymalna wrażliwość popytu, przy której podwyżka ceny nie przynosi strat.",
+      t1_not_m: "<strong>Początkowa marża cenowa</strong>, m = (P - MC) / P, gdzie P to cena, a MC to koszt krańcowy.",
+      t1_not_x: "<strong>Hipotetyczna podwyżka ceny</strong> w teście SSNIP (X = ΔP / P), standardowo przyjmowana jako 5% lub 10%.",
+      t1_not_cl: "<strong>Krytyczna utrata sprzedaży</strong> (Critical Loss); dopuszczalny spadek wolumenu dający ΔTP = 0: CL = X / (X + m).",
+      t1_not_al: "<strong>Rzeczywista utrata sprzedaży</strong> (Actual Loss); faktyczny odpływ wolumenu: AL = e<sub>p</sub>·X + S·X.",
+      t1_not_s: "<strong>Substytucyjność podaży</strong>; siła reakcji rywali przestawiających linie wytwórcze w odpowiedzi na podwyżkę.",
+      t2_badge: "Polowanie na najmniejszy rynek",
+      t2_title: "Mapa substytucji: dywersja popytowa i podażowa",
+      t2_subtitle: "Dodawaj produkty do koszyka w kolejności od najbliższego substytutu. Zatrzymaj się, gdy podwyżka ceny o 5% staje się opłacalna.",
+      t2_lbl_ssnip: "Podwyżka SSNIP",
+      t2_desc_ssnip: "Wielkość hipotetycznej podwyżki cen (standardowo 5–10%), której opłacalność sprawdza test.",
+      t2_lbl_outside: "Siła opcji zewnętrznej",
+      t2_desc_outside: "Skłonność klientów do całkowitej rezygnacji z zakupu lub przejścia do innych kategorii produktów.",
+      t2_btn_reset: "Zresetuj",
+      t2_btn_hint: "Podpowiedź",
+      t2_lbl_showdiv: "Pokaż dywersję",
+      t2_counter_clicks: "Kliknięcia:",
+      t2_counter_errors: "Błędy:",
+      t2_counter_hints: "Podpowiedzi:",
+      t2_cart_title: "Koszyk (kolejność dodawania):",
+      t2_map_title: "Mapa substytucji (d<sub>D</sub>, d<sub>S</sub>)",
+      t2_click_hint: "Kliknij produkt, aby dodać lub usunąć go z koszyka",
       t2_leg_core: "Produkt wyjściowy",
       t2_leg_in: "W koszyku",
       t2_leg_out: "Poza koszykiem",
-      t2_cart_title: "Aktualna zawartość koszyka:",
-      t2_rule_title: "Kryterium najmniejszego rynku:",
-      t2_rule_desc: "Gdy podwyżka na danym koszyku staje się zyskowna, zatrzymujemy procedurę. Dalsze dołączanie alternatyw rozmywa udziały rynkowe.",
+      t2_tile_dp: "ΔTP(S)",
+      t2_tile_cl: "CL(S)",
+      t2_tile_al: "AL(S)",
+      t2_tile_share: "Udział",
+      t2_tile_n: "Produkty",
+      t2_steps_title: "Obliczenia krok po kroku:",
+      t2_comment_default: "Koszyk zawiera tylko produkt wyjściowy. Kliknij najbliższy substytut, aby zacząć badanie rynku.",
+      t2_not_tag: "Aparatura pojęciowa",
+      t2_not_title: "Wykaz oznaczeń i skrótów (Zadanie 2)",
+      t2_not_s_basket: "<strong>Koszyk kandydacki</strong>; zbiór produktów poddany wspólnemu testowi hipotetycznego monopolisty.",
+      t2_not_tps: "<strong>Zysk koszyka</strong> i jego procentowa zmiana po podwyżce cen na całym koszyku S.",
+      t2_not_dist: "<strong>Dystans popytowy</strong> (różnica właściwości) oraz <strong>dystans podażowy</strong> (koszt przestawienia linii).",
+      t2_not_div: "<strong>Wskaźnik dywersji</strong> (Diversion Ratio); ułamek klientów porzucających produkt i, którzy wybierają produkt j.",
+      t2_not_mbar: "<strong>Średnia ważona marża</strong> produktów tworzących koszyk S, ważona ich wolumenami sprzedaży q<sub>i</sub>.",
+      t2_not_cls: "<strong>Krytyczna utrata sprzedaży koszyka</strong>; próg dopuszczalnego odpływu: CL(S) = X / (X + m̄(S)).",
+      t2_not_als: "<strong>Rzeczywisty odpływ sprzedaży</strong> poza koszyk S; popyt przechwycony wewnątrz koszyka nie stanowi straty.",
+      t2_not_wout: "<strong>Siła opcji zewnętrznej</strong>; skłonność klientów do rezygnacji z zakupu lub wyboru dóbr spoza mapy.",
       t3_badge: "Ćwiczenie decyzyjne",
       t3_title: "Symulator monopolisty: podwyżka ceny",
       t3_subtitle: "Zarządzasz producentem róż szklarniowych. Masz 100 mln zł budżetu na fuzje. Zbuduj koszyk, który utrzyma 10% podwyżkę cen.",
@@ -2157,14 +2717,14 @@
       ssnip_step4_h: "Step 4: basket expansion or stop",
       ssnip_step4_p: "If the price rise is unprofitable, the candidate is too narrow. Add the closest substitute and test again. When the price rise becomes profitable, stop: the relevant market is established.",
       sublab_tab1: "Task 1: Critical loss analysis",
-      sublab_tab2: "Task 2: Substitution map",
+      sublab_tab2: "Task 2: Minimal market hunt",
       sublab_tab3: "Task 3: Monopoly simulator",
       t1_badge: "Profitability condition",
       t1_title: "Critical loss vs actual sales loss",
       t1_subtitle: "Compare allowable volume loss with buyer diversion and rival supply switching.",
       t1_slider_margin: "Initial gross margin (m = (P - MC)/P):",
       t1_slider_ssnip: "SSNIP price increase (X = ΔP/P):",
-      t1_slider_eps: "Demand price elasticity (|εD|):",
+      t1_slider_eps: "Demand price elasticity (e<sub>p</sub> = |E<sub>p</sub>|):",
       t1_slider_sup: "Supply substitution (rival entry / line retooling):",
       t1_m_low: "5% (low margin)",
       t1_m_high: "90% (high margin)",
@@ -2174,9 +2734,9 @@
       t1_sup_high: "80% (fast line retooling)",
       t1_bars_title: "Sales loss comparison:",
       t1_bar_cl_lbl: "Critical loss (CL = X / (X + m)):",
-      t1_bar_al_lbl: "Actual sales loss (AL = |ε|·X + S·X):",
-      t1_out_profit: "Profit effect (ΔΠ):",
-      t1_out_eps_crit: "Critical elasticity (|εcrit|):",
+      t1_bar_al_lbl: "Actual sales loss (AL = e<sub>p</sub>·X + S·X):",
+      t1_out_profit: "Profit effect (ΔTP):",
+      t1_out_eps_crit: "Critical elasticity (e<sub>p,crit</sub>):",
       t1_out_eps_sub: "Break-even threshold",
       t1_out_verdict: "SSNIP verdict:",
       t1_chal_tag: "Analytical challenge",
@@ -2186,18 +2746,52 @@
       t1_pred_yes: "Yes, profitable",
       t1_pred_no: "No, unprofitable",
       t1_btn_apply: "Load parameters into sliders",
-      t2_badge: "Market boundaries",
-      t2_title: "Substitution map and product relations",
-      t2_subtitle: "Add objects to the candidate basket. Observe when you reach the market boundary without absorbing the whole industry.",
-      t2_btn_reset: "Reset basket",
-      t2_orbit_title: "Corridor: Warsaw – Gdansk",
-      t2_click_hint: "Click a node to include or remove it from the basket",
+      t1_not_tag: "Conceptual notation",
+      t1_not_title: "Notation and abbreviations (Task 1)",
+      t1_not_tp: "<strong>Total profit</strong> and its percentage change following price increases and volume changes.",
+      t1_not_ep: "<strong>Price elasticity of demand</strong>; e<sub>p</sub> = |E<sub>p</sub>| denotes its absolute value.",
+      t1_not_epcrit: "<strong>Critical elasticity</strong>; maximum demand price sensitivity where the price rise is break-even.",
+      t1_not_m: "<strong>Initial price-cost margin</strong>, m = (P - MC) / P, where P is unit price and MC is marginal cost.",
+      t1_not_x: "<strong>SSNIP price increase</strong> (X = ΔP / P), typically 5% or 10%.",
+      t1_not_cl: "<strong>Critical loss</strong>; allowable volume loss giving ΔTP = 0: CL = X / (X + m).",
+      t1_not_al: "<strong>Actual sales loss</strong>; observed volume loss: AL = e<sub>p</sub>·X + S·X.",
+      t1_not_s: "<strong>Supply substitution</strong>; extent of rival production bed/line switching.",
+      t2_badge: "Minimal market hunt",
+      t2_title: "Substitution map: demand and supply diversion",
+      t2_subtitle: "Add products to the basket starting with the closest substitute. Stop once a 5% price rise becomes profitable.",
+      t2_lbl_ssnip: "SSNIP increase",
+      t2_desc_ssnip: "The hypothetical price rise (typically 5–10%) tested for profitability.",
+      t2_lbl_outside: "Outside option strength",
+      t2_desc_outside: "Buyer propensity to stop purchasing entirely or switch to distant categories.",
+      t2_btn_reset: "Reset",
+      t2_btn_hint: "Hint",
+      t2_lbl_showdiv: "Show diversion",
+      t2_counter_clicks: "Clicks:",
+      t2_counter_errors: "Errors:",
+      t2_counter_hints: "Hints:",
+      t2_cart_title: "Basket (order added):",
+      t2_map_title: "Substitution map (d<sub>D</sub>, d<sub>S</sub>)",
+      t2_click_hint: "Click a product to add or remove it from the basket",
       t2_leg_core: "Baseline product",
       t2_leg_in: "In basket",
       t2_leg_out: "Outside basket",
-      t2_cart_title: "Basket contents:",
-      t2_rule_title: "Smallest market criterion:",
-      t2_rule_desc: "Once a price rise on a candidate basket becomes profitable, stop expanding. Adding further alternatives dilutes market shares into an industry.",
+      t2_tile_dp: "ΔTP(S)",
+      t2_tile_cl: "CL(S)",
+      t2_tile_al: "AL(S)",
+      t2_tile_share: "Share",
+      t2_tile_n: "Products",
+      t2_steps_title: "Step-by-step calculation:",
+      t2_comment_default: "The basket contains only the baseline product. Click the closest substitute to start the test.",
+      t2_not_tag: "Conceptual notation",
+      t2_not_title: "Notation and abbreviations (Task 2)",
+      t2_not_s_basket: "<strong>Candidate basket</strong>; set of products jointly tested under the hypothetical monopolist paradigm.",
+      t2_not_tps: "<strong>Basket total profit</strong> and percentage change after a joint price increase across basket S.",
+      t2_not_dist: "<strong>Demand distance</strong> (product attribute difference) and <strong>supply distance</strong> (retooling cost).",
+      t2_not_div: "<strong>Diversion ratio</strong>; share of sales lost by good i captured by good j.",
+      t2_not_mbar: "<strong>Weighted average margin</strong> across goods in basket S, weighted by volumes q<sub>i</sub>.",
+      t2_not_cls: "<strong>Basket critical loss</strong>; allowable volume outflow: CL(S) = X / (X + m̄(S)).",
+      t2_not_als: "<strong>Actual sales loss</strong> leaking outside basket S; diverted sales captured inside do not count as losses.",
+      t2_not_wout: "<strong>Outside option strength</strong>; consumer propensity to forgo purchase or switch outside the map.",
       t3_badge: "Decision exercise",
       t3_title: "Monopoly simulator: price increase",
       t3_subtitle: "You lead a greenhouse rose grower with a 100M PLN budget. Build a basket that sustains a 10% price rise.",
@@ -2317,7 +2911,14 @@
   }
 
   window.onload = function() {
+    shuffleT2Names();
+    selfTestTask2();
     initializeQuizSession();
+
+    const outsideRange = document.getElementById('t2-range-outside');
+    const outsideVal = document.getElementById('t2-val-outside');
+    if (outsideRange) outsideRange.value = T2_CONST.OUTSIDE_W;
+    if (outsideVal) outsideVal.textContent = T2_CONST.OUTSIDE_W;
 
     document.documentElement.lang = currentLang;
     document.querySelectorAll('[data-i18n]').forEach(el => {
