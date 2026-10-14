@@ -100,6 +100,9 @@
           <button id="tab-distinction" onclick="switchTab('distinction')" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition whitespace-nowrap">
             <span data-i18n="nav_concept">Concepts</span>
           </button>
+          <button id="tab-math" onclick="switchTab('math')" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition whitespace-nowrap">
+            <span data-i18n="nav_math">Formulas &amp; logic</span>
+          </button>
           <button id="tab-quiz" onclick="switchTab('quiz')" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition whitespace-nowrap">
             <span data-i18n="nav_quiz">Quiz</span>
           </button>
@@ -260,21 +263,16 @@
 
     <section id="view-lab" class="hidden space-y-6">
       
-      <div class="bg-white rounded-2xl p-2 sm:p-2.5 border border-slate-200 shadow-xs flex flex-wrap gap-2 items-center justify-between">
-        <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap">
-          <button id="btn-sublab-1" onclick="switchLabTask(1)" class="px-3.5 py-2 rounded-xl text-xs font-bold transition bg-indigo-600 text-white shadow-xs">
-            <span data-i18n="sublab_tab1">Zadanie 1: Krytyczna utrata sprzedaży</span>
-          </button>
-          <button id="btn-sublab-2" onclick="switchLabTask(2)" class="px-3.5 py-2 rounded-xl text-xs font-bold transition bg-slate-100 hover:bg-slate-200 text-slate-700">
-            <span data-i18n="sublab_tab2">Zadanie 2: Mapa substytucji i granice rynku</span>
-          </button>
-          <button id="btn-sublab-3" onclick="switchLabTask(3)" class="px-3.5 py-2 rounded-xl text-xs font-bold transition bg-slate-100 hover:bg-slate-200 text-slate-700">
-            <span data-i18n="sublab_tab3">Zadanie 3: Symulator monopolisty</span>
-          </button>
-        </div>
-        <div class="hidden sm:block text-[11px] font-medium text-slate-400 px-2" id="sublab-badge-info">
-          SSNIP &amp; Critical Loss
-        </div>
+      <div class="bg-white rounded-2xl p-2 sm:p-2.5 border border-slate-200 shadow-xs flex flex-wrap gap-1.5 sm:gap-2 items-center justify-center">
+        <button id="btn-sublab-1" onclick="switchLabTask(1)" class="px-3.5 py-2 rounded-xl text-xs font-bold transition bg-indigo-600 text-white shadow-xs">
+          <span data-i18n="sublab_tab1">Zadanie 1: Krytyczna utrata sprzedaży</span>
+        </button>
+        <button id="btn-sublab-2" onclick="switchLabTask(2)" class="px-3.5 py-2 rounded-xl text-xs font-bold transition bg-slate-100 hover:bg-slate-200 text-slate-700">
+          <span data-i18n="sublab_tab2">Zadanie 2: Mapa substytucji i granice rynku</span>
+        </button>
+        <button id="btn-sublab-3" onclick="switchLabTask(3)" class="px-3.5 py-2 rounded-xl text-xs font-bold transition bg-slate-100 hover:bg-slate-200 text-slate-700">
+          <span data-i18n="sublab_tab3">Zadanie 3: Geograficzny zakres rynku</span>
+        </button>
       </div>
 
       <div id="sublab-task-1" class="space-y-6">
@@ -417,7 +415,7 @@
               <div id="t1-prediction-panel" class="p-4 rounded-xl border bg-slate-50 border-slate-200 space-y-3">
                 <div class="text-xs font-bold text-slate-800" id="t1-active-scen-title">1. Lek na receptę z patentem</div>
                 <p class="text-[11px] text-slate-600 leading-relaxed" id="t1-active-scen-text">
-                  Chorzy kupują z konieczności leczenia; wysoka marża (m=80%), brak leczenia zamiennego (|ε|=0.6), brak reakcji podaży rywali (S=0%).
+                  Chorzy kupują z konieczności leczenia; wysoka marża (m=80%), brak leczenia zamiennego (e<sub>p</sub> = |E<sub>p</sub>| = 0.6), brak reakcji podaży rywali (S=0%).
                 </p>
 
                 <div class="space-y-1.5 pt-1">
@@ -445,7 +443,6 @@
 
         </div>
 
-        <!-- Task 1 Notation Box -->
         <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-3">
           <div class="border-b border-slate-100 pb-2.5">
             <span class="text-[10px] font-mono font-bold text-indigo-600 uppercase tracking-wider" data-i18n="t1_not_tag">Aparatura pojęciowa</span>
@@ -493,7 +490,7 @@
           <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3">
             <div>
               <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider" data-i18n="t2_badge">Polowanie na najmniejszy rynek</span>
-              <h3 class="text-lg font-bold text-slate-900 mt-0.5" data-i18n="t2_title">Mapa substytucji: dywersja popytowa i podażowa</h3>
+              <h3 class="text-lg font-bold text-slate-900 mt-0.5" data-i18n="t2_title">Mapa substytucji: odpływ popytu i reakcja podaży</h3>
               <p class="text-xs text-slate-500 mt-0.5" data-i18n="t2_subtitle">
                 Dodawaj produkty do koszyka w kolejności od najbliższego substytutu. Zatrzymaj się, gdy podwyżka ceny o 5% staje się opłacalna.
               </p>
@@ -535,7 +532,7 @@
                 </button>
                 <label class="flex items-center gap-2 px-3 py-2 min-h-[44px] bg-slate-100 rounded-lg cursor-pointer text-xs font-semibold text-slate-700">
                   <input type="checkbox" id="t2-chk-showdiv" onchange="toggleT2Diversion()" class="accent-indigo-600">
-                  <span data-i18n="t2_lbl_showdiv">Pokaż dywersję</span>
+                  <span data-i18n="t2_lbl_showdiv">Pokaż odpływ popytu</span>
                 </label>
               </div>
 
@@ -549,6 +546,13 @@
                 <span class="font-bold text-slate-800 uppercase text-[10px] tracking-wider block" data-i18n="t2_cart_title">Koszyk (kolejność dodawania):</span>
                 <div id="t2-cart-items" class="space-y-1.5"></div>
               </div>
+
+              <button onclick="generateNewTask2()" id="t2-btn-new-task" class="w-full py-3 px-4 bg-indigo-600 hover:bg-indigo-700 active:scale-[0.99] text-white font-bold rounded-xl text-xs sm:text-sm transition shadow-sm flex items-center justify-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                </svg>
+                <span data-i18n="t2_btn_new_task">Nowe zadanie (losowa mapa)</span>
+              </button>
             </div>
 
             <div class="lg:col-span-8 space-y-4">
@@ -616,7 +620,6 @@
           </div>
         </div>
 
-        <!-- Task 2 Notation Box -->
         <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-3">
           <div class="border-b border-slate-100 pb-2.5">
             <span class="text-[10px] font-mono font-bold text-indigo-600 uppercase tracking-wider" data-i18n="t2_not_tag">Aparatura pojęciowa</span>
@@ -637,7 +640,7 @@
             </div>
             <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
               <span class="font-mono font-bold text-indigo-700 text-[11px]">D<sub>ij</sub></span>
-              <p class="text-[11px] text-slate-600 leading-relaxed" data-i18n="t2_not_div"><strong>Wskaźnik dywersji</strong> (Diversion Ratio); ułamek klientów porzucających produkt i, którzy wybierają produkt j.</p>
+              <p class="text-[11px] text-slate-600 leading-relaxed" data-i18n="t2_not_div"><strong>Wskaźnik odpływu popytu</strong> (Diversion Ratio); ułamek klientów porzucających produkt i, którzy przechodzą na produkt j.</p>
             </div>
             <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
               <span class="font-mono font-bold text-indigo-700 text-[11px]">m̄(S)</span>
@@ -664,55 +667,180 @@
           
           <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3">
             <div>
-              <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider" data-i18n="t3_badge">Ćwiczenie decyzyjne</span>
-              <h3 class="text-lg font-bold text-slate-900 mt-0.5" data-i18n="t3_title">Symulator monopolisty: podwyżka ceny</h3>
+              <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider" data-i18n="t3_badge">Analiza przestrzenna rynku</span>
+              <h3 class="text-lg font-bold text-slate-900 mt-0.5" data-i18n="t3_title">Izochrony drogowe: obszar wyboru nabywcy, zasięg sprzedawcy i konkurencja</h3>
               <p class="text-xs text-slate-500 mt-0.5" data-i18n="t3_subtitle">
-                Zarządzasz producentem róż szklarniowych. Masz 100 mln zł budżetu na fuzje. Zbuduj koszyk, który utrzyma 10% podwyżkę cen.
+                Rynek betonu towarowego w zamkniętym regionie. Czas transportu po sieci dróg i przez mosty wyznacza odmienne granice dla nabywcy i sprzedawcy.
               </p>
             </div>
-            <div class="flex items-center gap-3">
-              <div class="bg-indigo-50 border border-indigo-200 px-3 py-1.5 rounded-xl text-xs font-mono font-bold text-indigo-700">
-                <span data-i18n="t3_budget_lbl">Budżet:</span> <span id="t3-budget-val">100 mln zł</span>
-              </div>
-              <button onclick="resetTask3()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg transition" data-i18n="t3_btn_restart">
-                Od nowa
+            <div class="flex items-center gap-2">
+              <button onclick="generateNewTask3Map()" class="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-xl transition shadow-xs flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                </svg>
+                <span data-i18n="t3_btn_random">Losuj układ mapy</span>
               </button>
             </div>
           </div>
 
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
             
-            <div class="lg:col-span-7 space-y-3">
-              <div class="flex justify-between items-center text-xs">
-                <span class="font-bold text-slate-700 uppercase text-[10px] tracking-wider" data-i18n="t3_acq_title">Dostępne podmioty do przejęcia:</span>
-                <span class="text-[11px] text-slate-400" data-i18n="t3_acq_sub">Nie każdy zakup ogranicza ucieczkę klientów.</span>
+            <div class="lg:col-span-4 space-y-4">
+              <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-3 text-xs">
+                <span class="font-bold text-slate-800 uppercase text-[10px] tracking-wider block" data-i18n="t3_mode_lbl">Perspektywa analizy geograficznej:</span>
+                <div class="space-y-1.5">
+                  <button id="t3-mode-buyer" onclick="setTask3Mode('buyer')" class="w-full text-left p-2.5 rounded-xl border transition flex items-start gap-2.5 bg-indigo-50 border-indigo-300 text-indigo-950 font-bold">
+                    <span class="w-5 h-5 rounded-lg bg-indigo-600 text-white flex items-center justify-center text-[10px] font-mono shrink-0 mt-0.5">1</span>
+                    <div>
+                      <div data-i18n="t3_mode1_h">Perspektywa nabywcy (popyt)</div>
+                      <div class="text-[10px] font-normal text-slate-600 mt-0.5" data-i18n="t3_mode1_p">Obszar, w którym wybrana budowa B może kupić beton w limicie czasu T.</div>
+                    </div>
+                  </button>
+                  <button id="t3-mode-catchment" onclick="setTask3Mode('catchment')" class="w-full text-left p-2.5 rounded-xl border transition flex items-start gap-2.5 bg-white hover:bg-slate-100 border-slate-200 text-slate-700 font-semibold">
+                    <span class="w-5 h-5 rounded-lg bg-teal-600 text-white flex items-center justify-center text-[10px] font-mono shrink-0 mt-0.5">2</span>
+                    <div>
+                      <div data-i18n="t3_mode2_h">Zasięg sprzedawcy (izochrony podaży)</div>
+                      <div class="text-[10px] font-normal text-slate-500 mt-0.5" data-i18n="t3_mode2_p">Strefy czasowe dojazdu gruszki (10, 20, 30 min) i obsługiwany wolumen.</div>
+                    </div>
+                  </button>
+                  <button id="t3-mode-competition" onclick="setTask3Mode('competition')" class="w-full text-left p-2.5 rounded-xl border transition flex items-start gap-2.5 bg-white hover:bg-slate-100 border-slate-200 text-slate-700 font-semibold">
+                    <span class="w-5 h-5 rounded-lg bg-amber-600 text-white flex items-center justify-center text-[10px] font-mono shrink-0 mt-0.5">3</span>
+                    <div>
+                      <div data-i18n="t3_mode3_h">Nakładanie się stref (z kim konkuruje?)</div>
+                      <div class="text-[10px] font-normal text-slate-500 mt-0.5" data-i18n="t3_mode3_p">Rywale, u których mogą kupić klienci obsługiwani przez wybraną wytwórnię.</div>
+                    </div>
+                  </button>
+                </div>
               </div>
 
-              <div class="space-y-2.5" id="t3-targets-container"></div>
+              <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-3 text-xs">
+                <div>
+                  <div class="flex justify-between items-center mb-1">
+                    <label class="font-bold text-slate-800 uppercase text-[10px] tracking-wider" data-i18n="t3_lbl_time">Maksymalny czas dowozu betonu (T<sub>max</sub>):</label>
+                    <span id="t3-val-time" class="font-mono font-bold bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded">20 min</span>
+                  </div>
+                  <input type="range" id="t3-range-time" min="10" max="35" step="5" value="20" oninput="onT3TimeChange()" class="w-full custom-range cursor-pointer">
+                  <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+                    <span data-i18n="t3_time_short">10 min (drogi fracht)</span>
+                    <span>20 min</span>
+                    <span data-i18n="t3_time_long">35 min (tani fracht)</span>
+                  </div>
+                </div>
 
-              <div class="pt-2">
-                <button onclick="runTask3Simulation()" id="t3-btn-simulate" class="w-full py-3 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-xs transition shadow-md flex items-center justify-center gap-2">
-                  <span data-i18n="t3_btn_run">Podnieś cenę o +10% (SSNIP)</span>
-                </button>
+                <div class="pt-2 border-t border-slate-200 flex items-center justify-between gap-2">
+                  <span class="font-semibold text-slate-700" id="t3-active-target-lbl" data-i18n="t3_sel_lbl">Aktywny punkt na mapie:</span>
+                  <span id="t3-active-badge" class="font-mono font-bold text-xs px-2.5 py-1 rounded-lg bg-indigo-600 text-white">B1</span>
+                </div>
+                <p class="text-[11px] text-slate-500 leading-relaxed" id="t3-click-instruction" data-i18n="t3_click_instr">
+                  Kliknij dowolny plac budowy (B1–B9) lub betoniarnię (S1–S4) bezpośrednio na mapie, aby zmienić punkt odniesienia.
+                </p>
+
+                <div id="t3-zones-demand-panel" class="hidden pt-2.5 border-t border-slate-200 space-y-1.5">
+                  <span class="font-bold text-teal-900 uppercase text-[10px] tracking-wider block" data-i18n="t3_zones_panel_title">Popyt w strefach czasowych:</span>
+                  <div id="t3-zones-demand-list" class="grid grid-cols-3 gap-1.5 text-center"></div>
+                </div>
+              </div>
+
+              <div class="p-4 rounded-xl border-2 border-amber-300 bg-amber-50/60 space-y-3 text-xs">
+                <div class="flex items-center justify-between">
+                  <span class="text-[10px] font-mono font-bold text-amber-800 uppercase tracking-wider" data-i18n="t3_chal_badge">Wyzwanie analityczne</span>
+                  <span id="t3-chal-score" class="text-[11px] font-mono font-bold text-amber-900 bg-amber-200/80 px-2 py-0.5 rounded">0 / 3</span>
+                </div>
+                <div id="t3-chal-question" class="font-bold text-slate-900 leading-snug"></div>
+                <div id="t3-chal-options" class="flex flex-wrap gap-1.5 pt-1"></div>
+                <div class="flex gap-2 pt-1">
+                  <button onclick="checkTask3Challenge()" id="t3-btn-check" class="flex-1 py-2 px-3 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-xl text-xs transition shadow-xs">
+                    <span data-i18n="t3_btn_verify">Sprawdź odpowiedź</span>
+                  </button>
+                  <button onclick="nextTask3Challenge()" class="py-2 px-3 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 font-semibold rounded-xl text-xs transition" data-i18n="t3_btn_next_chal">
+                    Inne pytanie
+                  </button>
+                </div>
+                <div id="t3-chal-feedback" class="hidden p-2.5 rounded-lg text-[11px] leading-relaxed border"></div>
               </div>
             </div>
 
-            <div class="lg:col-span-5 space-y-4">
-              <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-3 text-xs">
-                <span class="font-bold text-slate-800 uppercase text-[10px] tracking-wider block" data-i18n="t3_report_title">Wynik testu:</span>
-                
-                <div id="t3-report-feed" class="space-y-2 text-[11px] text-slate-600 leading-relaxed min-h-[140px]">
-                  <p class="text-slate-400" data-i18n="t3_report_intro">
-                    Zaznacz podmioty do włączenia, po czym uruchom podwyżkę ceny o 10%. Zobaczysz reakcję popytu oraz wejście podaży rywali.
-                  </p>
+            <div class="lg:col-span-8 space-y-4">
+              <div class="bg-slate-100 rounded-2xl p-3 sm:p-4 border border-slate-200 flex flex-col items-center">
+                <div class="w-full flex flex-wrap justify-between items-center text-xs mb-2 px-1 gap-2">
+                  <span class="font-bold text-slate-700" data-i18n="t3_map_header">Mapa drogowa regionu i izochrony dojazdu (poza mapą brak dostawców i odbiorców)</span>
+                  <span class="text-[11px] font-mono text-slate-500" id="t3-map-substatus">T<sub>max</sub> = 20 min</span>
                 </div>
-
-                <div id="t3-financial-card" class="hidden p-3 rounded-lg border transition space-y-1"></div>
+                <div class="w-full overflow-hidden flex justify-center bg-white rounded-xl border border-slate-200 shadow-inner">
+                  <svg id="t3-geo-svg" viewBox="0 0 680 480" class="w-full max-w-[680px] h-auto select-none font-sans"></svg>
+                </div>
+                <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-[11px] mt-3 pt-2 border-t border-slate-200 w-full text-slate-600">
+                  <span class="flex items-center gap-1.5">
+                    <span class="w-3.5 h-3.5 rounded bg-teal-700 inline-block border border-white shadow-xs"></span>
+                    <span data-i18n="t3_leg_s">Wytwórnia betonu (S1–S4)</span>
+                  </span>
+                  <span class="flex items-center gap-1.5">
+                    <span class="w-3 h-3 rounded-full bg-indigo-600 inline-block border border-white shadow-xs"></span>
+                    <span data-i18n="t3_leg_b">Plac budowy / nabywca (B1–B9)</span>
+                  </span>
+                  <span class="flex items-center gap-1.5">
+                    <span class="w-6 h-1.5 bg-slate-600 inline-flex items-center justify-center rounded-xs">
+                      <span class="w-4 border-t border-dashed border-slate-100"></span>
+                    </span>
+                    <span data-i18n="t3_leg_loc">Sieć drogowa</span>
+                  </span>
+                  <span class="flex items-center gap-1.5">
+                    <span class="w-5 h-1.5 bg-sky-300 inline-block rounded"></span>
+                    <span data-i18n="t3_leg_riv">Rzeka i mosty</span>
+                  </span>
+                </div>
               </div>
+
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                <div class="p-3 rounded-xl border border-slate-200 bg-white">
+                  <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider" id="t3-kpi1-lbl" data-i18n="t3_kpi1">Punkt analizy</div>
+                  <div id="t3-kpi1-val" class="text-base font-mono font-bold text-slate-900 mt-0.5">B1</div>
+                </div>
+                <div class="p-3 rounded-xl border border-slate-200 bg-white">
+                  <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider" id="t3-kpi2-lbl" data-i18n="t3_kpi2">Dostawcy w zasięgu</div>
+                  <div id="t3-kpi2-val" class="text-base font-mono font-bold text-teal-700 mt-0.5">2</div>
+                </div>
+                <div class="p-3 rounded-xl border border-slate-200 bg-white">
+                  <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider" id="t3-kpi3-lbl" data-i18n="t3_kpi3">Popyt w zasięgu</div>
+                  <div id="t3-kpi3-val" class="text-base font-mono font-bold text-indigo-700 mt-0.5">180 tys. m³</div>
+                </div>
+                <div class="p-3 rounded-xl border border-slate-200 bg-white">
+                  <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider" id="t3-kpi4-lbl" data-i18n="t3_kpi4">Popyt sporny (konkurencja)</div>
+                  <div id="t3-kpi4-val" class="text-base font-mono font-bold text-amber-600 mt-0.5">110 tys. m³</div>
+                </div>
+              </div>
+
+              <div id="t3-analysis-box" class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2 text-xs leading-relaxed text-slate-700"></div>
             </div>
 
           </div>
+        </div>
 
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-3">
+          <div class="border-b border-slate-100 pb-2.5">
+            <span class="text-[10px] font-mono font-bold text-indigo-600 uppercase tracking-wider" data-i18n="t3_not_tag">Aparatura pojęciowa</span>
+            <h3 class="text-sm font-bold text-slate-900 mt-0.5" data-i18n="t3_not_title">Trzy odmienne obszary geograficzne w analizie rynku (Zadanie 3)</h3>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="p-3 rounded-xl bg-indigo-50/60 border border-indigo-200 space-y-1">
+              <span class="font-bold text-indigo-900 block" data-i18n="t3_not_1_h">1. Obszar wyboru nabywcy (T<sub>B</sub> ≤ T<sub>max</sub>)</span>
+              <p class="text-[11px] text-slate-600 leading-relaxed" data-i18n="t3_not_1_p">
+                Obszar wokół konkretnego kupującego (placu budowy B), z którego może on sprowadzić towar bez przekroczenia akceptowalnego czasu i kosztu transportu. Wyznacza bezpośrednich dostawców dostępnych dla tego jednego klienta.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-teal-50/60 border border-teal-200 space-y-1">
+              <span class="font-bold text-teal-900 block" data-i18n="t3_not_2_h">2. Obszar ciążenia sprzedawcy (Catchment Area)</span>
+              <p class="text-[11px] text-slate-600 leading-relaxed" data-i18n="t3_not_2_p">
+                Izochrona wokół zakładu sprzedawcy S pokazująca, do których klientów jest on w stanie dowieźć produkt w czasie T<sub>max</sub>. Kształt izochrony zależy od przebiegu sieci drogowej i barier naturalnych (np. rzeki i mostów).
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-amber-50/60 border border-amber-200 space-y-1">
+              <span class="font-bold text-amber-900 block" data-i18n="t3_not_3_h">3. Obszar konkurencji sprzedawcy (Zazębianie stref)</span>
+              <p class="text-[11px] text-slate-600 leading-relaxed" data-i18n="t3_not_3_p">
+                Sprzedawca S<sub>1</sub> konkuruje z każdym innym sprzedawcą S<sub>k</sub>, u którego mogliby zaopatrzyć się klienci z obszaru ciążenia S<sub>1</sub>. Nawet jeśli dwie wytwórnie dzieli dystans do 2·T<sub>max</sub>, rywalizują one o odbiorców na obszarze wspólnym.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -883,6 +1011,199 @@
 
     </section>
 
+    <section id="view-math" class="hidden space-y-6">
+
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-3">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+          <div>
+            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider" data-i18n="math_badge">Matematyczne podstawy rynku</span>
+            <h2 class="text-xl font-bold text-slate-900" data-i18n="math_main_title">Wzory i logika: od intuicji do pełnego modelu</h2>
+          </div>
+          <div class="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl text-xs font-semibold">
+            <button id="btn-math-track-intuition" onclick="switchMathTrack('intuition')" class="px-3 py-1 rounded-lg bg-white shadow-xs text-indigo-600 font-bold transition">
+              <span data-i18n="math_tab_intuition">Tor intuicyjny</span>
+            </button>
+            <button id="btn-math-track-formal" onclick="switchMathTrack('formal')" class="px-3 py-1 rounded-lg text-slate-600 hover:text-slate-900 transition">
+              <span data-i18n="math_tab_formal">Tor formalny</span>
+            </button>
+          </div>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed" data-i18n="math_lead">
+          Test SSNIP to bilans zysku: czy dodatkowy przychód z wyższej ceny przeważy nad utratą marży ze spadku sprzedaży? Poniżej znajdziesz wyjaśnienie tej zasady w dwóch ujęciach: prostym (intuicyjnym) oraz ścisłym (formalnym).
+        </p>
+      </div>
+
+      <div id="math-track-intuition" class="space-y-6">
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+          <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-sm space-y-3 text-xs">
+            <div class="w-8 h-8 rounded-xl bg-indigo-50 border border-indigo-200 flex items-center justify-center text-indigo-600 font-bold font-mono text-sm">
+              1
+            </div>
+            <h3 class="text-sm font-bold text-slate-900" data-i18n="math_int_h1">Dwa przeciwstawne efekty</h3>
+            <p class="text-slate-600 leading-relaxed" data-i18n="math_int_p1">
+              Gdy podnosisz cenę o 5%, dzieją się dwie rzeczy na raz: na każdym sprzedanym produkcie zarabiasz więcej (efekt ceny), ale część klientów odchodzi i kupujesz mniej sztuk (efekt wolumenu). Podwyżka opłaca się wtedy, gdy pierwszy efekt jest większy od drugiego.
+            </p>
+          </div>
+
+          <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-sm space-y-3 text-xs">
+            <div class="w-8 h-8 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-700 font-bold font-mono text-sm">
+              2
+            </div>
+            <h3 class="text-sm font-bold text-slate-900" data-i18n="math_int_h2">Dlaczego marża jest kluczowa?</h3>
+            <p class="text-slate-600 leading-relaxed" data-i18n="math_int_p2">
+              Jeśli Twoja marża jest niska (np. 10%), każdy utracony klient kosztuje Cię niewiele. Możesz pozwolić sobie na duży spadek sprzedaży, bo zysk na sztuce rośnie proporcjonalnie bardzo mocno. Gdy marża wynosi 80%, każdy utracony klient to ogromna strata dotychczasowego zysku, więc tolerancja na spadek wolumenu jest mała.
+            </p>
+          </div>
+
+          <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-sm space-y-3 text-xs">
+            <div class="w-8 h-8 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700 font-bold font-mono text-sm">
+              3
+            </div>
+            <h3 class="text-sm font-bold text-slate-900" data-i18n="math_int_h3">Kieszenie tego samego właściciela</h3>
+            <p class="text-slate-600 leading-relaxed" data-i18n="math_int_p3">
+              Gdy badasz pojedynczy produkt, każdy klient, który odchodzi, jest stratą. Gdy jednak monopolista kontroluje cały koszyk dóbr, klient przechodzący z produktu A na produkt B w tym samym koszyku nie jest stratą: pieniądze trafiają do innej kieszeni tej samej firmy.
+            </p>
+          </div>
+
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4 text-xs">
+          <div class="border-b border-slate-100 pb-3">
+            <h3 class="text-base font-bold text-slate-900" data-i18n="math_rule_title">Prosta reguła decyzji SSNIP</h3>
+            <p class="text-slate-500 mt-0.5" data-i18n="math_rule_sub">Porównanie progu dopuszczalnego z rzeczywistą ucieczką klientów</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
+            <div class="p-4 rounded-xl border border-indigo-200 bg-indigo-50/60 space-y-2">
+              <span class="font-bold text-indigo-900 text-sm block" data-i18n="math_cl_box_h">CL (Krytyczna utrata sprzedaży) = Twój margines błędu</span>
+              <p class="text-slate-700 leading-relaxed" data-i18n="math_cl_box_p">
+                To maksymalny procent sprzedaży, jaki firma może stracić pod wpływem podwyżki ceny, aby jej całkowity zysk nie spadł poniżej zera. Jeśli stracisz dokładnie tyle, zysk pozostaje bez zmian.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl border border-emerald-200 bg-emerald-50/60 space-y-2">
+              <span class="font-bold text-emerald-900 text-sm block" data-i18n="math_al_box_h">AL (Rzeczywista utrata sprzedaży) = Faktyczna reakcja rynku</span>
+              <p class="text-slate-700 leading-relaxed" data-i18n="math_al_box_p">
+                To realny spadek sprzedaży wywołany wrażliwością klientów na cenę i reakcją innych dostawców. Jeśli rzeczywista strata jest mniejsza od progu krytycznego (AL &le; CL), podwyżka jest opłacalna i rynek został wyznaczony.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="math-track-formal" class="hidden space-y-6">
+
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4 text-xs">
+          <div class="border-b border-slate-100 pb-3">
+            <span class="text-[10px] font-mono font-bold text-indigo-600 uppercase tracking-wider" data-i18n="math_f1_badge">Część 1 • Pojedynczy produkt</span>
+            <h3 class="text-base font-bold text-slate-900 mt-0.5" data-i18n="math_f1_title">Wyprowadzenie wzoru na krytyczną utratę sprzedaży (CL)</h3>
+          </div>
+
+          <div class="space-y-3 text-slate-700 leading-relaxed">
+            <p data-i18n="math_f1_p1">
+              Niech cena początkowa wynosi P, koszt krańcowy MC, a wielkość sprzedaży q. Wyjściowy zysk całkowity wynosi:
+            </p>
+            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl font-mono text-center text-slate-900">
+              TP<sub>0</sub> = (P - MC) &middot; q = m &middot; P &middot; q
+            </div>
+            <p data-i18n="math_f1_p2">
+              gdzie m = (P - MC) / P to początkowa marża cenowa. Podnosimy cenę o ułamek X = &Delta;P / P, co powoduje spadek sprzedaży o ułamek L = -&Delta;q / q. Nowy zysk wynosi:
+            </p>
+            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl font-mono text-center text-slate-900">
+              TP<sub>1</sub> = [P &middot; (1 + X) - MC] &middot; q &middot; (1 - L)
+            </div>
+            <p data-i18n="math_f1_p3">
+              Krytyczną utratę sprzedaży (CL) wyznacza warunek opłacalności &Delta;TP = TP<sub>1</sub> - TP<sub>0</sub> = 0. Podstawiając i dzieląc obie strony przez P &middot; q, otrzymujemy:
+            </p>
+            <div class="p-3 bg-indigo-50 border border-indigo-200 rounded-xl font-mono text-center font-bold text-indigo-950 text-sm">
+              CL = X / (X + m)
+            </div>
+            <p data-i18n="math_f1_p4">
+              Z kolei elastyczność krytyczna popytu e<sub>p,crit</sub> to taka wrażliwość popytu, przy której rzeczywisty spadek sprzedaży L = e<sub>p</sub> &middot; X osiąga dokładnie próg CL:
+            </p>
+            <div class="p-3 bg-indigo-50 border border-indigo-200 rounded-xl font-mono text-center font-bold text-indigo-950 text-sm">
+              e<sub>p,crit</sub> = CL / X = 1 / (X + m)
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4 text-xs">
+          <div class="border-b border-slate-100 pb-3">
+            <span class="text-[10px] font-mono font-bold text-indigo-600 uppercase tracking-wider" data-i18n="math_f2_badge">Część 2 • Koszyk wielu produktów</span>
+            <h3 class="text-base font-bold text-slate-900 mt-0.5" data-i18n="math_f2_title">Od 1 produktu do koszyka dóbr: wskaźniki odpływu (Diversion Ratios)</h3>
+          </div>
+
+          <div class="space-y-3 text-slate-700 leading-relaxed">
+            <p data-i18n="math_f2_p1">
+              Gdy hipotetyczny monopolista kontroluje koszyk produktów S, podwyższa cenę wszystkich dóbr w koszyku jednocześnie. Klienci odchodzący od dobra i mogą przejść na inne dobro j należące do koszyka S.
+            </p>
+            <p data-i18n="math_f2_p2">
+              Ułamek klientów porzucających dobro i, którzy wybierają dobro j, określa wskaźnik odpływu popytu (Diversion Ratio, D<sub>ij</sub>). Część popytu, która bezpowrotnie ucieka poza koszyk S, wynosi zatem:
+            </p>
+            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl font-mono text-center text-slate-900">
+              Out<sub>i</sub>(S) = 1 - &Sigma;<sub>j &isin; S, j &ne; i</sub> D<sub>ij</sub>
+            </div>
+            <p data-i18n="math_f2_p3">
+              Dla każdego dobra i &isin; S bezwzględna utrata sprzedaży poza koszyk wynosi &Delta;q<sub>i</sub><sup>lost</sup> = q<sub>i</sub> &middot; e<sub>p,i</sub> &middot; X &middot; Out<sub>i</sub>(S). Dzieląc sumę tych strat przez łączny wolumen koszyka, otrzymujemy rzeczywistą utratę sprzedaży koszyka:
+            </p>
+            <div class="p-3 bg-indigo-50 border border-indigo-200 rounded-xl font-mono text-center font-bold text-indigo-950 text-sm">
+              AL(S) = [&Sigma;<sub>i &isin; S</sub> q<sub>i</sub> &middot; e<sub>p,i</sub> &middot; X &middot; Out<sub>i</sub>(S)] / &Sigma;<sub>i &isin; S</sub> q<sub>i</sub>
+            </div>
+            <p data-i18n="math_f2_p4">
+              Z kolei próg krytyczny koszyka opiera się na średniej ważonej marży m̄(S) = &Sigma; (q<sub>i</sub> &middot; m<sub>i</sub>) / &Sigma; q<sub>i</sub>:
+            </p>
+            <div class="p-3 bg-indigo-50 border border-indigo-200 rounded-xl font-mono text-center font-bold text-indigo-950 text-sm">
+              CL(S) = X / [X + m̄(S)]
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-3 text-xs">
+          <div class="border-b border-slate-100 pb-3">
+            <h3 class="text-base font-bold text-slate-900" data-i18n="math_comp_title">Zestawienie porównawcze: Zadanie 1 a Zadanie 2</h3>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr class="border-b border-slate-200 bg-slate-50 text-slate-700 font-bold">
+                  <th class="p-3 rounded-l-xl" data-i18n="math_th_feature">Cecha modelu</th>
+                  <th class="p-3 text-amber-900" data-i18n="math_th_t1">Zadanie 1 (1 produkt)</th>
+                  <th class="p-3 rounded-r-xl text-indigo-900" data-i18n="math_th_t2">Zadanie 2 (Koszyk produktów)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 text-slate-600">
+                <tr>
+                  <td class="p-3 font-semibold text-slate-900" data-i18n="math_row1_c1">Liczba dóbr</td>
+                  <td class="p-3" data-i18n="math_row1_c2">1 produkt</td>
+                  <td class="p-3" data-i18n="math_row1_c3">Wiele produktów o wagach q<sub>i</sub> i marżach m<sub>i</sub></td>
+                </tr>
+                <tr>
+                  <td class="p-3 font-semibold text-slate-900" data-i18n="math_row2_c1">Wzór na stratę rzeczywistą (AL)</td>
+                  <td class="p-3 font-mono font-semibold" data-i18n="math_row2_c2">AL = e<sub>p</sub>&middot;X + S&middot;X</td>
+                  <td class="p-3 font-mono font-semibold" data-i18n="math_row2_c3">AL(S) = &Sigma; q<sub>i</sub>&middot;e<sub>p,i</sub>&middot;X&middot;Out<sub>i</sub>(S) / &Sigma; q<sub>i</sub></td>
+                </tr>
+                <tr>
+                  <td class="p-3 font-semibold text-slate-900" data-i18n="math_row3_c1">Przechwytywanie popytu</td>
+                  <td class="p-3" data-i18n="math_row3_c2">Brak (każdy odchodzący klient to strata)</td>
+                  <td class="p-3" data-i18n="math_row3_c3">Tak (klienci przechodzący na inne dobra w koszyku nie są stratą)</td>
+                </tr>
+                <tr>
+                  <td class="p-3 font-semibold text-slate-900" data-i18n="math_row4_c1">Reakcja podaży konkurentów</td>
+                  <td class="p-3" data-i18n="math_row4_c2">Jawny składnik podażowy S&middot;X</td>
+                  <td class="p-3" data-i18n="math_row4_c3">Dystans podażowy d<sub>S</sub> wpływający na wagi substytucji</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
     <section id="view-quiz" class="hidden space-y-6">
       <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm max-w-3xl mx-auto">
         
@@ -945,22 +1266,22 @@
       id: "pharma",
       title_pl: "1. Lek na receptę z patentem",
       title_en: "1. Prescription drug with patent",
-      desc_pl: "Chorzy kupują lek z konieczności leczenia; brak zamienników terapeutycznych. Wysoka marża (m=80%), sztywny popyt (e_p = |E_p| = 0.6), brak reakcji podaży rywali (S=0% z uwagi na bariery rejestracyjne).",
-      desc_en: "Patients buy the drug out of medical need; therapeutic substitutes do not exist. High gross margin (m=80%), inelastic demand (e_p = |E_p| = 0.6), zero rival supply entry (S=0% due to regulatory barriers).",
+      desc_pl: "Chorzy kupują lek z konieczności leczenia; brak zamienników terapeutycznych. Wysoka marża (m=80%), sztywny popyt (e<sub>p</sub> = |E<sub>p</sub>| = 0.6), brak reakcji podaży rywali (S=0% z uwagi na bariery rejestracyjne).",
+      desc_en: "Patients buy the drug out of medical need; therapeutic substitutes do not exist. High gross margin (m=80%), inelastic demand (e<sub>p</sub> = |E<sub>p</sub>| = 0.6), zero rival supply entry (S=0% due to regulatory barriers).",
       m: 80,
       x: 5,
       eps: 0.6,
       sup: 0,
       expectedProfitable: true,
-      explanation_pl: "Marża m=80% daje próg straty krytycznej CL = 5.9%. Sztywny popyt (e_p = 0.6) i brak wejścia rywali (S=0%) oznaczają rzeczywisty odpływ 3.0%. Podwyżka zwiększa zysk całkowity (ΔTP > 0).",
-      explanation_en: "A margin of m=80% gives a critical loss threshold of CL = 5.9%. Inelastic demand (e_p = 0.6) and zero rival supply entry (S=0%) yield a volume loss of 3.0%. The price increase raises total profit (ΔTP > 0)."
+      explanation_pl: "Marża m=80% daje próg straty krytycznej CL = 5.9%. Sztywny popyt (e<sub>p</sub> = 0.6) i brak wejścia rywali (S=0%) oznaczają rzeczywisty odpływ 3.0%. Podwyżka zwiększa zysk całkowity (ΔTP > 0).",
+      explanation_en: "A margin of m=80% gives a critical loss threshold of CL = 5.9%. Inelastic demand (e<sub>p</sub> = 0.6) and zero rival supply entry (S=0%) yield a volume loss of 3.0%. The price increase raises total profit (ΔTP > 0)."
     },
     "fuel": {
       id: "fuel",
       title_pl: "2. Paliwo na miejskiej stacji benzynowej",
       title_en: "2. Urban petrol station retail fuel",
-      desc_pl: "Niska marża detaliczna (m=15%), widoczne pylony cenowe przy drodze. Wysoka elastyczność (e_p = |E_p| = 6.0) oraz szybkie przejęcie kierowców przez sąsiednie stacje (S=20%).",
-      desc_en: "Low retail margin (m=15%) and transparent pricing on roadside signs. High elasticity (e_p = |E_p| = 6.0) and rapid rival station response (S=20%).",
+      desc_pl: "Niska marża detaliczna (m=15%), widoczne pylony cenowe przy drodze. Wysoka elastyczność (e<sub>p</sub> = |E<sub>p</sub>| = 6.0) oraz szybkie przejęcie kierowców przez sąsiednie stacje (S=20%).",
+      desc_en: "Low retail margin (m=15%) and transparent pricing on roadside signs. High elasticity (e<sub>p</sub> = |E<sub>p</sub>| = 6.0) and rapid rival station response (S=20%).",
       m: 15,
       x: 5,
       eps: 6.0,
@@ -973,8 +1294,8 @@
       id: "streaming",
       title_pl: "3. Subskrypcja serwisu streamingowego (SVOD)",
       title_en: "3. Subscription video streaming service (SVOD)",
-      desc_pl: "Wysoka marża brutto (m=60%), umiarkowana wrażliwość subskrybentów (e_p = |E_p| = 1.8), ograniczona w krótkim czasie reakcja rywali z uwagi na czas produkcji filmów (S=10%).",
-      desc_en: "High gross margin (m=60%), moderate subscriber sensitivity (e_p = |E_p| = 1.8), and limited short-run rival capacity expansion due to content lead times (S=10%).",
+      desc_pl: "Wysoka marża brutto (m=60%), umiarkowana wrażliwość subskrybentów (e<sub>p</sub> = |E<sub>p</sub>| = 1.8), ograniczona w krótkim czasie reakcja rywali z uwagi na czas produkcji filmów (S=10%).",
+      desc_en: "High gross margin (m=60%), moderate subscriber sensitivity (e<sub>p</sub> = |E<sub>p</sub>| = 1.8), and limited short-run rival capacity expansion due to content lead times (S=10%).",
       m: 60,
       x: 5,
       eps: 1.8,
@@ -987,8 +1308,8 @@
       id: "cement",
       title_pl: "4. Cement z lokalnej cementowni",
       title_en: "4. Cement from a local kiln",
-      desc_pl: "Marża m=30%, transport drogowy ogranicza alternatywy (e_p = |E_p| = 1.0), znikoma podaż z odległych cementowni ze względu na koszt frachtu (S=15%).",
-      desc_en: "Gross margin m=30%, road freight costs limit alternatives (e_p = |E_p| = 1.0), and distant cement kilns do not supply the local market profitably (S=15%).",
+      desc_pl: "Marża m=30%, transport drogowy ogranicza alternatywy (e<sub>p</sub> = |E<sub>p</sub>| = 1.0), znikoma podaż z odległych cementowni ze względu na koszt frachtu (S=15%).",
+      desc_en: "Gross margin m=30%, road freight costs limit alternatives (e<sub>p</sub> = |E<sub>p</sub>| = 1.0), and distant cement kilns do not supply the local market profitably (S=15%).",
       m: 30,
       x: 5,
       eps: 1.0,
@@ -1001,8 +1322,8 @@
       id: "mortgage",
       title_pl: "5. Kredyt hipoteczny w banku detalicznym",
       title_en: "5. Retail bank residential mortgage",
-      desc_pl: "Marża bankowa m=45%, łatwe porównywanie ofert w internecie (e_p = |E_p| = 3.2), a inne banki oferują refinansowanie kredytu (S=40%).",
-      desc_en: "Banking margin m=45%, online comparison shopping (e_p = |E_p| = 3.2), and rival retail banks offering refinancing facilities (S=40%).",
+      desc_pl: "Marża bankowa m=45%, łatwe porównywanie ofert w internecie (e<sub>p</sub> = |E<sub>p</sub>| = 3.2), a inne banki oferują refinansowanie kredytu (S=40%).",
+      desc_en: "Banking margin m=45%, online comparison shopping (e<sub>p</sub> = |E<sub>p</sub>| = 3.2), and rival retail banks offering refinancing facilities (S=40%).",
       m: 45,
       x: 5,
       eps: 3.2,
@@ -1018,61 +1339,206 @@
   const T2_ORDER = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N'];
 
   const T2_NAME_POOL = [
-    { letter: 'A', name_pl: 'Aurora', name_en: 'Aurora' },
-    { letter: 'B', name_pl: 'Boreal', name_en: 'Boreal' },
-    { letter: 'C', name_pl: 'Citron Pulse', name_en: 'Citron Pulse' },
-    { letter: 'D', name_pl: 'Driftline', name_en: 'Driftline' },
-    { letter: 'E', name_pl: 'Ember Fizz', name_en: 'Ember Fizz' },
-    { letter: 'F', name_pl: 'Frostbite', name_en: 'Frostbite' },
-    { letter: 'G', name_pl: 'Glowroot', name_en: 'Glowroot' },
-    { letter: 'H', name_pl: 'Horizon Tonic', name_en: 'Horizon Tonic' },
-    { letter: 'I', name_pl: 'Ivory Surge', name_en: 'Ivory Surge' },
-    { letter: 'J', name_pl: 'Jadewave', name_en: 'Jadewave' },
-    { letter: 'K', name_pl: 'Kelpshine', name_en: 'Kelpshine' },
-    { letter: 'L', name_pl: 'Lumenroot', name_en: 'Lumenroot' },
-    { letter: 'M', name_pl: 'Marshlight', name_en: 'Marshlight' },
-    { letter: 'N', name_pl: 'Nightpine', name_en: 'Nightpine' },
-    { letter: 'O', name_pl: 'Oasis Mist', name_en: 'Oasis Mist' },
-    { letter: 'P', name_pl: 'Polar Chill', name_en: 'Polar Chill' },
-    { letter: 'Q', name_pl: 'Quench Boost', name_en: 'Quench Boost' },
-    { letter: 'R', name_pl: 'Ripple Wave', name_en: 'Ripple Wave' },
-    { letter: 'S', name_pl: 'Solar Zap', name_en: 'Solar Zap' },
-    { letter: 'T', name_pl: 'Terra Spark', name_en: 'Terra Spark' },
-    { letter: 'U', name_pl: 'Ultra Zing', name_en: 'Ultra Zing' },
-    { letter: 'V', name_pl: 'Vibe Cold', name_en: 'Vibe Cold' },
-    { letter: 'W', name_pl: 'Wild Bloom', name_en: 'Wild Bloom' },
-    { letter: 'Z', name_pl: 'Zephyr Tonic', name_en: 'Zephyr Tonic' }
+    { letter: 'A', name_pl: 'Aurora', name_en: 'Aurora', desc_pl: 'Napój funkcjonalny o cytrusowej nucie.', desc_en: 'Functional citrus-infused drink.' },
+    { letter: 'B', name_pl: 'Boreal', name_en: 'Boreal', desc_pl: 'Wariant leśny o chłodzącym aromacie ziół.', desc_en: 'Forest berry drink with cooling herbal hints.' },
+    { letter: 'C', name_pl: 'Citron Pulse', name_en: 'Citron Pulse', desc_pl: 'Cytrusowy napój orzeźwiający.', desc_en: 'Citrus-based refreshing functional beverage.' },
+    { letter: 'D', name_pl: 'Driftline', name_en: 'Driftline', desc_pl: 'Napój z dodatkiem elektrolitów.', desc_en: 'Electrolyte-enhanced light isotonic drink.' },
+    { letter: 'E', name_pl: 'Ember Fizz', name_en: 'Ember Fizz', desc_pl: 'Mocniej gazowany napój z ekstraktem guarany.', desc_en: 'Carbonated variant with guarana extract.' },
+    { letter: 'F', name_pl: 'Frostbite', name_en: 'Frostbite', desc_pl: 'Chłodzący napój z miętą i kofeiną.', desc_en: 'Cooling mint drink with natural caffeine.' },
+    { letter: 'G', name_pl: 'Glowroot', name_en: 'Glowroot', desc_pl: 'Napój oparty na korzeniach żeń-szenia.', desc_en: 'Ginseng-root based herbal functional blend.' },
+    { letter: 'H', name_pl: 'Horizon Tonic', name_en: 'Horizon Tonic', desc_pl: 'Toniczny napój premium z chiną.', desc_en: 'Premium quinine tonic botanical soda.' },
+    { letter: 'I', name_pl: 'Ivory Surge', name_en: 'Ivory Surge', desc_pl: 'Delikatny tonik z nutą wanilii i ziół.', desc_en: 'Mild herbal tonic with vanilla extract.' },
+    { letter: 'J', name_pl: 'Jadewave', name_en: 'Jadewave', desc_pl: 'Klasyczny napój energetyczny.', desc_en: 'Classic mass-market energizing beverage.' },
+    { letter: 'K', name_pl: 'Kelpshine', name_en: 'Kelpshine', desc_pl: 'Napój wzbogacany minerałami z alg morskich.', desc_en: 'Mineral-enriched functional sea-kelp drink.' },
+    { letter: 'L', name_pl: 'Lumenroot', name_en: 'Lumenroot', desc_pl: 'Napój ziołowy z innej kategorii smakowej.', desc_en: 'Botanical drink from an alternative flavor line.' },
+    { letter: 'M', name_pl: 'Marshlight', name_en: 'Marshlight', desc_pl: 'Słodzony napój owocowy o odrębnej recepturze.', desc_en: 'Sweetened fruit beverage on a separate formula.' },
+    { letter: 'N', name_pl: 'Nightpine', name_en: 'Nightpine', desc_pl: 'Odległy smakowo tonik leśny o innej bazie.', desc_en: 'Pine needle herbal soda from a distant category.' },
+    { letter: 'O', name_pl: 'Oasis Mist', name_en: 'Oasis Mist', desc_pl: 'Lekka woda smakowa wzbogacona witaminami.', desc_en: 'Light vitamin-enhanced flavored water.' },
+    { letter: 'P', name_pl: 'Polar Chill', name_en: 'Polar Chill', desc_pl: 'Napój lodowy o intensywnym smaku mentolu.', desc_en: 'Iced energy soda with strong menthol notes.' },
+    { letter: 'Q', name_pl: 'Quench Boost', name_en: 'Quench Boost', desc_pl: 'Szybko nawadniający napój izotoniczny.', desc_en: 'Fast-hydrating isotonic drink.' },
+    { letter: 'R', name_pl: 'Ripple Wave', name_en: 'Ripple Wave', desc_pl: 'Napój gazowany z ekstraktem yerba mate.', desc_en: 'Sparkling yerba mate functional infusion.' },
+    { letter: 'S', name_pl: 'Solar Zap', name_en: 'Solar Zap', desc_pl: 'Napój cytrusowy z wysoką zawartością witaminy C.', desc_en: 'High-vitamin-C sparkling citrus beverage.' },
+    { letter: 'T', name_pl: 'Terra Spark', name_en: 'Terra Spark', desc_pl: 'Napój korzenno-imbirowy o głębokim smaku.', desc_en: 'Deep spiced ginger functional drink.' },
+    { letter: 'U', name_pl: 'Ultra Zing', name_en: 'Ultra Zing', desc_pl: 'Mocno gazowany napój o smaku limonki.', desc_en: 'Highly carbonated sharp lime functional soda.' },
+    { letter: 'V', name_pl: 'Vibe Cold', name_en: 'Vibe Cold', desc_pl: 'Mrożony napój regeneracyjny z aminokwasami.', desc_en: 'Cold-pressed recovery drink with amino acids.' },
+    { letter: 'W', name_pl: 'Wild Bloom', name_en: 'Wild Bloom', desc_pl: 'Kwiatowy napój musujący z hibiskusem.', desc_en: 'Floral sparkling infusion with hibiscus.' },
+    { letter: 'Z', name_pl: 'Zephyr Tonic', name_en: 'Zephyr Tonic', desc_pl: 'Lekki tonik ziołowy o niskiej zawartości cukru.', desc_en: 'Low-sugar delicate botanical tonic.' }
   ];
 
-  const T2_PRODUCTS = {
-    A: { id: 'A', letter: 'A', name_pl: 'Aurora', name_en: 'Aurora', x: 0,   y: 0,   q: 100, m: 0.20, eps: 5.5, desc_pl: 'Napój funkcjonalny wyjściowy, wokół którego badamy rynek właściwy.', desc_en: 'The baseline functional drink around which the relevant market is tested.' },
-    B: { id: 'B', letter: 'B', name_pl: 'Boreal', name_en: 'Boreal', x: 1.0, y: 0.8, q: 70,  m: 0.19, eps: 5.8, desc_pl: 'Niemal identyczna receptura o zbliżonym smaku i opakowaniu.', desc_en: 'A nearly identical formula with a comparable taste and packaging.' },
-    C: { id: 'C', letter: 'C', name_pl: 'Citron Pulse', name_en: 'Citron Pulse', x: 1.8, y: 1.2, q: 60, m: 0.18, eps: 5.6, desc_pl: 'Bliski substytut o zbliżonym profilu smakowym.', desc_en: 'A close substitute with a similar flavour profile.' },
-    D: { id: 'D', letter: 'D', name_pl: 'Driftline', name_en: 'Driftline', x: 1.2, y: 2.4, q: 50, m: 0.18, eps: 5.5, desc_pl: 'Podobny efekt funkcjonalny, nieco trudniejszy do podrobienia przez konkurentów.', desc_en: 'A similar functional effect, somewhat harder for rivals to replicate.' },
-    E: { id: 'E', letter: 'E', name_pl: 'Ember Fizz', name_en: 'Ember Fizz', x: 2.8, y: 0.9, q: 45, m: 0.17, eps: 3.5, desc_pl: 'Mocniej gazowany wariant o innym poziomie słodyczy.', desc_en: 'A more carbonated variant with a different sweetness level.' },
-    F: { id: 'F', letter: 'F', name_pl: 'Frostbite', name_en: 'Frostbite', x: 3.6, y: 1.8, q: 65, m: 0.16, eps: 3.2, desc_pl: 'Alternatywny smak i aromat, dalszy substytut popytowy.', desc_en: 'An alternative flavour, a more distant demand substitute.' },
-    G: { id: 'G', letter: 'G', name_pl: 'Glowroot', name_en: 'Glowroot', x: 2.2, y: 3.8, q: 40, m: 0.15, eps: 3.0, desc_pl: 'Oparty na odmiennych ekstraktach, inna linia produkcyjna.', desc_en: 'Based on different extracts, produced on a different line.' },
-    H: { id: 'H', letter: 'H', name_pl: 'Horizon Tonic', name_en: 'Horizon Tonic', x: 4.6, y: 1.6, q: 55, m: 0.14, eps: 2.6, desc_pl: 'Napój tonizujący premium o odmiennym pozycjonowaniu cenowym.', desc_en: 'A premium tonic drink with different price positioning.' },
-    I: { id: 'I', letter: 'I', name_pl: 'Ivory Surge', name_en: 'Ivory Surge', x: 4.0, y: 4.4, q: 50, m: 0.14, eps: 2.6, desc_pl: 'Produkt niszowy o umiarkowanej zamienności popytowej.', desc_en: 'A niche product with moderate demand substitutability.' },
-    J: { id: 'J', letter: 'J', name_pl: 'Jadewave', name_en: 'Jadewave', x: 6.0, y: 2.8, q: 70, m: 0.12, eps: 2.2, desc_pl: 'Masowy napój energetyczny z osobnej kategorii cenowej.', desc_en: 'A mass-market energy drink from a separate price tier.' },
-    K: { id: 'K', letter: 'K', name_pl: 'Kelpshine', name_en: 'Kelpshine', x: 5.2, y: 5.6, q: 45, m: 0.12, eps: 2.2, desc_pl: 'Napój wzbogacany minerałami, odległy substytut funkcjonalny.', desc_en: 'A mineral-enriched drink, a distant functional substitute.' },
-    L: { id: 'L', letter: 'L', name_pl: 'Lumenroot', name_en: 'Lumenroot', x: 7.4, y: 4.2, q: 60, m: 0.11, eps: 2.0, desc_pl: 'Produkt z innej kategorii napojów, słaba zamienność.', desc_en: 'A product from another beverage category with weak substitutability.' },
-    M: { id: 'M', letter: 'M', name_pl: 'Marshlight', name_en: 'Marshlight', x: 6.4, y: 7.2, q: 40, m: 0.11, eps: 2.0, desc_pl: 'Produkowany na odrębnych liniach, niemal bez wpływu na produkt wyjściowy.', desc_en: 'Made on separate lines, with almost no link to the baseline product.' },
-    N: { id: 'N', letter: 'N', name_pl: 'Nightpine', name_en: 'Nightpine', x: 8.4, y: 7.8, q: 50, m: 0.10, eps: 2.0, desc_pl: 'Najdalszy produkt na mapie, reprezentuje inną branżę napojów.', desc_en: 'The most distant product on the map, representing another beverage industry.' },
-  };
+  const T2_BAND_BASES = [
+    { x: 0,   y: 0,   q: 100, m: 0.22, eps: 4.2 },
+    { x: 1.1, y: 0.8, q: 70,  m: 0.21, eps: 4.4 },
+    { x: 1.8, y: 1.3, q: 62,  m: 0.20, eps: 4.2 },
+    { x: 1.3, y: 2.5, q: 54,  m: 0.19, eps: 4.0 },
+    { x: 2.9, y: 1.1, q: 48,  m: 0.18, eps: 3.8 },
+    { x: 3.7, y: 2.7, q: 62,  m: 0.16, eps: 3.2 },
+    { x: 2.5, y: 3.8, q: 44,  m: 0.15, eps: 3.0 },
+    { x: 4.8, y: 1.7, q: 56,  m: 0.14, eps: 2.8 },
+    { x: 4.2, y: 4.5, q: 50,  m: 0.14, eps: 2.6 },
+    { x: 6.2, y: 2.9, q: 68,  m: 0.13, eps: 2.4 },
+    { x: 5.4, y: 5.8, q: 46,  m: 0.12, eps: 2.2 },
+    { x: 7.6, y: 4.3, q: 58,  m: 0.11, eps: 2.0 },
+    { x: 6.6, y: 7.3, q: 42,  m: 0.11, eps: 2.0 },
+    { x: 8.5, y: 7.9, q: 52,  m: 0.10, eps: 2.0 }
+  ];
 
-  function shuffleT2Names() {
+  let T2_PRODUCTS = {};
+
+  function generateNewTask2() {
     const pool = [...T2_NAME_POOL];
     for (let i = pool.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [pool[i], pool[j]] = [pool[j], pool[i]];
     }
-    T2_ORDER.forEach((id, index) => {
-      const item = pool[index];
-      T2_PRODUCTS[id].letter = item.letter;
-      T2_PRODUCTS[id].name_pl = item.name_pl;
-      T2_PRODUCTS[id].name_en = item.name_en;
-    });
+
+    let success = false;
+    let attempts = 0;
+    const w = T2_CONST.OUTSIDE_W;
+    const x = T2_CONST.X_SSNIP;
+
+    while (!success && attempts < 120) {
+      attempts++;
+      const targetK = 3 + Math.floor(Math.random() * 5);
+      const candidateProds = {};
+
+      for (let i = 0; i < 14; i++) {
+        const id = T2_ORDER[i];
+        const bb = T2_BAND_BASES[i];
+        const nameItem = pool[i];
+
+        let jx = bb.x;
+        let jy = bb.y;
+        let jq = bb.q;
+        let jm = bb.m;
+        let jeps = bb.eps;
+
+        if (i > 0) {
+          const dx = (Math.random() - 0.5) * 0.6;
+          const dy = (Math.random() - 0.5) * 0.6;
+          jx = Math.max(0.6, Math.min(9.1, bb.x + dx));
+          jy = Math.max(0.5, Math.min(8.1, bb.y + dy));
+          jq = Math.max(38, Math.min(85, Math.round(bb.q + (Math.random() - 0.5) * 14)));
+          jm = Math.max(0.12, Math.min(0.24, +(bb.m + (Math.random() - 0.5) * 0.03).toFixed(2)));
+          jeps = Math.max(2.4, +(bb.eps + (Math.random() - 0.5) * 0.6).toFixed(1));
+        }
+
+        candidateProds[id] = {
+          id,
+          letter: nameItem.letter,
+          name_pl: nameItem.name_pl,
+          name_en: nameItem.name_en,
+          x: +jx.toFixed(2),
+          y: +jy.toFixed(2),
+          q: jq,
+          m: jm,
+          eps: jeps,
+          desc_pl: nameItem.desc_pl,
+          desc_en: nameItem.desc_en
+        };
+      }
+
+      let overlaps = false;
+      for (let i = 0; i < 14; i++) {
+        for (let j = i + 1; j < 14; j++) {
+          const p1 = candidateProds[T2_ORDER[i]];
+          const p2 = candidateProds[T2_ORDER[j]];
+          const distSq = (p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2;
+          if (distSq < 1.05 * 1.05) {
+            overlaps = true;
+            break;
+          }
+        }
+        if (overlaps) break;
+      }
+      if (overlaps) continue;
+
+      T2_PRODUCTS = candidateProds;
+
+      let S = ['A'];
+      const path = ['A'];
+      let unambiguous = true;
+
+      for (let step = 0; step < 7; step++) {
+        const ranked = t2Engine.rankedCandidates(S, w);
+        if (ranked.length >= 2) {
+          const ratio = ranked[0].score / (ranked[1].score + 1e-6);
+          if (ratio < 1.05) {
+            unambiguous = false;
+            break;
+          }
+        }
+        const best = ranked[0].id;
+        S = S.concat(best);
+        path.push(best);
+      }
+      if (!unambiguous || path.length <= targetK) continue;
+
+      const S_prev = path.slice(0, targetK - 1);
+      const S_target = path.slice(0, targetK);
+
+      function getAlphaCrit(basket) {
+        let num = 0, den = 0;
+        basket.forEach(id => {
+          const p = T2_PRODUCTS[id];
+          const out = t2Engine.outShare(basket, id, w);
+          num += p.q;
+          den += p.q * (p.m + x) * p.eps * out;
+        });
+        return den > 0 ? (num / den) : 1;
+      }
+
+      const a_prev = getAlphaCrit(S_prev);
+      const a_target = getAlphaCrit(S_target);
+
+      if (a_target > a_prev) {
+        const targetAlpha = a_prev + (a_target - a_prev) * 0.55;
+        T2_ORDER.forEach(id => {
+          T2_PRODUCTS[id].eps = +(T2_PRODUCTS[id].eps * targetAlpha).toFixed(2);
+        });
+
+        const dp_prev = t2Engine.deltaProfit(S_prev, x, w);
+        const dp_target = t2Engine.deltaProfit(S_target, x, w);
+
+        if (dp_prev < -0.1 && dp_target > 0.1) {
+          let smallerOk = true;
+          for (let sLen = 1; sLen < targetK - 1; sLen++) {
+            if (t2Engine.deltaProfit(path.slice(0, sLen), x, w) >= -0.05) {
+              smallerOk = false;
+              break;
+            }
+          }
+          if (smallerOk) {
+            success = true;
+            break;
+          }
+        }
+      }
+    }
+
+    t2State = {
+      basket: ['A'],
+      history: [],
+      errors: 0,
+      hints: 0,
+      showDiv: t2State.showDiv,
+      ssnip: T2_CONST.X_SSNIP,
+      outsideW: T2_CONST.OUTSIDE_W,
+      solved: false,
+      clicks: 0,
+      stepErrorCount: 0,
+      eventMsg: null
+    };
+
+    const ssnipRange = document.getElementById('t2-range-ssnip');
+    const outsideRange = document.getElementById('t2-range-outside');
+    const ssnipVal = document.getElementById('t2-val-ssnip');
+    const outsideVal = document.getElementById('t2-val-outside');
+    if (ssnipRange) ssnipRange.value = 5;
+    if (ssnipVal) ssnipVal.textContent = '5%';
+    if (outsideRange) outsideRange.value = T2_CONST.OUTSIDE_W;
+    if (outsideVal) outsideVal.textContent = T2_CONST.OUTSIDE_W;
+
+    renderTask2();
   }
 
   const t2Engine = {
@@ -1170,67 +1636,870 @@
     }
   };
 
-  function selfTestTask2() {
-    const w = T2_CONST.OUTSIDE_W;
-    const x = T2_CONST.X_SSNIP;
-    let S = ['A'];
-    const remaining = T2_ORDER.filter(id => id !== 'A');
-    const path = [{ S: S.slice(), dp: t2Engine.deltaProfit(S, x, w) }];
-    while (remaining.length) {
-      const { id } = t2Engine.bestCandidate(S, w);
-      S = S.concat(id);
-      remaining.splice(remaining.indexOf(id), 1);
-      path.push({ S: S.slice(), dp: t2Engine.deltaProfit(S, x, w) });
-    }
-    console.log('selfTestTask2: OUTSIDE_W =', w);
-    console.log('Greedy path ΔΠ (5%):', path.map(p => `${p.S.join('')}=${p.dp.toFixed(2)}%`).join(' | '));
-  }
-
   let t2State = { basket: ['A'], history: [], errors: 0, hints: 0, showDiv: false, ssnip: T2_CONST.X_SSNIP, outsideW: T2_CONST.OUTSIDE_W, solved: false, clicks: 0, stepErrorCount: 0, eventMsg: null };
 
-  let t3Budget = 100;
-  const task3Targets = [
-    {
-      id: "greenhouse_rivals",
-      name_pl: "Przejęcie rywalizujących szklarni z kwiatami i roślinami doniczkowymi",
-      name_en: "Acquisition of rival greenhouse cut flowers & potted plant growers",
-      cost: 55,
-      bought: false,
-      impact_pl: "Neutralizuje substytucję podażową (ogrodnicy nie przestawią uprawy na róże) i przejmuje 45% odpływu popytu konsumentów.",
-      impact_en: "Neutralizes supply switching by competitors and captures 45% of consumer demand diversion.",
-      isRelevant: true
-    },
-    {
-      id: "ecommerce_florist",
-      name_pl: "Sieć kwiaciarni internetowych i dystrybucji kwiatów ciętych",
-      name_en: "Online florist marketplace & cold-chain distribution network",
-      cost: 30,
-      bought: false,
-      impact_pl: "Zapewnia wyłączność kanału sprzedaży detalicznej, zatrzymując 25% odpływu klientów do innych kwiatów.",
-      impact_en: "Secures retail distribution channels, capturing 25% of buyer diversion toward other bouquets.",
-      isRelevant: true
-    },
-    {
-      id: "forestry_nursery",
-      name_pl: "Szkółka leśna sadzonek sosen i dębów (inna branża)",
-      name_en: "Forestry nursery growing pine & oak tree saplings (unrelated industry)",
-      cost: 50,
-      bought: false,
-      impact_pl: "Brak wpływu na popyt i podaż róż. Nabywca bukietu róż nie kupi sadzonki sosny.",
-      impact_en: "No substitution impact. A flower bouquet buyer does not substitute with pine saplings.",
-      isRelevant: false
-    },
-    {
-      id: "plastic_pots",
-      name_pl: "Wytwórnia plastikowych doniczek i nawozów ogrodniczych",
-      name_en: "Plastic flower pot & horticultural fertilizer factory",
-      cost: 25,
-      bought: false,
-      impact_pl: "Rynek wertykalny, nie poziomy. Nie zatrzymuje odpływu klientów do innych kwiatów.",
-      impact_en: "Upstream supply input. Does not prevent consumer substitution toward other flowers.",
-      isRelevant: false
-    }
+  const T3_GRAPH_NODES = [
+    // Punkty lokalizacji podmiotów — Północ (kółka ze szkicu: 0..9)
+    { id: 0,  x: 80,  y: 72,  zone: 'NW', canSpawn: true },
+    { id: 1,  x: 195, y: 88,  zone: 'N',  canSpawn: true },
+    { id: 2,  x: 332, y: 106, zone: 'N',  canSpawn: true },
+    { id: 3,  x: 465, y: 82,  zone: 'NE', canSpawn: true },
+    { id: 4,  x: 590, y: 52,  zone: 'NE', canSpawn: true },
+    { id: 5,  x: 84,  y: 185, zone: 'W',  canSpawn: true },
+    { id: 6,  x: 175, y: 166, zone: 'W',  canSpawn: true },
+    { id: 7,  x: 256, y: 178, zone: 'C',  canSpawn: true },
+    { id: 8,  x: 405, y: 178, zone: 'C',  canSpawn: true },
+    { id: 9,  x: 532, y: 174, zone: 'E',  canSpawn: true },
+
+    // Przyczółki mostowe na pozycjach indeksów 10 i 11
+    { id: 10, x: 240, y: 222, zone: 'BRIDGE_W', isBridge: true },
+    { id: 11, x: 492, y: 242, zone: 'BRIDGE_E', isBridge: true },
+
+    // Punkty lokalizacji podmiotów — Południe (kółka ze szkicu: 12..20)
+    { id: 12, x: 105, y: 298, zone: 'SW', canSpawn: true },
+    { id: 13, x: 240, y: 298, zone: 'C',  canSpawn: true },
+    { id: 14, x: 372, y: 272, zone: 'C',  canSpawn: true },
+    { id: 15, x: 484, y: 292, zone: 'SE', canSpawn: true },
+    { id: 16, x: 602, y: 262, zone: 'E',  canSpawn: true },
+    { id: 17, x: 140, y: 422, zone: 'SW', canSpawn: true },
+    { id: 18, x: 286, y: 414, zone: 'S',  canSpawn: true },
+    { id: 19, x: 416, y: 404, zone: 'S',  canSpawn: true },
+    { id: 20, x: 568, y: 416, zone: 'SE', canSpawn: true },
+
+    // Węzły drogowe / skrzyżowania T / załamania dróg (indeksy 21..33)
+    { id: 21, x: 226, y: 134, zone: 'J_N1', isJunction: true },
+    { id: 22, x: 338, y: 178, zone: 'J_N2', isJunction: true },
+    { id: 23, x: 468, y: 176, zone: 'J_N3', isJunction: true },
+    { id: 24, x: 608, y: 126, zone: 'J_NE', isJunction: true },
+    { id: 25, x: 458, y: 212, zone: 'J_NB', isJunction: true },
+    { id: 26, x: 240, y: 256, zone: 'J_SB', isJunction: true },
+    { id: 27, x: 270, y: 252, zone: 'J_SB2', isJunction: true },
+    { id: 28, x: 175, y: 298, zone: 'J_SW', isJunction: true },
+    { id: 29, x: 263, y: 356, zone: 'J_SC1', isJunction: true },
+    { id: 30, x: 312, y: 318, zone: 'J_SC2', isJunction: true },
+    { id: 31, x: 385, y: 353, zone: 'J_SC3', isJunction: true },
+    { id: 32, x: 411, y: 337, zone: 'J_SC4', isJunction: true },
+    { id: 33, x: 476, y: 344, zone: 'J_SE', isJunction: true }
   ];
+
+  // Krawędzie sieci drogowej odpowiadające rysunkowi
+  const T3_GRAPH_EDGES = [
+    // Północna sieć dróg
+    [0, 1, 'road'], [1, 2, 'road'], [2, 3, 'road'], [3, 4, 'road'],
+    [0, 5, 'road'], [5, 6, 'road'], [6, 21, 'road'],
+    [1, 21, 'road'], [21, 7, 'road'],
+    [7, 22, 'road'], [22, 8, 'road'], [2, 22, 'road'],
+    [8, 23, 'road'], [23, 9, 'road'], [3, 23, 'road'],
+    [4, 24, 'road'], [24, 9, 'road'],
+    // Przeprawy przez rzekę
+    [7, 10, 'bridge'], [10, 26, 'bridge'], [26, 13, 'road'],
+    [8, 25, 'road'], [9, 25, 'road'], [25, 11, 'bridge'], [11, 15, 'bridge'],
+    // Południowa sieć dróg
+    [12, 28, 'road'], [28, 13, 'road'], [28, 17, 'road'],
+    [17, 18, 'road'],
+    [13, 29, 'road'], [29, 18, 'road'],
+    [26, 27, 'road'], [27, 30, 'road'],
+    [29, 30, 'road'], [30, 14, 'road'], [14, 32, 'road'],
+    [18, 31, 'road'], [31, 32, 'road'], [32, 15, 'road'],
+    [31, 19, 'road'], [19, 20, 'road'],
+    [15, 16, 'road'], [16, 20, 'road'],
+    [15, 33, 'road'], [33, 20, 'road']
+  ];
+
+  let t3DistMatrix = [];
+  let t3DirectEdgeTime = [];
+  let t3State = {
+    mode: 'buyer', // 'buyer' | 'catchment' | 'competition'
+    maxTime: 20,
+    selectedSeller: 'S1',
+    selectedBuyer: 'B1',
+    sellers: [],
+    buyers: [],
+    challengeType: 0, // 0: suppliers for buyer, 1: competitors for seller, 2: captive buyers for seller
+    challengeTargetId: 'B1',
+    challengeSelected: [],
+    challengeSolvedCount: 0
+  };
+
+  function initTask3Graph() {
+    const n = T3_GRAPH_NODES.length;
+    t3DistMatrix = Array.from({ length: n }, () => Array(n).fill(Infinity));
+    t3DirectEdgeTime = Array.from({ length: n }, () => Array(n).fill(Infinity));
+    for (let i = 0; i < n; i++) {
+      t3DistMatrix[i][i] = 0;
+      t3DirectEdgeTime[i][i] = 0;
+    }
+
+    const UNIFORM_ROAD_FACTOR = 0.105; // Jednolita kategoria prędkości dla wszystkich dróg
+    T3_GRAPH_EDGES.forEach(([u, v]) => {
+      const p1 = T3_GRAPH_NODES[u];
+      const p2 = T3_GRAPH_NODES[v];
+      const pxDist = Math.hypot(p1.x - p2.x, p1.y - p2.y);
+      const timeMin = +(pxDist * UNIFORM_ROAD_FACTOR).toFixed(1);
+      t3DistMatrix[u][v] = timeMin;
+      t3DistMatrix[v][u] = timeMin;
+      t3DirectEdgeTime[u][v] = timeMin;
+      t3DirectEdgeTime[v][u] = timeMin;
+    });
+
+    for (let k = 0; k < n; k++) {
+      for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++) {
+          if (t3DistMatrix[i][k] + t3DistMatrix[k][j] < t3DistMatrix[i][j]) {
+            t3DistMatrix[i][j] = +(t3DistMatrix[i][k] + t3DistMatrix[k][j]).toFixed(1);
+          }
+        }
+      }
+    }
+  }
+
+  function t3TimeBetweenNodes(u, v) {
+    return t3DistMatrix[u][v];
+  }
+
+  function generateNewTask3Map() {
+    if (t3DistMatrix.length === 0) initTask3Graph();
+
+    // Wybierz 4 dobrze rozdzielone punkty dla wytwórni S1..S4 (2 na północy, 2 na południu)
+    const northPool = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const southPool = [12, 13, 14, 15, 16, 17, 18, 19, 20];
+
+    const shuffledNorth = shuffleArray(northPool);
+    const shuffledSouth = shuffleArray(southPool);
+
+    const sNodes = [shuffledNorth[0]];
+    for (let idx of shuffledNorth.slice(1)) {
+      if (t3TimeBetweenNodes(sNodes[0], idx) >= 14) {
+        sNodes.push(idx);
+        break;
+      }
+    }
+    if (sNodes.length < 2) sNodes.push(shuffledNorth[1]);
+
+    sNodes.push(shuffledSouth[0]);
+    for (let idx of shuffledSouth.slice(1)) {
+      if (t3TimeBetweenNodes(sNodes[2], idx) >= 14) {
+        sNodes.push(idx);
+        break;
+      }
+    }
+    if (sNodes.length < 4) sNodes.push(shuffledSouth[1]);
+
+    const sellerNamesPl = ['Beton-Północ', 'Węzeł Centralny', 'Krusz-Bet Zachód', 'Betoniarnia Dolina'];
+    const sellerNamesEn = ['NorthMix Concrete', 'Central Batching', 'West Valley Concrete', 'Riverbank Ready-Mix'];
+
+    t3State.sellers = sNodes.map((nodeId, i) => ({
+      id: `S${i + 1}`,
+      nodeId,
+      name_pl: sellerNamesPl[i],
+      name_en: sellerNamesEn[i]
+    }));
+
+    // Pozostałe punkty podmiotowe (kółka ze szkicu) dla 9 placów budowy B1..B9
+    const usedNodes = new Set(sNodes);
+    const candidateBuyerNodes = T3_GRAPH_NODES
+      .filter(n => n.canSpawn && !usedNodes.has(n.id))
+      .map(n => n.id);
+
+    const chosenBuyerNodes = shuffleArray(candidateBuyerNodes).slice(0, 9).sort((a, b) => a - b);
+    const volumes = [35, 45, 50, 60, 65, 40, 55, 70, 45];
+
+    t3State.buyers = chosenBuyerNodes.map((nodeId, i) => ({
+      id: `B${i + 1}`,
+      nodeId,
+      vol: volumes[i % volumes.length]
+    }));
+
+    t3State.selectedSeller = 'S1';
+    t3State.selectedBuyer = 'B1';
+    setupTask3Challenge(0);
+    renderTask3();
+  }
+
+  function computeRoadIsochroneElements(originNodeId, thresholdMin, fill, opacity, stroke, strokeWidth, dashArray) {
+    const OFFROAD_SPEED_PX_PER_MIN = 2.05; // Prędkość rozlewania się zasięgu na boki od dróg (px / min)
+    const capsules = [];
+    const circles = [];
+
+    function addCapsulePath(x1, y1, r1, x2, y2, r2) {
+      const dx = x2 - x1;
+      const dy = y2 - y1;
+      const d = Math.hypot(dx, dy);
+      if (d < 0.5) {
+        const r = Math.max(r1, r2);
+        if (r > 0.5) circles.push({ x: x1, y: y1, r });
+        return;
+      }
+      if (r1 >= r2 + d) {
+        circles.push({ x: x1, y: y1, r: r1 });
+        return;
+      }
+      if (r2 >= r1 + d) {
+        circles.push({ x: x2, y: y2, r: r2 });
+        return;
+      }
+
+      const cosAlpha = Math.max(-1, Math.min(1, (r1 - r2) / d));
+      const alpha = Math.acos(cosAlpha);
+      const baseAngle = Math.atan2(dy, dx);
+
+      const theta1 = baseAngle - alpha;
+      const theta2 = baseAngle + alpha;
+
+      const t1x1 = +(x1 + r1 * Math.cos(theta1)).toFixed(1);
+      const t1y1 = +(y1 + r1 * Math.sin(theta1)).toFixed(1);
+      const t2x1 = +(x2 + r2 * Math.cos(theta1)).toFixed(1);
+      const t2y1 = +(y2 + r2 * Math.sin(theta1)).toFixed(1);
+
+      const t2x2 = +(x2 + r2 * Math.cos(theta2)).toFixed(1);
+      const t2y2 = +(y2 + r2 * Math.sin(theta2)).toFixed(1);
+      const t1x2 = +(x1 + r1 * Math.cos(theta2)).toFixed(1);
+      const t1y2 = +(y1 + r1 * Math.sin(theta2)).toFixed(1);
+
+      const largeArc1 = alpha < Math.PI / 2 ? 1 : 0;
+      const largeArc2 = alpha > Math.PI / 2 ? 1 : 0;
+
+      const pathData = `M ${t1x1} ${t1y1} L ${t2x1} ${t2y1} A ${r2.toFixed(1)} ${r2.toFixed(1)} 0 ${largeArc2} 1 ${t2x2} ${t2y2} L ${t1x2} ${t1y2} A ${r1.toFixed(1)} ${r1.toFixed(1)} 0 ${largeArc1} 1 ${t1x1} ${t1y1} Z`;
+      capsules.push(pathData);
+    }
+
+    T3_GRAPH_NODES.forEach(n => {
+      const d = t3TimeBetweenNodes(originNodeId, n.id);
+      if (d <= thresholdMin) {
+        const r = Math.max(4, (thresholdMin - d) * OFFROAD_SPEED_PX_PER_MIN);
+        circles.push({ x: n.x, y: n.y, r });
+      }
+    });
+
+    T3_GRAPH_EDGES.forEach(([u, v]) => {
+      const du = t3TimeBetweenNodes(originNodeId, u);
+      const dv = t3TimeBetweenNodes(originNodeId, v);
+      const edgeTime = t3DirectEdgeTime[u][v];
+      const pu = T3_GRAPH_NODES[u];
+      const pv = T3_GRAPH_NODES[v];
+
+      if (du > thresholdMin && dv > thresholdMin) return;
+
+      const ru = Math.max(0, (thresholdMin - du) * OFFROAD_SPEED_PX_PER_MIN);
+      const rv = Math.max(0, (thresholdMin - dv) * OFFROAD_SPEED_PX_PER_MIN);
+      const tipRadius = 3.5;
+
+      if (du <= thresholdMin && dv <= thresholdMin) {
+        const tMeet = (edgeTime + dv - du) / 2;
+        if (tMeet <= 0 || tMeet >= edgeTime) {
+          addCapsulePath(pu.x, pu.y, Math.max(tipRadius, ru), pv.x, pv.y, Math.max(tipRadius, rv));
+        } else {
+          const frac = tMeet / edgeTime;
+          const mx = pu.x + (pv.x - pu.x) * frac;
+          const my = pu.y + (pv.y - pu.y) * frac;
+          const timeAtMeet = du + tMeet;
+
+          if (timeAtMeet <= thresholdMin) {
+            const rMeet = Math.max(tipRadius, (thresholdMin - timeAtMeet) * OFFROAD_SPEED_PX_PER_MIN);
+            addCapsulePath(pu.x, pu.y, Math.max(tipRadius, ru), mx, my, rMeet);
+            addCapsulePath(pv.x, pv.y, Math.max(tipRadius, rv), mx, my, rMeet);
+          } else {
+            const fu = Math.min(1, Math.max(0, (thresholdMin - du) / edgeTime));
+            const fv = Math.min(1, Math.max(0, (thresholdMin - dv) / edgeTime));
+            addCapsulePath(
+              pu.x, pu.y, Math.max(tipRadius, ru),
+              pu.x + (pv.x - pu.x) * fu, pu.y + (pv.y - pu.y) * fu, tipRadius
+            );
+            addCapsulePath(
+              pv.x, pv.y, Math.max(tipRadius, rv),
+              pv.x + (pu.x - pv.x) * fv, pv.y + (pu.y - pv.y) * fv, tipRadius
+            );
+          }
+        }
+      } else if (du <= thresholdMin && dv > thresholdMin) {
+        const fu = Math.min(1, Math.max(0, (thresholdMin - du) / edgeTime));
+        addCapsulePath(
+          pu.x, pu.y, Math.max(tipRadius, ru),
+          pu.x + (pv.x - pu.x) * fu, pu.y + (pv.y - pu.y) * fu, tipRadius
+        );
+      } else if (dv <= thresholdMin && du > thresholdMin) {
+        const fv = Math.min(1, Math.max(0, (thresholdMin - dv) / edgeTime));
+        addCapsulePath(
+          pv.x, pv.y, Math.max(tipRadius, rv),
+          pv.x + (pu.x - pv.x) * fv, pv.y + (pu.y - pv.y) * fv, tipRadius
+        );
+      }
+    });
+
+    const colorUsed = fill !== 'none' ? fill : stroke;
+    let baseShapes = '';
+    circles.forEach(c => {
+      baseShapes += `<circle cx="${c.x.toFixed(1)}" cy="${c.y.toFixed(1)}" r="${c.r.toFixed(1)}" fill="${colorUsed}" />`;
+    });
+    capsules.forEach(d => {
+      baseShapes += `<path d="${d}" fill="${colorUsed}" />`;
+    });
+
+    let outlineShapes = '';
+    if (stroke && stroke !== 'none') {
+      const uid = `iso-cone-${originNodeId}-${thresholdMin}-${Math.random().toString(36).slice(2, 7)}`;
+      let maskInner = '';
+      circles.forEach(c => {
+        maskInner += `<circle cx="${c.x.toFixed(1)}" cy="${c.y.toFixed(1)}" r="${c.r.toFixed(1)}" fill="black" stroke="black" stroke-width="1" />`;
+      });
+      capsules.forEach(d => {
+        maskInner += `<path d="${d}" fill="black" stroke="black" stroke-width="1" stroke-linejoin="round" />`;
+      });
+
+      let outerShapes = '';
+      circles.forEach(c => {
+        outerShapes += `<circle cx="${c.x.toFixed(1)}" cy="${c.y.toFixed(1)}" r="${c.r.toFixed(1)}" fill="${stroke}" stroke="${stroke}" stroke-width="3.5" />`;
+      });
+      capsules.forEach(d => {
+        outerShapes += `<path d="${d}" fill="${stroke}" stroke="${stroke}" stroke-width="3.5" stroke-linejoin="round" />`;
+      });
+
+      outlineShapes = `
+        <mask id="${uid}">
+          <rect x="0" y="0" width="680" height="480" fill="white" />
+          ${maskInner}
+        </mask>
+        <g mask="url(#${uid})" opacity="0.88">
+          ${outerShapes}
+        </g>
+      `;
+    }
+
+    return `
+      <g>
+        ${fill !== 'none' ? `<g opacity="${opacity}">${baseShapes}</g>` : ''}
+        ${outlineShapes}
+      </g>
+    `;
+  }
+
+  function setTask3Mode(mode) {
+    t3State.mode = mode;
+    ['buyer', 'catchment', 'competition'].forEach(m => {
+      const btn = document.getElementById(`t3-mode-${m}`);
+      if (!btn) return;
+      if (m === mode) {
+        btn.className = "w-full text-left p-2.5 rounded-xl border-2 transition flex items-start gap-2.5 bg-indigo-50/90 border-indigo-500 text-indigo-950 font-bold shadow-xs";
+      } else {
+        btn.className = "w-full text-left p-2.5 rounded-xl border transition flex items-start gap-2.5 bg-white hover:bg-slate-100 border-slate-200 text-slate-700 font-semibold";
+      }
+    });
+    renderTask3();
+  }
+
+  function onT3TimeChange() {
+    const val = parseInt(document.getElementById('t3-range-time').value, 10);
+    t3State.maxTime = val;
+    document.getElementById('t3-val-time').textContent = `${val} min`;
+    document.getElementById('t3-map-substatus').innerHTML = `T<sub>max</sub> = ${val} min`;
+    renderTask3();
+  }
+
+  function onT3EntityClick(entityId) {
+    if (entityId.startsWith('B')) {
+      t3State.selectedBuyer = entityId;
+      if (t3State.mode !== 'buyer') {
+        setTask3Mode('buyer');
+        return;
+      }
+    } else if (entityId.startsWith('S')) {
+      t3State.selectedSeller = entityId;
+      if (t3State.mode === 'buyer') {
+        setTask3Mode('catchment');
+        return;
+      }
+    }
+    renderTask3();
+  }
+
+  function getT3BuyerSuppliers(buyerId, maxT) {
+    const buyer = t3State.buyers.find(b => b.id === buyerId);
+    if (!buyer) return [];
+    return t3State.sellers.filter(s => t3TimeBetweenNodes(buyer.nodeId, s.nodeId) <= maxT);
+  }
+
+  function getT3SellerBuyers(sellerId, maxT) {
+    const seller = t3State.sellers.find(s => s.id === sellerId);
+    if (!seller) return [];
+    return t3State.buyers.filter(b => t3TimeBetweenNodes(seller.nodeId, b.nodeId) <= maxT);
+  }
+
+  function getT3SellerCompetitors(sellerId, maxT) {
+    const myBuyers = getT3SellerBuyers(sellerId, maxT);
+    const compSet = new Set();
+    myBuyers.forEach(b => {
+      const sups = getT3BuyerSuppliers(b.id, maxT);
+      sups.forEach(s => {
+        if (s.id !== sellerId) compSet.add(s.id);
+      });
+    });
+    return t3State.sellers.filter(s => compSet.has(s.id));
+  }
+
+  function setupTask3Challenge(typeIndex) {
+    if (!t3State.sellers.length || !t3State.buyers.length) return;
+    t3State.challengeType = typeIndex % 3;
+    t3State.challengeSelected = [];
+    const fb = document.getElementById('t3-chal-feedback');
+    if (fb) fb.classList.add('hidden');
+
+    if (t3State.challengeType === 0) {
+      const b = t3State.buyers[Math.floor(Math.random() * t3State.buyers.length)];
+      t3State.challengeTargetId = b.id;
+      t3State.selectedBuyer = b.id;
+    } else {
+      const s = t3State.sellers[Math.floor(Math.random() * t3State.sellers.length)];
+      t3State.challengeTargetId = s.id;
+      t3State.selectedSeller = s.id;
+    }
+    renderTask3ChallengeUI();
+  }
+
+  function nextTask3Challenge() {
+    setupTask3Challenge((t3State.challengeType + 1) % 3);
+    renderTask3();
+  }
+
+  function toggleTask3ChallengeOption(optId) {
+    const idx = t3State.challengeSelected.indexOf(optId);
+    if (idx >= 0) t3State.challengeSelected.splice(idx, 1);
+    else t3State.challengeSelected.push(optId);
+    renderTask3ChallengeUI();
+  }
+
+  function renderTask3ChallengeUI() {
+    const isEn = currentLang === 'en';
+    const qEl = document.getElementById('t3-chal-question');
+    const optContainer = document.getElementById('t3-chal-options');
+    const scoreEl = document.getElementById('t3-chal-score');
+    if (!qEl || !optContainer) return;
+
+    if (scoreEl) scoreEl.textContent = `${t3State.challengeSolvedCount} / 3`;
+
+    const T = t3State.maxTime;
+    const target = t3State.challengeTargetId;
+    let optionsList = [];
+
+    if (t3State.challengeType === 0) {
+      qEl.innerHTML = isEn
+        ? `Question 1 (Buyer perspective): Which concrete plants are inside the geographic market of construction site <strong>${target}</strong> at T<sub>max</sub> = ${T} min?`
+        : `Pytanie 1 (Perspektywa nabywcy): Które betoniarnie tworzą rynek geograficzny dla placu budowy <strong>${target}</strong> przy limicie T<sub>max</sub> = ${T} min?`;
+      optionsList = t3State.sellers.map(s => s.id);
+    } else if (t3State.challengeType === 1) {
+      qEl.innerHTML = isEn
+        ? `Question 2 (Competitor overlap): With which other plants does <strong>${target}</strong> compete for at least one shared buyer at T<sub>max</sub> = ${T} min?`
+        : `Pytanie 2 (Obszar konkurencji): Z którymi wytwórniami konkuruje betoniarnia <strong>${target}</strong> o co najmniej jednego wspólnego klienta przy T<sub>max</sub> = ${T} min?`;
+      optionsList = t3State.sellers.filter(s => s.id !== target).map(s => s.id);
+    } else {
+      qEl.innerHTML = isEn
+        ? `Question 3 (Captive demand): Which construction sites are served <strong>exclusively</strong> by plant <strong>${target}</strong> (no rival plant within ${T} min)?`
+        : `Pytanie 3 (Klienci wyłączni): Które place budowy znajdują się w zasięgu <strong>wyłącznie</strong> betoniarni <strong>${target}</strong> (brak rywali w czasie ${T} min)?`;
+      optionsList = t3State.buyers.map(b => b.id);
+    }
+
+    optContainer.innerHTML = '';
+    optionsList.concat(['NONE']).forEach(optId => {
+      const isSelected = t3State.challengeSelected.includes(optId);
+      const label = optId === 'NONE' ? (isEn ? 'None' : 'Żaden') : optId;
+      const btn = document.createElement('button');
+      btn.className = `px-2.5 py-1 rounded-lg font-mono text-xs font-bold border transition ${
+        isSelected
+          ? 'bg-indigo-600 text-white border-indigo-700 shadow-xs'
+          : 'bg-white hover:bg-amber-100 text-slate-700 border-slate-300'
+      }`;
+      btn.textContent = label;
+      btn.onclick = () => {
+        if (optId === 'NONE') {
+          t3State.challengeSelected = isSelected ? [] : ['NONE'];
+        } else {
+          t3State.challengeSelected = t3State.challengeSelected.filter(x => x !== 'NONE');
+          toggleTask3ChallengeOption(optId);
+          return;
+        }
+        renderTask3ChallengeUI();
+      };
+      optContainer.appendChild(btn);
+    });
+  }
+
+  function checkTask3Challenge() {
+    const isEn = currentLang === 'en';
+    const T = t3State.maxTime;
+    const target = t3State.challengeTargetId;
+    let correctIds = [];
+
+    if (t3State.challengeType === 0) {
+      correctIds = getT3BuyerSuppliers(target, T).map(s => s.id);
+    } else if (t3State.challengeType === 1) {
+      correctIds = getT3SellerCompetitors(target, T).map(s => s.id);
+    } else {
+      const myBuyers = getT3SellerBuyers(target, T);
+      correctIds = myBuyers
+        .filter(b => getT3BuyerSuppliers(b.id, T).length === 1)
+        .map(b => b.id);
+    }
+
+    const expected = correctIds.length === 0 ? ['NONE'] : correctIds.sort();
+    const userSel = t3State.challengeSelected.slice().sort();
+    const isOk = expected.length === userSel.length && expected.every((v, i) => v === userSel[i]);
+
+    const fb = document.getElementById('t3-chal-feedback');
+    fb.classList.remove('hidden');
+
+    if (isOk) {
+      if (t3State.challengeSolvedCount < 3) t3State.challengeSolvedCount++;
+      fb.className = "p-2.5 rounded-lg text-[11px] leading-relaxed border bg-emerald-50 border-emerald-300 text-emerald-950";
+      fb.innerHTML = `<strong>${isEn ? 'Correct answer.' : 'Poprawna odpowiedź.'}</strong> ${
+        isEn
+          ? `Expected set: <strong>${expected.join(', ')}</strong>.`
+          : `Prawidłowy zbiór: <strong>${expected.join(', ')}</strong>.`
+      }`;
+    } else {
+      fb.className = "p-2.5 rounded-lg text-[11px] leading-relaxed border bg-rose-50 border-rose-300 text-rose-950";
+      fb.innerHTML = `<strong>${isEn ? 'Not quite.' : 'Niezupełnie.'}</strong> ${
+        isEn
+          ? `At T<sub>max</sub> = ${T} min, the correct answer for ${target} is: <strong>${expected.join(', ')}</strong>. Click ${target} on the map and switch perspective to verify.`
+          : `Przy T<sub>max</sub> = ${T} min prawidłowa odpowiedź dla punktu ${target} to: <strong>${expected.join(', ')}</strong>. Kliknij ${target} na mapie i przełącz perspektywę, aby to zweryfikować.`
+      }`;
+    }
+    const scoreEl = document.getElementById('t3-chal-score');
+    if (scoreEl) scoreEl.textContent = `${t3State.challengeSolvedCount} / 3`;
+  }
+
+  function renderTask3() {
+    if (!t3State.sellers.length) generateNewTask3Map();
+    const isEn = currentLang === 'en';
+    const svg = document.getElementById('t3-geo-svg');
+    if (!svg) return;
+
+    const T = t3State.maxTime;
+    const mode = t3State.mode;
+
+    renderTask3ChallengeUI();
+
+    const zonesPanel = document.getElementById('t3-zones-demand-panel');
+    const zonesList = document.getElementById('t3-zones-demand-list');
+    if (zonesPanel && zonesList) {
+      if (mode === 'catchment') {
+        zonesPanel.classList.remove('hidden');
+        const seller = t3State.sellers.find(s => s.id === t3State.selectedSeller) || t3State.sellers[0];
+        const vol12 = getT3SellerBuyers(seller.id, 12).reduce((acc, b) => acc + b.vol, 0);
+        const vol20 = getT3SellerBuyers(seller.id, 20).reduce((acc, b) => acc + b.vol, 0);
+        const vol30 = getT3SellerBuyers(seller.id, 30).reduce((acc, b) => acc + b.vol, 0);
+        const unit = isEn ? 'k m³' : 'tys. m³';
+        zonesList.innerHTML = `
+          <div class="p-2 rounded-lg bg-teal-600/15 border border-teal-500/30">
+            <div class="text-[10px] font-bold text-teal-900">≤ 12 min</div>
+            <div class="font-mono font-bold text-xs text-teal-950 mt-0.5">${vol12} ${unit}</div>
+          </div>
+          <div class="p-2 rounded-lg bg-teal-400/15 border border-teal-400/40">
+            <div class="text-[10px] font-bold text-teal-800">≤ 20 min</div>
+            <div class="font-mono font-bold text-xs text-teal-950 mt-0.5">${vol20} ${unit}</div>
+          </div>
+          <div class="p-2 rounded-lg bg-teal-200/30 border border-teal-300/60">
+            <div class="text-[10px] font-bold text-teal-700">≤ 30 min</div>
+            <div class="font-mono font-bold text-xs text-teal-950 mt-0.5">${vol30} ${unit}</div>
+          </div>
+        `;
+      } else {
+        zonesPanel.classList.add('hidden');
+      }
+    }
+
+    // 1. Rzeka dopasowana do przebiegu ze szkicu
+    const riverHtml = `
+      <path d="M 10,224 Q 140,212 242,222 T 498,244 T 670,226" fill="none" stroke="#bae6fd" stroke-width="14" stroke-linecap="round" />
+      <path d="M 10,224 Q 140,212 242,222 T 498,244 T 670,226" fill="none" stroke="#7dd3fc" stroke-width="2" stroke-dasharray="6,6" />
+    `;
+
+    // 1.5. Dekoracyjne tło: schematyczne rysunki domków i drzew w najniższej warstwie
+    const backgroundDecorHtml = `
+      <g opacity="0.35">
+        <!-- Grupy drzew (zielone ikony lasów/parków w wolnych przestrzeniach) -->
+        <g fill="#86efac" stroke="#16a34a" stroke-width="1">
+          <!-- Północny zachód -->
+          <circle cx="140" cy="120" r="12" />
+          <circle cx="125" cy="130" r="9" />
+          <circle cx="155" cy="128" r="10" />
+          
+          <!-- Północny wschód -->
+          <circle cx="530" cy="95" r="14" />
+          <circle cx="515" cy="105" r="10" />
+          <circle cx="548" cy="102" r="11" />
+
+          <!-- Południowy zachód -->
+          <circle cx="180" cy="350" r="13" />
+          <circle cx="165" cy="362" r="9" />
+
+          <!-- Południowy wschód -->
+          <circle cx="500" cy="380" r="15" />
+          <circle cx="482" cy="390" r="10" />
+          <circle cx="518" cy="388" r="11" />
+        </g>
+
+        <!-- Schematyczne domki / osiedla w wolnych polach między drogami -->
+        <!-- Dom wolnostojący (dach trójkątny + kwadrat) -->
+        <g stroke="#cbd5e1" stroke-width="1.2" fill="#f1f5f9">
+          <!-- Dom 1 (północny środek) -->
+          <rect x="350" y="65" width="22" height="18" rx="2" />
+          <polygon points="348,65 374,65 361,50" />
+
+          <!-- Dom 2 (północny wschód) -->
+          <rect x="400" y="120" width="18" height="15" rx="2" />
+          <polygon points="398,120 420,120 409,108" />
+
+          <!-- Dom 3 (południowy środek) -->
+          <rect x="330" y="340" width="20" height="16" rx="2" />
+          <polygon points="328,340 352,340 340,326" />
+
+          <!-- Dom 4 (południowy zachód) -->
+          <rect x="180" y="245" width="20" height="16" rx="2" />
+          <polygon points="178,245 202,245 190,232" />
+
+          <!-- Bloki / budynki wielorodzinne (wyższe prostokąty z płaskim dachem) -->
+          <rect x="280" y="115" width="14" height="28" rx="1" />
+          <rect x="530" y="180" width="16" height="30" rx="1" />
+          <rect x="210" y="380" width="15" height="26" rx="1" />
+        </g>
+      </g>
+    `;
+
+    // 2. Isochrone corridors along roads depending on active mode
+    let isochroneHtml = '';
+    let connectionsHtml = '';
+
+    if (mode === 'buyer') {
+      const buyer = t3State.buyers.find(b => b.id === t3State.selectedBuyer) || t3State.buyers[0];
+      const bNode = T3_GRAPH_NODES[buyer.nodeId];
+      isochroneHtml += computeRoadIsochroneElements(buyer.nodeId, T, '#4f46e5', 0.18, '#4f46e5', 2, '5,3');
+
+      const reachingSellers = getT3BuyerSuppliers(buyer.id, T);
+      reachingSellers.forEach(s => {
+        const sNode = T3_GRAPH_NODES[s.nodeId];
+        const tVal = t3TimeBetweenNodes(buyer.nodeId, s.nodeId);
+        const mx = (bNode.x + sNode.x) / 2;
+        const my = (bNode.y + sNode.y) / 2;
+        connectionsHtml += `
+          <line x1="${bNode.x}" y1="${bNode.y}" x2="${sNode.x}" y2="${sNode.y}" stroke="#4f46e5" stroke-width="2.2" />
+          <rect x="${mx - 18}" y="${my - 7.5}" width="36" height="15" rx="4" fill="#ffffff" stroke="#6366f1" stroke-width="1.2" />
+          <text x="${mx}" y="${my + 3}" font-size="8.5" font-weight="800" fill="#4338ca" text-anchor="middle">${tVal.toFixed(0)}m</text>
+        `;
+      });
+    } else if (mode === 'catchment') {
+      const seller = t3State.sellers.find(s => s.id === t3State.selectedSeller) || t3State.sellers[0];
+      const bands = [
+        { t: 30, fill: '#99f6e4', op: 0.36 },
+        { t: 20, fill: '#2dd4bf', op: 0.34 },
+        { t: 12, fill: '#0d9488', op: 0.36 }
+      ];
+      bands.forEach(b => {
+        isochroneHtml += computeRoadIsochroneElements(seller.nodeId, b.t, b.fill, b.op, 'none', 0, '');
+      });
+      isochroneHtml += computeRoadIsochroneElements(seller.nodeId, T, 'none', 0, '#0f766e', 2, '');
+    } else if (mode === 'competition') {
+      const seller = t3State.sellers.find(s => s.id === t3State.selectedSeller) || t3State.sellers[0];
+      const comps = getT3SellerCompetitors(seller.id, T);
+
+      comps.forEach(c => {
+        isochroneHtml += computeRoadIsochroneElements(c.nodeId, T, '#f59e0b', 0.16, '#d97706', 1.5, '');
+      });
+
+      isochroneHtml += computeRoadIsochroneElements(seller.nodeId, T, '#0d9488', 0.24, '#0f766e', 2, '');
+
+      const myBuyers = getT3SellerBuyers(seller.id, T);
+      myBuyers.forEach(b => {
+        const sups = getT3BuyerSuppliers(b.id, T);
+        if (sups.length >= 2) {
+          const bNode = T3_GRAPH_NODES[b.nodeId];
+          sups.forEach(s => {
+            const sNode = T3_GRAPH_NODES[s.nodeId];
+            const isPrimary = s.id === seller.id;
+            connectionsHtml += `
+              <line x1="${bNode.x}" y1="${bNode.y}" x2="${sNode.x}" y2="${sNode.y}" stroke="${isPrimary ? '#0f766e' : '#d97706'}" stroke-width="${isPrimary ? '2.2' : '1.6'}" stroke-dasharray="${isPrimary ? 'none' : '4,2'}" />
+            `;
+          });
+        }
+      });
+    }
+
+    // 3. Road network lines (jednolity wygląd ulicy z linią przerywaną pośrodku)
+    let roadsBaseHtml = '';
+    let roadsDashHtml = '';
+    T3_GRAPH_EDGES.forEach(([u, v]) => {
+      const p1 = T3_GRAPH_NODES[u];
+      const p2 = T3_GRAPH_NODES[v];
+      roadsBaseHtml += `
+        <line x1="${p1.x}" y1="${p1.y}" x2="${p2.x}" y2="${p2.y}" stroke="#475569" stroke-width="5.5" stroke-linecap="round" />
+      `;
+      roadsDashHtml += `
+        <line x1="${p1.x}" y1="${p1.y}" x2="${p2.x}" y2="${p2.y}" stroke="#f8fafc" stroke-width="1.6" stroke-dasharray="4,3" stroke-linecap="round" />
+      `;
+    });
+    const roadsHtml = `${roadsBaseHtml}${roadsDashHtml}`;
+
+    // 4. Buyers B1..B9 (powiększone okręgi i czcionka o 1 pkt)
+    let buyersHtml = '';
+    const activeSellerBuyers = mode !== 'buyer'
+      ? new Set(getT3SellerBuyers(t3State.selectedSeller, T).map(b => b.id))
+      : new Set();
+
+    t3State.buyers.forEach(b => {
+      const n = T3_GRAPH_NODES[b.nodeId];
+      const isSelected = (mode === 'buyer' && b.id === t3State.selectedBuyer);
+      const supsInT = getT3BuyerSuppliers(b.id, T);
+      const isInCatchment = activeSellerBuyers.has(b.id);
+      const isContested = isInCatchment && supsInT.length >= 2;
+
+      let fill = '#6366f1';
+      let stroke = '#ffffff';
+      let r = 9.5;
+
+      if (isSelected) {
+        fill = '#4f46e5';
+        stroke = '#fde047';
+        r = 12.5;
+      } else if (mode === 'competition' && isContested) {
+        fill = '#d97706';
+        r = 11;
+      } else if (mode !== 'buyer' && isInCatchment) {
+        fill = '#0d9488';
+        r = 10.5;
+      } else if (mode !== 'buyer' && !isInCatchment) {
+        fill = '#94a3b8';
+      }
+
+      buyersHtml += `
+        <g class="cursor-pointer" onclick="onT3EntityClick('${b.id}')">
+          <title>${b.id} — ${b.vol} ${isEn ? 'k m³' : 'tys. m³'}</title>
+          <circle cx="${n.x}" cy="${n.y}" r="${r + 6}" fill="transparent" />
+          <circle cx="${n.x}" cy="${n.y}" r="${r}" fill="${fill}" stroke="${stroke}" stroke-width="2" />
+          <text x="${n.x}" y="${n.y + 3.2}" font-size="9" font-weight="800" fill="#ffffff" text-anchor="middle">${b.id}</text>
+          <text x="${n.x}" y="${n.y + r + 11}" font-size="8.5" font-weight="700" fill="#334155" text-anchor="middle">${b.vol}${isEn ? 'k' : 't'}</text>
+        </g>
+      `;
+    });
+
+    // 5. Sellers S1..S4 (powiększona czcionka o 1 pkt)
+    let sellersHtml = '';
+    const activeBuyerSuppliers = mode === 'buyer'
+      ? new Set(getT3BuyerSuppliers(t3State.selectedBuyer, T).map(s => s.id))
+      : new Set();
+    const activeCompetitors = mode === 'competition'
+      ? new Set(getT3SellerCompetitors(t3State.selectedSeller, T).map(s => s.id))
+      : new Set();
+
+    t3State.sellers.forEach(s => {
+      const n = T3_GRAPH_NODES[s.nodeId];
+      const isSelected = (mode !== 'buyer' && s.id === t3State.selectedSeller);
+      const isSupplierForBuyer = activeBuyerSuppliers.has(s.id);
+      const isCompetitor = activeCompetitors.has(s.id);
+
+      let fill = '#0f766e';
+      let stroke = '#ffffff';
+      if (isSelected) {
+        fill = '#0f766e';
+        stroke = '#fde047';
+      } else if (mode === 'buyer' && isSupplierForBuyer) {
+        fill = '#16a34a';
+      } else if (mode === 'competition' && isCompetitor) {
+        fill = '#d97706';
+      } else if (mode === 'buyer' && !isSupplierForBuyer) {
+        fill = '#64748b';
+      }
+
+      sellersHtml += `
+        <g class="cursor-pointer" onclick="onT3EntityClick('${s.id}')">
+          <title>${s.id} — ${isEn ? s.name_en : s.name_pl}</title>
+          <circle cx="${n.x}" cy="${n.y}" r="15" fill="transparent" />
+          <rect x="${n.x - 14}" y="${n.y - 14}" width="28" height="28" rx="8" fill="${fill}" stroke="${stroke}" stroke-width="2.2" />
+          <text x="${n.x}" y="${n.y + 4.2}" font-size="10.5" font-weight="800" fill="#ffffff" text-anchor="middle">${s.id}</text>
+        </g>
+      `;
+    });
+
+    svg.innerHTML = `
+      <defs>
+        <marker id="t2arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="#4f46e5" />
+        </marker>
+      </defs>
+      ${backgroundDecorHtml}${riverHtml}${isochroneHtml}${roadsHtml}${connectionsHtml}${buyersHtml}${sellersHtml}
+    `;
+
+    updateTask3Analytics();
+  }
+
+  function updateTask3Analytics() {
+    const isEn = currentLang === 'en';
+    const T = t3State.maxTime;
+    const mode = t3State.mode;
+
+    const badge = document.getElementById('t3-active-badge');
+    const kpi1Lbl = document.getElementById('t3-kpi1-lbl');
+    const kpi1Val = document.getElementById('t3-kpi1-val');
+    const kpi2Lbl = document.getElementById('t3-kpi2-lbl');
+    const kpi2Val = document.getElementById('t3-kpi2-val');
+    const kpi3Lbl = document.getElementById('t3-kpi3-lbl');
+    const kpi3Val = document.getElementById('t3-kpi3-val');
+    const kpi4Lbl = document.getElementById('t3-kpi4-lbl');
+    const kpi4Val = document.getElementById('t3-kpi4-val');
+    const box = document.getElementById('t3-analysis-box');
+
+    if (mode === 'buyer') {
+      const b = t3State.buyers.find(x => x.id === t3State.selectedBuyer) || t3State.buyers[0];
+      const sups = getT3BuyerSuppliers(b.id, T);
+      const supIds = sups.map(s => s.id).join(', ') || (isEn ? 'None' : 'Brak');
+
+      badge.textContent = b.id;
+      badge.className = "font-mono font-bold text-xs px-2.5 py-1 rounded-lg bg-indigo-600 text-white";
+
+      kpi1Lbl.textContent = isEn ? 'Selected buyer' : 'Wybrany nabywca';
+      kpi1Val.textContent = `${b.id} (${b.vol}k m³)`;
+      kpi2Lbl.textContent = isEn ? 'Suppliers in reach' : 'Dostawcy w zasięgu';
+      kpi2Val.textContent = `${sups.length} (${supIds})`;
+      kpi3Lbl.textContent = isEn ? 'Buyer demand' : 'Zapotrzebowanie budowy';
+      kpi3Val.textContent = `${b.vol} ${isEn ? 'k m³' : 'tys. m³'}`;
+      kpi4Lbl.textContent = isEn ? 'Market structure' : 'Sytuacja nabywcy';
+      kpi4Val.textContent = sups.length === 0
+        ? (isEn ? 'No supply' : 'Brak dostaw')
+        : (sups.length === 1 ? (isEn ? 'Captive (1 plant)' : 'Skazany na 1 zakład') : (isEn ? `Choice (${sups.length})` : `Wybór (${sups.length})`));
+
+      box.innerHTML = isEn
+        ? `<strong>Buyer perspective (${b.id}):</strong> At maximum transport time T<sub>max</sub> = ${T} min, construction site <strong>${b.id}</strong> can source concrete from <strong>${sups.length}</strong> plant(s): <strong>${supIds}</strong>. Notice that this buyer's relevant geographic market is centered on ${b.id} along the road network, not around any single seller.`
+        : `<strong>Perspektywa nabywcy (${b.id}):</strong> Przy maksymalnym czasie transportu T<sub>max</sub> = ${T} min plac budowy <strong>${b.id}</strong> może zamówić beton z <strong>${sups.length}</strong> wytwórni: <strong>${supIds}</strong>. Zauważ, że rynek geograficzny dla tego klienta jest wyznaczony wokół jego budowy wzdłuż dróg dojazdowych, a nie wokół pojedynczego sprzedawcy.`;
+    } else {
+      const s = t3State.sellers.find(x => x.id === t3State.selectedSeller) || t3State.sellers[0];
+      const myBuyers = getT3SellerBuyers(s.id, T);
+      const comps = getT3SellerCompetitors(s.id, T);
+      const totalDemand = myBuyers.reduce((acc, b) => acc + b.vol, 0);
+      const contestedDemand = myBuyers
+        .filter(b => getT3BuyerSuppliers(b.id, T).length >= 2)
+        .reduce((acc, b) => acc + b.vol, 0);
+      const captiveDemand = totalDemand - contestedDemand;
+
+      badge.textContent = s.id;
+      badge.className = "font-mono font-bold text-xs px-2.5 py-1 rounded-lg bg-teal-700 text-white";
+
+      kpi1Lbl.textContent = isEn ? 'Selected plant' : 'Wybrana wytwórnia';
+      kpi1Val.textContent = s.id;
+      kpi2Lbl.textContent = isEn ? 'Active competitors' : 'Konkurenci o klientów';
+      kpi2Val.textContent = comps.length ? comps.map(c => c.id).join(', ') : (isEn ? 'None' : 'Brak');
+      kpi3Lbl.textContent = isEn ? 'Catchment demand' : 'Popyt w zasięgu';
+      kpi3Val.textContent = `${totalDemand} ${isEn ? 'k m³' : 'tys. m³'}`;
+      kpi4Lbl.textContent = isEn ? 'Contested / Captive' : 'Sporny / Wyłączny';
+      kpi4Val.textContent = `${contestedDemand}k / ${captiveDemand}k`;
+
+      if (mode === 'catchment') {
+        box.innerHTML = isEn
+          ? `<strong>Seller catchment area (${s.id}):</strong> Within ${T} minutes of driving, plant <strong>${s.id}</strong> reaches <strong>${myBuyers.length}</strong> construction sites (${myBuyers.map(b => b.id).join(', ') || 'none'}) with total demand of <strong>${totalDemand}k m³</strong>. The isochrone spreads strictly along the road network and river bridges.`
+          : `<strong>Obszar ciążenia sprzedawcy (${s.id}):</strong> W czasie do ${T} minut jazdy gruszka z wytwórni <strong>${s.id}</strong> dociera do <strong>${myBuyers.length}</strong> budów (${myBuyers.map(b => b.id).join(', ') || 'brak'}) o łącznym popycie <strong>${totalDemand} tys. m³</strong>. Izochrona rozchodzi się wzdłuż sieci dróg, a rzeka wymusza przejazd przez mosty.`;
+      } else {
+        box.innerHTML = isEn
+          ? `<strong>Competitor overlap (${s.id}):</strong> Plant <strong>${s.id}</strong> competes with every supplier that can reach ${s.id}'s customers: <strong>${comps.map(c => c.id).join(', ') || 'none'}</strong>. Out of ${totalDemand}k m³ in ${s.id}'s catchment area, <strong>${contestedDemand}k m³</strong> is contested by rivals and <strong>${captiveDemand}k m³</strong> comes from captive buyers.`
+          : `<strong>Z kim konkuruje sprzedawca (${s.id}):</strong> Wytwórnia <strong>${s.id}</strong> konkuruje ze wszystkimi dostawcami, u których mogliby kupić jej klienci: <strong>${comps.map(c => c.id).join(', ') || 'brak'}</strong>. Spośród ${totalDemand} tys. m³ popytu w zasięgu ${s.id}, <strong>${contestedDemand} tys. m³</strong> to popyt sporny (wspólny z rywalami), a <strong>${captiveDemand} tys. m³</strong> to klienci wyłączni.`;
+      }
+    }
+  }
 
   function switchLabTask(taskNumber) {
     activeLabTask = taskNumber;
@@ -1248,13 +2517,6 @@
       }
     });
 
-    const badge = document.getElementById('sublab-badge-info');
-    if (badge) {
-      if (taskNumber === 1) badge.textContent = "Task 1: SSNIP & Critical Loss";
-      else if (taskNumber === 2) badge.textContent = "Task 2: Minimal Market Hunt";
-      else badge.textContent = "Task 3: Monopoly Sim";
-    }
-
     if (taskNumber === 1) updateTask1();
     else if (taskNumber === 2) renderTask2();
     else if (taskNumber === 3) renderTask3();
@@ -1262,7 +2524,9 @@
 
   function updateTask1() {
     const isEn = currentLang === 'en';
-    const m = parseFloat(document.getElementById('t1-range-m').value) / 100;
+    const mEl = document.getElementById('t1-range-m');
+    if (!mEl) return;
+    const m = parseFloat(mEl.value) / 100;
     const x = parseFloat(document.getElementById('t1-range-x').value) / 100;
     const eps = parseFloat(document.getElementById('t1-range-eps').value);
     const sup = parseFloat(document.getElementById('t1-range-sup').value) / 100;
@@ -1363,14 +2627,16 @@
     const activeScen = task1Scenarios[t1ActiveScenarioId];
     if (activeScen) {
       document.getElementById('t1-active-scen-title').textContent = isEn ? activeScen.title_en : activeScen.title_pl;
-      document.getElementById('t1-active-scen-text').textContent = isEn ? activeScen.desc_en : activeScen.desc_pl;
+      document.getElementById('t1-active-scen-text').innerHTML = isEn ? activeScen.desc_en : activeScen.desc_pl;
     }
 
     t1UserPrediction = null;
     const fb = document.getElementById('t1-pred-feedback');
-    fb.classList.add('hidden');
-    document.getElementById('btn-pred-yes').className = "py-2 px-3 rounded-lg border border-slate-200 bg-white hover:bg-emerald-50 hover:border-emerald-300 text-xs font-semibold text-slate-700 transition";
-    document.getElementById('btn-pred-no').className = "py-2 px-3 rounded-lg border border-slate-200 bg-white hover:bg-rose-50 hover:border-rose-300 text-xs font-semibold text-slate-700 transition";
+    if (fb) fb.classList.add('hidden');
+    const btnYes = document.getElementById('btn-pred-yes');
+    const btnNo = document.getElementById('btn-pred-no');
+    if (btnYes) btnYes.className = "py-2 px-3 rounded-lg border border-slate-200 bg-white hover:bg-emerald-50 hover:border-emerald-300 text-xs font-semibold text-slate-700 transition";
+    if (btnNo) btnNo.className = "py-2 px-3 rounded-lg border border-slate-200 bg-white hover:bg-rose-50 hover:border-rose-300 text-xs font-semibold text-slate-700 transition";
   }
 
   function selectTask1Scenario(scenKey) {
@@ -1449,7 +2715,7 @@
   function renderTask2() {
     const isEn = currentLang === 'en';
     const svg = document.getElementById('t2-map-svg');
-    if (!svg) return;
+    if (!svg || !T2_PRODUCTS['A']) return;
 
     const basket = t2State.basket;
     let gridHtml = "", axesHtml = "", hullHtml = "", arrowsHtml = "", nodesHtml = "";
@@ -1484,12 +2750,24 @@
       ranked.forEach(({ id, score }) => {
         const p = T2_PRODUCTS[id];
         const tx = t2px(p.x), ty = t2py(p.y);
-        const w = Math.max(1.5, Math.min(6, score * 25));
-        const midx = (cx + tx) / 2, midy = (cy + ty) / 2;
-        arrowsHtml += `
-          <line x1="${cx}" y1="${cy}" x2="${tx}" y2="${ty}" stroke="#4f46e5" stroke-width="${w}" stroke-opacity="0.55" marker-end="url(#t2arrow)" />
-          <text x="${midx}" y="${midy - 4}" font-size="8" font-weight="800" fill="#4338ca" text-anchor="middle" paint-order="stroke" stroke="#ffffff" stroke-width="3">${(score * 100).toFixed(1)}%</text>
-        `;
+        const dx = tx - cx;
+        const dy = ty - cy;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist > 1) {
+          const rTarget = t2Radius(p.q);
+          const endX = tx - (dx / dist) * rTarget;
+          const endY = ty - (dy / dist) * rTarget;
+          const badgeX = cx + (endX - cx) * (5 / 6);
+          const badgeY = cy + (endY - cy) * (5 / 6);
+          const pctStr = (score * 100).toFixed(1) + '%';
+          arrowsHtml += `
+            <g class="pointer-events-none">
+              <line x1="${cx}" y1="${cy}" x2="${endX}" y2="${endY}" stroke="#4f46e5" stroke-width="2" stroke-opacity="0.8" />
+              <rect x="${badgeX - 16}" y="${badgeY - 7.5}" width="32" height="15" rx="4" ry="4" fill="#ffffff" stroke="#c7d2fe" stroke-width="1.2" />
+              <text x="${badgeX}" y="${badgeY + 3}" font-size="9" font-weight="800" fill="#4338ca" text-anchor="middle">${pctStr}</text>
+            </g>
+          `;
+        }
       });
     }
 
@@ -1505,7 +2783,7 @@
       const desc = isEn ? p.desc_en : p.desc_pl;
       nodesHtml += `
         <g id="t2-node-${id}" class="cursor-pointer" role="button" tabindex="0" aria-label="[${p.letter}] ${name}, ${inBasket ? (isEn ? 'in basket' : 'w koszyku') : (isEn ? 'outside basket' : 'poza koszykiem')}" onclick="onT2ProductClick('${id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();onT2ProductClick('${id}');}" transform="translate(${t2px(p.x)}, ${t2py(p.y)})">
-          <title>[${p.letter}] ${name} — q=${p.q}, m=${Math.round(p.m * 100)}%, e_p=${p.eps.toFixed(1)}. ${desc}</title>
+          <title>[${p.letter}] ${name} — q=${p.q}, m=${Math.round(p.m * 100)}%, ep=${p.eps.toFixed(1)}. ${desc}</title>
           <circle r="${Math.max(r + 8, 22)}" fill="transparent" />
           <circle r="${r}" fill="${fill}" stroke="${stroke}" stroke-width="2.5" class="transition hover:opacity-90" />
           <text y="3" font-size="9.5" font-weight="800" fill="${textFill}" text-anchor="middle">${p.letter}</text>
@@ -1514,14 +2792,7 @@
       `;
     });
 
-    svg.innerHTML = `
-      <defs>
-        <marker id="t2arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-          <path d="M0,0 L6,3 L0,6 Z" fill="#4f46e5" />
-        </marker>
-      </defs>
-      ${gridHtml}${axesHtml}${hullHtml}${arrowsHtml}${nodesHtml}
-    `;
+    svg.innerHTML = `${gridHtml}${axesHtml}${hullHtml}${nodesHtml}${arrowsHtml}`;
 
     if (t2State.eventMsg && t2State.eventMsg.type === 'error') {
       const el = document.getElementById(`t2-node-${t2State.eventMsg.id}`);
@@ -1563,7 +2834,6 @@
   }
 
   function resetTask2() {
-    shuffleT2Names();
     t2State = { basket: ['A'], history: [], errors: 0, hints: 0, showDiv: t2State.showDiv, ssnip: T2_CONST.X_SSNIP, outsideW: T2_CONST.OUTSIDE_W, solved: false, clicks: 0, stepErrorCount: 0, eventMsg: null };
     const ssnipRange = document.getElementById('t2-range-ssnip');
     const outsideRange = document.getElementById('t2-range-outside');
@@ -1740,8 +3010,8 @@
               : "To nie jest najbliższy substytut. Podpowiedź: poszukaj produktu, który obecnie przejmuje najwięcej klientów uciekających z całego koszyka.";
           } else {
             evtBox.textContent = isEn
-              ? `${name} does not capture enough diversion from the current basket yet. Try the product most similar to what you already hold.`
-              : `${name} nie przejmuje jeszcze wystarczająco dużo dywersji z obecnego koszyka. Spróbuj produktu najbardziej podobnego do tych już wybranych.`;
+              ? `${name} does not capture enough diverted demand from the current basket yet. Try the product most similar to what you already hold.`
+              : `${name} nie przejmuje jeszcze wystarczająco dużo odpływającego popytu z obecnego koszyka. Spróbuj produktu najbardziej zbliżonego do tych już wybranych.`;
           }
         } else if (evt.type === 'cascade') {
           evtBox.className = "p-3 rounded-xl border border-amber-200 bg-amber-50 text-amber-950 text-[11px] leading-relaxed";
@@ -1770,7 +3040,7 @@
       stepsContainer.innerHTML = `
         <div class="flex justify-between font-mono"><span>${isEn ? 'Weighted avg. margin m̄(S)' : 'Średnia ważona marża m̄(S)'}</span><span class="font-bold">${(mBar * 100).toFixed(1)}%</span></div>
         <div class="flex justify-between font-mono"><span>CL(S) = X / (X + m̄)</span><span class="font-bold">${CL.toFixed(1)}%</span></div>
-        <div class="flex justify-between font-mono"><span>AL(S) = Σ qᵢ·e<sub>p,i</sub>·X·Outᵢ(S) / Σ qᵢ</span><span class="font-bold">${AL.toFixed(1)}%</span></div>
+        <div class="flex justify-between font-mono"><span>AL(S) = Σ q<sub>i</sub>·e<sub>p,i</sub>·X·Out<sub>i</sub>(S) / Σ q<sub>i</sub></span><span class="font-bold">${AL.toFixed(1)}%</span></div>
         <div class="flex justify-between font-mono"><span>ΔTP(S)</span><span class="font-bold ${dP >= 0 ? 'text-emerald-700' : 'text-rose-700'}">${dP >= 0 ? '+' : ''}${dP.toFixed(1)}%</span></div>
       `;
     }
@@ -1782,130 +3052,6 @@
     document.getElementById('t2-counter-hints').textContent = `${t2State.hints} / 3`;
     const hintBtn = document.getElementById('t2-btn-hint');
     if (hintBtn) hintBtn.disabled = t2State.hints >= 3;
-  }
-
-  function renderTask3() {
-    const isEn = currentLang === 'en';
-    const container = document.getElementById('t3-targets-container');
-    if (!container) return;
-    container.innerHTML = '';
-
-    document.getElementById('t3-budget-val').textContent = `${t3Budget} mln zł`;
-
-    task3Targets.forEach(t => {
-      const card = document.createElement('div');
-      card.className = `p-3.5 rounded-xl border transition flex items-start justify-between gap-3 ${
-        t.bought ? 'bg-indigo-50 border-indigo-300' : 'bg-slate-50 border-slate-200'
-      }`;
-
-      card.innerHTML = `
-        <div class="space-y-1 flex-1">
-          <div class="flex items-center gap-2">
-            <span class="font-bold text-slate-800 text-xs">${isEn ? t.name_en : t.name_pl}</span>
-            <span class="font-mono text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-200 text-slate-700">${t.cost} mln zł</span>
-          </div>
-          <p class="text-[11px] text-slate-500 leading-relaxed">${isEn ? t.impact_en : t.impact_pl}</p>
-        </div>
-        <button onclick="toggleTask3Target('${t.id}')" class="shrink-0 px-3 py-1.5 rounded-lg text-xs font-bold transition ${
-          t.bought ? 'bg-rose-600 hover:bg-rose-700 text-white' : 'bg-indigo-600 hover:bg-indigo-700 text-white'
-        }">
-          ${t.bought ? (isEn ? 'Sell' : 'Sprzedaj') : (isEn ? 'Buy' : 'Kup')}
-        </button>
-      `;
-      container.appendChild(card);
-    });
-  }
-
-  function toggleTask3Target(id) {
-    const t = task3Targets.find(item => item.id === id);
-    if (!t) return;
-
-    if (!t.bought) {
-      if (t3Budget < t.cost) {
-        return;
-      }
-      t3Budget -= t.cost;
-      t.bought = true;
-    } else {
-      t3Budget += t.cost;
-      t.bought = false;
-    }
-
-    renderTask3();
-  }
-
-  function runTask3Simulation() {
-    const isEn = currentLang === 'en';
-    const feed = document.getElementById('t3-report-feed');
-    const card = document.getElementById('t3-financial-card');
-    card.classList.remove('hidden');
-
-    const hasGreenhouse = task3Targets.find(t => t.id === 'greenhouse_rivals').bought;
-    const hasFlorist = task3Targets.find(t => t.id === 'ecommerce_florist').bought;
-    const hasForestry = task3Targets.find(t => t.id === 'forestry_nursery').bought;
-
-    let baseDemandLoss = 0.40;
-    let baseSupplyLoss = 0.35;
-
-    if (hasGreenhouse) {
-      baseDemandLoss -= 0.25;
-      baseSupplyLoss -= 0.30;
-    }
-    if (hasFlorist) {
-      baseDemandLoss -= 0.12;
-    }
-
-    const netLoss = Math.max(0.04, baseDemandLoss + baseSupplyLoss);
-    const margin = 0.40;
-    const ssnip = 0.10;
-    const profitDeltaPct = (((margin + ssnip) * (1 - netLoss) - margin) / margin) * 100;
-
-    let reportHtml = "";
-    if (!hasGreenhouse) {
-      reportHtml += `<p class="text-rose-700"><strong>${isEn ? 'Supply reaction:' : 'Reakcja podaży:'}</strong> ${isEn ? 'Nearby greenhouse growers adjusted production beds to roses, reducing prices.' : 'Okoliczni ogrodnicy szklarniowi przestawili uprawę na róże, zbijając cenę.'}</p>`;
-    } else {
-      reportHtml += `<p class="text-emerald-700"><strong>${isEn ? 'Supply controlled:' : 'Podaż pod kontrolą:'}</strong> ${isEn ? 'Competitor greenhouse capacity is internalized.' : 'Przejęto moce produkcyjne szklarni, co powstrzymało wejście rywali.'}</p>`;
-    }
-
-    if (!hasFlorist && !hasGreenhouse) {
-      reportHtml += `<p class="text-rose-700"><strong>${isEn ? 'Demand diversion:' : 'Odpływ popytu:'}</strong> ${isEn ? 'Consumers shifted to alternative flowers.' : 'Klienci kwiaciarni kupują inne gatunki kwiatów.'}</p>`;
-    } else {
-      reportHtml += `<p class="text-emerald-700"><strong>${isEn ? 'Demand recaptured:' : 'Popyt zatrzymany:'}</strong> ${isEn ? 'Most buyers switching to other flowers purchase within your group.' : 'Klienci wybierający inne kwiaty kupują w Twojej sieci.'}</p>`;
-    }
-
-    if (hasForestry) {
-      reportHtml += `<p class="text-amber-700"><strong>${isEn ? 'Capital misallocation:' : 'Błędny zakup:'}</strong> ${isEn ? 'You spent 50M PLN on forestry tree saplings. Flower shoppers do not buy pine seedlings.' : 'Wydano 50 mln zł na sadzonki sosen. Klienci szukający kwiatów nie kupują sadzonek leśnych.'}</p>`;
-    }
-
-    feed.innerHTML = reportHtml;
-
-    if (profitDeltaPct > 0 && !hasForestry) {
-      card.className = "p-3 rounded-lg border bg-emerald-50 border-emerald-300 text-emerald-950 space-y-1";
-      card.innerHTML = `
-        <strong class="block text-xs font-bold">${isEn ? "Result: Market defined profitably" : "Wynik: Rynek wyznaczony opłacalnie"}</strong>
-        <p class="text-[11px]">${isEn ? `Profit changed by <strong>+${profitDeltaPct.toFixed(1)}%</strong>. You controlled the smallest group of products supporting a price increase.` : `Zysk zmienił się o <strong>+${profitDeltaPct.toFixed(1)}%</strong>. Kontrolujesz najmniejszą grupę produktów tworzącą rynek właściwy roślin ozdobnych.`}</p>
-      `;
-    } else {
-      card.className = "p-3 rounded-lg border bg-rose-50 border-rose-300 text-rose-950 space-y-1";
-      card.innerHTML = `
-        <strong class="block text-xs font-bold">${isEn ? "Result: Price increase unprofitable" : "Wynik: Podwyżka nieopłacalna"}</strong>
-        <p class="text-[11px]">${isEn ? `Profit changed by <strong>${profitDeltaPct.toFixed(1)}%</strong>. Rival supply expanded or capital was spent on unrelated forestry assets.` : `Zysk zmienił się o <strong>${profitDeltaPct.toFixed(1)}%</strong>. Rywale dostarczyli zamienniki lub środki wydano na obcą branżę leśną.`}</p>
-      `;
-    }
-  }
-
-  function resetTask3() {
-    t3Budget = 100;
-    task3Targets.forEach(t => t.bought = false);
-    document.getElementById('t3-financial-card').classList.add('hidden');
-    document.getElementById('t3-report-feed').innerHTML = `
-      <p class="text-slate-400">
-        ${currentLang === 'en' 
-          ? 'Select targets to acquire, then execute the 10% price rise to observe demand and supply reactions.' 
-          : 'Zaznacz podmioty do włączenia, po czym uruchom podwyżkę ceny o 10%. Zobaczysz reakcję popytu oraz wejście podaży rywali.'}
-      </p>
-    `;
-    renderTask3();
   }
 
   const rawQuizQuestions = [
@@ -2479,7 +3625,53 @@
       nav_intro: "Wprowadzenie",
       nav_lab: "Laboratorium",
       nav_concept: "Pojęcia",
+      nav_math: "Wzory i logika",
       nav_quiz: "Quiz",
+      math_badge: "Matematyczne podstawy rynku",
+      math_main_title: "Wzory i logika: od intuicji do pełnego modelu",
+      math_tab_intuition: "Tor intuicyjny",
+      math_tab_formal: "Tor formalny",
+      math_lead: "Test SSNIP to bilans zysku: czy dodatkowy przychód z wyższej ceny przeważy nad utratą marży ze spadku sprzedaży? Poniżej znajdziesz wyjaśnienie tej zasady w dwóch ujęciach: prostym (intuicyjnym) oraz ścisłym (formalnym).",
+      math_int_h1: "Dwa przeciwstawne efekty",
+      math_int_p1: "Gdy podnosisz cenę o 5%, dzieją się dwie rzeczy na raz: na każdym sprzedanym produkcie zarabiasz więcej (efekt ceny), ale część klientów odchodzi i kupujesz mniej sztuk (efekt wolumenu). Podwyżka opłaca się wtedy, gdy pierwszy efekt jest większy od drugiego.",
+      math_int_h2: "Dlaczego marża jest kluczowa?",
+      math_int_p2: "Jeśli Twoja marża jest niska (np. 10%), każdy utracony klient kosztuje Cię niewiele. Możesz pozwolić sobie na duży spadek sprzedaży, bo zysk na sztuce rośnie proporcjonalnie bardzo mocno. Gdy marża wynosi 80%, każdy utracony klient to ogromna strata dotychczasowego zysku, więc tolerancja na spadek wolumenu jest mała.",
+      math_int_h3: "Kieszenie tego samego właściciela",
+      math_int_p3: "Gdy badasz pojedynczy produkt, każdy klient, który odchodzi, jest stratą. Gdy jednak monopolista kontroluje cały koszyk dóbr, klient przechodzący z produktu A na produkt B w tym samym koszyku nie jest stratą: pieniądze trafiają do innej kieszeni tej samej firmy.",
+      math_rule_title: "Prosta reguła decyzji SSNIP",
+      math_rule_sub: "Porównanie progu dopuszczalnego z rzeczywistą ucieczką klientów",
+      math_cl_box_h: "CL (Krytyczna utrata sprzedaży) = Twój margines błędu",
+      math_cl_box_p: "To maksymalny procent sprzedaży, jaki firma może stracić pod wpływem podwyżki ceny, aby jej całkowity zysk nie spadł poniżej zera. Jeśli stracisz dokładnie tyle, zysk pozostaje bez zmian.",
+      math_al_box_h: "AL (Rzeczywista utrata sprzedaży) = Faktyczna reakcja rynku",
+      math_al_box_p: "To realny spadek sprzedaży wywołany wrażliwością klientów na cenę i reakcją innych dostawców. Jeśli rzeczywista strata jest mniejsza od progu krytycznego (AL ≤ CL), podwyżka jest opłacalna i rynek został wyznaczony.",
+      math_f1_badge: "Część 1 • Pojedynczy produkt",
+      math_f1_title: "Wyprowadzenie wzoru na krytyczną utratę sprzedaży (CL)",
+      math_f1_p1: "Niech cena początkowa wynosi P, koszt krańcowy MC, a wielkość sprzedaży q. Wyjściowy zysk całkowity wynosi:",
+      math_f1_p2: "gdzie m = (P - MC) / P to początkowa marża cenowa. Podnosimy cenę o ułamek X = ΔP / P, co powoduje spadek sprzedaży o ułamek L = -Δq / q. Nowy zysk wynosi:",
+      math_f1_p3: "Krytyczną utratę sprzedaży (CL) wyznacza warunek opłacalności ΔTP = TP<sub>1</sub> - TP<sub>0</sub> = 0. Podstawiając i dzieląc obie strony przez P · q, otrzymujemy:",
+      math_f1_p4: "Z kolei elastyczność krytyczna popytu e<sub>p,crit</sub> to taka wrażliwość popytu, przy której rzeczywisty spadek sprzedaży L = e<sub>p</sub> · X osiąga dokładnie próg CL:",
+      math_f2_badge: "Część 2 • Koszyk wielu produktów",
+      math_f2_title: "Od 1 produktu do koszyka dóbr: wskaźniki odpływu (Diversion Ratios)",
+      math_f2_p1: "Gdy hipotetyczny monopolista kontroluje koszyk produktów S, podwyższa cenę wszystkich dóbr w koszyku jednocześnie. Klienci odchodzący od dobra i mogą przejść na inne dobro j należące do koszyka S.",
+      math_f2_p2: "Ułamek klientów porzucających dobro i, którzy wybierają dobro j, określa wskaźnik odpływu popytu (Diversion Ratio, D<sub>ij</sub>). Część popytu, która bezpowrotnie ucieka poza koszyk S, wynosi zatem:",
+      math_f2_p3: "Dla każdego dobra i ∈ S bezwzględna utrata sprzedaży poza koszyk wynosi Δq<sub>i</sub><sup>lost</sup> = q<sub>i</sub> · e<sub>p,i</sub> · X · Out<sub>i</sub>(S). Dzieląc sumę tych strat przez łączny wolumen koszyka, otrzymujemy rzeczywistą utratę sprzedaży koszyka:",
+      math_f2_p4: "Z kolei próg krytyczny koszyka opiera się na średniej ważonej marży m̄(S) = Σ (q<sub>i</sub> · m<sub>i</sub>) / Σ q<sub>i</sub>:",
+      math_comp_title: "Zestawienie porównawcze: Zadanie 1 a Zadanie 2",
+      math_th_feature: "Cecha modelu",
+      math_th_t1: "Zadanie 1 (1 produkt)",
+      math_th_t2: "Zadanie 2 (Koszyk produktów)",
+      math_row1_c1: "Liczba dóbr",
+      math_row1_c2: "1 produkt",
+      math_row1_c3: "Wiele produktów o wagach q<sub>i</sub> i marżach m<sub>i</sub>",
+      math_row2_c1: "Wzór na stratę rzeczywistą (AL)",
+      math_row2_c2: "AL = e<sub>p</sub>·X + S·X",
+      math_row2_c3: "AL(S) = Σ q<sub>i</sub>·e<sub>p,i</sub>·X·Out<sub>i</sub>(S) / Σ q<sub>i</sub>",
+      math_row3_c1: "Przechwytywanie popytu",
+      math_row3_c2: "Brak (każdy odchodzący klient to strata)",
+      math_row3_c3: "Tak (klienci przechodzący na inne dobra w koszyku nie są stratą)",
+      math_row4_c1: "Reakcja podaży konkurentów",
+      math_row4_c2: "Jawny składnik podażowy S·X",
+      math_row4_c3: "Dystans podażowy d<sub>S</sub> wpływający na wagi substytucji",
       intro_hero_tag: "Ekonomia konkurencji i polityka antymonopolowa",
       intro_hero_title: "Wyznaczanie rynku właściwego i test SSNIP",
       intro_hero_desc: "Zanim organy ochrony konkurencji ocenią siłę rynkową, wskaźniki koncentracji czy fuzje przedsiębiorstw, ustalają granice rynku właściwego. Rynek nie jest ani całą branżą, ani pojedynczym wariantem produktu. Jest obszarem, w którym zachodzi bezpośrednia substytucja popytowa i podażowa.",
@@ -2523,7 +3715,7 @@
       ssnip_step4_p: "Jeśli podwyżka przynosi straty, kandydat jest za wąski. Dodajemy najbliższy zamiennik i powtarzamy test. Gdy podwyżka staje się zyskowna, zatrzymujemy procedurę: rynek właściwy został wyznaczony.",
       sublab_tab1: "Zadanie 1: Krytyczna utrata sprzedaży",
       sublab_tab2: "Zadanie 2: Mapa substytucji i granice rynku",
-      sublab_tab3: "Zadanie 3: Symulator monopolisty",
+      sublab_tab3: "Zadanie 3: Geograficzny zakres rynku",
       t1_badge: "Warunek opłacalności",
       t1_title: "Krytyczna utrata sprzedaży a rzeczywisty odpływ",
       t1_subtitle: "Porównaj próg dopuszczalnego spadku wolumenu z realną ucieczką klientów i reakcją podaży rywali.",
@@ -2562,7 +3754,7 @@
       t1_not_al: "<strong>Rzeczywista utrata sprzedaży</strong> (Actual Loss); faktyczny odpływ wolumenu: AL = e<sub>p</sub>·X + S·X.",
       t1_not_s: "<strong>Substytucyjność podaży</strong>; siła reakcji rywali przestawiających linie wytwórcze w odpowiedzi na podwyżkę.",
       t2_badge: "Polowanie na najmniejszy rynek",
-      t2_title: "Mapa substytucji: dywersja popytowa i podażowa",
+      t2_title: "Mapa substytucji: odpływ popytu i reakcja podaży",
       t2_subtitle: "Dodawaj produkty do koszyka w kolejności od najbliższego substytutu. Zatrzymaj się, gdy podwyżka ceny o 5% staje się opłacalna.",
       t2_lbl_ssnip: "Podwyżka SSNIP",
       t2_desc_ssnip: "Wielkość hipotetycznej podwyżki cen (standardowo 5–10%), której opłacalność sprawdza test.",
@@ -2570,11 +3762,12 @@
       t2_desc_outside: "Skłonność klientów do całkowitej rezygnacji z zakupu lub przejścia do innych kategorii produktów.",
       t2_btn_reset: "Zresetuj",
       t2_btn_hint: "Podpowiedź",
-      t2_lbl_showdiv: "Pokaż dywersję",
+      t2_lbl_showdiv: "Pokaż odpływ popytu",
       t2_counter_clicks: "Kliknięcia:",
       t2_counter_errors: "Błędy:",
       t2_counter_hints: "Podpowiedzi:",
       t2_cart_title: "Koszyk (kolejność dodawania):",
+      t2_btn_new_task: "Nowe zadanie (losowa mapa)",
       t2_map_title: "Mapa substytucji (d<sub>D</sub>, d<sub>S</sub>)",
       t2_click_hint: "Kliknij produkt, aby dodać lub usunąć go z koszyka",
       t2_leg_core: "Produkt wyjściowy",
@@ -2592,21 +3785,48 @@
       t2_not_s_basket: "<strong>Koszyk kandydacki</strong>; zbiór produktów poddany wspólnemu testowi hipotetycznego monopolisty.",
       t2_not_tps: "<strong>Zysk koszyka</strong> i jego procentowa zmiana po podwyżce cen na całym koszyku S.",
       t2_not_dist: "<strong>Dystans popytowy</strong> (różnica właściwości) oraz <strong>dystans podażowy</strong> (koszt przestawienia linii).",
-      t2_not_div: "<strong>Wskaźnik dywersji</strong> (Diversion Ratio); ułamek klientów porzucających produkt i, którzy wybierają produkt j.",
+      t2_not_div: "<strong>Wskaźnik odpływu popytu</strong> (Diversion Ratio); ułamek klientów porzucających produkt i, którzy przechodzą na produkt j.",
       t2_not_mbar: "<strong>Średnia ważona marża</strong> produktów tworzących koszyk S, ważona ich wolumenami sprzedaży q<sub>i</sub>.",
       t2_not_cls: "<strong>Krytyczna utrata sprzedaży koszyka</strong>; próg dopuszczalnego odpływu: CL(S) = X / (X + m̄(S)).",
       t2_not_als: "<strong>Rzeczywisty odpływ sprzedaży</strong> poza koszyk S; popyt przechwycony wewnątrz koszyka nie stanowi straty.",
       t2_not_wout: "<strong>Siła opcji zewnętrznej</strong>; skłonność klientów do rezygnacji z zakupu lub wyboru dóbr spoza mapy.",
-      t3_badge: "Ćwiczenie decyzyjne",
-      t3_title: "Symulator monopolisty: podwyżka ceny",
-      t3_subtitle: "Zarządzasz producentem róż szklarniowych. Masz 100 mln zł budżetu na fuzje. Zbuduj koszyk, który utrzyma 10% podwyżkę cen.",
-      t3_budget_lbl: "Budżet:",
-      t3_btn_restart: "Od nowa",
-      t3_acq_title: "Dostępne podmioty do przejęcia:",
-      t3_acq_sub: "Nie każdy zakup ogranicza ucieczkę klientów.",
-      t3_btn_run: "Podnieś cenę o +10% (SSNIP)",
-      t3_report_title: "Wynik testu:",
-      t3_report_intro: "Zaznacz podmioty do włączenia, po czym uruchom podwyżkę ceny o 10%. Zobaczysz reakcję popytu oraz wejście podaży rywali.",
+      t3_badge: "Analiza przestrzenna rynku",
+      t3_title: "Izochrony drogowe: obszar wyboru nabywcy, zasięg sprzedawcy i konkurencja",
+      t3_subtitle: "Rynek betonu towarowego w zamkniętym regionie. Czas transportu po sieci dróg i przez mosty wyznacza odmienne granice dla nabywcy i sprzedawcy.",
+      t3_btn_random: "Losuj układ mapy",
+      t3_mode_lbl: "Perspektywa analizy geograficznej:",
+      t3_mode1_h: "Perspektywa nabywcy (popyt)",
+      t3_mode1_p: "Obszar, w którym wybrana budowa B może kupić beton w limicie czasu T.",
+      t3_mode2_h: "Zasięg sprzedawcy (izochrony podaży)",
+      t3_mode2_p: "Strefy czasowe dojazdu gruszki (12, 20, 30 min) i obsługiwany wolumen.",
+      t3_mode3_h: "Nakładanie się stref (z kim konkuruje?)",
+      t3_mode3_p: "Rywale, u których mogą kupić klienci obsługiwani przez wybraną wytwórnię.",
+      t3_lbl_time: "Maksymalny czas dowozu betonu (T<sub>max</sub>):",
+      t3_time_short: "10 min (drogi fracht)",
+      t3_time_long: "35 min (tani fracht)",
+      t3_sel_lbl: "Aktywny punkt na mapie:",
+      t3_click_instr: "Kliknij dowolny plac budowy (B1–B9) lub betoniarnię (S1–S4) bezpośrednio na mapie, aby zmienić punkt odniesienia.",
+      t3_zones_panel_title: "Popyt w strefach czasowych:",
+      t3_chal_badge: "Wyzwanie analityczne",
+      t3_btn_verify: "Sprawdź odpowiedź",
+      t3_btn_next_chal: "Inne pytanie",
+      t3_map_header: "Mapa drogowa regionu i izochrony dojazdu (poza mapą brak dostawców i odbiorców)",
+      t3_leg_s: "Wytwórnia betonu (S1–S4)",
+      t3_leg_b: "Plac budowy / nabywca (B1–B9)",
+      t3_leg_loc: "Sieć drogowa",
+      t3_leg_riv: "Rzeka i mosty",
+      t3_kpi1: "Punkt analizy",
+      t3_kpi2: "Dostawcy w zasięgu",
+      t3_kpi3: "Popyt w zasięgu",
+      t3_kpi4: "Popyt sporny (konkurencja)",
+      t3_not_tag: "Aparatura pojęciowa",
+      t3_not_title: "Trzy odmienne obszary geograficzne w analizie rynku (Zadanie 3)",
+      t3_not_1_h: "1. Obszar wyboru nabywcy (T<sub>B</sub> ≤ T<sub>max</sub>)",
+      t3_not_1_p: "Obszar wokół konkretnego kupującego (placu budowy B), z którego może on sprowadzić towar bez przekroczenia akceptowalnego czasu i kosztu transportu. Wyznacza bezpośrednich dostawców dostępnych dla tego jednego klienta.",
+      t3_not_2_h: "2. Obszar ciążenia sprzedawcy (Catchment Area)",
+      t3_not_2_p: "Izochrona wokół zakładu sprzedawcy S pokazująca, do których klientów jest on w stanie dowieźć produkt w czasie T<sub>max</sub>. Kształt izochrony zależy od przebiegu sieci drogowej i barier naturalnych (np. rzeki i mostów).",
+      t3_not_3_h: "3. Obszar konkurencji sprzedawcy (Zazębianie stref)",
+      t3_not_3_p: "Sprzedawca S<sub>1</sub> konkuruje z każdym innym sprzedawcą S<sub>k</sub>, u którego mogliby zaopatrzyć się klienci z obszaru ciążenia S<sub>1</sub>. Nawet jeśli dwie wytwórnie dzieli dystans do 2·T<sub>max</sub>, rywalizują one o odbiorców na obszarze wspólnym.",
       dist_badge: "Podstawowe pojęcia",
       dist_main_title: "Branża, rynek właściwy i segment produktowy",
       dist_hierarchy_tag: "Hierarchia pojęć",
@@ -2674,7 +3894,53 @@
       nav_intro: "Introduction",
       nav_lab: "Laboratory",
       nav_concept: "Concepts",
+      nav_math: "Formulas & logic",
       nav_quiz: "Quiz",
+      math_badge: "Mathematical foundations",
+      math_main_title: "Formulas & logic: from intuition to the full model",
+      math_tab_intuition: "Intuitive track",
+      math_tab_formal: "Formal track",
+      math_lead: "The SSNIP test is a profit balance: does higher revenue per unit outweigh the margin loss from lower sales volume? Below, this mechanism is explained via two tracks: simple intuition and formal derivation.",
+      math_int_h1: "Two opposing effects",
+      math_int_p1: "When raising the price by 5%, two things occur simultaneously: you earn more profit on each unit sold (price effect), but some buyers leave, reducing total volume (volume effect). The price rise is profitable if the price effect outweighs the volume effect.",
+      math_int_h2: "Why margin matters",
+      math_int_p2: "With a low margin (e.g. 10%), losing a customer costs little profit. You can tolerate a large sales drop because the profit increase per unit is proportionally huge. With an 80% margin, losing a customer wipes out a large gross profit, so allowable sales loss is very small.",
+      math_int_h3: "Pockets of the same owner",
+      math_int_p3: "When examining an isolated product, every customer who leaves is a loss. When a hypothetical monopolist owns the whole basket, a customer switching from product A to product B in the same basket is not a loss: the revenue stays within the same company.",
+      math_rule_title: "Simple SSNIP decision rule",
+      math_rule_sub: "Comparing the allowable threshold with actual customer switching",
+      math_cl_box_h: "CL (Critical Loss) = Allowable margin of error",
+      math_cl_box_p: "The maximum percentage volume drop a firm can suffer before total profit falls below zero. At exactly this threshold, profit remains unchanged.",
+      math_al_box_h: "AL (Actual Loss) = Real market response",
+      math_al_box_p: "The observed sales loss driven by customer price sensitivity and rival suppliers. If actual loss does not exceed critical loss (AL ≤ CL), the price rise is profitable and the relevant market boundary is established.",
+      math_f1_badge: "Part 1 • Single product",
+      math_f1_title: "Derivation of the Critical Loss formula (CL)",
+      math_f1_p1: "Let initial unit price be P, marginal cost MC, and volume q. Baseline total profit is:",
+      math_f1_p2: "where m = (P - MC) / P is the initial margin. Increasing price by X = ΔP / P triggers a volume drop L = -Δq / q. New profit is:",
+      math_f1_p3: "Critical loss (CL) satisfies the break-even condition ΔTP = TP<sub>1</sub> - TP<sub>0</sub> = 0. Solving for L yields:",
+      math_f1_p4: "Critical elasticity e<sub>p,crit</sub> is the demand elasticity where actual loss L = e<sub>p</sub> · X exactly equals CL:",
+      math_f2_badge: "Part 2 • Multi-product basket",
+      math_f2_title: "From 1 product to a basket: Diversion Ratios",
+      math_f2_p1: "When a hypothetical monopolist controls product basket S, it increases prices across all products in S simultaneously. Buyers leaving product i may switch to another product j in basket S.",
+      math_f2_p2: "The share of customers leaving product i who choose product j is the Diversion Ratio (D<sub>ij</sub>). The share leaking outside basket S is:",
+      math_f2_p3: "For each product i ∈ S, volume lost outside the basket is Δq<sub>i</sub><sup>lost</sup> = q<sub>i</sub> · e<sub>p,i</sub> · X · Out<sub>i</sub>(S). Dividing total lost volume by basket sales yields basket actual loss:",
+      math_f2_p4: "The critical threshold relies on the weighted average margin m̄(S) = Σ (q<sub>i</sub> · m<sub>i</sub>) / Σ q<sub>i</sub>:",
+      math_comp_title: "Model comparison: Task 1 vs Task 2",
+      math_th_feature: "Dimension",
+      math_th_t1: "Task 1 (Single product)",
+      math_th_t2: "Task 2 (Product basket)",
+      math_row1_c1: "Products",
+      math_row1_c2: "1 product",
+      math_row1_c3: "Multiple products with volumes q<sub>i</sub> and margins m<sub>i</sub>",
+      math_row2_c1: "Actual loss formula (AL)",
+      math_row2_c2: "AL = e<sub>p</sub>·X + S·X",
+      math_row2_c3: "AL(S) = Σ q<sub>i</sub>·e<sub>p,i</sub>·X·Out<sub>i</sub>(S) / Σ q<sub>i</sub>",
+      math_row3_c1: "Demand diversion",
+      math_row3_c2: "None (all diverted volume is lost)",
+      math_row3_c3: "Recaptured (switching within the basket is retained)",
+      math_row4_c1: "Competitor supply entry",
+      math_row4_c2: "Explicit supply term S·X",
+      math_row4_c3: "Supply distance d<sub>S</sub> shaping substitution weights",
       intro_hero_tag: "Competition economics & antitrust policy",
       intro_hero_title: "Relevant market identification and the SSNIP test",
       intro_hero_desc: "Before competition authorities evaluate market power, concentration ratios, or mergers, they determine the boundary of the relevant market. A market is neither an entire industry nor an isolated product variant. It is the boundary where direct demand and supply substitution occur.",
@@ -2718,7 +3984,7 @@
       ssnip_step4_p: "If the price rise is unprofitable, the candidate is too narrow. Add the closest substitute and test again. When the price rise becomes profitable, stop: the relevant market is established.",
       sublab_tab1: "Task 1: Critical loss analysis",
       sublab_tab2: "Task 2: Minimal market hunt",
-      sublab_tab3: "Task 3: Monopoly simulator",
+      sublab_tab3: "Task 3: Geographic market scope",
       t1_badge: "Profitability condition",
       t1_title: "Critical loss vs actual sales loss",
       t1_subtitle: "Compare allowable volume loss with buyer diversion and rival supply switching.",
@@ -2757,7 +4023,7 @@
       t1_not_al: "<strong>Actual sales loss</strong>; observed volume loss: AL = e<sub>p</sub>·X + S·X.",
       t1_not_s: "<strong>Supply substitution</strong>; extent of rival production bed/line switching.",
       t2_badge: "Minimal market hunt",
-      t2_title: "Substitution map: demand and supply diversion",
+      t2_title: "Substitution map: demand diversion and supply response",
       t2_subtitle: "Add products to the basket starting with the closest substitute. Stop once a 5% price rise becomes profitable.",
       t2_lbl_ssnip: "SSNIP increase",
       t2_desc_ssnip: "The hypothetical price rise (typically 5–10%) tested for profitability.",
@@ -2765,11 +4031,12 @@
       t2_desc_outside: "Buyer propensity to stop purchasing entirely or switch to distant categories.",
       t2_btn_reset: "Reset",
       t2_btn_hint: "Hint",
-      t2_lbl_showdiv: "Show diversion",
+      t2_lbl_showdiv: "Show diverted demand",
       t2_counter_clicks: "Clicks:",
       t2_counter_errors: "Errors:",
       t2_counter_hints: "Hints:",
       t2_cart_title: "Basket (order added):",
+      t2_btn_new_task: "New task (random map)",
       t2_map_title: "Substitution map (d<sub>D</sub>, d<sub>S</sub>)",
       t2_click_hint: "Click a product to add or remove it from the basket",
       t2_leg_core: "Baseline product",
@@ -2787,21 +4054,48 @@
       t2_not_s_basket: "<strong>Candidate basket</strong>; set of products jointly tested under the hypothetical monopolist paradigm.",
       t2_not_tps: "<strong>Basket total profit</strong> and percentage change after a joint price increase across basket S.",
       t2_not_dist: "<strong>Demand distance</strong> (product attribute difference) and <strong>supply distance</strong> (retooling cost).",
-      t2_not_div: "<strong>Diversion ratio</strong>; share of sales lost by good i captured by good j.",
+      t2_not_div: "<strong>Diversion ratio</strong> (relocation of demand); share of sales lost by good i captured by good j.",
       t2_not_mbar: "<strong>Weighted average margin</strong> across goods in basket S, weighted by volumes q<sub>i</sub>.",
       t2_not_cls: "<strong>Basket critical loss</strong>; allowable volume outflow: CL(S) = X / (X + m̄(S)).",
       t2_not_als: "<strong>Actual sales loss</strong> leaking outside basket S; diverted sales captured inside do not count as losses.",
       t2_not_wout: "<strong>Outside option strength</strong>; consumer propensity to forgo purchase or switch outside the map.",
-      t3_badge: "Decision exercise",
-      t3_title: "Monopoly simulator: price increase",
-      t3_subtitle: "You lead a greenhouse rose grower with a 100M PLN budget. Build a basket that sustains a 10% price rise.",
-      t3_budget_lbl: "Budget:",
-      t3_btn_restart: "Restart",
-      t3_acq_title: "Available acquisition targets:",
-      t3_acq_sub: "Not every acquisition constrains consumer diversion.",
-      t3_btn_run: "Raise price by +10% (SSNIP)",
-      t3_report_title: "Test report:",
-      t3_report_intro: "Select targets to acquire, then execute the 10% price rise to observe demand and supply reactions.",
+      t3_badge: "Spatial market analysis",
+      t3_title: "Road isochrones: buyer search area, seller catchment, and competition",
+      t3_subtitle: "Ready-mix concrete market in a closed region. Road travel time and river bridges create distinct boundaries for buyers and sellers.",
+      t3_btn_random: "Randomize map layout",
+      t3_mode_lbl: "Geographic analysis perspective:",
+      t3_mode1_h: "Buyer perspective (demand)",
+      t3_mode1_p: "Area from which selected construction site B can source concrete within time limit T.",
+      t3_mode2_h: "Seller catchment area (supply isochrones)",
+      t3_mode2_p: "Driving time bands (12, 20, 30 min) and total volume served.",
+      t3_mode3_h: "Overlapping zones (who competes?)",
+      t3_mode3_p: "Rival plants that can also supply customers inside the selected plant's catchment area.",
+      t3_lbl_time: "Max concrete delivery time (T<sub>max</sub>):",
+      t3_time_short: "10 min (high freight cost)",
+      t3_time_long: "35 min (low freight cost)",
+      t3_sel_lbl: "Active map point:",
+      t3_click_instr: "Click any construction site (B1–B9) or concrete plant (S1–S4) directly on the map to change the reference point.",
+      t3_zones_panel_title: "Isochrone demand bands:",
+      t3_chal_badge: "Analytical challenge",
+      t3_btn_verify: "Check answer",
+      t3_btn_next_chal: "Next question",
+      t3_map_header: "Regional road network and travel isochrones (closed region — no outside buyers or sellers)",
+      t3_leg_s: "Concrete plant (S1–S4)",
+      t3_leg_b: "Construction site / buyer (B1–B9)",
+      t3_leg_loc: "Road network",
+      t3_leg_riv: "River and bridges",
+      t3_kpi1: "Analysis point",
+      t3_kpi2: "Suppliers in reach",
+      t3_kpi3: "Demand in reach",
+      t3_kpi4: "Contested demand",
+      t3_not_tag: "Conceptual notation",
+      t3_not_title: "Three distinct geographic areas in market analysis (Task 3)",
+      t3_not_1_h: "1. Buyer search area (T<sub>B</sub> ≤ T<sub>max</sub>)",
+      t3_not_1_p: "The area around a specific buyer (construction site B) from which it can source concrete without exceeding acceptable delivery time and transport cost.",
+      t3_not_2_h: "2. Seller catchment area",
+      t3_not_2_p: "The road isochrone around plant S showing which buyers can be reached within T<sub>max</sub>. Its shape follows the road network and bottlenecks such as river bridges.",
+      t3_not_3_h: "3. Competitor overlap zone",
+      t3_not_3_p: "Seller S<sub>1</sub> competes with every rival plant S<sub>k</sub> that can supply customers inside S<sub>1</sub>'s catchment area, even if the plants themselves are up to 2·T<sub>max</sub> apart.",
       dist_badge: "Basic concepts",
       dist_main_title: "Industry, relevant market, and product segment",
       dist_hierarchy_tag: "Hierarchy of concepts",
@@ -2865,7 +4159,7 @@
   };
 
   function switchTab(tabId) {
-    ['intro', 'lab', 'distinction', 'quiz'].forEach(t => {
+    ['intro', 'lab', 'distinction', 'math', 'quiz'].forEach(t => {
       const el = document.getElementById(`view-${t}`);
       const btn = document.getElementById(`tab-${t}`);
       if (!el || !btn) return;
@@ -2880,6 +4174,26 @@
 
     if (tabId === 'lab') {
       switchLabTask(activeLabTask);
+    }
+  }
+
+  function switchMathTrack(track) {
+    const intView = document.getElementById('math-track-intuition');
+    const formView = document.getElementById('math-track-formal');
+    const intBtn = document.getElementById('btn-math-track-intuition');
+    const formBtn = document.getElementById('btn-math-track-formal');
+    if (!intView || !formView || !intBtn || !formBtn) return;
+
+    if (track === 'intuition') {
+      intView.classList.remove('hidden');
+      formView.classList.add('hidden');
+      intBtn.className = "px-3 py-1 rounded-lg bg-white shadow-xs text-indigo-600 font-bold transition";
+      formBtn.className = "px-3 py-1 rounded-lg text-slate-600 hover:text-slate-900 transition";
+    } else {
+      formView.classList.remove('hidden');
+      intView.classList.add('hidden');
+      formBtn.className = "px-3 py-1 rounded-lg bg-white shadow-xs text-indigo-600 font-bold transition";
+      intBtn.className = "px-3 py-1 rounded-lg text-slate-600 hover:text-slate-900 transition";
     }
   }
 
@@ -2911,8 +4225,9 @@
   }
 
   window.onload = function() {
-    shuffleT2Names();
-    selfTestTask2();
+    generateNewTask2();
+    initTask3Graph();
+    generateNewTask3Map();
     initializeQuizSession();
 
     const outsideRange = document.getElementById('t2-range-outside');
@@ -2930,7 +4245,6 @@
 
     renderTask1Scenarios();
     updateTask1();
-    renderTask2();
     renderTask3();
     renderQuizQuestion();
   };
