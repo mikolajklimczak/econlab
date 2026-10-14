@@ -752,8 +752,8 @@
                   <button onclick="checkTask3Challenge()" id="t3-btn-check" class="flex-1 py-2 px-3 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-xl text-xs transition shadow-xs">
                     <span data-i18n="t3_btn_verify">Sprawdź odpowiedź</span>
                   </button>
-                  <button onclick="nextTask3Challenge()" class="py-2 px-3 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 font-semibold rounded-xl text-xs transition" data-i18n="t3_btn_next_chal">
-                    Inne pytanie
+                  <button onclick="nextTask3Challenge()" id="t3-btn-next-chal" class="py-2 px-3 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 font-semibold rounded-xl text-xs transition" data-i18n="t3_btn_next_chal">
+                    Następne pytanie
                   </button>
                 </div>
                 <div id="t3-chal-feedback" class="hidden p-2.5 rounded-lg text-[11px] leading-relaxed border"></div>
@@ -1812,6 +1812,7 @@
 
     t3State.selectedSeller = 'S1';
     t3State.selectedBuyer = 'B1';
+    t3State.challengeSolvedCount = 0;
     setupTask3Challenge(0);
     renderTask3();
   }
@@ -2056,7 +2057,12 @@
   }
 
   function nextTask3Challenge() {
-    setupTask3Challenge((t3State.challengeType + 1) % 3);
+    if (t3State.challengeType === 2) {
+      t3State.challengeSolvedCount = 0;
+      setupTask3Challenge(0);
+    } else {
+      setupTask3Challenge(t3State.challengeType + 1);
+    }
     renderTask3();
   }
 
@@ -2095,6 +2101,15 @@
         ? `Question 3 (Captive demand): Which construction sites are served <strong>exclusively</strong> by plant <strong>${target}</strong> (no rival plant within ${T} min)?`
         : `Pytanie 3 (Klienci wyłączni): Które place budowy znajdują się w zasięgu <strong>wyłącznie</strong> betoniarni <strong>${target}</strong> (brak rywali w czasie ${T} min)?`;
       optionsList = t3State.buyers.map(b => b.id);
+    }
+
+    const nextBtn = document.getElementById('t3-btn-next-chal');
+    if (nextBtn) {
+      const isLast = (t3State.challengeType === 2);
+      nextBtn.setAttribute('data-i18n', isLast ? 't3_btn_reset_chal' : 't3_btn_next_chal');
+      nextBtn.textContent = isLast
+        ? (isEn ? 'Reset' : 'Zresetuj')
+        : (isEn ? 'Next question' : 'Następne pytanie');
     }
 
     optContainer.innerHTML = '';
@@ -3809,7 +3824,8 @@
       t3_zones_panel_title: "Popyt w strefach czasowych:",
       t3_chal_badge: "Wyzwanie analityczne",
       t3_btn_verify: "Sprawdź odpowiedź",
-      t3_btn_next_chal: "Inne pytanie",
+      t3_btn_next_chal: "Następne pytanie",
+      t3_btn_reset_chal: "Zresetuj",
       t3_map_header: "Mapa drogowa regionu i izochrony dojazdu (poza mapą brak dostawców i odbiorców)",
       t3_leg_s: "Wytwórnia betonu (S1–S4)",
       t3_leg_b: "Plac budowy / nabywca (B1–B9)",
@@ -4079,6 +4095,7 @@
       t3_chal_badge: "Analytical challenge",
       t3_btn_verify: "Check answer",
       t3_btn_next_chal: "Next question",
+      t3_btn_reset_chal: "Reset",
       t3_map_header: "Regional road network and travel isochrones (closed region — no outside buyers or sellers)",
       t3_leg_s: "Concrete plant (S1–S4)",
       t3_leg_b: "Construction site / buyer (B1–B9)",
