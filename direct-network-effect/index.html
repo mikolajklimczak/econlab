@@ -1,0 +1,2548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EconLab - Network Effects & Critical Mass | Efekty sieciowe i masa krytyczna</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              600: '#4f46e5',
+              700: '#4338ca',
+              900: '#312e81',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    .custom-range {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      border-radius: 9999px;
+      outline: none;
+      background: #e2e8f0;
+      transition: background 0.15s ease-in-out;
+    }
+    .custom-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid #ffffff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+      transition: transform 0.1s ease;
+    }
+    .custom-range::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+    .range-indigo::-webkit-slider-thumb { background: #4f46e5; }
+    .range-emerald::-webkit-slider-thumb { background: #16a34a; }
+    .range-blue::-webkit-slider-thumb { background: #2563eb; }
+    .range-amber::-webkit-slider-thumb { background: #d97706; }
+    .range-purple::-webkit-slider-thumb { background: #9333ea; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col antialiased selection:bg-indigo-500 selection:text-white">
+
+  <header class="bg-white border-b border-slate-200 shadow-sm sticky top-0 z-40 min-h-16 flex items-center">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex items-center justify-between gap-4 py-2">
+      <div class="flex items-center gap-3">
+        <a href="javascript:void(0)" onclick="switchTab('intro')" class="flex items-center shrink-0">
+          <img src="econlab_poziomo_v2.png" alt="EconLab Logo" onerror="this.src='https://placehold.co/240x60/ffffff/0e2b46?text=EconLab'" class="h-9 sm:h-10 w-auto max-h-11 object-contain">
+        </a>
+        <div class="border-l border-slate-200 pl-3">
+          <div class="text-sm font-semibold text-slate-800 leading-tight" data-i18n="subtitle">Network effects and critical mass</div>
+          <div class="text-xs text-slate-500 flex items-center gap-2 mt-0.5">
+            <span class="flex items-center gap-1">
+              <span data-i18n="author_prefix">Author:</span>
+              <a href="https://orcid.org/0000-0003-4761-3421" target="_blank" rel="noopener noreferrer" class="font-medium text-slate-700 hover:text-emerald-700 flex items-center gap-0.5 underline decoration-slate-300">
+                Mikołaj Klimczak
+                <svg class="w-3.5 h-3.5 text-emerald-600 inline-block" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.516.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.016-5.325 5.016h-3.919V7.416zm1.444 1.303v7.444h2.297c2.359 0 3.9-1.388 3.9-3.722 0-2.2-1.509-3.722-3.831-3.722h-2.366z"/>
+                </svg>
+              </a>
+            </span>
+            <span>•</span>
+            <span class="text-indigo-600/90 font-medium" data-i18n="ai_support">AI implementation support: Gemini</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 sm:gap-3">
+        <nav class="bg-slate-100 p-1 rounded-xl flex text-xs font-semibold overflow-x-auto max-w-xs sm:max-w-none">
+          <button id="nav-btn-intro" onclick="switchTab('intro')" class="tab-btn px-3 py-1.5 rounded-lg transition-all bg-white shadow-sm text-indigo-600 font-bold" data-i18n="tab_intro">Introduction</button>
+          <button id="nav-btn-concepts" onclick="switchTab('concepts')" class="tab-btn px-3 py-1.5 rounded-lg transition-all text-slate-600 hover:text-slate-900" data-i18n="tab_concepts">Concepts</button>
+          <button id="nav-btn-lab" onclick="switchTab('lab')" class="tab-btn px-3 py-1.5 rounded-lg transition-all text-slate-600 hover:text-slate-900" data-i18n="tab_lab">Laboratory</button>
+          <button id="nav-btn-tasks" onclick="switchTab('tasks')" class="tab-btn px-3 py-1.5 rounded-lg transition-all text-slate-600 hover:text-slate-900" data-i18n="tab_tasks">Tasks</button>
+          <button id="nav-btn-quiz" onclick="switchTab('quiz')" class="tab-btn px-3 py-1.5 rounded-lg transition-all text-slate-600 hover:text-slate-900" data-i18n="tab_quiz">Quiz</button>
+        </nav>
+
+        <button onclick="toggleLanguage()" class="p-2 bg-slate-100 hover:bg-slate-200 border border-slate-200 text-indigo-600 rounded-xl transition-colors shrink-0" title="Switch language / Przełącz język">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 w-full">
+
+    <section id="tab-intro" class="space-y-6">
+      <div class="bg-gradient-to-r from-indigo-700 via-indigo-600 to-blue-600 text-white rounded-2xl p-6 sm:p-8 shadow-sm">
+        <div class="inline-block bg-white/15 px-3 py-1 rounded-full text-xs font-semibold mb-3 tracking-wide" data-i18n="intro_pill">Economics of the digital business</div>
+        <h1 class="text-2xl sm:text-3xl font-display font-bold leading-tight" data-i18n="intro_title">Network effects and critical mass</h1>
+        <p class="mt-2 text-sm sm:text-base text-indigo-100 max-w-3xl leading-relaxed" data-i18n="intro_desc">
+          In digital markets, product value depends on how many other people use it. When this relational value exceeds the price, self-reinforcing adoption takes over.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <button onclick="switchTab('concepts')" class="px-4 py-2 bg-white text-indigo-700 text-xs sm:text-sm font-semibold rounded-xl hover:bg-indigo-50 transition shadow-sm" data-i18n="intro_cta_concepts">Explore concepts</button>
+          <button onclick="switchTab('lab')" class="px-4 py-2 bg-indigo-500/30 text-white border border-white/30 text-xs sm:text-sm font-semibold rounded-xl hover:bg-white/20 transition" data-i18n="intro_cta_lab">Open laboratory</button>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm space-y-4">
+        <div class="border-b border-slate-100 pb-3">
+          <h2 class="text-base font-bold text-slate-800" data-i18n="intro_taxonomy_title">Taxonomy of network effects</h2>
+          <p class="text-xs text-slate-500 mt-0.5" data-i18n="intro_taxonomy_sub">How the user base alters value across different market structures.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="p-4 rounded-xl border-2 border-indigo-200 bg-indigo-50/50 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold text-indigo-700 uppercase tracking-wider" data-i18n="intro_type1_badge">In focus here</span>
+                <span class="h-2 w-2 rounded-full bg-indigo-600"></span>
+              </div>
+              <h3 class="font-bold text-slate-800 text-sm" data-i18n="intro_type1_name">Direct network effects</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed" data-i18n="intro_type1_desc">
+                The number of users in a single group influences the value for participants in that same group. Messaging apps and phone networks become more useful as more of your peers join.
+              </p>
+            </div>
+            <div class="mt-3 pt-2 border-t border-indigo-100 text-[11px] font-mono text-indigo-800" data-i18n="intro_type1_ex">Example: Signal, WhatsApp, telephone systems</div>
+          </div>
+
+          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/60 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider" data-i18n="intro_type2_badge">Complementary</span>
+              </div>
+              <h3 class="font-bold text-slate-800 text-sm" data-i18n="intro_type2_name">Indirect network effects</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed" data-i18n="intro_type2_desc">
+                The value of a primary good is influenced by the availability and variety of complementary goods created for it. Hardware adoption attracts third-party software development.
+              </p>
+            </div>
+            <div class="mt-3 pt-2 border-t border-slate-200 text-[11px] font-mono text-slate-700" data-i18n="intro_type2_ex">Example: Video game consoles and compatible titles</div>
+          </div>
+
+          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/60 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider" data-i18n="intro_type3_badge">Two-sided</span>
+              </div>
+              <h3 class="font-bold text-slate-800 text-sm" data-i18n="intro_type3_name">Cross-side network effects</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed" data-i18n="intro_type3_desc">
+                The number of participants in one distinct group changes the value for another group using the same platform. More buyers attract more sellers, and shorter wait times attract riders.
+              </p>
+            </div>
+            <div class="mt-3 pt-2 border-t border-slate-200 text-[11px] font-mono text-slate-700" data-i18n="intro_type3_ex">Example: Uber (riders/drivers), Airbnb (hosts/guests)</div>
+          </div>
+        </div>
+
+        <div class="p-3.5 bg-amber-50 rounded-xl border border-amber-200 text-xs text-amber-900 leading-relaxed flex items-start gap-2.5">
+          <svg class="w-4 h-4 text-amber-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <div data-i18n="intro_scope_note">
+            <strong>Scope of this simulator:</strong> This EconLab focuses specifically on <em>direct network effects</em> within a single consumer population, modeling how expectations, autonomous product value, and pricing determine critical mass thresholds and market equilibria.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-concepts" class="hidden space-y-6">
+      <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div>
+          <h2 class="text-lg font-bold text-slate-800" data-i18n="concepts_header">Theoretical foundations</h2>
+          <p class="text-xs text-slate-500 mt-0.5" data-i18n="concepts_sub">Choose between the qualitative mechanism and the formal model from Katz & Shapiro.</p>
+        </div>
+        <div class="bg-slate-100 p-1 rounded-xl flex text-xs font-semibold shrink-0">
+          <button id="concepts-track-btn-intuitive" onclick="switchConceptsTrack('intuitive')" class="px-3 py-1.5 rounded-lg bg-white shadow-sm text-indigo-600 font-bold transition" data-i18n="track_intuitive">Intuitive track</button>
+          <button id="concepts-track-btn-formal" onclick="switchConceptsTrack('formal')" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition" data-i18n="track_formal">Formal track</button>
+        </div>
+      </div>
+
+      <!-- CONCEPTS TRACK A: INTUITIVE -->
+      <div id="concepts-view-intuitive" class="space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <h3 class="font-bold text-slate-800 text-sm mb-2" data-i18n="concept_cm_title">The critical mass mechanism</h3>
+              <p class="text-xs text-slate-600 leading-relaxed mb-3" data-i18n="concept_cm_p1">
+                A network product requires a minimum number of users before its value outweighs the effort or cost of joining. Below this threshold, early adopters encounter too few peers, so churn exceeds growth and the network collapses.
+              </p>
+              <p class="text-xs text-slate-600 leading-relaxed" data-i18n="concept_cm_p2">
+                Once the user base crosses this critical mass, word of mouth and coordination turn positive. Joining becomes rational for the wider population, driving rapid growth toward market saturation.
+              </p>
+            </div>
+            <div class="mt-4 p-3 bg-indigo-50 rounded-xl border border-indigo-100 text-[11px] text-indigo-900 leading-relaxed font-medium" data-i18n="concept_cm_note">
+              Analogy: A public square where performers only appear if there is an audience, while visitors only gather if there is something to watch.
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <h3 class="font-bold text-slate-800 text-sm mb-2" data-i18n="concept_metcalfe_title">Metcalfe's law and practical constraints</h3>
+              <p class="text-xs text-slate-600 leading-relaxed mb-3" data-i18n="concept_metcalfe_p1">
+                Robert Metcalfe postulated that the value of a communications network scales with the square of its participants, because the number of possible bilateral connections is \(n(n - 1) / 2\).
+              </p>
+              <p class="text-xs text-slate-600 leading-relaxed" data-i18n="concept_metcalfe_p2">
+                In practice, human cognitive bandwidth is limited (Dunbar's number of about 150 stable ties). As networks expand, additional ties are weak, spam increases, and congestion sets in. Odlyzko and Tilly show that network value grows closer to \(n \log n\).
+              </p>
+            </div>
+            <div class="mt-4 p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-700 leading-relaxed font-mono" data-i18n="concept_metcalfe_note">
+              \(V \propto n^2 \quad \text{vs} \quad V \propto n \log(n)\)
+            </div>
+          </div>
+        </div>
+
+        <!-- NEW: STRATEGIES TO OVERCOME CRITICAL MASS -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-4">
+          <div class="border-b border-slate-100 pb-2">
+            <h3 class="text-sm font-bold text-slate-800" data-i18n="strategies_header">Strategies to overcome critical mass</h3>
+            <p class="text-xs text-slate-500 mt-0.5" data-i18n="strategies_sub">Two canonical paths to eliminate the start-up trap.</p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="p-4 rounded-xl border border-purple-200 bg-purple-50/50 space-y-2">
+              <div class="text-[11px] font-bold text-purple-700 uppercase tracking-wider" data-i18n="strat_utility_badge">Product design path</div>
+              <h4 class="text-sm font-bold text-slate-800" data-i18n="strat_utility_title">Standalone utility (single-player mode)</h4>
+              <p class="text-xs text-slate-600 leading-relaxed" data-i18n="strat_utility_desc">
+                Give the product autonomous value \(u_0 > 0\) that does not rely on peers. Early adopters join because the tool is immediately useful on its own (for instance, Instagram's photo filters or Dropbox's single-folder cloud backup). As users accumulate, the network layer activates on top of the established base, eliminating the coordination barrier.
+              </p>
+            </div>
+            <div class="p-4 rounded-xl border border-emerald-200 bg-emerald-50/50 space-y-2">
+              <div class="text-[11px] font-bold text-emerald-700 uppercase tracking-wider" data-i18n="strat_price_badge">Pricing policy path</div>
+              <h4 class="text-sm font-bold text-slate-800" data-i18n="strat_price_title">Dynamic penetration pricing</h4>
+              <p class="text-xs text-slate-600 leading-relaxed" data-i18n="strat_price_desc">
+                Set price below the willingness-to-pay curve during early adoption (\(p(z) < g(z)\)). By keeping the entry barrier below current network valuation, joining remains attractive at every scale. Once user volume matures, the fee ramps up to commercial market rates.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- FOUR MARKET REGIMES -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-4">
+          <div class="border-b border-slate-100 pb-2">
+            <h3 class="text-sm font-bold text-slate-800" data-i18n="states_header">Four market adoption regimes</h3>
+            <p class="text-xs text-slate-500 mt-0.5" data-i18n="states_sub">How initial adoption and price determine the trajectory of the network.</p>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <div class="p-3.5 rounded-xl border border-rose-200 bg-rose-50/60">
+              <div class="text-[11px] font-bold text-rose-700 uppercase tracking-wide" data-i18n="state1_badge">Prohibitive price</div>
+              <div class="text-sm font-bold text-slate-800 mt-1" data-i18n="state1_title">Market failure</div>
+              <p class="text-xs text-slate-600 mt-1.5 leading-relaxed" data-i18n="state1_desc">
+                When price exceeds peak willingness to pay (\(p > p_{\max}\)), no expectation can sustain the network. The only equilibrium is zero users.
+              </p>
+            </div>
+            <div class="p-3.5 rounded-xl border border-amber-200 bg-amber-50/60">
+              <div class="text-[11px] font-bold text-amber-700 uppercase tracking-wide" data-i18n="state2_badge">Sub-critical pool</div>
+              <div class="text-sm font-bold text-slate-800 mt-1" data-i18n="state2_title">Start-up trap</div>
+              <p class="text-xs text-slate-600 mt-1.5 leading-relaxed" data-i18n="state2_desc">
+                The price is viable, but early users are below the critical threshold (\(z_0 < z_1\)). Dissatisfaction drives the network toward extinction.
+              </p>
+            </div>
+            <div class="p-3.5 rounded-xl border border-indigo-200 bg-indigo-50/60">
+              <div class="text-[11px] font-bold text-indigo-700 uppercase tracking-wide" data-i18n="state3_badge">Tipping point passed</div>
+              <div class="text-sm font-bold text-slate-800 mt-1" data-i18n="state3_title">Bandwagon growth</div>
+              <p class="text-xs text-slate-600 mt-1.5 leading-relaxed" data-i18n="state3_desc">
+                The network starts with enough users to beat the critical threshold (\(z_0 > z_1\)). Value exceeds cost, pulling in additional users each period.
+              </p>
+            </div>
+            <div class="p-3.5 rounded-xl border border-emerald-200 bg-emerald-50/60">
+              <div class="text-[11px] font-bold text-emerald-700 uppercase tracking-wide" data-i18n="state4_badge">High equilibrium</div>
+              <div class="text-sm font-bold text-slate-800 mt-1" data-i18n="state4_title">Market maturity</div>
+              <p class="text-xs text-slate-600 mt-1.5 leading-relaxed" data-i18n="state4_desc">
+                Adoption reaches the stable high equilibrium \(z_2\). The remaining non-users have intrinsic reservations lower than current subscription price.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- INTERACTIVE INTUITION CHECK (EXPANDED TO 6 SCENARIOS) -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-3">
+          <div>
+            <h3 class="text-sm font-bold text-slate-800" data-i18n="micro_header">Interactive intuition check</h3>
+            <p class="text-xs text-slate-500" data-i18n="micro_sub">Click any scenario to diagnose the underlying network effect or strategy.</p>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+            <button onclick="revealIntuitionCheck(1)" class="text-left p-3 rounded-xl border border-slate-200 hover:border-indigo-400 bg-slate-50 hover:bg-indigo-50/30 transition">
+              <div class="text-xs font-bold text-slate-800" data-i18n="micro1_title">Signal messenger</div>
+              <div class="text-[11px] text-slate-500 mt-0.5" data-i18n="micro1_sub">Friends installing the app</div>
+            </button>
+            <button onclick="revealIntuitionCheck(2)" class="text-left p-3 rounded-xl border border-slate-200 hover:border-indigo-400 bg-slate-50 hover:bg-indigo-50/30 transition">
+              <div class="text-xs font-bold text-slate-800" data-i18n="micro2_title">Conference Wi-Fi</div>
+              <div class="text-[11px] text-slate-500 mt-0.5" data-i18n="micro2_sub">Crowded room streaming video</div>
+            </button>
+            <button onclick="revealIntuitionCheck(3)" class="text-left p-3 rounded-xl border border-slate-200 hover:border-indigo-400 bg-slate-50 hover:bg-indigo-50/30 transition">
+              <div class="text-xs font-bold text-slate-800" data-i18n="micro3_title">PlayStation catalog</div>
+              <div class="text-[11px] text-slate-500 mt-0.5" data-i18n="micro3_sub">Game studio support</div>
+            </button>
+            <button onclick="revealIntuitionCheck(4)" class="text-left p-3 rounded-xl border border-slate-200 hover:border-indigo-400 bg-slate-50 hover:bg-indigo-50/30 transition">
+              <div class="text-xs font-bold text-slate-800" data-i18n="micro4_title">Uber drivers and riders</div>
+              <div class="text-[11px] text-slate-500 mt-0.5" data-i18n="micro4_sub">Two distinct user groups</div>
+            </button>
+            <button onclick="revealIntuitionCheck(5)" class="text-left p-3 rounded-xl border border-slate-200 hover:border-indigo-400 bg-slate-50 hover:bg-indigo-50/30 transition">
+              <div class="text-xs font-bold text-slate-800" data-i18n="micro5_title">Early Instagram filters</div>
+              <div class="text-[11px] text-slate-500 mt-0.5" data-i18n="micro5_sub">Single-player photo editing</div>
+            </button>
+            <button onclick="revealIntuitionCheck(6)" class="text-left p-3 rounded-xl border border-slate-200 hover:border-indigo-400 bg-slate-50 hover:bg-indigo-50/30 transition">
+              <div class="text-xs font-bold text-slate-800" data-i18n="micro6_title">PayPal signup cash bonus</div>
+              <div class="text-[11px] text-slate-500 mt-0.5" data-i18n="micro6_sub">Negative price adoption subsidy</div>
+            </button>
+          </div>
+          <div id="intuition-answer-box" class="p-3.5 bg-indigo-50/70 border border-indigo-200 rounded-xl text-xs text-indigo-950 leading-relaxed">
+            <span class="font-semibold" data-i18n="micro_default_lead">Selected case:</span>
+            <span id="intuition-answer-text" data-i18n="micro_default_text">Click any of the scenarios above to see the economic mechanism.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONCEPTS TRACK B: FORMAL -->
+      <div id="concepts-view-formal" class="hidden space-y-6">
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-4">
+          <div class="border-b border-slate-100 pb-2">
+            <h3 class="text-sm font-bold text-slate-800" data-i18n="formal_sec1_title">Consumer utility and heterogeneous valuations</h3>
+            <p class="text-xs text-slate-500 mt-0.5" data-i18n="formal_sec1_sub">Analytical framework following Katz & Shapiro (1985) and Easley & Kleinberg (Ch. 17).</p>
+          </div>
+          <div class="text-xs text-slate-600 leading-relaxed space-y-2">
+            <p data-i18n="formal_p1">
+              Consumers are indexed on the interval \(x \in [0, 1]\) in descending order of their intrinsic preference for the product. Consumer \(x\) has an intrinsic valuation:
+            </p>
+            <div class="text-xs bg-slate-50 p-3 rounded-xl border border-slate-200 text-slate-800 text-center font-serif">
+              \(r(x) = a \cdot (1 - x), \quad a > 0\)
+            </div>
+            <p data-i18n="formal_p2">
+              If consumers expect a fraction \(z \in [0, 1]\) of the population to use the service, and the product also provides an autonomous value \(u_0 \ge 0\), total willingness to pay is:
+            </p>
+            <div class="text-xs bg-slate-50 p-3 rounded-xl border border-slate-200 text-slate-800 text-center font-serif">
+              \(v(x) = (1 - x)(u_0 + \beta z)\)
+            </div>
+            <p class="text-slate-500" data-i18n="formal_p3">
+              The coefficient \(\beta = a \cdot b\) captures baseline reservation price and intensity of network coordination, while \(u_0\) represents standalone utility. At \(x = 1\), willingness to pay drops to zero, anchoring the curve at \(z = 1\).
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-4">
+          <div class="border-b border-slate-100 pb-2">
+            <h3 class="text-sm font-bold text-slate-800" data-i18n="formal_sec2_title">Self-fulfilling expectations and market equilibria</h3>
+          </div>
+          <div class="text-xs text-slate-600 leading-relaxed space-y-2">
+            <p data-i18n="formal_p4">
+              At market price \(p\), consumer \(x\) buys if \(v(x) \ge p\), meaning \((1 - x)(u_0 + \beta z) \ge p\). The marginal buyer is:
+            </p>
+            <div class="text-xs bg-slate-50 p-3 rounded-xl border border-slate-200 text-slate-800 text-center font-serif">
+              \(\hat{x}(z) = 1 - \dfrac{p}{u_0 + \beta z}\)
+            </div>
+            <p data-i18n="formal_p5">
+              In a rational expectations equilibrium (\(z = \hat{x}(z)\)), the willingness-to-pay curve becomes:
+            </p>
+            <div class="text-xs bg-slate-50 p-3 rounded-xl border border-slate-200 text-indigo-700 font-bold text-center font-serif">
+              \(p = g(z) = (1 - z)(u_0 + \beta z)\)
+            </div>
+            <p data-i18n="formal_p6">
+              When \(u_0 = 0\), the curve starts at the origin with maximum sustainable price \(p_{\max} = \beta / 4\). When \(u_0 > 0\), the curve starts at \(g(0) = u_0\) and remains anchored at \(g(1) = 0\). If \(p \le u_0\), every consumer with \(x < 1 - p/u_0\) has positive surplus even with zero peers, eliminating critical mass \(z_1\).
+            </p>
+            <p data-i18n="formal_p7">
+              For \(p > u_0\), solving \(\beta z^2 + (u_0 - \beta)z + (p - u_0) = 0\) with discriminant \(\Delta = (\beta - u_0)^2 - 4\beta(p - u_0)\) gives:
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+              <div class="p-3 bg-rose-50 border border-rose-200 rounded-xl">
+                <div class="font-bold text-rose-700 text-center">\(z_1 = \dfrac{(\beta - u_0) - \sqrt{\Delta}}{2\beta}\)</div>
+                <div class="text-[11px] text-rose-800 mt-1" data-i18n="eq_z1_desc">Critical mass. Unstable threshold. Below it, adoption decays to zero.</div>
+              </div>
+              <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-xl">
+                <div class="font-bold text-emerald-700 text-center">\(z_2 = \dfrac{(\beta - u_0) + \sqrt{\Delta}}{2\beta}\)</div>
+                <div class="text-[11px] text-emerald-800 mt-1" data-i18n="eq_z2_desc">High equilibrium. Stable target. Small disturbances self-correct.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-3">
+          <h3 class="text-sm font-bold text-slate-800" data-i18n="formal_sec3_title">Dynamic adjustment process and pricing paths</h3>
+          <p class="text-xs text-slate-600 leading-relaxed" data-i18n="formal_dyn_desc">
+            Adoption adjusts according to \(z_{t+1} = \max\left(0, \min\left(1, 1 - \dfrac{p}{u_0 + \beta z_t}\right)\right)\). Under dynamic pricing \(p(z_t) = \min(p_{\text{target}},\, \gamma \cdot g(z_t))\) with \(\gamma < 1\), price remains strictly below willingness to pay, ensuring \(\Delta z_t > 0\) until high equilibrium is reached.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-lab" class="hidden space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <!-- LEFT COLUMN: CONTROLS (4 COLS) -->
+        <div class="lg:col-span-4 space-y-4">
+          <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+              <h2 class="text-sm font-bold text-slate-800" data-i18n="lab_params_header">Network parameters</h2>
+              <button onclick="resetLabToDefaults()" class="text-xs font-semibold text-indigo-600 hover:text-indigo-800" data-i18n="btn_defaults">Defaults</button>
+            </div>
+
+            <!-- SLIDER BETA -->
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-semibold text-slate-700" data-i18n="slider_beta">Network strength (\(\beta\))</span>
+                <span id="val-beta" class="font-mono font-bold text-indigo-600">60</span>
+              </div>
+              <input type="range" id="input-beta" min="20" max="100" step="2" value="60" oninput="updateLabSimulation()" class="custom-range range-indigo">
+              <div class="flex justify-between text-[10px] text-slate-400">
+                <span>20 (weak)</span>
+                <span>100 (intense)</span>
+              </div>
+            </div>
+
+            <!-- SLIDER U0 (STANDALONE UTILITY) -->
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-semibold text-slate-700" data-i18n="slider_u0">Standalone utility (\(u_0\))</span>
+                <span id="val-u0" class="font-mono font-bold text-purple-600">0.00</span>
+              </div>
+              <input type="range" id="input-u0" min="0" max="15" step="0.5" value="0" oninput="updateLabSimulation()" class="custom-range range-purple">
+              <div class="flex justify-between text-[10px] text-slate-400">
+                <span>0 (pure network)</span>
+                <span>15 (high utility)</span>
+              </div>
+            </div>
+
+            <!-- SLIDER PRICE -->
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-semibold text-slate-700" data-i18n="slider_price">Target market price (\(p\))</span>
+                <span id="val-price" class="font-mono font-bold text-emerald-600">9.00</span>
+              </div>
+              <input type="range" id="input-price" min="0" max="25" step="0.25" value="9" oninput="updateLabSimulation()" class="custom-range range-emerald">
+              <div class="flex justify-between text-[10px] text-slate-400">
+                <span>0 (free / open)</span>
+                <span>25 (premium)</span>
+              </div>
+            </div>
+
+            <!-- SLIDER STARTING USERS -->
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-semibold text-slate-700" data-i18n="slider_zstart">Initial adoption (\(z_0\))</span>
+                <span id="val-zstart" class="font-mono font-bold text-blue-600">12%</span>
+              </div>
+              <input type="range" id="input-zstart" min="1" max="100" step="1" value="12" oninput="updateLabSimulation(true)" class="custom-range range-blue">
+              <div class="flex justify-between text-[10px] text-slate-400">
+                <span>1% (seed)</span>
+                <span>100% (saturated)</span>
+              </div>
+            </div>
+
+            <!-- PRICING REGIME TOGGLE -->
+            <div class="pt-2 border-t border-slate-100 space-y-1.5">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-semibold text-slate-700" data-i18n="label_pricing_mode">Pricing regime</span>
+                <span id="val-pricing-mode" class="text-[11px] font-bold text-indigo-700">Fixed price</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 text-xs">
+                <button id="btn-mode-fixed" onclick="setPricingMode('fixed')" class="py-1.5 px-2 rounded-lg font-semibold bg-indigo-50 border border-indigo-200 text-indigo-700" data-i18n="mode_fixed">Fixed</button>
+                <button id="btn-mode-dynamic" onclick="setPricingMode('dynamic')" class="py-1.5 px-2 rounded-lg font-semibold bg-slate-50 border border-slate-200 text-slate-600 hover:bg-slate-100" data-i18n="mode_dynamic">Dynamic ramp</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- PRESETS -->
+          <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200 shadow-sm space-y-2.5">
+            <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider" data-i18n="lab_presets_header">Scenario presets</h3>
+            <div class="grid grid-cols-2 gap-2">
+              <button onclick="applyPreset('trap')" class="p-2.5 text-left rounded-xl border border-slate-200 hover:border-rose-400 bg-slate-50 hover:bg-rose-50/40 text-xs transition">
+                <div class="font-bold text-slate-800" data-i18n="preset_trap_title">Start-up trap</div>
+                <div class="text-[10px] text-slate-500 mt-0.5">\(u_0=0, z_0 < z_1\)</div>
+              </button>
+              <button onclick="applyPreset('freemium')" class="p-2.5 text-left rounded-xl border border-slate-200 hover:border-emerald-400 bg-slate-50 hover:bg-emerald-50/40 text-xs transition">
+                <div class="font-bold text-slate-800" data-i18n="preset_free_title">Freemium jump</div>
+                <div class="text-[10px] text-slate-500 mt-0.5">\(p = 0\)</div>
+              </button>
+              <button onclick="applyPreset('utility')" class="p-2.5 text-left rounded-xl border border-slate-200 hover:border-purple-400 bg-slate-50 hover:bg-purple-50/40 text-xs transition">
+                <div class="font-bold text-slate-800" data-i18n="preset_utility_title">Standalone utility</div>
+                <div class="text-[10px] text-slate-500 mt-0.5">\(u_0=8.0, p=7.0\)</div>
+              </button>
+              <button onclick="applyPreset('dynamic')" class="p-2.5 text-left rounded-xl border border-slate-200 hover:border-indigo-400 bg-slate-50 hover:bg-indigo-50/40 text-xs transition">
+                <div class="font-bold text-slate-800" data-i18n="preset_dyn_title">Dynamic ramp-up</div>
+                <div class="text-[10px] text-slate-500 mt-0.5">\(p(z) < g(z)\)</div>
+              </button>
+            </div>
+          </div>
+
+          <!-- DYNAMICS CONTROLLER -->
+          <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200 shadow-sm space-y-3">
+            <div class="flex items-center justify-between">
+              <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider" data-i18n="lab_dyn_header">Dynamic adjustment</h3>
+              <span id="dyn-step-counter" class="text-xs font-mono font-semibold text-slate-500">t = 0</span>
+            </div>
+            <div class="flex gap-2">
+              <button id="btn-run-dyn" onclick="toggleDynamicsAnimation()" class="flex-1 py-2 px-3 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-xl shadow-sm transition flex items-center justify-center gap-1.5">
+                <svg id="dyn-play-icon" class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4l12 6-12 6z"/></svg>
+                <span id="dyn-play-text" data-i18n="btn_run_sim">Run simulation</span>
+              </button>
+              <button onclick="stepDynamicsForward()" class="py-2 px-3 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-xl transition" data-i18n="btn_step">Step</button>
+              <button onclick="resetDynamicsToStart()" class="py-2 px-3 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-xl transition" data-i18n="btn_reset">Reset</button>
+            </div>
+            <div id="dyn-status-message" class="text-[11px] p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-slate-600 leading-tight">
+              Ready to simulate dynamic adjustment.
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN: SVG VISUALIZATION & KPI BAR (8 COLS) -->
+        <div class="lg:col-span-8 space-y-4">
+          <!-- KPI BAR -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div class="bg-white rounded-2xl p-3.5 border border-slate-200 shadow-sm">
+              <div class="text-[11px] text-slate-500 font-medium" data-i18n="kpi_pmax">Max price (\(p_{\max}\))</div>
+              <div id="kpi-pmax-val" class="text-lg font-bold font-mono text-slate-800 mt-0.5">15.00</div>
+              <div id="kpi-pmax-sub" class="text-[10px] text-slate-400 mt-0.5">\((\beta + u_0)^2 / 4\beta\)</div>
+            </div>
+            <div class="bg-white rounded-2xl p-3.5 border border-slate-200 shadow-sm">
+              <div class="text-[11px] text-rose-700 font-medium" data-i18n="kpi_critical">Critical mass (\(z_1\))</div>
+              <div id="kpi-z1-val" class="text-lg font-bold font-mono text-rose-600 mt-0.5">18.4%</div>
+              <div id="kpi-z1-sub" class="text-[10px] text-rose-500 mt-0.5" data-i18n="kpi_unstable">Unstable threshold</div>
+            </div>
+            <div class="bg-white rounded-2xl p-3.5 border border-slate-200 shadow-sm">
+              <div class="text-[11px] text-blue-700 font-medium" data-i18n="kpi_high">High equilibrium (\(z_2\))</div>
+              <div id="kpi-z2-val" class="text-lg font-bold font-mono text-blue-600 mt-0.5">81.6%</div>
+              <div class="text-[10px] text-blue-500 mt-0.5" data-i18n="kpi_stable">Stable target</div>
+            </div>
+            <div class="bg-white rounded-2xl p-3.5 border border-slate-200 shadow-sm">
+              <div class="text-[11px] text-indigo-700 font-medium" data-i18n="kpi_trajectory">Market regime</div>
+              <div id="kpi-trajectory-val" class="text-xs font-bold text-slate-800 mt-1.5 leading-snug">Converging</div>
+              <div id="kpi-trajectory-sub" class="text-[10px] text-slate-400 mt-0.5">Tracking \(z_t\)</div>
+            </div>
+          </div>
+
+          <!-- MAIN SVG PLOT -->
+          <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-3">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-2">
+              <div class="text-xs font-bold text-slate-800" data-i18n="chart_title">Willingness-to-pay curve & expectations equilibrium</div>
+              <div class="flex items-center gap-3 text-[11px]">
+                <span class="flex items-center gap-1.5 text-indigo-700 font-medium">
+                  <span class="w-3 h-0.5 bg-indigo-600 inline-block"></span>
+                  <span id="chart-curve-equation">\(p = (1 - z)(u_0 + \beta z)\)</span>
+                </span>
+                <span class="flex items-center gap-1.5 text-emerald-700 font-medium">
+                  <span class="w-3 h-0.5 bg-emerald-600 inline-block"></span>
+                  <span>\(p\)</span>
+                </span>
+              </div>
+            </div>
+
+            <!-- SVG CANVAS -->
+            <div class="w-full aspect-[16/10] sm:aspect-[16/9] relative select-none">
+              <svg id="network-svg" viewBox="0 0 700 400" class="w-full h-full overflow-visible">
+                <defs>
+                  <marker id="arrow-axis" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#64748b"/>
+                  </marker>
+                  <marker id="arrow-green" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                    <path d="M 0 2 L 7 5 L 0 8 z" fill="#16a34a"/>
+                  </marker>
+                  <marker id="arrow-red" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                    <path d="M 0 2 L 7 5 L 0 8 z" fill="#dc2626"/>
+                  </marker>
+                </defs>
+
+                <g id="svg-grid"></g>
+                <g id="svg-areas"></g>
+                <g id="svg-axes"></g>
+                <g id="svg-curves"></g>
+                <g id="svg-projections"></g>
+                <g id="svg-vectors"></g>
+                <g id="svg-points"></g>
+                <g id="svg-labels"></g>
+              </svg>
+            </div>
+          </div>
+
+          <!-- STEP-BY-STEP ALGEBRAIC DERIVATION -->
+          <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-3">
+            <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wider" data-i18n="algebra_header">Step-by-step mathematical solution</h3>
+            <div id="algebra-content" class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-tasks" class="hidden space-y-6">
+      <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div>
+          <h2 class="text-lg font-bold text-slate-800" data-i18n="tasks_header">Interactive challenges</h2>
+          <p class="text-xs text-slate-500 mt-0.5" data-i18n="tasks_sub">Apply critical mass logic to three distinct managerial decisions.</p>
+        </div>
+        <div class="bg-slate-100 p-1 rounded-xl flex text-xs font-semibold shrink-0">
+          <button id="task-nav-1" onclick="switchTask(1)" class="px-3 py-1.5 rounded-lg bg-white shadow-sm text-indigo-600 font-bold transition" data-i18n="task1_btn">Challenge 1: Prediction</button>
+          <button id="task-nav-2" onclick="switchTask(2)" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition" data-i18n="task2_btn">Challenge 2: Subsidies vs Utility</button>
+          <button id="task-nav-3" onclick="switchTask(3)" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition" data-i18n="task3_btn">Challenge 3: Reverse detective</button>
+        </div>
+      </div>
+
+      <!-- CHALLENGE 1: PREDICTION -->
+      <div id="task-panel-1" class="space-y-4">
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-indigo-700 uppercase tracking-wider" data-i18n="task1_tag">Prediction challenge</span>
+            <button onclick="generateNewPredictionTask()" class="text-xs font-semibold text-slate-600 hover:text-indigo-600 underline" data-i18n="btn_new_scenario">New scenario</button>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed" data-i18n="task1_intro">
+            A new communication app launches on a university campus. Based on market parameters below, predict whether the seed user base will trigger spontaneous growth or fade into extinction.
+          </p>
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 grid grid-cols-3 gap-3 text-center">
+            <div>
+              <div class="text-[11px] text-slate-500" data-i18n="task_param_beta">Network strength (&beta;)</div>
+              <div id="t1-beta" class="font-mono text-base font-bold text-indigo-600">64</div>
+            </div>
+            <div>
+              <div class="text-[11px] text-slate-500" data-i18n="task_param_price">Subscription price (p)</div>
+              <div id="t1-price" class="font-mono text-base font-bold text-emerald-600">12.00</div>
+            </div>
+            <div>
+              <div class="text-[11px] text-slate-500" data-i18n="task_param_seed">Seed adoption (z<sub>start</sub>)</div>
+              <div id="t1-seed" class="font-mono text-base font-bold text-blue-600">22%</div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <label class="text-xs font-bold text-slate-700" data-i18n="t1_question">What will happen to the network without intervention?</label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <button onclick="submitPrediction(false)" id="t1-btn-fail" class="p-3 text-left rounded-xl border border-slate-200 hover:border-rose-400 hover:bg-rose-50/30 transition text-xs">
+                <div class="font-bold text-slate-800" data-i18n="t1_opt_fail">Collapse to zero users</div>
+                <div class="text-[11px] text-slate-500 mt-0.5" data-i18n="t1_opt_fail_sub">Seed base is below critical mass (z<sub>start</sub> &lt; z<sub>1</sub>)</div>
+              </button>
+              <button onclick="submitPrediction(true)" id="t1-btn-grow" class="p-3 text-left rounded-xl border border-slate-200 hover:border-emerald-400 hover:bg-emerald-50/30 transition text-xs">
+                <div class="font-bold text-slate-800" data-i18n="t1_opt_grow">Grow to high equilibrium</div>
+                <div class="text-[11px] text-slate-500 mt-0.5" data-i18n="t1_opt_grow_sub">Seed base exceeds critical mass (z<sub>start</sub> &gt; z<sub>1</sub>)</div>
+              </button>
+            </div>
+          </div>
+
+          <div id="t1-feedback" class="hidden p-3.5 rounded-xl text-xs leading-relaxed"></div>
+        </div>
+      </div>
+
+      <!-- CHALLENGE 2: SUBSIDIES VS STANDALONE UTILITY -->
+      <div id="task-panel-2" class="hidden space-y-4">
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider" data-i18n="task2_tag">Strategic bootstrapping</span>
+            <button onclick="resetTask2()" class="text-xs font-semibold text-slate-600 hover:text-indigo-600 underline" data-i18n="btn_reset">Reset</button>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed" data-i18n="task2_intro">
+            A venture has \(\beta = 50\), target regular price \(p = 8.00\), and starts with only \(z_0 = 4\%\). At \(p = 8.00\), critical mass is \(z_1 = 20.0\%\). Compare two growth strategies: burn budget on temporary price subsidies, or invest upfront in standalone utility (\(u_0\)).
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- STRATEGY A: SUBSIDY -->
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-3 flex flex-col justify-between">
+              <div>
+                <div class="text-xs font-bold text-emerald-700 uppercase tracking-wider">Strategy A: Promotional pricing</div>
+                <p class="text-[11px] text-slate-600 mt-1">
+                  Subsidize user price each round. Each round costs \((p_{\text{reg}} - p_{\text{promo}}) \cdot z_t\).
+                </p>
+                <div class="mt-3 space-y-1">
+                  <div class="flex justify-between text-xs">
+                    <span class="text-slate-600">Promo price:</span>
+                    <span id="t2-promo-display" class="font-mono font-bold text-emerald-600">0.00</span>
+                  </div>
+                  <input type="range" id="t2-promo-slider" min="0" max="7" step="0.5" value="0" oninput="updateT2Promo()" class="custom-range range-emerald">
+                </div>
+              </div>
+              <div class="space-y-2 pt-2 border-t border-slate-200">
+                <div class="flex justify-between text-xs">
+                  <span class="text-slate-500">Subsidy cash burned:</span>
+                  <span id="t2-cash-burned" class="font-mono font-bold text-amber-600">0.00</span>
+                </div>
+                <button onclick="runT2SubsidyRound()" class="w-full py-2 px-3 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-xl transition" data-i18n="btn_t2_round">Run 1 promo round</button>
+              </div>
+            </div>
+
+            <!-- STRATEGY B: STANDALONE UTILITY -->
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-3 flex flex-col justify-between">
+              <div>
+                <div class="text-xs font-bold text-purple-700 uppercase tracking-wider">Strategy B: Standalone utility tool</div>
+                <p class="text-[11px] text-slate-600 mt-1">
+                  Invest a fixed R&D budget (e.g. 15.00) to build single-player utility \(u_0 = 8.5\). If \(u_0 \ge p\), critical mass disappears immediately.
+                </p>
+                <div class="mt-3 p-2.5 rounded-lg bg-purple-50 border border-purple-200 text-[11px] text-purple-900">
+                  Fixed investment: <strong>15.00</strong> &bull; Value \(u_0 = 8.50\)
+                </div>
+              </div>
+              <div class="space-y-2 pt-2 border-t border-slate-200">
+                <div class="flex justify-between text-xs">
+                  <span class="text-slate-500">R&D cost:</span>
+                  <span class="font-mono font-bold text-purple-600">15.00 fixed</span>
+                </div>
+                <button onclick="applyT2UtilityInvestment()" id="t2-btn-utility" class="w-full py-2 px-3 bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold rounded-xl transition" data-i18n="btn_t2_invest">Build standalone utility</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- COMMON CONTROLS -->
+          <div class="p-3 bg-slate-100 rounded-xl flex items-center justify-between text-xs">
+            <div>
+              <span class="text-slate-600">Current adoption \(z_t\):</span>
+              <span id="t2-status-z" class="font-mono font-bold text-blue-600 ml-1">4.0%</span>
+            </div>
+            <button onclick="testT2CommercialLaunch()" class="py-2 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl transition" data-i18n="btn_t2_launch">Launch at regular price (\(p = 8.00\))</button>
+          </div>
+
+          <div id="t2-feedback" class="p-3.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 leading-relaxed">
+            Choose a strategy to lift adoption above critical mass (\(z_1 = 20.0\%\)) before launching regular pricing.
+          </div>
+        </div>
+      </div>
+
+      <!-- CHALLENGE 3: REVERSE DETECTIVE -->
+      <div id="task-panel-3" class="hidden space-y-4">
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-purple-700 uppercase tracking-wider" data-i18n="task3_tag">Market detective</span>
+            <button onclick="generateDetectiveCase()" class="text-xs font-semibold text-slate-600 hover:text-indigo-600 underline" data-i18n="btn_new_case">New case</button>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed" data-i18n="task3_intro">
+            A mature enterprise platform has stabilized at a known market share and subscription price. Use the equilibrium condition to deduce the underlying network strength &beta; and find historical critical mass z<sub>1</sub>.
+          </p>
+
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl grid grid-cols-2 gap-4 text-center">
+            <div>
+              <div class="text-[11px] text-slate-500" data-i18n="t3_obs_p">Observed market price (p)</div>
+              <div id="t3-obs-p" class="font-mono text-lg font-bold text-emerald-600">16.00</div>
+            </div>
+            <div>
+              <div class="text-[11px] text-slate-500" data-i18n="t3_obs_z">Stable market share (z<sub>2</sub>)</div>
+              <div id="t3-obs-z" class="font-mono text-lg font-bold text-blue-600">80%</div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="space-y-1">
+              <label class="text-xs font-semibold text-slate-700" data-i18n="t3_input_beta">Estimated network strength (&beta;):</label>
+              <input type="number" id="t3-guess-beta" placeholder="e.g. 100" class="w-full p-2.5 rounded-xl border border-slate-200 text-xs font-mono focus:outline-none focus:border-indigo-500">
+            </div>
+            <div class="space-y-1">
+              <label class="text-xs font-semibold text-slate-700" data-i18n="t3_input_z1">Historical critical mass (z<sub>1</sub> in %):</label>
+              <input type="number" id="t3-guess-z1" placeholder="e.g. 20" class="w-full p-2.5 rounded-xl border border-slate-200 text-xs font-mono focus:outline-none focus:border-indigo-500">
+            </div>
+          </div>
+
+          <button onclick="verifyDetectiveGuess()" class="py-2.5 px-4 bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold rounded-xl shadow-sm transition" data-i18n="btn_check_answers">Check calculation</button>
+
+          <div id="t3-feedback" class="hidden p-3.5 rounded-xl text-xs leading-relaxed"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-quiz" class="hidden space-y-6">
+      <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex items-center justify-between">
+        <div>
+          <h2 class="text-lg font-bold text-slate-800" data-i18n="quiz_title">Examination quiz</h2>
+          <p class="text-xs text-slate-500 mt-0.5" data-i18n="quiz_sub">12 questions on network taxonomy, critical mass dynamics, standalone utility, and pricing strategies.</p>
+        </div>
+        <div class="text-right">
+          <div class="text-xs text-slate-500 font-medium" data-i18n="quiz_score_prefix">Your score</div>
+          <div id="quiz-score-display" class="font-mono text-lg font-bold text-indigo-600">0 / 12</div>
+        </div>
+      </div>
+
+      <!-- QUESTION CONTAINER -->
+      <div id="quiz-card" class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <span id="quiz-q-number" class="text-xs font-bold text-indigo-700 uppercase tracking-wider">Question 1 of 12</span>
+          <span id="quiz-q-category" class="text-[11px] font-medium text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded-full">Taxonomy</span>
+        </div>
+
+        <div id="quiz-q-text" class="text-sm font-semibold text-slate-800 leading-snug">
+          Question text will appear here.
+        </div>
+
+        <div id="quiz-options-container" class="space-y-2.5"></div>
+
+        <div id="quiz-feedback-box" class="hidden p-4 rounded-xl text-xs leading-relaxed"></div>
+
+        <div class="flex justify-between items-center pt-2">
+          <button id="quiz-prev-btn" onclick="navigateQuiz(-1)" class="px-3.5 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-600 hover:bg-slate-50 transition" data-i18n="btn_prev">Previous</button>
+          <button id="quiz-next-btn" onclick="navigateQuiz(1)" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold transition" data-i18n="btn_next">Next question</button>
+        </div>
+      </div>
+
+      <!-- QUIZ RESULT SUMMARY -->
+      <div id="quiz-summary-card" class="hidden bg-white rounded-2xl p-6 border border-slate-200 shadow-sm text-center space-y-4">
+        <div class="inline-block p-3 rounded-full bg-indigo-50 text-indigo-600">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-slate-800" data-i18n="quiz_complete_title">Quiz completed</h3>
+        <p class="text-xs text-slate-500 max-w-sm mx-auto" data-i18n="quiz_complete_desc">Review your final understanding of network effects and critical mass dynamics.</p>
+        <div id="quiz-final-score" class="font-mono text-4xl font-extrabold text-indigo-600">10 / 12</div>
+        <div id="quiz-final-message" class="text-xs text-slate-600 font-medium"></div>
+        <button onclick="restartQuizSession()" class="mt-2 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-xl transition shadow-sm" data-i18n="btn_restart_quiz">Restart quiz</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-white border-t border-slate-200 py-4 mt-8">
+    <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-400">
+      <span data-i18n="footer_text">EconLab — Interactive Economics Simulator for Students. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+    let currentLang = 'en';
+
+    function renderMath(element) {
+      if (window.renderMathInElement) {
+        renderMathInElement(element || document.body, {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '\\[', right: '\\]', display: true},
+            {left: '\\(', right: '\\)', display: false},
+            {left: '$', right: '$', display: false}
+          ],
+          throwOnError: false
+        });
+      }
+    }
+
+    const translations = {
+      en: {
+        subtitle: "Network effects and critical mass",
+        author_prefix: "Author:",
+        ai_support: "AI implementation support: Gemini",
+        tab_intro: "Introduction",
+        tab_concepts: "Concepts",
+        tab_lab: "Laboratory",
+        tab_tasks: "Tasks",
+        tab_quiz: "Quiz",
+
+        intro_pill: "Economics of the digital business",
+        intro_title: "Network effects and critical mass",
+        intro_desc: "In digital markets, product value depends on how many other people use it. When this relational value exceeds the price, self-reinforcing adoption takes over.",
+        intro_cta_concepts: "Explore concepts",
+        intro_cta_lab: "Open laboratory",
+
+        intro_taxonomy_title: "Taxonomy of network effects",
+        intro_taxonomy_sub: "How the user base alters value across different market structures.",
+        intro_type1_badge: "In focus here",
+        intro_type1_name: "Direct network effects",
+        intro_type1_desc: "The number of users in a single group influences the value for participants in that same group. Messaging apps and phone networks become more useful as more of your peers join.",
+        intro_type1_ex: "Example: Signal, WhatsApp, telephone systems",
+        intro_type2_badge: "Complementary",
+        intro_type2_name: "Indirect network effects",
+        intro_type2_desc: "The value of a primary good is influenced by the availability and variety of complementary goods created for it. Hardware adoption attracts third-party software development.",
+        intro_type2_ex: "Example: Video game consoles and compatible titles",
+        intro_type3_badge: "Two-sided",
+        intro_type3_name: "Cross-side network effects",
+        intro_type3_desc: "The number of participants in one distinct group changes the value for another group using the same platform. More buyers attract more sellers, and shorter wait times attract riders.",
+        intro_type3_ex: "Example: Uber (riders/drivers), Airbnb (hosts/guests)",
+        intro_scope_note: "<strong>Scope of this simulator:</strong> This EconLab focuses specifically on <em>direct network effects</em> within a single consumer population, modeling how expectations, autonomous product value, and pricing determine critical mass thresholds and market equilibria.",
+
+        concepts_header: "Theoretical foundations",
+        concepts_sub: "Choose between the qualitative mechanism and the formal model from Katz & Shapiro.",
+        track_intuitive: "Intuitive track",
+        track_formal: "Formal track",
+
+        concept_cm_title: "The critical mass mechanism",
+        concept_cm_p1: "A network product requires a minimum number of users before its value outweighs the effort or cost of joining. Below this threshold, early adopters encounter too few peers, so churn exceeds growth and the network collapses.",
+        concept_cm_p2: "Once the user base crosses this critical mass, word of mouth and coordination turn positive. Joining becomes rational for the wider population, driving rapid growth toward market saturation.",
+        concept_cm_note: "Analogy: A public square where performers only appear if there is an audience, while visitors only gather if there is something to watch.",
+
+        concept_metcalfe_title: "Metcalfe's law and practical constraints",
+        concept_metcalfe_p1: "Robert Metcalfe postulated that the value of a communications network scales with the square of its participants, because the number of possible bilateral connections is \\(n(n - 1) / 2\\).",
+        concept_metcalfe_p2: "In practice, human cognitive bandwidth is limited (Dunbar's number of about 150 stable ties). As networks expand, additional ties are weak, spam increases, and congestion sets in. Odlyzko and Tilly show that network value grows closer to \\(n \\log n\\).",
+        concept_metcalfe_note: "\\(V \\propto n^2 \\quad \\text{vs} \\quad V \\propto n \\log(n)\\)",
+
+        strategies_header: "Strategies to overcome critical mass",
+        strategies_sub: "Two canonical paths to eliminate the start-up trap.",
+        strat_utility_badge: "Product design path",
+        strat_utility_title: "Standalone utility (single-player mode)",
+        strat_utility_desc: "Give the product autonomous value \\(u_0 > 0\\) that does not rely on peers. Early adopters join because the tool is immediately useful on its own (for instance, Instagram's photo filters or Dropbox's single-folder cloud backup). As users accumulate, the network layer activates on top of the established base, eliminating the coordination barrier.",
+        strat_price_badge: "Pricing policy path",
+        strat_price_title: "Dynamic penetration pricing",
+        strat_price_desc: "Set price below the willingness-to-pay curve during early adoption (\\(p(z) < g(z)\\)). By keeping the entry barrier below current network valuation, joining remains attractive at every scale. Once user volume matures, the fee ramps up to commercial market rates.",
+
+        states_header: "Four market adoption regimes",
+        states_sub: "How initial adoption and price determine the trajectory of the network.",
+        state1_badge: "Prohibitive price",
+        state1_title: "Market failure",
+        state1_desc: "When price exceeds peak willingness to pay (\\(p > p_{\\max}\\)), no expectation can sustain the network. The only equilibrium is zero users.",
+        state2_badge: "Sub-critical pool",
+        state2_title: "Start-up trap",
+        state2_desc: "The price is viable, but early users are below the critical threshold (\\(z_0 < z_1\\)). Dissatisfaction drives the network toward extinction.",
+        state3_badge: "Tipping point passed",
+        state3_title: "Bandwagon growth",
+        state3_desc: "The network starts with enough users to beat the critical threshold (\\(z_0 > z_1\\)). Value exceeds cost, pulling in additional users each period.",
+        state4_badge: "High equilibrium",
+        state4_title: "Market maturity",
+        state4_desc: "Adoption reaches the stable high equilibrium \\(z_2\\). The remaining non-users have intrinsic reservations lower than current subscription price.",
+
+        micro_header: "Interactive intuition check",
+        micro_sub: "Click any scenario to diagnose the underlying network effect or strategy.",
+        micro1_title: "Signal messenger",
+        micro1_sub: "Friends installing the app",
+        micro2_title: "Conference Wi-Fi",
+        micro2_sub: "Crowded room streaming video",
+        micro3_title: "PlayStation catalog",
+        micro3_sub: "Game studio support",
+        micro4_title: "Uber drivers and riders",
+        micro4_sub: "Two distinct user groups",
+        micro5_title: "Early Instagram filters",
+        micro5_sub: "Single-player photo editing",
+        micro6_title: "PayPal signup cash bonus",
+        micro6_sub: "Negative price adoption subsidy",
+        micro_default_lead: "Selected case:",
+        micro_default_text: "Click any of the scenarios above to see the economic mechanism.",
+
+        formal_sec1_title: "Consumer utility and heterogeneous valuations",
+        formal_sec1_sub: "Analytical framework following Katz & Shapiro (1985) and Easley & Kleinberg (Ch. 17).",
+        formal_p1: "Consumers are indexed on the interval \\(x \\in [0, 1]\\) in descending order of their intrinsic preference for the product. Consumer \\(x\\) has an intrinsic valuation:",
+        formal_p2: "If consumers expect a fraction \\(z \\in [0, 1]\\) of the population to use the service, and the product also provides an autonomous value \\(u_0 \\ge 0\\), total willingness to pay is:",
+        formal_p3: "The coefficient \\(\\beta = a \\cdot b\\) captures baseline reservation price and intensity of network coordination, while \\(u_0\\) represents standalone utility. At \\(x = 1\\), willingness to pay drops to zero, anchoring the curve at \\(z = 1\\).",
+        formal_sec2_title: "Self-fulfilling expectations and market equilibria",
+        formal_p4: "At market price \\(p\\), consumer \\(x\\) buys if \\(v(x) \\ge p\\), meaning \\((1 - x)(u_0 + \\beta z) \\ge p\\). The marginal buyer is:",
+        formal_p5: "In a rational expectations equilibrium (\\(z = \\hat{x}(z)\\)), the willingness-to-pay curve becomes:",
+        formal_p6: "When \\(u_0 = 0\\), the curve starts at the origin with maximum sustainable price \\(p_{\\max} = \\beta / 4\\). When \\(u_0 > 0\\), the curve starts at \\(g(0) = u_0\\) and remains anchored at \\(g(1) = 0\\). If \\(p \\le u_0\\), every consumer with \\(x < 1 - p/u_0\\) has positive surplus even with zero peers, eliminating critical mass \\(z_1\\).",
+        formal_p7: "For \\(p > u_0\\), solving \\(\\beta z^2 + (u_0 - \\beta)z + (p - u_0) = 0\\) with discriminant \\(\\Delta = (\\beta - u_0)^2 - 4\\beta(p - u_0)\\) gives:",
+        eq_z1_desc: "Critical mass. Unstable threshold. Below it, adoption decays to zero.",
+        eq_z2_desc: "High equilibrium. Stable target. Small disturbances self-correct.",
+        formal_sec3_title: "Dynamic adjustment process and pricing paths",
+        formal_dyn_desc: "Adoption adjusts according to \\(z_{t+1} = \\max\\left(0, \\min\\left(1, 1 - \\dfrac{p}{u_0 + \\beta z_t}\\right)\\right)\\). Under dynamic pricing \\(p(z_t) = \\min(p_{\\text{target}},\\, \\gamma \\cdot g(z_t))\\) with \\(\\gamma < 1\\), price remains strictly below willingness to pay, ensuring \\(\\Delta z_t > 0\\) until high equilibrium is reached.",
+
+        lab_params_header: "Network parameters",
+        btn_defaults: "Defaults",
+        slider_beta: "Network strength (\\(\\beta\\))",
+        slider_u0: "Standalone utility (\\(u_0\\))",
+        slider_price: "Target market price (\\(p\\))",
+        slider_zstart: "Initial adoption (\\(z_0\\))",
+        label_pricing_mode: "Pricing regime",
+        mode_fixed: "Fixed",
+        mode_dynamic: "Dynamic ramp",
+        lab_presets_header: "Scenario presets",
+        preset_trap_title: "Start-up trap",
+        preset_free_title: "Freemium jump",
+        preset_utility_title: "Standalone utility",
+        preset_dyn_title: "Dynamic ramp-up",
+        lab_dyn_header: "Dynamic adjustment",
+        btn_run_sim: "Run simulation",
+        btn_stop_sim: "Pause",
+        btn_step: "Step",
+        btn_reset: "Reset",
+
+        kpi_pmax: "Max price (\\(p_{\\max}\\))",
+        kpi_critical: "Critical mass (\\(z_1\\))",
+        kpi_high: "High equilibrium (\\(z_2\\))",
+        kpi_trajectory: "Market regime",
+        kpi_unstable: "Unstable threshold",
+        kpi_stable: "Stable target",
+
+        chart_title: "Willingness-to-pay curve & expectations equilibrium",
+        algebra_header: "Step-by-step mathematical solution",
+
+        tasks_header: "Interactive challenges",
+        tasks_sub: "Apply critical mass logic to three distinct managerial decisions.",
+        task1_btn: "Challenge 1: Prediction",
+        task2_btn: "Challenge 2: Subsidies vs Utility",
+        task3_btn: "Challenge 3: Reverse detective",
+
+        task1_tag: "Prediction challenge",
+        btn_new_scenario: "New scenario",
+        task1_intro: "A new communication app launches on a university campus. Based on market parameters below, predict whether the seed user base will trigger spontaneous growth or fade into extinction.",
+        task_param_beta: "Network strength (\\(\\beta\\))",
+        task_param_price: "Subscription price (\\(p\\))",
+        task_param_seed: "Seed adoption (\\(z_{\\text{start}}\\))",
+        t1_question: "What will happen to the network without intervention?",
+        t1_opt_fail: "Collapse to zero users",
+        t1_opt_fail_sub: "Seed base is below critical mass (\\(z_{\\text{start}} < z_1\\))",
+        t1_opt_grow: "Grow to high equilibrium",
+        t1_opt_grow_sub: "Seed base exceeds critical mass (\\(z_{\\text{start}} > z_1\\))",
+
+        task2_tag: "Strategic bootstrapping",
+        task2_intro: "A venture has \\(\\beta = 50\\), target regular price \\(p = 8.00\\), and starts with only \\(z_0 = 4\\%\\). At \\(p = 8.00\\), critical mass is \\(z_1 = 20.0\\%\\). Compare two growth strategies: burn budget on temporary price subsidies, or invest upfront in standalone utility (\\(u_0\\)).",
+        t2_prompt_initial: "Choose a strategy to lift adoption above critical mass (\\(z_1 = 20.0\\%\\)) before launching regular pricing.",
+        btn_t2_round: "Run 1 promo round",
+        btn_t2_invest: "Build standalone utility",
+        btn_t2_launch: "Launch at regular price (p = 8.00)",
+
+        task3_tag: "Market detective",
+        btn_new_case: "New case",
+        task3_intro: "A mature enterprise platform has stabilized at a known market share and subscription price. Use the equilibrium condition to deduce the underlying network strength \\(\\beta\\) and find historical critical mass \\(z_1\\).",
+        t3_obs_p: "Observed market price (\\(p\\))",
+        t3_obs_z: "Stable market share (\\(z_2\\))",
+        t3_input_beta: "Estimated network strength (\\(\\beta\\)):",
+        t3_input_z1: "Historical critical mass (\\(z_1\\) in %):",
+        btn_check_answers: "Check calculation",
+
+        quiz_title: "Examination quiz",
+        quiz_sub: "12 questions on network taxonomy, critical mass dynamics, standalone utility, and pricing strategies.",
+        quiz_score_prefix: "Your score",
+        btn_prev: "Previous",
+        btn_next: "Next question",
+        quiz_complete_title: "Quiz completed",
+        quiz_complete_desc: "Review your final understanding of network effects and critical mass dynamics.",
+        btn_restart_quiz: "Restart quiz",
+        footer_text: "EconLab — Interactive Economics Simulator for Students. All rights reserved."
+      },
+      pl: {
+        subtitle: "Efekty sieciowe i masa krytyczna",
+        author_prefix: "Autor:",
+        ai_support: "Wsparcie w implementacji AI: Gemini",
+        tab_intro: "Wprowadzenie",
+        tab_concepts: "Pojęcia",
+        tab_lab: "Laboratorium",
+        tab_tasks: "Zadania",
+        tab_quiz: "Quiz",
+
+        intro_pill: "Ekonomia biznesu cyfrowego",
+        intro_title: "Efekty sieciowe i masa krytyczna",
+        intro_desc: "Na rynkach cyfrowych wartość produktu zależy od liczby pozostałych użytkowników. Gdy ta korzyść relacyjna przewyższa cenę, dochodzi do samonapędzającego się wzrostu adopcji.",
+        intro_cta_concepts: "Przejdź do pojęć",
+        intro_cta_lab: "Otwórz laboratorium",
+
+        intro_taxonomy_title: "Taksonomia efektów sieciowych",
+        intro_taxonomy_sub: "Wpływ bazy użytkowników na wartość w różnych strukturach rynkowych.",
+        intro_type1_badge: "Przedmiot tego symulatora",
+        intro_type1_name: "Bezpośrednie efekty sieciowe",
+        intro_type1_desc: "Liczba użytkowników w danej grupie bezpośrednio wpływa na użyteczność usługi dla pozostałych członków tej samej grupy. Komunikatory i sieci telefoniczne zyskują na wartości, gdy dołączają kolejni znajomi.",
+        intro_type1_ex: "Przykłady: Signal, WhatsApp, sieci telefoniczne",
+        intro_type2_badge: "Dobra komplementarne",
+        intro_type2_name: "Pośrednie efekty sieciowe",
+        intro_type2_desc: "Wartość dobra głównego rośnie wraz z dostępnością, jakością i różnorodnością dóbr komplementarnych. Duża baza konsol przyciąga niezależnych twórców gier wideo.",
+        intro_type2_ex: "Przykład: Konsole do gier i dedykowane biblioteki gier",
+        intro_type3_badge: "Platformy dwustronne",
+        intro_type3_name: "Krzyżowe efekty sieciowe",
+        intro_type3_desc: "Liczba uczestników po jednej stronie rynku zmienia wartość platformy dla uczestników po drugiej stronie. Większa liczba kupujących przyciąga sprzedawców, a krótszy czas oczekiwania zachęca pasażerów.",
+        intro_type3_ex: "Przykłady: Uber (pasażerowie/kierowcy), Airbnb (gospodarze/goście)",
+        intro_scope_note: "<strong>Zakres tego symulatora:</strong> Narzędzie bada <em>bezpośrednie efekty sieciowe</em> w jednolitej populacji konsumentów, analizując wpływ oczekiwań, wartości autonomicznej oraz cen na próg masy krytycznej i punkty równowagi.",
+
+        concepts_header: "Podstawy teoretyczne",
+        concepts_sub: "Wybierz tor intuicyjny bez matematyki lub formalny model Katza i Shapiro.",
+        track_intuitive: "Tor intuicyjny",
+        track_formal: "Tor formalny",
+
+        concept_cm_title: "Mechanizm masy krytycznej",
+        concept_cm_p1: "Produkt sieciowy potrzebuje minimalnej bazy użytkowników, aby płynące z niego korzyści zrównoważyły wysiłek i koszt dołączenia. Poniżej tego progu wczesny użytkownik zastaje zbyt mało kontaktów, rezygnacje przewyższają napływ i sieć gaśnie.",
+        concept_cm_p2: "Po przekroczeniu masy krytycznej koordynacja staje się samonapędzająca. Dołączenie jest opłacalne dla szerokiego grona konsumentów, co prowadzi do dynamicznego wzrostu w stronę nasycenia rynku.",
+        concept_cm_note: "Analogia: Plac miejski, na którym uliczni grajkowie występują tylko wtedy, gdy są słuchacze, a przechodnie zatrzymują się tylko wtedy, gdy ktoś gra.",
+
+        concept_metcalfe_title: "Prawo Metcalfe'a i ograniczenia rzeczywiste",
+        concept_metcalfe_p1: "Robert Metcalfe przyjął, że wartość sieci telekomunikacyjnej rośnie z kwadratem liczby użytkowników, ponieważ liczba unikalnych połączeń wynosi \\(n(n - 1) / 2\\).",
+        concept_metcalfe_p2: "W praktyce możliwości poznawcze człowieka są ograniczone (liczba Dunbara wynosi około 150 trwałych relacji). W wielkich sieciach przeważają słabe więzi, rośnie szum informacyjny i zatłoczenie. Odlyzko i Tilly wykazują, że realna wartość sieci rośnie wolniej, w tempie zbliżonym do \\(n \\log n\\).",
+        concept_metcalfe_note: "\\(V \\propto n^2 \\quad \\text{vs} \\quad V \\propto n \\log(n)\\)",
+
+        strategies_header: "Strategie przełamywania progu masy krytycznej",
+        strategies_sub: "Dwie kanoniczne ścieżki eliminacji pułapki startowej.",
+        strat_utility_badge: "Ścieżka cech produktu",
+        strat_utility_title: "Wartość autonomiczna (tryb jednoosobowy)",
+        strat_utility_desc: "Nadanie produktowi niezależnej wartości \\(u_0 > 0\\), która nie wymaga obecności innych osób. Pierwsi użytkownicy instalują narzędzie ze względu na jego natychmiastową użyteczność osobistą (np. filtry fotograficzne wczesnego Instagrama lub dysk w chmurze Dropboxa). Warstwa sieciowa uaktywnia się na zgromadzonej bazie, usuwając barierę koordynacji.",
+        strat_price_badge: "Ścieżka polityki cenowej",
+        strat_price_title: "Dynamiczne ceny penetracyjne",
+        strat_price_desc: "Ustalenie ceny poniżej krzywej gotowości do płacenia we wczesnej fazie (\\(p(z) < g(z)\\)). Dzięki temu bariera dołączenia jest zawsze niższa od bieżącej wyceny sieci. Wraz ze wzrostem wolumenu cena stopniowo rośnie do stawki rynkowej.",
+
+        states_header: "Cztery stany rynkowe",
+        states_sub: "Zależność trajektorii sieci od wielkości początkowej i ceny.",
+        state1_badge: "Cena zaporowa",
+        state1_title: "Brak rynku",
+        state1_desc: "Gdy cena przewyższa maksymalną gotowość do płacenia (\\(p > p_{\\max}\\)), żadne oczekiwania nie utrzymają sieci. Jedyną równowagą jest zerowa adopcja.",
+        state2_badge: "Zbyt mała baza",
+        state2_title: "Pułapka startowa",
+        state2_desc: "Cena jest akceptowalna, lecz liczba początkowych użytkowników znajduje się poniżej progu (\\(z_0 < z_1\\)). Rozczarowanie prowadzi do zaniku bazy.",
+        state3_badge: "Próg przekroczony",
+        state3_title: "Efekt pędu",
+        state3_desc: "Sieć startuje z bazą powyżej masy krytycznej (\\(z_0 > z_1\\)). Wartość przewyższa cenę, przyciągając w każdym okresie kolejnych użytkowników.",
+        state4_badge: "Wysoka równowaga",
+        state4_title: "Dojrzałość rynkowa",
+        state4_desc: "Adopcja stabilizuje się w punkcie \\(z_2\\). Pozostali poza siecią konsumenci mają wycenę autonomiczną niższą od rynkowej ceny abonamentu.",
+
+        micro_header: "Mini-test intuicji",
+        micro_sub: "Kliknij przypadek rynkowy, aby sprawdzić klasyfikację efektu lub strategii.",
+        micro1_title: "Komunikator Signal",
+        micro1_sub: "Instalacja aplikacji przez znajomych",
+        micro2_title: "Wi-Fi na konferencji",
+        micro2_sub: "Zatłoczona sala i spadek prędkości",
+        micro3_title: "Katalog gier PlayStation",
+        micro3_sub: "Wsparcie studiów deweloperskich",
+        micro4_title: "Kierowcy i pasażerowie Ubera",
+        micro4_sub: "Dwie odrębne grupy użytkowników",
+        micro5_title: "Filtry wczesnego Instagrama",
+        micro5_sub: "Jednoosobowa obróbka zdjęć",
+        micro6_title: "Premia gotówkowa w PayPal",
+        micro6_sub: "Dopłata do wczesnej adopcji",
+        micro_default_lead: "Wybrany przypadek:",
+        micro_default_text: "Kliknij jeden z powyższych scenariuszy, aby poznać mechanizm ekonomiczny.",
+
+        formal_sec1_title: "Użyteczność konsumenta i zróżnicowanie wycen",
+        formal_sec1_sub: "Model analityczny według Katza i Shapiro (1985) oraz Easleya i Kleinberga (rozdz. 17).",
+        formal_p1: "Konsumenci są uporządkowani na odcinku \\(x \\in [0, 1]\\) malejąco według swojej wyceny autonomicznej. Konsument \\(x\\) wycenia produkt bazowo na:",
+        formal_p2: "Gdy konsumenci oczekują, że ułamek \\(z \\in [0, 1]\\) populacji kupi produkt, a usługa dostarcza także wartość autonomiczną \\(u_0 \\ge 0\\), łączna gotowość do płacenia wynosi:",
+        formal_p3: "Współczynnik \\(\\beta = a \\cdot b\\) łączy wycenę bazową z siłą korzyści sieciowych, natomiast \\(u_0\\) oznacza użyteczność autonomiczną. Dla \\(x = 1\\) wycena spada do zera, kotwicząc krzywą w punkcie \\(z = 1\\).",
+        formal_sec2_title: "Samospełniające się oczekiwania i stany równowagi",
+        formal_p4: "Przy cenie rynkowej \\(p\\) konsument \\(x\\) dokonuje zakupu, jeśli \\(v(x) \\ge p\\), czyli \\((1 - x)(u_0 + \\beta z) \\ge p\\). Wyznacza to krańcowego nabywcę:",
+        formal_p5: "W równowadze samospełniających się oczekiwań (\\(z = \\hat{x}(z)\\)) funkcja gotowości do płacenia ma postać:",
+        formal_p6: "Gdy \\(u_0 = 0\\), krzywa startuje z początku układu przy cenie maksymalnej \\(p_{\\max} = \\beta / 4\\). Gdy \\(u_0 > 0\\), krzywa zaczyna się w punkcie \\(g(0) = u_0\\) i pozostaje zakotwiczona w \\(g(1) = 0\\). Jeśli \\(p \\le u_0\\), konsumenci o \\(x < 1 - p/u_0\\) uzyskują dodatnią nadwyżkę nawet przy zerze użytkowników, co eliminuje próg \\(z_1\\).",
+        formal_p7: "Dla \\(p > u_0\\) rozwiązanie równania \\(\\beta z^2 + (u_0 - \\beta)z + (p - u_0) = 0\\) z wyróżnikiem \\(\\Delta = (\\beta - u_0)^2 - 4\\beta(p - u_0)\\) daje:",
+        eq_z1_desc: "Masa krytyczna. Niestabilny próg. Spadek poniżej tej wartości prowadzi do wygaszenia sieci.",
+        eq_z2_desc: "Wysoka równowaga. Punkt stabilny. Drobne wstrząsy są samoczynnie korygowane.",
+        formal_sec3_title: "Proces dostosowań dynamicznych i ścieżki cenowe",
+        formal_dyn_desc: "Adopcja dostosowuje się według \\(z_{t+1} = \\max\\left(0, \\min\\left(1, 1 - \\dfrac{p}{u_0 + \\beta z_t}\\right)\\right)\\). W reżimie dynamicznym \\(p(z_t) = \\min(p_{\\text{target}},\\, \\gamma \\cdot g(z_t))\\) dla \\(\\gamma < 1\\) cena pozostaje poniżej gotowości do płacenia, zapewniając \\(\\Delta z_t > 0\\) aż do nasycenia rynku.",
+
+        lab_params_header: "Parametry sieci",
+        btn_defaults: "Domyślne",
+        slider_beta: "Siła sieci (\\(\\beta\\))",
+        slider_u0: "Wartość autonomiczna (\\(u_0\\))",
+        slider_price: "Docelowa cena rynkowa (\\(p\\))",
+        slider_zstart: "Adopcja początkowa (\\(z_0\\))",
+        label_pricing_mode: "Reżim cenowy",
+        mode_fixed: "Stała",
+        mode_dynamic: "Rampa dynamiczna",
+        lab_presets_header: "Scenariusze bazowe",
+        preset_trap_title: "Pułapka startowa",
+        preset_free_title: "Skok freemium",
+        preset_utility_title: "Wartość autonomiczna",
+        preset_dyn_title: "Rampa dynamiczna",
+        lab_dyn_header: "Dynamika dostosowawcza",
+        btn_run_sim: "Uruchom symulację",
+        btn_stop_sim: "Wstrzymaj",
+        btn_step: "Krok",
+        btn_reset: "Reset",
+
+        kpi_pmax: "Cena maks. (\\(p_{\\max}\\))",
+        kpi_critical: "Masa krytyczna (\\(z_1\\))",
+        kpi_high: "Wysoka równowaga (\\(z_2\\))",
+        kpi_trajectory: "Stan rynku",
+        kpi_unstable: "Niestabilny próg",
+        kpi_stable: "Punkt stabilny",
+
+        chart_title: "Krzywa gotowości do płacenia i równowaga oczekiwań",
+        algebra_header: "Rozwiązanie algebraiczne krok po kroku",
+
+        tasks_header: "Zadania interaktywne",
+        tasks_sub: "Zastosuj logikę masy krytycznej w trzech decyzjach menedżerskich.",
+        task1_btn: "Zadanie 1: Prognoza",
+        task2_btn: "Zadanie 2: Dopłaty vs Wartość własna",
+        task3_btn: "Zadanie 3: Detektyw rynkowy",
+
+        task1_tag: "Wyzwanie predykcyjne",
+        btn_new_scenario: "Nowy scenariusz",
+        task1_intro: "Nowy komunikator startuje w środowisku akademickim. Na podstawie parametrów rynkowych oceń, czy początkowa grupa użytkowników wywoła samonapędzający się wzrost, czy też sieć upadnie.",
+        task_param_beta: "Siła sieci (\\(\\beta\\))",
+        task_param_price: "Cena subskrypcji (\\(p\\))",
+        task_param_seed: "Adopcja początkowa (\\(z_{\\text{start}}\\))",
+        t1_question: "Co stanie się z siecią przy braku interwencji cenowej?",
+        t1_opt_fail: "Upadek do zera użytkowników",
+        t1_opt_fail_sub: "Baza startowa poniżej masy krytycznej (\\(z_{\\text{start}} < z_1\\))",
+        t1_opt_grow: "Wzrost do wysokiej równowagi",
+        t1_opt_grow_sub: "Baza startowa przewyższa masę krytyczną (\\(z_{\\text{start}} > z_1\\))",
+
+        task2_tag: "Strategie wejścia na rynek",
+        task2_intro: "Startup ma \\(\\beta = 50\\), cenę docelową \\(p = 8{,}00\\) i startuje z bazą \\(z_0 = 4\\%\\). Przy cenie 8,00 próg wynosi \\(z_1 = 20{,}0\\%\\). Porównaj dwie strategie: spalanie budżetu na dopłaty do cen promocyjnych lub jednorazową inwestycję w wartość autonomiczną narzędzia (\\(u_0\\)).",
+        t2_prompt_initial: "Wybierz strategię, aby podnieść adopcję powyżej masy krytycznej (\\(z_1 = 20{,}0\\%\\)) przed wdrożeniem ceny rynkowej.",
+        btn_t2_round: "Wykonaj 1 rundę promocji",
+        btn_t2_invest: "Stwórz wartość autonomiczną",
+        btn_t2_launch: "Wprowadź cenę regularną (p = 8,00)",
+
+        task3_tag: "Detektyw rynkowy",
+        btn_new_case: "Nowy przypadek",
+        task3_intro: "Dojrzała platforma oprogramowania ustabilizowała się na znanym udziale rynkowym przy danej cenie. Wykorzystaj warunek równowagi, aby wyznaczyć siłę sieci \\(\\beta\\) oraz obliczyć historyczny próg \\(z_1\\).",
+        t3_obs_p: "Obserwowana cena rynkowa (\\(p\\))",
+        t3_obs_z: "Stabilny udział rynkowy (\\(z_2\\))",
+        t3_input_beta: "Oszacowana siła sieci (\\(\\beta\\)):",
+        t3_input_z1: "Historyczna masa krytyczna (\\(z_1\\) w %):",
+        btn_check_answers: "Sprawdź obliczenia",
+
+        quiz_title: "Quiz egzaminacyjny",
+        quiz_sub: "12 pytań dotyczących taksonomii sieci, masy krytycznej, wartości autonomicznej i strategii cenowych.",
+        quiz_score_prefix: "Twój wynik",
+        btn_prev: "Poprzednie",
+        btn_next: "Następne pytanie",
+        quiz_complete_title: "Quiz zakończony",
+        quiz_complete_desc: "Podsumowanie znajomości modeli efektów sieciowych i masy krytycznej.",
+        btn_restart_quiz: "Rozpocznij quiz od nowa",
+        footer_text: "EconLab — Interaktywny symulator ekonomiczny dla studentów. Wszelkie prawa zastrzeżone."
+      }
+    };
+
+    let labState = {
+      beta: 60,
+      u0: 0.0,
+      price: 9.0,
+      zStart: 0.12,
+      zCurrent: 0.12,
+      pricingMode: 'fixed', // 'fixed' | 'dynamic'
+      t: 0,
+      animating: false,
+      animInterval: null
+    };
+
+    let currentConceptsTrack = 'intuitive';
+    let currentTask = 1;
+
+    const intuitionChecks = {
+      1: {
+        en: "<strong>Direct positive network effect:</strong> Each friend joining Signal directly creates new communication links for existing users without needing intermediaries.",
+        pl: "<strong>Bezpośredni pozytywny efekt sieciowy:</strong> Każdy znajomy instalujący Signal bezpośrednio tworzy nowe możliwości kontaktu dla dotychczasowych użytkowników."
+      },
+      2: {
+        en: "<strong>Direct negative network effect (congestion):</strong> When too many users join local Wi-Fi, radio bandwidth becomes congested, degrading connection speed for everyone in the room.",
+        pl: "<strong>Bezpośredni negatywny efekt sieciowy (przeciążenie):</strong> Zbyt wielu użytkowników lokalnej sieci Wi-Fi wyczerpuje pasmo radiowe, obniżając jakość połączenia pozostałym osobom."
+      },
+      3: {
+        en: "<strong>Indirect network effect:</strong> Console owners benefit not from connecting to other gamers directly, but from developers creating a richer library of complementary video games.",
+        pl: "<strong>Pośredni efekt sieciowy:</strong> Posiadacze konsoli zyskują na rosnącej bazie sprzętowej dzięki temu, że przyciąga ona twórców oferujących bogatszy wybór gier komplementarnych."
+      },
+      4: {
+        en: "<strong>Cross-side network effect:</strong> Uber links two distinct groups. More passengers attract more drivers (higher earnings), while more drivers reduce waiting times for passengers.",
+        pl: "<strong>Krzyżowy efekt sieciowy:</strong> Platforma łączy dwie odrębne grupy. Większa liczba pasażerów przyciąga kierowców, a większa liczba kierowców skraca czas oczekiwania pasażerów."
+      },
+      5: {
+        en: "<strong>Standalone utility (single-player mode):</strong> Instagram filters provided immediate photographic utility to an individual user even with zero social followers, overcoming the start-up trap.",
+        pl: "<strong>Wartość autonomiczna (tryb jednoosobowy):</strong> Filtry fotograficzne Instagrama dawały natychmiastową użyteczność pojedynczemu użytkownikowi bez znajomych w aplikacji, przełamując pułapkę startową."
+      },
+      6: {
+        en: "<strong>Penetration pricing and adoption subsidy:</strong> PayPal gave $10 cash bonuses for registration, effectively setting a negative price (\\(p < 0\\)) to eliminate the critical mass threshold.",
+        pl: "<strong>Ceny penetracyjne i dotowanie adopcji:</strong> PayPal płacił 10 dolarów premii za rejestrację, wprowadzając ujemną cenę (\\(p < 0\\)) w celu likwidacji bariery masy krytycznej."
+      }
+    };
+
+    function revealIntuitionCheck(id) {
+      const box = document.getElementById('intuition-answer-text');
+      box.innerHTML = intuitionChecks[id][currentLang];
+      renderMath(box);
+    }
+
+    function switchTab(tabId) {
+      ['intro', 'concepts', 'lab', 'tasks', 'quiz'].forEach(t => {
+        const sec = document.getElementById('tab-' + t);
+        const btn = document.getElementById('nav-btn-' + t);
+        if (sec) sec.classList.toggle('hidden', t !== tabId);
+        if (btn) {
+          if (t === tabId) {
+            btn.className = "tab-btn px-3 py-1.5 rounded-lg transition-all bg-white shadow-sm text-indigo-600 font-bold";
+          } else {
+            btn.className = "tab-btn px-3 py-1.5 rounded-lg transition-all text-slate-600 hover:text-slate-900";
+          }
+        }
+      });
+      if (tabId === 'lab') {
+        updateLabSimulation();
+      }
+    }
+
+    function switchConceptsTrack(track) {
+      currentConceptsTrack = track;
+      const isIntuitive = track === 'intuitive';
+      document.getElementById('concepts-view-intuitive').classList.toggle('hidden', !isIntuitive);
+      document.getElementById('concepts-view-formal').classList.toggle('hidden', isIntuitive);
+
+      const btnInt = document.getElementById('concepts-track-btn-intuitive');
+      const btnFor = document.getElementById('concepts-track-btn-formal');
+      if (isIntuitive) {
+        btnInt.className = "px-3 py-1.5 rounded-lg bg-white shadow-sm text-indigo-600 font-bold transition";
+        btnFor.className = "px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition";
+      } else {
+        btnInt.className = "px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition";
+        btnFor.className = "px-3 py-1.5 rounded-lg bg-white shadow-sm text-indigo-600 font-bold transition";
+      }
+    }
+
+    function switchTask(taskId) {
+      currentTask = taskId;
+      [1, 2, 3].forEach(id => {
+        const panel = document.getElementById('task-panel-' + id);
+        const btn = document.getElementById('task-nav-' + id);
+        if (panel) panel.classList.toggle('hidden', id !== taskId);
+        if (btn) {
+          if (id === taskId) {
+            btn.className = "px-3 py-1.5 rounded-lg bg-white shadow-sm text-indigo-600 font-bold transition";
+          } else {
+            btn.className = "px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition";
+          }
+        }
+      });
+    }
+
+    function setPricingMode(mode) {
+      labState.pricingMode = mode;
+      const btnFixed = document.getElementById('btn-mode-fixed');
+      const btnDyn = document.getElementById('btn-mode-dynamic');
+      const label = document.getElementById('val-pricing-mode');
+
+      if (mode === 'fixed') {
+        btnFixed.className = "py-1.5 px-2 rounded-lg font-semibold bg-indigo-50 border border-indigo-200 text-indigo-700";
+        btnDyn.className = "py-1.5 px-2 rounded-lg font-semibold bg-slate-50 border border-slate-200 text-slate-600 hover:bg-slate-100";
+        label.textContent = currentLang === 'en' ? "Fixed price" : "Stała cena";
+      } else {
+        btnFixed.className = "py-1.5 px-2 rounded-lg font-semibold bg-slate-50 border border-slate-200 text-slate-600 hover:bg-slate-100";
+        btnDyn.className = "py-1.5 px-2 rounded-lg font-semibold bg-indigo-50 border border-indigo-200 text-indigo-700";
+        label.textContent = currentLang === 'en' ? "Dynamic ramp" : "Rampa dynamiczna";
+      }
+      updateLabSimulation(false);
+    }
+
+    function evaluateWTP(beta, u0, z) {
+      return (1.0 - z) * (u0 + beta * z);
+    }
+
+    function getEffectivePrice(z) {
+      if (labState.pricingMode === 'fixed') {
+        return labState.price;
+      }
+      const gZ = evaluateWTP(labState.beta, labState.u0, z);
+      // Dynamic penetration price during initial bootstrapping:
+      // A fraction of willingness-to-pay (0.80 * g(z)) capped at target market price p*.
+      // Once adoption expands such that this exceeds target price, price locks permanently at target price p*.
+      const dynamicPromo = Math.max(0, gZ * 0.80);
+      return Math.min(labState.price, dynamicPromo);
+    }
+
+    function calculateEquilibria(beta, u0, targetPrice) {
+      // p_max occurs at vertex z* = (beta - u0) / (2 * beta) if beta > u0, else at z = 0
+      let zPeak = 0;
+      let pMax = u0;
+      if (beta > u0) {
+        zPeak = (beta - u0) / (2.0 * beta);
+        pMax = evaluateWTP(beta, u0, zPeak);
+      } else {
+        pMax = u0;
+      }
+
+      // If standalone utility alone covers target price, no critical mass barrier exists
+      if (targetPrice <= u0) {
+        // Since g(0) = u0 >= p, at z=0 marginal user is 1 - p/u0 >= 0.
+        // The positive root of beta*z^2 + (u0 - beta)z + (targetPrice - u0) = 0:
+        const disc = Math.pow(beta - u0, 2) - 4.0 * beta * (targetPrice - u0);
+        const sqrtDisc = Math.sqrt(Math.max(0, disc));
+        const z2 = Math.min(1.0, ((beta - u0) + sqrtDisc) / (2.0 * beta));
+        return { pMax, viable: true, criticalMassEliminated: true, z0: 0, z1: 0, z2 };
+      }
+
+      if (targetPrice > pMax) {
+        return { pMax, viable: false, criticalMassEliminated: false, z0: 0, z1: null, z2: null };
+      }
+
+      const disc = Math.pow(beta - u0, 2) - 4.0 * beta * (targetPrice - u0);
+      const sqrtDisc = Math.sqrt(Math.max(0, disc));
+      const z1 = ((beta - u0) - sqrtDisc) / (2.0 * beta);
+      const z2 = ((beta - u0) + sqrtDisc) / (2.0 * beta);
+      return { pMax, viable: true, criticalMassEliminated: false, z0: 0, z1, z2 };
+    }
+
+    function nextDynamicStep(beta, u0, price, zCurrent) {
+      const denom = u0 + beta * zCurrent;
+      if (denom <= 0) {
+        return price <= 0 ? 1.0 : 0.0;
+      }
+      const thresholdUser = 1.0 - (price / denom);
+      return Math.max(0, Math.min(1.0, thresholdUser));
+    }
+
+    function updateLabSimulation(resetCurrentToStart = false) {
+      labState.beta = parseFloat(document.getElementById('input-beta').value);
+      labState.u0 = parseFloat(document.getElementById('input-u0').value);
+      labState.price = parseFloat(document.getElementById('input-price').value);
+      labState.zStart = parseFloat(document.getElementById('input-zstart').value) / 100.0;
+
+      if (resetCurrentToStart) {
+        labState.zCurrent = labState.zStart;
+        labState.t = 0;
+        stopDynamicsAnimation();
+      }
+
+      document.getElementById('val-beta').textContent = labState.beta;
+      document.getElementById('val-u0').textContent = labState.u0.toFixed(2);
+      document.getElementById('val-price').textContent = labState.price.toFixed(2);
+      document.getElementById('val-zstart').textContent = `${Math.round(labState.zStart * 100)}%`;
+      document.getElementById('dyn-step-counter').textContent = `t = ${labState.t}`;
+
+      const eq = calculateEquilibria(labState.beta, labState.u0, labState.price);
+
+      document.getElementById('kpi-pmax-val').textContent = eq.pMax.toFixed(2);
+
+      const kpiZ1Val = document.getElementById('kpi-z1-val');
+      const kpiZ1Sub = document.getElementById('kpi-z1-sub');
+      const kpiZ2Val = document.getElementById('kpi-z2-val');
+
+      if (eq.criticalMassEliminated || labState.pricingMode === 'dynamic') {
+        kpiZ1Val.textContent = "0.0%";
+        kpiZ1Val.className = "text-lg font-bold font-mono text-emerald-600 mt-0.5";
+        kpiZ1Sub.textContent = currentLang === 'en' ? "Barrier eliminated" : "Próg zlikwidowany";
+        kpiZ2Val.textContent = eq.z2 !== null ? `${(eq.z2 * 100).toFixed(1)}%` : "100.0%";
+      } else if (eq.viable && eq.z1 !== null) {
+        kpiZ1Val.textContent = `${(eq.z1 * 100).toFixed(1)}%`;
+        kpiZ1Val.className = "text-lg font-bold font-mono text-rose-600 mt-0.5";
+        kpiZ1Sub.textContent = currentLang === 'en' ? "Unstable threshold" : "Niestabilny próg";
+        kpiZ2Val.textContent = `${(eq.z2 * 100).toFixed(1)}%`;
+      } else {
+        kpiZ1Val.textContent = "—";
+        kpiZ1Val.className = "text-lg font-bold font-mono text-slate-400 mt-0.5";
+        kpiZ1Sub.textContent = "No equilibrium";
+        kpiZ2Val.textContent = "—";
+      }
+
+      const trajVal = document.getElementById('kpi-trajectory-val');
+      const trajSub = document.getElementById('kpi-trajectory-sub');
+      const dynMsg = document.getElementById('dyn-status-message');
+
+      const effP = getEffectivePrice(labState.zCurrent);
+      const isDynamic = labState.pricingMode === 'dynamic';
+
+      if (!eq.viable && !isDynamic) {
+        trajVal.textContent = currentLang === 'en' ? "Market failure" : "Brak rynku";
+        trajVal.className = "text-xs font-bold text-rose-600 mt-1.5 leading-snug";
+        trajSub.textContent = currentLang === 'en' ? "p > p max (no demand)" : "p > p max (brak popytu)";
+        dynMsg.textContent = currentLang === 'en'
+          ? "Target price exceeds peak valuation. Adoption collapses to zero."
+          : "Cena docelowa przewyższa szczytową gotowość do płacenia. Popyt gaśnie do zera.";
+      } else if (eq.criticalMassEliminated || isDynamic || labState.zCurrent >= (eq.z1 || 0)) {
+        trajVal.textContent = currentLang === 'en' ? "Growing to high eq." : "Wzrost do nasycenia";
+        trajVal.className = "text-xs font-bold text-emerald-600 mt-1.5 leading-snug";
+        const targetPct = eq.z2 ? (eq.z2 * 100).toFixed(1) : "100.0";
+        trajSub.textContent = currentLang === 'en' ? `Target: ${targetPct}%` : `Cel: ${targetPct}%`;
+        const reachedTargetPrice = Math.abs(effP - labState.price) < 0.05;
+        dynMsg.textContent = isDynamic
+          ? (reachedTargetPrice
+            ? (currentLang === 'en'
+              ? `Adoption crossed the start-up phase. Price reached target commercial rate p* = ${labState.price.toFixed(2)}, converging to stable equilibrium z₂ = ${targetPct}%.`
+              : `Adopcja przekroczyła fazę początkową. Cena osiągnęła docelową stawkę rynkową p* = ${labState.price.toFixed(2)}, zmierzając do punktu równowagi z₂ = ${targetPct}%.`)
+            : (currentLang === 'en'
+              ? `Initial growth phase: dynamic promo price p = ${effP.toFixed(2)} remains below willingness to pay to overcome critical mass.`
+              : `Wczesna faza wzrostu: cena promocyjna p = ${effP.toFixed(2)} pozostaje poniżej gotowości do płacenia, przełamując barierę startową.`))
+          : (eq.criticalMassEliminated
+            ? (currentLang === 'en'
+              ? `Standalone utility u₀ = ${labState.u0.toFixed(2)} covers price. Critical mass eliminated!`
+              : `Wartość autonomiczna u₀ = ${labState.u0.toFixed(2)} przewyższa cenę. Próg zlikwidowany!`)
+            : (currentLang === 'en'
+              ? `Adoption is above threshold. Network pulling toward ${targetPct}%.`
+              : `Adopcja przekroczyła próg. Sieć zmierza do stabilnego poziomu ${targetPct}%.`));
+      } else {
+        trajVal.textContent = currentLang === 'en' ? "Collapsing to zero" : "Spadek do zera";
+        trajVal.className = "text-xs font-bold text-rose-600 mt-1.5 leading-snug";
+        trajSub.textContent = currentLang === 'en' ? "z < z₁ (below threshold)" : "z < z₁ (poniżej progu)";
+        dynMsg.textContent = currentLang === 'en'
+          ? `Current adoption ${(labState.zCurrent * 100).toFixed(1)}% is below critical mass ${(eq.z1 * 100).toFixed(1)}%. Users are leaving.`
+          : `Aktualna adopcja ${(labState.zCurrent * 100).toFixed(1)}% jest poniżej masy krytycznej ${(eq.z1 * 100).toFixed(1)}%. Baza maleje.`;
+      }
+
+      renderSvgPlot(eq);
+      renderAlgebraSteps(eq);
+    }
+
+    function renderSvgPlot(eq) {
+      const W = 700;
+      const H = 400;
+      const padLeft = 60;
+      const padRight = 40;
+      const padTop = 30;
+      const padBottom = 50;
+
+      const plotW = W - padLeft - padRight;
+      const plotH = H - padTop - padBottom;
+
+      const pScaleMax = Math.max(30, eq.pMax * 1.25, labState.price * 1.35, evaluateWTP(labState.beta, labState.u0, 0.5) * 1.2);
+
+      function toX(z) {
+        return padLeft + z * plotW;
+      }
+      function toY(p) {
+        return padTop + plotH - (Math.max(0, p) / pScaleMax) * plotH;
+      }
+
+      // Grid
+      let gridHtml = '';
+      for (let z = 0.2; z <= 1.0; z += 0.2) {
+        const x = toX(z);
+        gridHtml += `<line x1="${x}" y1="${padTop}" x2="${x}" y2="${padTop + plotH}" stroke="#f1f5f9" stroke-width="1"/>`;
+      }
+      for (let p = 5; p < pScaleMax; p += 5) {
+        const y = toY(p);
+        gridHtml += `<line x1="${padLeft}" y1="${y}" x2="${padLeft + plotW}" y2="${y}" stroke="#f1f5f9" stroke-width="1"/>`;
+      }
+      document.getElementById('svg-grid').innerHTML = gridHtml;
+
+      // Shaded Areas
+      let areasHtml = '';
+      if (!eq.criticalMassEliminated && eq.viable && eq.z1 !== null && labState.pricingMode === 'fixed') {
+        // Red region: [0, z1]
+        let redPath = `M ${toX(0)} ${toY(labState.u0)}`;
+        for (let s = 0; s <= 30; s++) {
+          const zVal = (s / 30) * eq.z1;
+          const pVal = evaluateWTP(labState.beta, labState.u0, zVal);
+          redPath += ` L ${toX(zVal)} ${toY(pVal)}`;
+        }
+        redPath += ` L ${toX(eq.z1)} ${toY(0)} L ${toX(0)} ${toY(0)} Z`;
+        areasHtml += `<path d="${redPath}" fill="#fee2e2" opacity="0.45"/>`;
+
+        // Green region: [z1, z2]
+        let greenPath = `M ${toX(eq.z1)} ${toY(labState.price)}`;
+        const stepZ = (eq.z2 - eq.z1) / 40;
+        for (let s = 0; s <= 40; s++) {
+          const zVal = eq.z1 + s * stepZ;
+          const pVal = evaluateWTP(labState.beta, labState.u0, zVal);
+          greenPath += ` L ${toX(zVal)} ${toY(pVal)}`;
+        }
+        greenPath += ` L ${toX(eq.z2)} ${toY(labState.price)} Z`;
+        areasHtml += `<path d="${greenPath}" fill="#dcfce7" opacity="0.45"/>`;
+      } else if (eq.criticalMassEliminated || labState.pricingMode === 'dynamic') {
+        // Whole adoption corridor is viable (green)
+        const endZ = eq.z2 || 1.0;
+        let greenPath = `M ${toX(0)} ${toY(labState.u0)}`;
+        for (let s = 0; s <= 40; s++) {
+          const zVal = (s / 40) * endZ;
+          const pVal = evaluateWTP(labState.beta, labState.u0, zVal);
+          greenPath += ` L ${toX(zVal)} ${toY(pVal)}`;
+        }
+        greenPath += ` L ${toX(endZ)} ${toY(0)} L ${toX(0)} ${toY(0)} Z`;
+        areasHtml += `<path d="${greenPath}" fill="#dcfce7" opacity="0.35"/>`;
+      }
+      document.getElementById('svg-areas').innerHTML = areasHtml;
+
+      // Axes
+      const yAxisTitle = currentLang === 'en' ? 'Price & willingness to pay p' : 'Cena i gotowość do płacenia p';
+      let axesHtml = `
+        <line x1="${padLeft}" y1="${padTop + plotH}" x2="${padLeft + plotW + 15}" y2="${padTop + plotH}" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow-axis)"/>
+        <line x1="${padLeft}" y1="${padTop + plotH}" x2="${padLeft}" y2="${padTop - 15}" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow-axis)"/>
+        <text x="${padLeft + plotW + 5}" y="${padTop + plotH + 32}" font-size="11" fill="#475569" font-weight="600" text-anchor="end">Adoption fraction z</text>
+        <text x="${padLeft - 10}" y="${padTop - 12}" font-size="11" fill="#475569" font-weight="600" text-anchor="end" transform="rotate(-90, ${padLeft - 10}, ${padTop - 12})">${yAxisTitle}</text>
+      `;
+
+      // X ticks
+      [0, 0.25, 0.5, 0.75, 1.0].forEach(z => {
+        const x = toX(z);
+        axesHtml += `
+          <line x1="${x}" y1="${padTop + plotH}" x2="${x}" y2="${padTop + plotH + 4}" stroke="#64748b" stroke-width="1"/>
+          <text x="${x}" y="${padTop + plotH + 18}" font-size="10" font-family="monospace" fill="#64748b" text-anchor="middle">${Math.round(z * 100)}%</text>
+        `;
+      });
+      document.getElementById('svg-axes').innerHTML = axesHtml;
+
+      // Curve p = (1 - z)(u0 + beta * z)
+      let curvePath = '';
+      const samples = 100;
+      for (let i = 0; i <= samples; i++) {
+        const z = i / samples;
+        const p = evaluateWTP(labState.beta, labState.u0, z);
+        const x = toX(z);
+        const y = toY(p);
+        curvePath += (i === 0 ? `M ${x} ${y}` : ` L ${x} ${y}`);
+      }
+
+      const targetPriceY = toY(labState.price);
+      let curvesHtml = `
+        <path d="${curvePath}" fill="none" stroke="#4f46e5" stroke-width="2.5"/>
+        <line x1="${padLeft}" y1="${targetPriceY}" x2="${padLeft + plotW}" y2="${targetPriceY}" stroke="#16a34a" stroke-width="1.8" stroke-dasharray="4,3"/>
+      `;
+
+      // Dynamic Price curve if enabled
+      if (labState.pricingMode === 'dynamic') {
+        // Find transition point where dynamic promo price reaches target price p*
+        // Dynamic price path ramps up during initial phase and then flattens at p = p*
+        let dynPath = '';
+        let hasReachedTarget = false;
+        let transitionZ = 1.0;
+
+        for (let i = 0; i <= samples; i++) {
+          const z = i / samples;
+          const promoP = Math.max(0, evaluateWTP(labState.beta, labState.u0, z) * 0.80);
+          if (!hasReachedTarget && promoP >= labState.price) {
+            hasReachedTarget = true;
+            transitionZ = z;
+            break;
+          }
+        }
+
+        for (let i = 0; i <= samples; i++) {
+          const z = i / samples;
+          const pEff = (z <= transitionZ)
+            ? Math.min(labState.price, Math.max(0, evaluateWTP(labState.beta, labState.u0, z) * 0.80))
+            : labState.price;
+          const x = toX(z);
+          const y = toY(pEff);
+          dynPath += (i === 0 ? `M ${x} ${y}` : ` L ${x} ${y}`);
+        }
+        curvesHtml += `
+          <path d="${dynPath}" fill="none" stroke="#d97706" stroke-width="2.5" stroke-dasharray="5,3"/>
+        `;
+      }
+      document.getElementById('svg-curves').innerHTML = curvesHtml;
+
+      // Projections & Points
+      let projHtml = '';
+      let pointsHtml = '';
+      let labelsHtml = '';
+
+      // Target Price label
+      labelsHtml += `
+        <rect x="${padLeft + 8}" y="${targetPriceY - 18}" width="74" height="15" rx="4" fill="#16a34a"/>
+        <text x="${padLeft + 45}" y="${targetPriceY - 7}" font-size="9" font-weight="bold" fill="#ffffff" text-anchor="middle">p = ${labState.price.toFixed(2)}</text>
+      `;
+
+      // Standalone utility marker on Y axis if > 0
+      if (labState.u0 > 0) {
+        const u0Y = toY(labState.u0);
+        projHtml += `
+          <line x1="${padLeft}" y1="${u0Y}" x2="${toX(0.08)}" y2="${u0Y}" stroke="#9333ea" stroke-width="1.5" stroke-dasharray="2,2"/>
+        `;
+        pointsHtml += `
+          <circle cx="${padLeft}" cy="${u0Y}" r="4" fill="#9333ea"/>
+        `;
+        labelsHtml += `
+          <rect x="${padLeft + 6}" y="${u0Y - 16}" width="60" height="14" rx="3" fill="#9333ea"/>
+          <text x="${padLeft + 36}" y="${u0Y - 6}" font-size="8.5" font-weight="bold" fill="#ffffff" text-anchor="middle">u₀ = ${labState.u0.toFixed(1)}</text>
+        `;
+      }
+
+      // Point at (100%, 0)
+      pointsHtml += `
+        <circle cx="${toX(1.0)}" cy="${toY(0)}" r="3.5" fill="#4f46e5"/>
+      `;
+
+      if (!eq.criticalMassEliminated && eq.viable && eq.z1 !== null && labState.pricingMode === 'fixed') {
+        const x1 = toX(eq.z1);
+        const y1 = targetPriceY;
+        const x2 = toX(eq.z2);
+        const y2 = targetPriceY;
+
+        // Verticals
+        projHtml += `
+          <line x1="${x1}" y1="${y1}" x2="${x1}" y2="${padTop + plotH}" stroke="#dc2626" stroke-width="1.2" stroke-dasharray="3,3"/>
+          <line x1="${x2}" y1="${y2}" x2="${x2}" y2="${padTop + plotH}" stroke="#2563eb" stroke-width="1.2" stroke-dasharray="3,3"/>
+        `;
+
+        // Points
+        pointsHtml += `
+          <circle cx="${toX(0)}" cy="${toY(labState.u0)}" r="4" fill="#94a3b8"/>
+          <circle cx="${x1}" cy="${y1}" r="6" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+          <circle cx="${x2}" cy="${y2}" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+        `;
+
+        // Labels
+        labelsHtml += `
+          <rect x="${x1 - 38}" y="${y1 - 22}" width="76" height="16" rx="4" fill="#dc2626"/>
+          <text x="${x1}" y="${y1 - 10}" font-size="9" font-weight="bold" fill="#ffffff" text-anchor="middle">z<tspan baseline-shift="sub" font-size="7">1</tspan> = ${(eq.z1 * 100).toFixed(1)}%</text>
+
+          <rect x="${x2 - 38}" y="${y2 - 22}" width="76" height="16" rx="4" fill="#2563eb"/>
+          <text x="${x2}" y="${y2 - 10}" font-size="9" font-weight="bold" fill="#ffffff" text-anchor="middle">z<tspan baseline-shift="sub" font-size="7">2</tspan> = ${(eq.z2 * 100).toFixed(1)}%</text>
+        `;
+      } else if (eq.z2) {
+        // High equilibrium only
+        const x2 = toX(eq.z2);
+        const y2 = toY(evaluateWTP(labState.beta, labState.u0, eq.z2));
+        projHtml += `
+          <line x1="${x2}" y1="${y2}" x2="${x2}" y2="${padTop + plotH}" stroke="#2563eb" stroke-width="1.2" stroke-dasharray="3,3"/>
+        `;
+        pointsHtml += `
+          <circle cx="${x2}" cy="${y2}" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+        `;
+        labelsHtml += `
+          <rect x="${x2 - 38}" y="${y2 - 22}" width="76" height="16" rx="4" fill="#2563eb"/>
+          <text x="${x2}" y="${y2 - 10}" font-size="9" font-weight="bold" fill="#ffffff" text-anchor="middle">z<tspan baseline-shift="sub" font-size="7">2</tspan> = ${(eq.z2 * 100).toFixed(1)}%</text>
+        `;
+      }
+
+      // Current State Marker (zCurrent)
+      const curX = toX(labState.zCurrent);
+      const curP = evaluateWTP(labState.beta, labState.u0, labState.zCurrent);
+      const curY = toY(curP);
+
+      projHtml += `
+        <line x1="${curX}" y1="${padTop + plotH}" x2="${curX}" y2="${curY}" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="2,2"/>
+      `;
+
+      pointsHtml += `
+        <circle cx="${curX}" cy="${curY}" r="5" fill="#7c3aed" opacity="0.4">
+          <animate attributeName="r" values="5;13;5" dur="2s" repeatCount="indefinite" />
+          <animate attributeName="opacity" values="0.7;0.1;0.7" dur="2s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="${curX}" cy="${curY}" r="5.5" fill="#7c3aed" stroke="#ffffff" stroke-width="2"/>
+        <circle cx="${curX}" cy="${padTop + plotH}" r="4" fill="#7c3aed"/>
+      `;
+
+      labelsHtml += `
+        <rect x="${curX - 42}" y="${padTop + plotH + 5}" width="84" height="15" rx="3" fill="#7c3aed"/>
+        <text x="${curX}" y="${padTop + plotH + 16}" font-size="9" font-weight="bold" fill="#ffffff" text-anchor="middle">z<tspan baseline-shift="sub" font-size="7">t</tspan> = ${(labState.zCurrent * 100).toFixed(1)}%</text>
+      `;
+
+      // Direction vector arrow
+      const curEffP = getEffectivePrice(labState.zCurrent);
+      const nextZ = nextDynamicStep(labState.beta, labState.u0, curEffP, labState.zCurrent);
+      const nextX = toX(nextZ);
+      if (Math.abs(nextX - curX) > 4) {
+        const arrowMarker = nextZ > labState.zCurrent ? 'url(#arrow-green)' : 'url(#arrow-red)';
+        const arrowColor = nextZ > labState.zCurrent ? '#16a34a' : '#dc2626';
+        projHtml += `
+          <line x1="${curX}" y1="${padTop + plotH - 12}" x2="${nextX}" y2="${padTop + plotH - 12}" stroke="${arrowColor}" stroke-width="2.5" marker-end="${arrowMarker}"/>
+        `;
+      }
+
+      document.getElementById('svg-projections').innerHTML = projHtml;
+      document.getElementById('svg-points').innerHTML = pointsHtml;
+      document.getElementById('svg-labels').innerHTML = labelsHtml;
+    }
+
+    function renderAlgebraSteps(eq) {
+      const container = document.getElementById('algebra-content');
+      const beta = labState.beta;
+      const u0 = labState.u0;
+      const p = labState.price;
+      const pMax = eq.pMax;
+
+      if (eq.criticalMassEliminated || labState.pricingMode === 'dynamic') {
+        const reason = labState.pricingMode === 'dynamic'
+          ? (currentLang === 'en'
+            ? 'Dynamic pricing operates only in the initial bootstrapping phase: \\(p(z) < g(z)\\). Once the barrier is crossed, price locks at target \\(p^* = ' + p.toFixed(2) + '\\), yielding stable equilibrium \\(z_2\\).'
+            : 'Cena dynamiczna działa tylko we wczesnej fazie: \\(p(z) < g(z)\\). Po przekroczeniu bariery cena blokuje się na poziomie docelowym \\(p^* = ' + p.toFixed(2) + '\\), stabilizując rynek w \\(z_2\\).')
+          : (currentLang === 'en'
+            ? 'Standalone utility \\(u_0 \\ge p\\). At \\(z = 0\\), consumers enjoy positive surplus, anchoring the curve at \\(g(1) = 0\\).'
+            : 'Wartość autonomiczna \\(u_0 \\ge p\\). Przy \\(z = 0\\) konsumenci uzyskują dodatnią nadwyżkę, a krzywa pozostaje zakotwiczona w \\(g(1) = 0\\).');
+
+        container.innerHTML = `
+          <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-xl space-y-1">
+            <div class="font-bold text-emerald-800">1. ${currentLang === 'en' ? 'Critical mass eliminated' : 'Likwidacja masy krytycznej'}</div>
+            <div class="text-slate-800">
+              \\[u_0 = ${u0.toFixed(2)}, \\quad p^* = ${p.toFixed(2)}, \\quad g(1) = 0\\]
+            </div>
+            <p class="text-slate-600 mt-1">${reason}</p>
+          </div>
+          <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+            <div class="font-bold text-slate-800">2. ${currentLang === 'en' ? 'Target market equilibrium' : 'Docelowa równowaga rynkowa'}</div>
+            <div class="text-blue-700 font-bold">
+              \\[z_2 = ${eq.z2 ? (eq.z2 * 100).toFixed(1) + '\\%' : '100.0\\%'}\\]
+            </div>
+            <p class="text-slate-600 mt-1">${currentLang === 'en' ? 'Once target price p* is active, the platform maintains mature market share z₂.' : 'Po przejściu na cenę docelową p* platforma zachowuje stabilny udział rynkowy z₂.'}</p>
+          </div>
+        `;
+        renderMath(container);
+        return;
+      }
+
+      const disc = Math.pow(beta - u0, 2) - 4.0 * beta * (p - u0);
+
+      if (!eq.viable) {
+        container.innerHTML = `
+          <div class="p-3 bg-rose-50 border border-rose-200 rounded-xl space-y-1">
+            <div class="font-bold text-rose-800">1. ${currentLang === 'en' ? 'Discriminant condition' : 'Warunek wyróżnika'}: \\(\\Delta < 0\\)</div>
+            <div class="text-slate-800">
+              \\[\\Delta = (${beta} - ${u0.toFixed(1)})^2 - 4 \\cdot ${beta} (${p.toFixed(2)} - ${u0.toFixed(2)}) = ${disc.toFixed(2)}\\]
+            </div>
+            <p class="text-slate-600 mt-1">${currentLang === 'en' ? 'Since \\(\\Delta < 0\\), price line lies above peak valuation.' : 'Wyróżnik \\(\\Delta < 0\\) oznacza, że cena przewyższa szczytową gotowość do płacenia.'}</p>
+          </div>
+          <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+            <div class="font-bold text-slate-800">2. ${currentLang === 'en' ? 'Maximum allowable price' : 'Maksymalna dopuszczalna cena'}: \\(p_{\\max}\\)</div>
+            <div class="text-slate-800">
+              \\[p_{\\max} = ${pMax.toFixed(2)}\\]
+            </div>
+          </div>
+        `;
+        renderMath(container);
+        return;
+      }
+
+      const sqrtDisc = Math.sqrt(Math.max(0, disc));
+
+      container.innerHTML = `
+        <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+          <div class="font-bold text-slate-800">1. ${currentLang === 'en' ? 'Self-fulfilling condition' : 'Warunek spójności oczekiwań'}</div>
+          <div class="text-slate-800">
+            \\[(1 - z)(${u0.toFixed(2)} + ${beta}z) = ${p.toFixed(2)}\\]
+          </div>
+          <div class="text-slate-600 text-[11px] text-center">
+            \\[\\Delta = (${beta} - ${u0.toFixed(1)})^2 - 4(${beta})(${(p - u0).toFixed(2)}) = ${disc.toFixed(2)}, \\quad \\sqrt{\\Delta} = ${sqrtDisc.toFixed(2)}\\]
+          </div>
+        </div>
+        <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+          <div class="font-bold text-slate-800">2. ${currentLang === 'en' ? 'Equilibria roots' : 'Pierwiastki równowagi'}</div>
+          <div class="text-rose-700">
+            \\[z_1 = \\dfrac{(${beta} - ${u0.toFixed(1)}) - ${sqrtDisc.toFixed(2)}}{2 \\cdot ${beta}} = ${eq.z1.toFixed(3)} \\; (${(eq.z1 * 100).toFixed(1)}\\%)\\]
+          </div>
+          <div class="text-blue-700">
+            \\[z_2 = \\dfrac{(${beta} - ${u0.toFixed(1)}) + ${sqrtDisc.toFixed(2)}}{2 \\cdot ${beta}} = ${eq.z2.toFixed(3)} \\; (${(eq.z2 * 100).toFixed(1)}\\%)\\]
+          </div>
+        </div>
+      `;
+      renderMath(container);
+    }
+
+    function resetLabToDefaults() {
+      document.getElementById('input-beta').value = 60;
+      document.getElementById('input-u0').value = 0;
+      document.getElementById('input-price').value = 9;
+      document.getElementById('input-zstart').value = 12;
+      setPricingMode('fixed');
+      updateLabSimulation(true);
+    }
+
+    function applyPreset(name) {
+      if (name === 'trap') {
+        document.getElementById('input-beta').value = 60;
+        document.getElementById('input-u0').value = 0;
+        document.getElementById('input-price').value = 10;
+        document.getElementById('input-zstart').value = 10;
+        setPricingMode('fixed');
+      } else if (name === 'freemium') {
+        document.getElementById('input-beta').value = 60;
+        document.getElementById('input-u0').value = 0;
+        document.getElementById('input-price').value = 0;
+        document.getElementById('input-zstart').value = 3;
+        setPricingMode('fixed');
+      } else if (name === 'utility') {
+        document.getElementById('input-beta').value = 60;
+        document.getElementById('input-u0').value = 8;
+        document.getElementById('input-price').value = 7;
+        document.getElementById('input-zstart').value = 3;
+        setPricingMode('fixed');
+      } else if (name === 'dynamic') {
+        document.getElementById('input-beta').value = 60;
+        document.getElementById('input-u0').value = 0;
+        document.getElementById('input-price').value = 12;
+        document.getElementById('input-zstart').value = 4;
+        setPricingMode('dynamic');
+      }
+      updateLabSimulation(true);
+    }
+
+    function stepDynamicsForward() {
+      const curEffP = getEffectivePrice(labState.zCurrent);
+      const targetZ = nextDynamicStep(labState.beta, labState.u0, curEffP, labState.zCurrent);
+      const diff = targetZ - labState.zCurrent;
+      if (Math.abs(diff) < 0.001) {
+        labState.zCurrent = targetZ;
+      } else {
+        const step = 0.01;
+        if (Math.abs(diff) <= step) {
+          labState.zCurrent = targetZ;
+        } else {
+          labState.zCurrent += Math.sign(diff) * step;
+        }
+      }
+      labState.t += 1;
+      updateLabSimulation(false);
+    }
+
+    function resetDynamicsToStart() {
+      labState.zCurrent = labState.zStart;
+      labState.t = 0;
+      stopDynamicsAnimation();
+      updateLabSimulation(false);
+    }
+
+    function toggleDynamicsAnimation() {
+      if (labState.animating) {
+        stopDynamicsAnimation();
+      } else {
+        startDynamicsAnimation();
+      }
+    }
+
+    function startDynamicsAnimation() {
+      labState.animating = true;
+      document.getElementById('dyn-play-text').textContent = translations[currentLang].btn_stop_sim;
+      document.getElementById('dyn-play-icon').innerHTML = '<path d="M5 4h3v12H5V4zm7 0h3v12h-3V4z"/>';
+      labState.animInterval = setInterval(() => {
+        const curEffP = getEffectivePrice(labState.zCurrent);
+        const targetZ = nextDynamicStep(labState.beta, labState.u0, curEffP, labState.zCurrent);
+        const diff = targetZ - labState.zCurrent;
+
+        if (Math.abs(diff) < 0.001 || labState.t >= 200) {
+          labState.zCurrent = targetZ;
+          stopDynamicsAnimation();
+          updateLabSimulation(false);
+        } else {
+          const step = 0.01;
+          if (Math.abs(diff) <= step) {
+            labState.zCurrent = targetZ;
+          } else {
+            labState.zCurrent += Math.sign(diff) * step;
+          }
+          labState.t += 1;
+          updateLabSimulation(false);
+        }
+      }, 250);
+    }
+
+    function stopDynamicsAnimation() {
+      labState.animating = false;
+      if (labState.animInterval) {
+        clearInterval(labState.animInterval);
+        labState.animInterval = null;
+      }
+      document.getElementById('dyn-play-text').textContent = translations[currentLang].btn_run_sim;
+      document.getElementById('dyn-play-icon').innerHTML = '<path d="M4 4l12 6-12 6z"/>';
+    }
+
+    // Task 1: Prediction
+    let task1State = { beta: 64, price: 12.0, seed: 0.22, willGrow: false, z1: 0.25 };
+
+    function generateNewPredictionTask() {
+      const betas = [50, 60, 64, 72, 80];
+      const beta = betas[Math.floor(Math.random() * betas.length)];
+      const maxP = beta / 4.0;
+      const price = Math.round((maxP * (0.45 + Math.random() * 0.45)) * 2) / 2;
+
+      const disc = 1.0 - (4.0 * price / beta);
+      const z1 = (1.0 - Math.sqrt(disc)) / 2.0;
+
+      const delta = (Math.random() * 0.10) + 0.03;
+      const willGrow = Math.random() > 0.5;
+      let seed = willGrow ? z1 + delta : z1 - delta;
+      seed = Math.max(0.04, Math.min(0.65, seed));
+
+      task1State = { beta, price, seed, willGrow: seed > z1, z1 };
+
+      document.getElementById('t1-beta').textContent = beta;
+      document.getElementById('t1-price').textContent = price.toFixed(2);
+      document.getElementById('t1-seed').textContent = `${Math.round(seed * 100)}%`;
+
+      const fb = document.getElementById('t1-feedback');
+      fb.className = "hidden p-3.5 rounded-xl text-xs leading-relaxed";
+      fb.innerHTML = "";
+    }
+
+    function submitPrediction(userGuessGrow) {
+      const fb = document.getElementById('t1-feedback');
+      const isCorrect = (userGuessGrow === task1State.willGrow);
+      const z1Pct = (task1State.z1 * 100).toFixed(1);
+      const seedPct = Math.round(task1State.seed * 100);
+
+      fb.classList.remove('hidden');
+      if (isCorrect) {
+        fb.className = "p-3.5 bg-emerald-50 border border-emerald-200 text-emerald-900 rounded-xl text-xs leading-relaxed";
+        fb.innerHTML = currentLang === 'en'
+          ? `<strong>Correct!</strong> Critical mass was \\(z_1 = ${z1Pct}\\%\\). Since the seed base of \\(${seedPct}\\%\\) was ${task1State.willGrow ? 'above' : 'below'} this threshold, the network will ${task1State.willGrow ? 'sustain positive growth toward high equilibrium' : 'inevitably decay to zero users'}.`
+          : `<strong>Poprawnie!</strong> Masa krytyczna wynosiła \\(z_1 = ${z1Pct}\\%\\). Ponieważ baza startowa \\(${seedPct}\\%\\) znajdowała się ${task1State.willGrow ? 'powyżej' : 'poniżej'} tego progu, sieć ${task1State.willGrow ? 'uzyska samonapędzający się wzrost w stronę wysokiej równowagi' : 'nieuchronnie wygaśnie do zera'}.`;
+      } else {
+        fb.className = "p-3.5 bg-rose-50 border border-rose-200 text-rose-900 rounded-xl text-xs leading-relaxed";
+        fb.innerHTML = currentLang === 'en'
+          ? `<strong>Incorrect.</strong> Solving \\(\\beta z(1-z) = p\\) yields critical mass \\(z_1 = ${z1Pct}\\%\\). The seed base was \\(${seedPct}\\%\\), which means it was ${task1State.willGrow ? 'above' : 'below'} the barrier.`
+          : `<strong>Błąd.</strong> Rozwiązanie równania \\(\\beta z(1-z) = p\\) wyznacza masę krytyczną \\(z_1 = ${z1Pct}\\%\\). Baza startowa wynosiła \\(${seedPct}\\%\\), czyli znajdowała się ${task1State.willGrow ? 'powyżej' : 'poniżej'} bariery.`;
+      }
+      renderMath(fb);
+    }
+
+    // Task 2: Subsidies vs Standalone Utility
+    let task2State = {
+      beta: 50,
+      pReg: 8.0,
+      u0: 0.0,
+      zCurrent: 0.04,
+      zCritTarget: 0.20,
+      cashBurned: 0.0,
+      utilityInvested: false
+    };
+
+    function updateT2Promo() {
+      const p = parseFloat(document.getElementById('t2-promo-slider').value);
+      document.getElementById('t2-promo-display').textContent = p.toFixed(2);
+    }
+
+    function runT2SubsidyRound() {
+      const pPromo = parseFloat(document.getElementById('t2-promo-slider').value);
+      const nextZ = nextDynamicStep(task2State.beta, task2State.u0, pPromo, task2State.zCurrent);
+      const cost = Math.max(0, task2State.pReg - pPromo) * nextZ;
+
+      task2State.cashBurned += cost;
+      task2State.zCurrent = nextZ;
+
+      document.getElementById('t2-cash-burned').textContent = task2State.cashBurned.toFixed(2);
+      document.getElementById('t2-status-z').textContent = `${(task2State.zCurrent * 100).toFixed(1)}%`;
+
+      const fb = document.getElementById('t2-feedback');
+      if (task2State.zCurrent >= task2State.zCritTarget) {
+        fb.className = "p-3.5 bg-emerald-50 border border-emerald-200 text-emerald-900 rounded-xl text-xs leading-relaxed";
+        fb.innerHTML = currentLang === 'en'
+          ? `<strong>Critical mass surpassed!</strong> Adoption reached ${(task2State.zCurrent * 100).toFixed(1)}% (above 20.0%). Total cash burned: ${task2State.cashBurned.toFixed(2)}. You can now safely switch to regular price p = 8.00.`
+          : `<strong>Próg masy krytycznej przekroczony!</strong> Udział osiągnął ${(task2State.zCurrent * 100).toFixed(1)}% (powyżej 20,0%). Wydane subsydia: ${task2State.cashBurned.toFixed(2)}. Możesz bezpiecznie wdrożyć cenę regularną p = 8,00.`;
+      } else {
+        fb.className = "p-3.5 bg-slate-50 border border-slate-200 text-slate-700 rounded-xl text-xs leading-relaxed";
+        fb.innerHTML = currentLang === 'en'
+          ? `Round finished: Adoption is ${(task2State.zCurrent * 100).toFixed(1)}%. Still below 20.0%. Run another promo round or switch strategy.`
+          : `Runda zakończona: Baza wynosi ${(task2State.zCurrent * 100).toFixed(1)}%. Wciąż poniżej 20,0%. Kontynuuj promocję lub zmień podejście.`;
+      }
+    }
+
+    function applyT2UtilityInvestment() {
+      if (task2State.utilityInvested) return;
+      task2State.utilityInvested = true;
+      task2State.u0 = 8.5;
+
+      const btn = document.getElementById('t2-btn-utility');
+      btn.disabled = true;
+      btn.className = "w-full py-2 px-3 bg-slate-200 text-slate-500 text-xs font-semibold rounded-xl cursor-not-allowed";
+      btn.textContent = currentLang === 'en' ? "Utility tool deployed (u₀ = 8.50)" : "Narzędzie wdrożone (u₀ = 8,50)";
+
+      task2State.zCurrent = Math.max(task2State.zCurrent, 0.28);
+      document.getElementById('t2-status-z').textContent = `${(task2State.zCurrent * 100).toFixed(1)}%`;
+
+      const fb = document.getElementById('t2-feedback');
+      fb.className = "p-3.5 bg-purple-50 border border-purple-200 text-purple-900 rounded-xl text-xs leading-relaxed";
+      fb.innerHTML = currentLang === 'en'
+        ? `<strong>Standalone utility deployed!</strong> Because \\(u_0 = 8.50 > p = 8.00\\), critical mass is eliminated while the curve remains anchored at \\(g(1) = 0\\). Every consumer obtains positive surplus even with zero friends. Adoption jumps to ${(task2State.zCurrent * 100).toFixed(1)}% at a fixed cost of 15.00.`
+        : `<strong>Wartość autonomiczna wdrożona!</strong> Ponieważ \\(u_0 = 8{,}50 > p = 8{,}00\\), próg masy krytycznej został zlikwidowany, a krzywa pozostaje zakotwiczona w \\(g(1) = 0\\). Każdy konsument zyskuje nadwyżkę nawet bez znajomych. Baza wzrosła do ${(task2State.zCurrent * 100).toFixed(1)}% przy stałym koszcie 15,00.`;
+      renderMath(fb);
+    }
+
+    function testT2CommercialLaunch() {
+      const fb = document.getElementById('t2-feedback');
+      const isSafe = task2State.u0 >= task2State.pReg || task2State.zCurrent >= task2State.zCritTarget;
+
+      if (isSafe) {
+        const totalCost = task2State.utilityInvested ? (15.0 + task2State.cashBurned) : task2State.cashBurned;
+        fb.className = "p-3.5 bg-emerald-50 border border-emerald-200 text-emerald-900 rounded-xl text-xs leading-relaxed";
+        fb.innerHTML = currentLang === 'en'
+          ? `<strong>Commercial success!</strong> Regular price p = 8.00 launched successfully. Network expands toward 80.0% high equilibrium. Total expenditure: ${totalCost.toFixed(2)}.`
+          : `<strong>Sukces komercyjny!</strong> Wdrożono cenę regularną p = 8,00. Sieć rozwija się w stronę 80,0% wysokiej równowagi. Łączny wydatek: ${totalCost.toFixed(2)}.`;
+      } else {
+        fb.className = "p-3.5 bg-rose-50 border border-rose-200 text-rose-900 rounded-xl text-xs leading-relaxed";
+        fb.innerHTML = currentLang === 'en'
+          ? `<strong>Premature commercial launch!</strong> Adoption was only ${(task2State.zCurrent * 100).toFixed(1)}% (below critical mass 20.0%) and \\(u_0 = 0\\). Users left and the platform collapsed.`
+          : `<strong>Przedwczesne wdrożenie ceny rynkowej!</strong> Udział wynosił tylko ${(task2State.zCurrent * 100).toFixed(1)}% (poniżej progu 20,0%), a \\(u_0 = 0\\). Użytkownicy odeszli i platforma upadła.`;
+      }
+      renderMath(fb);
+    }
+
+    function resetTask2() {
+      task2State = {
+        beta: 50,
+        pReg: 8.0,
+        u0: 0.0,
+        zCurrent: 0.04,
+        zCritTarget: 0.20,
+        cashBurned: 0.0,
+        utilityInvested: false
+      };
+      document.getElementById('t2-cash-burned').textContent = "0.00";
+      document.getElementById('t2-status-z').textContent = "4.0%";
+      document.getElementById('t2-promo-slider').value = 0;
+      updateT2Promo();
+      const btn = document.getElementById('t2-btn-utility');
+      btn.disabled = false;
+      btn.className = "w-full py-2 px-3 bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold rounded-xl transition";
+      btn.textContent = translations[currentLang].btn_t2_invest;
+      
+      const fb = document.getElementById('t2-feedback');
+      fb.className = "p-3.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 leading-relaxed";
+      fb.innerHTML = translations[currentLang].t2_prompt_initial;
+      renderMath(fb);
+    }
+
+    // Task 3: Market Detective
+    let task3State = { beta: 100, price: 16.0, z2: 0.80, z1: 0.20 };
+
+    function generateDetectiveCase() {
+      const cases = [
+        { beta: 100, price: 16.0, z2: 0.80, z1: 0.20 },
+        { beta: 80, price: 12.0, z2: 0.75, z1: 0.25 },
+        { beta: 90, price: 18.0, z2: 0.69, z1: 0.31 },
+        { beta: 60, price: 9.6, z2: 0.80, z1: 0.20 }
+      ];
+      task3State = cases[Math.floor(Math.random() * cases.length)];
+      document.getElementById('t3-obs-p').textContent = task3State.price.toFixed(2);
+      document.getElementById('t3-obs-z').textContent = `${Math.round(task3State.z2 * 100)}%`;
+      document.getElementById('t3-guess-beta').value = '';
+      document.getElementById('t3-guess-z1').value = '';
+      const fb = document.getElementById('t3-feedback');
+      fb.classList.add('hidden');
+    }
+
+    function verifyDetectiveGuess() {
+      const guessBeta = parseFloat(document.getElementById('t3-guess-beta').value);
+      const guessZ1 = parseFloat(document.getElementById('t3-guess-z1').value);
+      const fb = document.getElementById('t3-feedback');
+
+      fb.classList.remove('hidden');
+
+      if (isNaN(guessBeta) || isNaN(guessZ1)) {
+        fb.className = "p-3.5 bg-amber-50 border border-amber-200 text-amber-900 rounded-xl text-xs";
+        fb.textContent = currentLang === 'en' ? "Please enter numerical values for both fields." : "Wprowadź wartości liczbowe w obu polach.";
+        return;
+      }
+
+      const betaErr = Math.abs(guessBeta - task3State.beta) / task3State.beta;
+      const z1TruePct = task3State.z1 * 100;
+      const z1Err = Math.abs(guessZ1 - z1TruePct);
+
+      if (betaErr <= 0.05 && z1Err <= 2.0) {
+        fb.className = "p-3.5 bg-emerald-50 border border-emerald-200 text-emerald-900 rounded-xl text-xs leading-relaxed";
+        fb.innerHTML = currentLang === 'en'
+          ? `<strong>Accurate deduction!</strong> From \\(p = \\beta z_2 (1 - z_2)\\), \\(\\beta = \\dfrac{${task3State.price.toFixed(2)}}{${task3State.z2} \\cdot ${(1 - task3State.z2).toFixed(2)}} = ${task3State.beta}\\). Due to parabolic symmetry, \\(z_1 = 1 - z_2 = ${z1TruePct.toFixed(0)}\\%\\).`
+          : `<strong>Dokładne obliczenia!</strong> Z warunku \\(p = \\beta z_2 (1 - z_2)\\) wynika \\(\\beta = \\dfrac{${task3State.price.toFixed(2)}}{${task3State.z2} \\cdot ${(1 - task3State.z2).toFixed(2)}} = ${task3State.beta}\\). Z symetrii paraboli \\(z_1 = 1 - z_2 = ${z1TruePct.toFixed(0)}\\%\\).`;
+      } else {
+        fb.className = "p-3.5 bg-rose-50 border border-rose-200 text-rose-900 rounded-xl text-xs leading-relaxed";
+        fb.innerHTML = currentLang === 'en'
+          ? `<strong>Check your formula:</strong> Rearrange \\(p = \\beta z_2(1 - z_2) \\implies \\beta = \\dfrac{p}{z_2(1 - z_2)}\\). The exact \\(\\beta\\) was ${task3State.beta}, and \\(z_1\\) was ${z1TruePct.toFixed(1)}%.`
+          : `<strong>Sprawdź przekształcenie:</strong> Przekształć \\(p = \\beta z_2(1 - z_2) \\implies \\beta = \\dfrac{p}{z_2(1 - z_2)}\\). Prawidłowa wartość \\(\\beta\\) to ${task3State.beta}, a \\(z_1\\) wynosiło ${z1TruePct.toFixed(1)}%.`;
+      }
+      renderMath(fb);
+    }
+
+    const rawQuizQuestions = [
+      {
+        cat_en: "Taxonomy",
+        cat_pl: "Taksonomia",
+        q_en: "A consumer installs a secure messaging application because their close colleagues already use it. What type of network effect is this?",
+        q_pl: "Konsument instaluje bezpieczny komunikator internetowy, ponieważ korzystają z niego jego współpracownicy. Jaki to typ efektu sieciowego?",
+        options_en: [
+          "Direct positive network effect",
+          "Indirect network effect",
+          "Cross-side network effect",
+          "Supply-side scale economy"
+        ],
+        options_pl: [
+          "Bezpośredni pozytywny efekt sieciowy",
+          "Pośredni efekt sieciowy",
+          "Krzyżowy efekt sieciowy",
+          "Podażowa korzyść skali"
+        ],
+        explanation_en: "In direct network effects, the value of the service for a participant depends on how many other people in the very same user group use it.",
+        explanation_pl: "W bezpośrednich efektach sieciowych wartość usługi dla użytkownika zależy od liczby uczestników należących do tej samej grupy."
+      },
+      {
+        cat_en: "Taxonomy",
+        cat_pl: "Taksonomia",
+        q_en: "Why is the relationship between game console sales and game development classified as an indirect network effect?",
+        q_pl: "Dlaczego relacja między sprzedażą konsol do gier a powstawaniem gier wideo jest klasyfikowana jako pośredni efekt sieciowy?",
+        options_en: [
+          "Value increases through the variety and availability of complementary goods, not direct communication",
+          "Gamers pay developers directly without using hardware intermediaries",
+          "The hardware cost drops as more consoles are manufactured",
+          "It represents pure congestion on digital distribution servers"
+        ],
+        options_pl: [
+          "Wartość rośnie dzięki różnorodności dóbr komplementarnych, a nie bezpośredniej komunikacji",
+          "Gracze płacą twórcom bezpośrednio z pominięciem sprzętu",
+          "Koszt produkcji konsoli spada wraz ze skalą fabryczną",
+          "Odzwierciedla to przeciążenie serwerów pobierania plików"
+        ],
+        explanation_en: "Indirect network effects occur when adopting the primary platform stimulates the market for complementary third-party software and accessories.",
+        explanation_pl: "Pośrednie efekty sieciowe zachodzą wtedy, gdy adopcja platformy bazowej stymuluje rynek komplementarnych aplikacji i akcesoriów."
+      },
+      {
+        cat_en: "Standalone utility",
+        cat_pl: "Wartość autonomiczna",
+        q_en: "How does adding standalone utility (\\(u_0 \\ge p\\)) alter the critical mass threshold \\(z_1\\)?",
+        q_pl: "W jaki sposób dodanie wartości autonomicznej (\\(u_0 \\ge p\\)) wpływa na próg masy krytycznej \\(z_1\\)?",
+        options_en: [
+          "It eliminates the critical mass threshold, allowing spontaneous growth from zero users",
+          "It doubles the critical threshold, requiring twice as many early users",
+          "It shifts the entire curve downward, creating permanent congestion",
+          "It makes the high equilibrium point unstable"
+        ],
+        options_pl: [
+          "Eliminuje próg masy krytycznej, umożliwiając samorzutny wzrost od zera użytkowników",
+          "Podwaja próg krytyczny, wymagając dwukrotnie większej bazy startowej",
+          "Przesuwa całą krzywą w dół, wywołując trwałe przeciążenie",
+          "Powoduje utratę stabilności przez punkt wysokiej równowagi"
+        ],
+        explanation_en: "When \\(u_0 \\ge p\\), consumers obtain net positive surplus even when network size is zero, so \\(z_1 = 0\\) and the startup trap is eliminated.",
+        explanation_pl: "Gdy \\(u_0 \\ge p\\), konsumenci uzyskują dodatnią nadwyżkę nawet przy zerze użytkowników w sieci, więc \\(z_1 = 0\\) i pułapka startowa znika."
+      },
+      {
+        cat_en: "Pricing strategy",
+        cat_pl: "Strategia cenowa",
+        q_en: "What is the primary economic mechanism behind dynamic penetration pricing in network markets?",
+        q_pl: "Na czym polega główny mechanizm ekonomiczny dynamicznych cen penetracyjnych na rynkach sieciowych?",
+        options_en: [
+          "Keeping price below the current willingness-to-pay curve to prevent any sub-critical contraction",
+          "Charging monopoly rates early to recover fixed development costs immediately",
+          "Colluding with competing platforms to divide the market geographically",
+          "Fixing marginal revenue equal to average fixed cost"
+        ],
+        options_pl: [
+          "Utrzymywaniu ceny poniżej bieżącej krzywej gotowości do płacenia, co wyklucza odpływ użytkowników",
+          "Pobieraniu cen monopolistycznych na starcie w celu natychmiastowego zwrotu kosztów stałych",
+          "Zawieraniu zmowy z konkurentami w celu podziału rynku geograficznego",
+          "Zrównywaniu przychodu krańcowego z przeciętnym kosztem stałym"
+        ],
+        explanation_en: "By adjusting \\(p(z) < g(z)\\), realized demand always exceeds current network size, driving continuous positive adoption steps toward maturity.",
+        explanation_pl: "Utrzymanie \\(p(z) < g(z)\\) sprawia, że popyt przewyższa bieżący rozmiar sieci, generując dodatnie kroki wzrostu aż do dojrzałości."
+      },
+      {
+        cat_en: "Model mechanics",
+        cat_pl: "Mechanika modelu",
+        q_en: "In the Katz-Shapiro self-fulfilling expectations model, why does the willingness-to-pay curve take a parabolic shape?",
+        q_pl: "Dlaczego w modelu Katza i Shapiro krzywa gotowości do płacenia ma kształt odwróconej paraboli?",
+        options_en: [
+          "Network utility increases with \\(z\\), but marginal non-adopters have progressively lower intrinsic reservations",
+          "Marginal production costs increase exponentially as the platform expands",
+          "Consumers suffer from fatigue and abandon the service at high prices",
+          "The firm deliberately restricts access to create artificial scarcity"
+        ],
+        options_pl: [
+          "Korzyści sieciowe rosną z rozmiarem \\(z\\), lecz kolejni konsumenci mają coraz niższą wycenę autonomiczną",
+          "Krańcowe koszty techniczne rosną wykładniczo wraz z rozmiarem bazy",
+          "Użytkownicy doświadczają znużenia i odchodzą przy wyższych cenach",
+          "Firma celowo ogranicza dostęp w celu wywołania sztucznej rzadkości"
+        ],
+        explanation_en: "While network benefits scale with \\(z\\), expanding market share requires convincing consumers with lower autonomous valuations \\(r(x) = a(1 - x)\\).",
+        explanation_pl: "Choć korzyści sieciowe rosną wraz z \\(z\\), zwiększanie zasięgu wymaga przekonania konsumentów o coraz niższej wycenie bazowej \\(r(x) = a(1 - x)\\)."
+      },
+      {
+        cat_en: "Equilibria",
+        cat_pl: "Równowagi",
+        q_en: "What happens if a digital platform sets its subscription price above \\(p_{\\max} = u_0 + \\beta / 4\\)?",
+        q_pl: "Co się dzieje, gdy platforma cyfrowa ustali cenę abonamentu powyżej wartości \\(p_{\\max} = u_0 + \\beta / 4\\)?",
+        options_en: [
+          "No expectations can sustain positive demand, and the only equilibrium is zero users",
+          "The critical mass threshold drops to zero, triggering instant adoption",
+          "The platform splits into two smaller competing networks",
+          "Consumers coordinate on the high equilibrium to minimize costs"
+        ],
+        options_pl: [
+          "Żadne oczekiwania nie utrzymają dodatniego popytu, a jedyną równowagą jest zero użytkowników",
+          "Próg masy krytycznej spada do zera, wywołując natychmiastową adopcję",
+          "Platforma dzieli się na dwie mniejsze konkurujące sieci",
+          "Konsumenci koordynują wybór w wysokiej równowadze, aby obniżyć koszty"
+        ],
+        explanation_en: "When price exceeds maximum willingness to pay, the price line lies entirely above the curve, making adoption impossible.",
+        explanation_pl: "Gdy cena przewyższa szczytową gotowość do płacenia, linia ceny przebiega całkowicie ponad krzywą, uniemożliwiając adopcję."
+      },
+      {
+        cat_en: "Stability",
+        cat_pl: "Stabilność",
+        q_en: "Why is the critical mass point \\(z_1\\) considered an unstable equilibrium?",
+        q_pl: "Dlaczego punkt masy krytycznej \\(z_1\\) jest uważany za równowagę niestabilną?",
+        options_en: [
+          "Small decreases in adoption push the network to collapse, while small increases drive it to high equilibrium",
+          "The firm earns negative profit at this exact point",
+          "Government regulators mandate equal access below this market share",
+          "Marginal cost equals average revenue only at this specific point"
+        ],
+        options_pl: [
+          "Drobny spadek adopcji spycha rynek do zera, a drobny wzrost napędza ekspansję do wysokiej równowagi",
+          "Firma ponosi ujemny zysk dokładnie w tym punkcie",
+          "Regulatorzy rynku nakazują otwarcie platformy poniżej tego udziału",
+          "Koszt krańcowy zrównuje się z przychodem przeciętnym tylko w tym punkcie"
+        ],
+        explanation_en: "At \\(z_1\\), downward deviations reduce willingness to pay below price (collapse), while upward deviations trigger positive feedback.",
+        explanation_pl: "W punkcie \\(z_1\\) odchylenie w dół obniża gotowość do płacenia poniżej ceny (upadek), a odchylenie w górę uruchamia sprzężenie dodatnie."
+      },
+      {
+        cat_en: "Metcalfe",
+        cat_pl: "Prawo Metcalfe'a",
+        q_en: "What is the primary empirical critique of Metcalfe's Law (\\(V \\propto n^2\\)) made by Odlyzko and Tilly?",
+        q_pl: "Na czym polega główny zarzut empiryczny Odlyzko i Tilly'ego wobec prawa Metcalfe'a (\\(V \\propto n^2\\))?",
+        options_en: [
+          "Connections have diminishing marginal value, and human cognitive limits create congestion and noise",
+          "Digital networks cannot have more than 1,000 active nodes",
+          "The cost of hardware decreases faster than the number of connections",
+          "All network participants have identical valuations for all peers"
+        ],
+        options_pl: [
+          "Kolejne połączenia mają malejącą wartość krańcową, a ograniczenia poznawcze rodzą szum i przeciążenie",
+          "Sieci cyfrowe nie mogą przekroczyć 1000 aktywnych węzłów",
+          "Koszt sprzętu spada szybciej niż rośnie liczba połączeń",
+          "Wszyscy uczestnicy sieci przypisują identyczną wartość każdemu kontaktowi"
+        ],
+        explanation_en: "Metcalfe assumes every link is equally valuable. In reality, human social capacity is limited and new links represent weaker ties.",
+        explanation_pl: "Metcalfe zakłada jednakową wartość każdego połączenia. W rzeczywistości pojemność relacyjna człowieka jest ograniczona, a dalsze kontakty to słabe więzi."
+      },
+      {
+        cat_en: "Comparative statics",
+        cat_pl: "Statyka porównawcza",
+        q_en: "If a platform successfully raises its subscription price \\(p\\) (while remaining below \\(p_{\\max}\\)), what happens to the equilibrium points?",
+        q_pl: "Jeśli platforma podniesie cenę \\(p\\) (pozostając poniżej \\(p_{\\max}\\)), jak zmieni się położenie punktów równowagi?",
+        options_en: [
+          "Critical mass \\(z_1\\) shifts to the right (higher barrier) and high equilibrium \\(z_2\\) shifts to the left (smaller market)",
+          "Both \\(z_1\\) and \\(z_2\\) shift to the right",
+          "Both \\(z_1\\) and \\(z_2\\) shift to the left",
+          "Critical mass \\(z_1\\) drops to zero while \\(z_2\\) remains unchanged"
+        ],
+        options_pl: [
+          "Masa krytyczna \\(z_1\\) przesuwa się w prawo (wyższy próg), a wysoka równowaga \\(z_2\\) w lewo (mniejszy rynek)",
+          "Zarówno \\(z_1\\), jak i \\(z_2\\) przesuwają się w prawo",
+          "Zarówno \\(z_1\\), jak i \\(z_2\\) przesuwają się w lewo",
+          "Masa krytyczna \\(z_1\\) spada do zera, a \\(z_2\\) pozostaje bez zmian"
+        ],
+        explanation_en: "Higher prices narrow the viable adoption corridor: the discriminant shrinks, moving \\(z_1\\) up and \\(z_2\\) down.",
+        explanation_pl: "Wyższa cena zawęża korytarz adopcji: wyróżnik maleje, co podnosi próg \\(z_1\\) i obniża docelowy udział \\(z_2\\)."
+      },
+      {
+        cat_en: "Strategy",
+        cat_pl: "Strategia",
+        q_en: "Why did Instagram initially emphasize filters rather than social networking features?",
+        q_pl: "Dlaczego Instagram początkowo położył nacisk na filtry fotograficzne, a nie na funkcje społecznościowe?",
+        options_en: [
+          "To provide standalone utility that attracted users before the network effect had any value",
+          "Because regulatory agencies banned user registration across universities",
+          "To force users to purchase physical camera accessories",
+          "Because digital photographs exhibit strong negative cross-side externalities"
+        ],
+        options_pl: [
+          "Aby zapewnić wartość autonomiczną przyciągającą użytkowników, zanim sieć uzyskała jakąkolwiek wartość",
+          "Ponieważ urzędy regulacyjne zakazały rejestracji użytkowników na uniwersytetach",
+          "Aby wymusić zakup fizycznych akcesoriów fotograficznych",
+          "Ponieważ cyfrowe fotografie wywołują silne negatywne efekty krzyżowe"
+        ],
+        explanation_en: "Standalone photo-editing utility gave immediate personal value to users with zero followers, solving the start-up problem.",
+        explanation_pl: "Autonomiczna użyteczność edycji zdjęć dawała wartość bez znajomych w aplikacji, rozwiązując problem startowy."
+      },
+      {
+        cat_en: "Network strength",
+        cat_pl: "Siła sieci",
+        q_en: "What is the economic effect of an increase in network strength \\(\\beta\\)?",
+        q_pl: "Jaki jest skutek ekonomiczny wzrostu siły sieci \\(\\beta\\)?",
+        options_en: [
+          "\\(p_{\\max}\\) increases, critical mass \\(z_1\\) decreases, and mature market share \\(z_2\\) expands",
+          "The network shifts into an unavoidable negative congestion cycle",
+          "Critical mass increases because consumers become more demanding",
+          "The willingness-to-pay parabola flattens toward zero"
+        ],
+        options_pl: [
+          "Wzrasta cena maksymalna \\(p_{\\max}\\), próg masy krytycznej \\(z_1\\) maleje, a docelowy udział \\(z_2\\) rośnie",
+          "Sieć nieuchronnie wchodzi w cykl negatywnych przeciążeń",
+          "Masa krytyczna rośnie, ponieważ konsumenci stają się bardziej wymagający",
+          "Parabola gotowości do płacenia spłaszcza się w stronę zera"
+        ],
+        explanation_en: "A higher \\(\\beta\\) scales up the parabola, lowering the start-up barrier \\(z_1\\) and broadening the stable high equilibrium \\(z_2\\).",
+        explanation_pl: "Wyższy współczynnik \\(\\beta\\) podnosi całą parabolę, co obniża próg startowy \\(z_1\\) i powiększa docelowy rynek \\(z_2\\)."
+      },
+      {
+        cat_en: "Taxonomy",
+        cat_pl: "Taksonomia",
+        q_en: "Which scenario represents a negative direct network effect?",
+        q_pl: "Który scenariusz reprezentuje negatywny bezpośredni efekt sieciowy?",
+        options_en: [
+          "A public blockchain network slowing down and gas fees spiking due to high transaction volume",
+          "An operating system gaining more third-party graphic design software",
+          "A ridesharing app recruiting more drivers, reducing passenger wait times",
+          "A streaming service securing exclusive sports broadcasting rights"
+        ],
+        options_pl: [
+          "Spowolnienie sieci blockchain i skok opłat transakcyjnych przy dużej liczbie transakcji",
+          "Pojawienie się nowych programów graficznych na dany system operacyjny",
+          "Pozyskanie nowych kierowców w aplikacji przewozowej, skracające czas oczekiwania",
+          "Wykupienie wyłącznych praw do transmisji sportowych przez serwis streamingowy"
+        ],
+        explanation_en: "Congestion on a single-tier network directly degrades performance for participants in the same user group.",
+        explanation_pl: "Przeciążenie jednopoziomowej sieci bezpośrednio obniża użyteczność usługi dla członków tej samej grupy użytkowników."
+      }
+    ];
+
+    let quizSession = {
+      currentQuestionIndex: 0,
+      score: 0,
+      answered: false,
+      userAnswers: {},
+      questions: []
+    };
+
+    function initializeQuizSession() {
+      quizSession.questions = rawQuizQuestions.map(q => {
+        const indices = [0, 1, 2, 3];
+        for (let i = indices.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [indices[i], indices[j]] = [indices[j], indices[i]];
+        }
+        return {
+          cat_en: q.cat_en,
+          cat_pl: q.cat_pl,
+          q_en: q.q_en,
+          q_pl: q.q_pl,
+          options_en: indices.map(i => q.options_en[i]),
+          options_pl: indices.map(i => q.options_pl[i]),
+          correctIndex: indices.indexOf(0),
+          explanation_en: q.explanation_en,
+          explanation_pl: q.explanation_pl
+        };
+      });
+      quizSession.currentQuestionIndex = 0;
+      quizSession.score = 0;
+      quizSession.userAnswers = {};
+      renderCurrentQuizQuestion();
+    }
+
+    function renderCurrentQuizQuestion() {
+      const qIdx = quizSession.currentQuestionIndex;
+      const q = quizSession.questions[qIdx];
+      const total = quizSession.questions.length;
+
+      document.getElementById('quiz-summary-card').classList.add('hidden');
+      document.getElementById('quiz-card').classList.remove('hidden');
+
+      document.getElementById('quiz-q-number').textContent = currentLang === 'en'
+        ? `Question ${qIdx + 1} of ${total}`
+        : `Pytanie ${qIdx + 1} z ${total}`;
+      document.getElementById('quiz-q-category').textContent = currentLang === 'en' ? q.cat_en : q.cat_pl;
+      document.getElementById('quiz-q-text').textContent = currentLang === 'en' ? q.q_en : q.q_pl;
+      document.getElementById('quiz-score-display').textContent = `${quizSession.score} / ${total}`;
+
+      const optsContainer = document.getElementById('quiz-options-container');
+      optsContainer.innerHTML = '';
+
+      const letters = ['A', 'B', 'C', 'D'];
+      const hasAnswered = quizSession.userAnswers[qIdx] !== undefined;
+      const savedAnswer = quizSession.userAnswers[qIdx];
+
+      const optionsList = currentLang === 'en' ? q.options_en : q.options_pl;
+
+      optionsList.forEach((optText, i) => {
+        let btnClasses = "w-full p-3 rounded-xl border text-left text-xs font-medium flex items-center justify-between transition ";
+        if (!hasAnswered) {
+          btnClasses += "border-slate-200 bg-white hover:border-indigo-400 hover:bg-slate-50 text-slate-800";
+        } else {
+          if (i === q.correctIndex) {
+            btnClasses += "border-emerald-500 bg-emerald-50 text-emerald-950 font-semibold";
+          } else if (i === savedAnswer.selectedIndex) {
+            btnClasses += "border-rose-500 bg-rose-50 text-rose-950 font-semibold";
+          } else {
+            btnClasses += "border-slate-200 bg-slate-50 text-slate-400 opacity-60";
+          }
+        }
+
+        const optBtn = document.createElement('button');
+        optBtn.className = btnClasses;
+        optBtn.disabled = hasAnswered;
+        optBtn.onclick = () => selectQuizAnswer(i);
+        optBtn.innerHTML = `
+          <span>${optText}</span>
+          <span class="w-5 h-5 rounded-full border border-current flex items-center justify-center text-[10px] shrink-0 font-bold ml-2">${letters[i]}</span>
+        `;
+        optsContainer.appendChild(optBtn);
+      });
+
+      const fbBox = document.getElementById('quiz-feedback-box');
+      if (hasAnswered) {
+        fbBox.classList.remove('hidden');
+        if (savedAnswer.isCorrect) {
+          fbBox.className = "p-3.5 bg-emerald-50 border border-emerald-200 text-emerald-950 rounded-xl text-xs leading-relaxed";
+          fbBox.innerHTML = `<strong>${currentLang === 'en' ? 'Correct!' : 'Poprawnie!'}</strong> ${currentLang === 'en' ? q.explanation_en : q.explanation_pl}`;
+        } else {
+          fbBox.className = "p-3.5 bg-rose-50 border border-rose-200 text-rose-950 rounded-xl text-xs leading-relaxed";
+          fbBox.innerHTML = `<strong>${currentLang === 'en' ? 'Incorrect.' : 'Błędna odpowiedź.'}</strong> ${currentLang === 'en' ? q.explanation_en : q.explanation_pl}`;
+        }
+      } else {
+        fbBox.classList.add('hidden');
+      }
+
+      document.getElementById('quiz-prev-btn').disabled = (qIdx === 0);
+      document.getElementById('quiz-next-btn').textContent = (qIdx === total - 1)
+        ? (currentLang === 'en' ? 'Finish quiz' : 'Zakończ quiz')
+        : (currentLang === 'en' ? 'Next question' : 'Następne pytanie');
+
+      renderMath(document.getElementById('quiz-card'));
+    }
+
+    function selectQuizAnswer(index) {
+      const qIdx = quizSession.currentQuestionIndex;
+      const q = quizSession.questions[qIdx];
+      const isCorrect = (index === q.correctIndex);
+
+      if (isCorrect) {
+        quizSession.score += 1;
+      }
+      quizSession.userAnswers[qIdx] = { selectedIndex: index, isCorrect };
+      renderCurrentQuizQuestion();
+    }
+
+    function navigateQuiz(delta) {
+      const total = quizSession.questions.length;
+      const nextIdx = quizSession.currentQuestionIndex + delta;
+      if (nextIdx < 0) return;
+      if (nextIdx >= total) {
+        showQuizSummary();
+        return;
+      }
+      quizSession.currentQuestionIndex = nextIdx;
+      renderCurrentQuizQuestion();
+    }
+
+    function showQuizSummary() {
+      document.getElementById('quiz-card').classList.add('hidden');
+      const sumCard = document.getElementById('quiz-summary-card');
+      sumCard.classList.remove('hidden');
+
+      const total = quizSession.questions.length;
+      document.getElementById('quiz-final-score').textContent = `${quizSession.score} / ${total}`;
+
+      const pct = (quizSession.score / total) * 100;
+      let msg = "";
+      if (pct >= 85) {
+        msg = currentLang === 'en' ? "Excellent grasp of network dynamics, critical mass, and bootstrapping strategies." : "Znakomite opanowanie dynamiki sieci, masy krytycznej oraz strategii pokonywania progu startowego.";
+      } else if (pct >= 60) {
+        msg = currentLang === 'en' ? "Good understanding. Review standalone utility and dynamic pricing paths." : "Dobre zrozumienie tematu. Przejrzyj wpływ wartości autonomicznej i rampy dynamicznej.";
+      } else {
+        msg = currentLang === 'en' ? "Explore the intuitive track and laboratory simulations before retesting." : "Przeanalizuj tor intuicyjny i poćwicz na symulatorze laboratoryjnym przed ponownym podejściem.";
+      }
+      document.getElementById('quiz-final-message').textContent = msg;
+    }
+
+    function restartQuizSession() {
+      initializeQuizSession();
+    }
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'en' ? 'pl' : 'en';
+      document.documentElement.lang = currentLang;
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[currentLang][key]) {
+          el.innerHTML = translations[currentLang][key];
+        }
+      });
+
+      const btnFixed = document.getElementById('btn-mode-fixed');
+      const btnDyn = document.getElementById('btn-mode-dynamic');
+      const labelMode = document.getElementById('val-pricing-mode');
+      if (labState.pricingMode === 'fixed') {
+        labelMode.textContent = currentLang === 'en' ? "Fixed price" : "Stała cena";
+      } else {
+        labelMode.textContent = currentLang === 'en' ? "Dynamic ramp" : "Rampa dynamiczna";
+      }
+
+      updateLabSimulation();
+      updateT2Promo();
+      renderCurrentQuizQuestion();
+
+      const defText = translations[currentLang].micro_default_text;
+      const curBox = document.getElementById('intuition-answer-text');
+      if (curBox.textContent === translations.en.micro_default_text || curBox.textContent === translations.pl.micro_default_text) {
+        curBox.textContent = defText;
+      }
+
+      renderMath();
+    }
+
+    window.onload = function() {
+      updateLabSimulation(true);
+      generateNewPredictionTask();
+      generateDetectiveCase();
+      initializeQuizSession();
+      renderMath();
+    };
+  </script>
+</body>
+</html>
