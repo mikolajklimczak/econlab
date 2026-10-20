@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EconLab — Interactive Economics Simulations Hub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Outfit', 'sans-serif']
+          },
+          colors: {
+            brand: {
+              navy: '#0e2b46',
+              cyan: '#00a8b5',
+              dark: '#0a1d30'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col antialiased selection:bg-indigo-500 selection:text-white">
+
+  <!-- Header -->
+  <header class="bg-white border-b border-slate-200 shadow-sm sticky top-0 z-40 min-h-16 flex items-center">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-3 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <a href="#" class="flex items-center group">
+          <img src="econlab_poziomo_v2.png" alt="EconLab Logo" class="h-9 sm:h-10 w-auto max-h-11 object-contain" onerror="this.onerror=null; this.src='https://placehold.co/240x60/ffffff/0e2b46?text=EconLab';">
+        </a>
+        <div class="border-l border-slate-200 pl-3 hidden sm:block">
+          <h1 class="text-sm font-semibold text-slate-800 leading-tight" data-i18n="portal_title">Interactive Economics Lab</h1>
+          <div class="flex items-center gap-1.5 text-xs text-slate-500">
+            <span data-i18n="author_label">Author:</span>
+            <a href="https://orcid.org/0000-0003-4761-3421" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 font-medium text-slate-700 hover:text-emerald-700 transition">
+              <span>Mikołaj Klimczak</span>
+              <svg class="w-3.5 h-3.5 text-emerald-600 fill-current" viewBox="0 0 256 256">
+                <path d="M128,0A128,128,0,1,0,256,128,128,128,0,0,0,128,0ZM86.35,186.29H65V77.85H86.35ZM75.68,64.44a13.38,13.38,0,1,1,13.37-13.37A13.38,13.38,0,0,1,75.68,64.44Zm125,75.81c0,27.52-19.14,46-49.85,46H110.15V77.85h41.45C182,77.85,200.72,96.65,200.72,140.25Zm-22.37.16c0-17.7-10.23-28.77-28.43-28.77H131.5v57.69h18.42C168.12,169.33,178.35,158.26,178.35,140.41Z"/>
+              </svg>
+            </a>
+            <span class="text-slate-300">•</span>
+            <span class="text-indigo-600 font-medium" data-i18n="ai_note">AI support: Gemini</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick stats & Language Toggle -->
+      <div class="flex items-center gap-3">
+        <div class="hidden md:flex items-center gap-2 px-3 py-1.5 bg-slate-100 rounded-xl text-xs font-medium text-slate-600">
+          <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span data-i18n="status_apps_count">4 interactive simulators</span>
+        </div>
+        <button onclick="toggleLanguage()" class="p-2 bg-slate-100 hover:bg-slate-200 border border-slate-200 text-indigo-600 rounded-xl transition flex items-center justify-center" title="Toggle language / Zmień język" aria-label="Toggle language">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4 w-full">
+    <div class="bg-gradient-to-r from-indigo-700 via-indigo-600 to-blue-600 text-white rounded-2xl p-6 sm:p-8 shadow-sm relative overflow-hidden">
+      <div class="max-w-3xl relative z-10">
+        <span class="inline-block bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold mb-3 tracking-wide" data-i18n="hero_pill">
+          University economics laboratory
+        </span>
+        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold font-display tracking-tight mb-3" data-i18n="hero_heading">
+          Explore economic dynamics through interactive experimentation
+        </h2>
+        <p class="text-indigo-100 text-sm sm:text-base leading-relaxed mb-6" data-i18n="hero_desc">
+          Autonomous, visual microeconomic models designed to bridge mathematical equations with market intuition. Test parameters, resolve case challenges, and verify insights in real time.
+        </p>
+        <div class="flex flex-wrap items-center gap-3 text-xs text-indigo-100">
+          <span class="flex items-center gap-1.5 bg-black/20 px-3 py-1.5 rounded-lg">
+            <svg class="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            <span data-i18n="feature_svg">Interactive SVG vectors</span>
+          </span>
+          <span class="flex items-center gap-1.5 bg-black/20 px-3 py-1.5 rounded-lg">
+            <svg class="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            <span data-i18n="feature_standalone">Zero dependencies</span>
+          </span>
+          <span class="flex items-center gap-1.5 bg-black/20 px-3 py-1.5 rounded-lg">
+            <svg class="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            <span data-i18n="feature_bilingual">Bilingual (EN / PL)</span>
+          </span>
+        </div>
+      </div>
+      <!-- Background subtle illustration -->
+      <div class="absolute -right-12 -bottom-12 w-80 h-80 opacity-10 pointer-events-none">
+        <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" class="w-full h-full text-white">
+          <circle cx="100" cy="100" r="80" stroke-width="4" stroke-dasharray="8 8"/>
+          <line x1="20" y1="180" x2="180" y2="20" stroke-width="6"/>
+          <line x1="20" y1="20" x2="180" y2="180" stroke-width="6"/>
+          <circle cx="100" cy="100" r="10" fill="currentColor"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter & Controls Toolbar -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex-1 w-full">
+    <div class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-sm mb-6 flex flex-col md:flex-row gap-4 items-stretch md:items-center justify-between">
+      
+      <!-- Search input -->
+      <div class="relative flex-1 max-w-md">
+        <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Search simulations, concepts, or models..." data-i18n-ph="search_placeholder" class="w-full pl-10 pr-4 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition">
+        <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+      </div>
+
+      <!-- Controls row -->
+      <div class="flex flex-wrap items-center gap-3">
+        <!-- Category Filter -->
+        <div class="flex items-center gap-1.5 text-xs">
+          <span class="text-slate-500 font-medium" data-i18n="filter_label">Subject:</span>
+          <select id="categoryFilter" onchange="applyFilters()" class="bg-slate-50 border border-slate-200 text-slate-700 rounded-xl px-3 py-2 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer">
+            <option value="all" data-i18n="cat_all">All subjects</option>
+            <option value="micro" data-i18n="cat_micro">Microeconomics</option>
+            <option value="io" data-i18n="cat_io">Industrial organization</option>
+            <option value="digital" data-i18n="cat_digital">Digital economy</option>
+          </select>
+        </div>
+
+        <!-- Sort Select -->
+        <div class="flex items-center gap-1.5 text-xs">
+          <span class="text-slate-500 font-medium" data-i18n="sort_label">Sort by:</span>
+          <select id="sortBy" onchange="applyFilters()" class="bg-slate-50 border border-slate-200 text-slate-700 rounded-xl px-3 py-2 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer">
+            <option value="recommended" data-i18n="sort_recommended">Curriculum order</option>
+            <option value="title_asc" data-i18n="sort_title_asc">Title (A-Z)</option>
+            <option value="difficulty" data-i18n="sort_difficulty">Difficulty</option>
+          </select>
+        </div>
+
+        <!-- View Toggle (Grid / List) -->
+        <div class="bg-slate-100 p-1 rounded-xl flex items-center border border-slate-200">
+          <button id="viewGridBtn" onclick="setViewMode('grid')" class="p-1.5 rounded-lg bg-white shadow-xs text-indigo-600 transition" title="Grid view">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+          </button>
+          <button id="viewListBtn" onclick="setViewMode('list')" class="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 transition" title="List view">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Active Count & Tags Indicator -->
+    <div class="flex items-center justify-between text-xs text-slate-500 mb-4 px-1">
+      <div>
+        <span data-i18n="showing_prefix">Showing</span>
+        <span id="visibleCount" class="font-bold text-slate-700">4</span>
+        <span data-i18n="showing_suffix">simulations</span>
+      </div>
+      <div class="hidden sm:block text-slate-400" data-i18n="click_hint">
+        Select any simulation to launch in a full interactive workspace
+      </div>
+    </div>
+
+    <!-- Applications Container -->
+    <div id="appsContainer" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <!-- Cards rendered via JavaScript -->
+    </div>
+
+    <!-- Empty State -->
+    <div id="emptyState" class="hidden bg-white border border-slate-200 rounded-2xl p-12 text-center">
+      <div class="w-12 h-12 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mx-auto mb-3">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      </div>
+      <h3 class="text-base font-semibold text-slate-800 mb-1" data-i18n="empty_title">No simulations match your filter</h3>
+      <p class="text-xs text-slate-500 max-w-sm mx-auto mb-4" data-i18n="empty_desc">Try broadening your search query or reset your subject category filter.</p>
+      <button onclick="resetFilters()" class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-semibold hover:bg-indigo-100 transition" data-i18n="empty_reset_btn">
+        Reset filters
+      </button>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 py-6 mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+      <div class="flex items-center gap-2">
+        <span class="font-semibold text-slate-700">EconLab Hub</span>
+        <span>—</span>
+        <span data-i18n="footer_text">Interactive Economics Simulator for Students. All rights reserved.</span>
+      </div>
+      <div class="flex items-center gap-4 text-slate-400">
+        <a href="https://orcid.org/0000-0003-4761-3421" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-600 transition flex items-center gap-1">
+          <span>Mikołaj Klimczak</span>
+        </a>
+        <span>•</span>
+        <span>GitHub Pages Hosted</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- App Data & Logic -->
+  <script>
+    let currentLang = 'en';
+    let currentViewMode = 'grid';
+
+    const appsData = [
+      {
+        id: 'market-mechanism',
+        folder: 'market-mechanism',
+        category: 'micro',
+        difficulty: 1, // 1: Beginner, 2: Intermediate, 3: Advanced
+        order: 1,
+        title_en: 'Market mechanism analysis',
+        title_pl: 'Analiza mechanizmu rynkowego',
+        badge_en: 'Supply & demand dynamics',
+        badge_pl: 'Dynamika popytu i podaży',
+        desc_en: 'Investigation of market equilibrium, curve shifts versus movements along the curve, and welfare deadweight loss from price regulations.',
+        desc_pl: 'Badanie stanu równowagi rynkowej, przesunięć krzywych względem ruchu wzdłuż krzywej oraz zbędnej straty społecznej przy regulacjach cenowych.',
+        tags: ['P* & Q*', 'Equilibrium', 'Welfare & DWL', 'Double shocks'],
+        tags_pl: ['P* i Q*', 'Równowaga', 'Dobrobyt i DWL', 'Podwójne szoki'],
+        features_en: ['4 canonical shocks', 'Algebraic derivation', 'Market detective challenge'],
+        features_pl: ['4 kanoniczne szoki', 'Wyprowadzenie algebraiczne', 'Wyzwanie detektywa rynkowego'],
+        accentColor: 'indigo'
+      },
+      {
+        id: 'price-elasticity-of-demand',
+        folder: 'price-elasticity-of-demand',
+        category: 'micro',
+        difficulty: 1,
+        order: 2,
+        title_en: 'Price elasticity of demand',
+        title_pl: 'Elastyczność cenowa popytu',
+        badge_en: 'Elasticity & revenue',
+        badge_pl: 'Elastyczność a utarg',
+        desc_en: 'Decomposition of price elasticity of demand (|Ep|), point versus arc formulations, revenue optimization, and consumer responsiveness.',
+        desc_pl: 'Dekompozycja cenowej elastyczności popytu (|Ep|), formuła punktowa i łukowa, optymalizacja utargu całkowitego oraz reakcje konsumentów.',
+        tags: ['|Ep|', 'Total revenue', 'Arc & point', 'Slope vs elasticity'],
+        tags_pl: ['|Ep|', 'Utarg całkowity (TR)', 'Łukowa i punktowa', 'Nachylenie a elastyczność'],
+        features_en: ['Revenue graph pairing', 'Threshold simulator', '12-question quiz'],
+        features_pl: ['Sprzężony wykres utargu', 'Symulator progowy', 'Quiz 12 pytań'],
+        accentColor: 'blue'
+      },
+      {
+        id: 'relevant-market',
+        folder: 'relevant-market',
+        category: 'io',
+        difficulty: 3,
+        order: 3,
+        title_en: 'Relevant market identification',
+        title_pl: 'Identyfikacja rynku właściwego',
+        badge_en: 'Antitrust & SSNIP test',
+        badge_pl: 'Ochrona konkurencji i test SSNIP',
+        desc_en: 'Antitrust market delineation via SSNIP methodology, critical loss (CL) versus actual loss (AL), diversion matrices, and merger simulations.',
+        desc_pl: 'Wyznaczanie granic rynku właściwego w prawie konkurencji: test SSNIP, utrata krytyczna (CL) vs rzeczywista (AL), macierze dywersji i fuzje.',
+        tags: ['SSNIP test', 'Critical loss', 'Diversion ratios', 'Antitrust'],
+        tags_pl: ['Test SSNIP', 'Utrata krytyczna', 'Wskaźniki dywersji', 'Prawo konkurencji'],
+        features_en: ['Randomised 14-product orbital map', 'Monopoly pricing game', 'Algebraic appendix'],
+        features_pl: ['Losowa orbitalna mapa produktów', 'Gra cenowa monopolisty', 'Dodatek analityczny'],
+        accentColor: 'emerald'
+      },
+      {
+        id: 'direct-network-effect',
+        folder: 'direct-network-effect',
+        category: 'digital',
+        difficulty: 2,
+        order: 4,
+        title_en: 'Direct network effects & critical mass',
+        title_pl: 'Bezpośrednie efekty sieciowe i masa krytyczna',
+        badge_en: 'Digital platforms & tipping',
+        badge_pl: 'Platformy cyfrowe i tipping',
+        desc_en: 'Self-fulfilling expectations dynamics (Katz & Shapiro), unstable critical thresholds (z1), standalone utility (u0), and platform penetration pricing.',
+        desc_pl: 'Dynamika samospełniających się oczekiwań (Katz i Shapiro), niestabilny próg masy krytycznej (z1), wartość autonomiczna (u0) i pricing.',
+        tags: ['Network externalities', 'Critical mass (z1)', 'Standalone utility', 'Platform tipping'],
+        tags_pl: ['Efekty sieciowe', 'Masa krytyczna (z1)', 'Wartość autonomiczna', 'Tipping platformy'],
+        features_en: ['Dynamic convergence engine', 'Subsidies vs standalone utility challenge', 'Dual-track concepts'],
+        features_pl: ['Silnik konwergencji dynamicznej', 'Wyzwanie: dopłaty vs u0', 'Dwa tory pojęciowe'],
+        accentColor: 'purple'
+      }
+    ];
+
+    const translations = {
+      en: {
+        portal_title: 'Interactive Economics Lab',
+        author_label: 'Author:',
+        ai_note: 'AI support: Gemini',
+        status_apps_count: '4 interactive simulators',
+        hero_pill: 'University economics laboratory',
+        hero_heading: 'Explore economic dynamics through interactive experimentation',
+        hero_desc: 'Autonomous, visual microeconomic models designed to bridge mathematical equations with market intuition. Test parameters, resolve case challenges, and verify insights in real time.',
+        feature_svg: 'Interactive SVG vectors',
+        feature_standalone: 'Zero dependencies',
+        feature_bilingual: 'Bilingual (EN / PL)',
+        search_placeholder: 'Search simulations, concepts, or models...',
+        filter_label: 'Subject:',
+        cat_all: 'All subjects',
+        cat_micro: 'Microeconomics',
+        cat_io: 'Industrial organization',
+        cat_digital: 'Digital economy',
+        sort_label: 'Sort by:',
+        sort_recommended: 'Curriculum order',
+        sort_title_asc: 'Title (A-Z)',
+        sort_difficulty: 'Difficulty',
+        showing_prefix: 'Showing',
+        showing_suffix: 'simulations',
+        click_hint: 'Select any simulation to launch in a full interactive workspace',
+        launch_btn: 'Launch simulation',
+        features_heading: 'Core features:',
+        empty_title: 'No simulations match your filter',
+        empty_desc: 'Try broadening your search query or reset your subject category filter.',
+        empty_reset_btn: 'Reset filters',
+        diff_easy: 'Introductory',
+        diff_med: 'Intermediate',
+        diff_hard: 'Advanced',
+        footer_text: 'Interactive Economics Simulator for Students. All rights reserved.'
+      },
+      pl: {
+        portal_title: 'Interaktywne laboratorium ekonomii',
+        author_label: 'Autor:',
+        ai_note: 'Wsparcie AI: Gemini',
+        status_apps_count: '4 interaktywne symulatory',
+        hero_pill: 'Uniwersyteckie laboratorium ekonomiczne',
+        hero_heading: 'Poznawaj zjawiska rynkowe poprzez interaktywny eksperyment',
+        hero_desc: 'Autonomiczne, wizualne modele mikroekonomiczne łączące zapis formalny z intuicją rynkową. Steruj parametrami, rozwiązuj zadania decyzyjne i weryfikuj wiedzę w czasie rzeczywistym.',
+        feature_svg: 'Wektory SVG w czasie rzeczywistym',
+        feature_standalone: 'Bez zewnętrznych bibliotek',
+        feature_bilingual: 'Dwujęzyczność (PL / EN)',
+        search_placeholder: 'Szukaj symulacji, pojęć lub modeli...',
+        filter_label: 'Przedmiot:',
+        cat_all: 'Wszystkie przedmioty',
+        cat_micro: 'Mikroekonomia',
+        cat_io: 'Rynki i konkurencja',
+        cat_digital: 'Gospodarka cyfrowa',
+        sort_label: 'Sortuj według:',
+        sort_recommended: 'Kolejności w programie',
+        sort_title_asc: 'Tytułu (A-Z)',
+        sort_difficulty: 'Poziomu trudności',
+        showing_prefix: 'Prezentowane:',
+        showing_suffix: 'symulacje',
+        click_hint: 'Wybierz symulator, aby otworzyć pełne środowisko laboratoryjne',
+        launch_btn: 'Uruchom symulację',
+        features_heading: 'W module:',
+        empty_title: 'Brak symulacji spełniających wybrane kryteria',
+        empty_desc: 'Spróbuj zmienić wpisane hasło lub zresetuj filtr przedmiotowy.',
+        empty_reset_btn: 'Zresetuj filtry',
+        diff_easy: 'Podstawowy',
+        diff_med: 'Średniozaawansowany',
+        diff_hard: 'Zaawansowany',
+        footer_text: 'Interaktywne symulatory ekonomiczne dla studentów. Wszelkie prawa zastrzeżone.'
+      }
+    };
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'en' ? 'pl' : 'en';
+      document.documentElement.lang = currentLang;
+
+      // Update text in static elements
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[currentLang][key]) {
+          el.innerHTML = translations[currentLang][key];
+        }
+      });
+
+      // Update placeholders
+      document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+        const key = el.getAttribute('data-i18n-ph');
+        if (translations[currentLang][key]) {
+          el.setAttribute('placeholder', translations[currentLang][key]);
+        }
+      });
+
+      applyFilters();
+    }
+
+    function setViewMode(mode) {
+      currentViewMode = mode;
+      const gridBtn = document.getElementById('viewGridBtn');
+      const listBtn = document.getElementById('viewListBtn');
+      const container = document.getElementById('appsContainer');
+
+      if (mode === 'grid') {
+        gridBtn.className = 'p-1.5 rounded-lg bg-white shadow-xs text-indigo-600 transition';
+        listBtn.className = 'p-1.5 rounded-lg text-slate-500 hover:text-slate-900 transition';
+        container.className = 'grid grid-cols-1 md:grid-cols-2 gap-5';
+      } else {
+        listBtn.className = 'p-1.5 rounded-lg bg-white shadow-xs text-indigo-600 transition';
+        gridBtn.className = 'p-1.5 rounded-lg text-slate-500 hover:text-slate-900 transition';
+        container.className = 'flex flex-col gap-4';
+      }
+      applyFilters();
+    }
+
+    function resetFilters() {
+      document.getElementById('searchInput').value = '';
+      document.getElementById('categoryFilter').value = 'all';
+      document.getElementById('sortBy').value = 'recommended';
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const q = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+      const cat = document.getElementById('categoryFilter').value;
+      const sortBy = document.getElementById('sortBy').value;
+
+      let filtered = appsData.filter(app => {
+        // Category check
+        if (cat !== 'all' && app.category !== cat) return false;
+
+        // Search check
+        if (!q) return true;
+        const title = (currentLang === 'en' ? app.title_en : app.title_pl).toLowerCase();
+        const desc = (currentLang === 'en' ? app.desc_en : app.desc_pl).toLowerCase();
+        const tags = (currentLang === 'en' ? app.tags : app.tags_pl).join(' ').toLowerCase();
+        return title.includes(q) || desc.includes(q) || tags.includes(q) || app.folder.includes(q);
+      });
+
+      // Sorting
+      filtered.sort((a, b) => {
+        if (sortBy === 'title_asc') {
+          const tA = currentLang === 'en' ? a.title_en : a.title_pl;
+          const tB = currentLang === 'en' ? b.title_en : b.title_pl;
+          return tA.localeCompare(tB);
+        }
+        if (sortBy === 'difficulty') {
+          return a.difficulty - b.difficulty;
+        }
+        return a.order - b.order;
+      });
+
+      renderApps(filtered);
+    }
+
+    function renderApps(items) {
+      const container = document.getElementById('appsContainer');
+      const emptyState = document.getElementById('emptyState');
+      const visibleCount = document.getElementById('visibleCount');
+
+      visibleCount.innerText = items.length;
+
+      if (items.length === 0) {
+        container.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+      emptyState.classList.add('hidden');
+
+      const t = translations[currentLang];
+
+      container.innerHTML = items.map(app => {
+        const title = currentLang === 'en' ? app.title_en : app.title_pl;
+        const badge = currentLang === 'en' ? app.badge_en : app.badge_pl;
+        const desc = currentLang === 'en' ? app.desc_en : app.desc_pl;
+        const tags = currentLang === 'en' ? app.tags : app.tags_pl;
+        const feats = currentLang === 'en' ? app.features_en : app.features_pl;
+
+        let diffBadge = '';
+        if (app.difficulty === 1) {
+          diffBadge = `<span class="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">${t.diff_easy}</span>`;
+        } else if (app.difficulty === 2) {
+          diffBadge = `<span class="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-blue-50 text-blue-700 border border-blue-200">${t.diff_med}</span>`;
+        } else {
+          diffBadge = `<span class="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-amber-50 text-amber-700 border border-amber-200">${t.diff_hard}</span>`;
+        }
+
+        let catBadge = '';
+        if (app.category === 'micro') catBadge = `<span class="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">Microeconomics</span>`;
+        if (app.category === 'io') catBadge = `<span class="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">Industrial org</span>`;
+        if (app.category === 'digital') catBadge = `<span class="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-purple-50 text-purple-700 border border-purple-200">Digital economy</span>`;
+
+        // Accent border
+        let accentBorder = 'hover:border-indigo-400';
+        if (app.accentColor === 'blue') accentBorder = 'hover:border-blue-400';
+        if (app.accentColor === 'emerald') accentBorder = 'hover:border-emerald-400';
+        if (app.accentColor === 'purple') accentBorder = 'hover:border-purple-400';
+
+        if (currentViewMode === 'list') {
+          return `
+            <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm transition-all duration-200 hover:shadow-md ${accentBorder} flex flex-col lg:flex-row items-start lg:items-center justify-between gap-5 group">
+              <div class="flex-1">
+                <div class="flex flex-wrap items-center gap-2 mb-2">
+                  ${catBadge}
+                  ${diffBadge}
+                  <span class="text-xs text-slate-400 font-mono">./${app.folder}/</span>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900 group-hover:text-indigo-600 transition mb-1">
+                  <a href="./${app.folder}/">${title}</a>
+                </h3>
+                <p class="text-xs text-slate-600 leading-relaxed mb-3 max-w-3xl">${desc}</p>
+                <div class="flex flex-wrap items-center gap-1.5">
+                  ${tags.map(tag => `<span class="text-[11px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md font-mono">${tag}</span>`).join('')}
+                </div>
+              </div>
+              <div class="w-full lg:w-auto flex flex-col sm:flex-row items-center gap-3 shrink-0">
+                <a href="./${app.folder}/" class="w-full sm:w-auto text-center px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-semibold shadow-xs hover:shadow transition flex items-center justify-center gap-2">
+                  <span>${t.launch_btn}</span>
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
+              </div>
+            </div>
+          `;
+        }
+
+        // Grid View
+        return `
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm transition-all duration-200 hover:shadow-md ${accentBorder} flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <div class="flex items-center gap-1.5">
+                  ${catBadge}
+                  ${diffBadge}
+                </div>
+                <span class="text-[11px] font-mono text-slate-400">./${app.folder}/</span>
+              </div>
+
+              <h3 class="text-lg font-bold font-display text-slate-900 group-hover:text-indigo-600 transition mb-1 leading-snug">
+                <a href="./${app.folder}/">${title}</a>
+              </h3>
+              
+              <div class="text-xs font-medium text-slate-500 mb-3">${badge}</div>
+
+              <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                ${desc}
+              </p>
+
+              <!-- Tags -->
+              <div class="flex flex-wrap items-center gap-1.5 mb-5">
+                ${tags.map(tag => `<span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md font-mono">${tag}</span>`).join('')}
+              </div>
+
+              <!-- Feature highlights -->
+              <div class="border-t border-slate-100 pt-3 mb-5">
+                <div class="text-[11px] font-semibold text-slate-700 mb-1.5">${t.features_heading}</div>
+                <ul class="text-[11px] text-slate-500 space-y-1">
+                  ${feats.map(f => `<li class="flex items-center gap-1.5"><span class="text-emerald-500">✓</span> <span>${f}</span></li>`).join('')}
+                </ul>
+              </div>
+            </div>
+
+            <!-- Launch Button -->
+            <div class="pt-2">
+              <a href="./${app.folder}/" class="w-full text-center px-4 py-2.5 bg-slate-100 hover:bg-indigo-600 hover:text-white text-slate-800 rounded-xl text-xs font-semibold transition flex items-center justify-center gap-2 group/btn">
+                <span>${t.launch_btn}</span>
+                <svg class="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    window.onload = function() {
+      applyFilters();
+    };
+  </script>
+</body>
+</html>
