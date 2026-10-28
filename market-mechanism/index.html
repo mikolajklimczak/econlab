@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EconLab - Market Mechanism Analysis | Popyt i Podaż</title>
+  <title>EconLab - Market Mechanism Analysis | Analiza mechanizmu rynkowego</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -18,15 +18,15 @@
               600: '#4f46e5',
               700: '#4338ca',
             },
-            demand: '#2563eb', // Blue
-            supply: '#16a34a', // Green
+            demand: '#2563eb',
+            supply: '#16a34a',
           }
         }
       }
     }
   </script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Urbanist:wght@700;800&family=Outfit:wght@700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@600;700;800&display=swap');
     body {
       font-family: 'Inter', sans-serif;
     }
@@ -50,22 +50,19 @@
   <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-16 py-2.5 sm:py-0 flex flex-wrap sm:flex-nowrap items-center justify-between gap-3">
       
-      <!-- Brand Logo & Author Attribution -->
       <div class="flex items-center space-x-3.5">
-        <a href="#" onclick="switchTab('intro'); return false;" class="shrink-0 block hover:opacity-95 transition" aria-label="EconLab Home">
-          <img src="econlab_poziomo_v2.png" alt="EconLab Logo" class="h-9 sm:h-10 w-auto max-h-11 object-contain" onerror="this.onerror=null; this.src='https://placehold.co/240x60/ffffff/0e2b46?text=EconLab';">
+        <a href="#" onclick="switchTab('intro'); return false;" class="shrink-0 block hover:opacity-95 transition" aria-label="EconLab home">
+          <img src="econlab_poziomo_v2.png" alt="EconLab logo" class="h-9 sm:h-10 w-auto max-h-11 object-contain" onerror="this.onerror=null; this.src='https://placehold.co/240x60/ffffff/0e2b46?text=EconLab';">
         </a>
 
         <div class="border-l border-slate-200 pl-3">
-          <p class="text-sm font-semibold text-slate-800 leading-tight" data-i18n="subtitle">
-            Market mechanism analysis
-          </p>
+          <p class="text-sm font-semibold text-slate-800 leading-tight" data-i18n="subtitle">Market mechanism analysis</p>
           <p class="text-[11px] text-slate-400 mt-0.5 flex items-center gap-1.5 flex-wrap">
             <span><strong class="text-slate-600 font-semibold" data-i18n="author_lbl">Author:</strong> 
               <a href="https://orcid.org/0000-0003-4761-3421" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 font-semibold hover:underline inline-flex items-center gap-1">
                 <span>Mikołaj Klimczak</span>
                 <svg class="w-3 h-3 text-emerald-600 inline" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.041-2.062 4.041-3.722 0-2.016-1.078-3.722-3.844-3.722h-2.494z"/>
+                  <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.041-2.062 4.041-3.722 0-2.016-1.078-3.722-3.844-3.722h-2.494z"></path>
                 </svg>
               </a>
             </span>
@@ -75,9 +72,7 @@
         </div>
       </div>
 
-      <!-- Navigation & Language Toggle Controls -->
       <div class="flex items-center space-x-2 sm:space-x-3">
-        <!-- Tab Navigation Buttons -->
         <div class="bg-slate-100 p-1 rounded-xl flex text-xs font-semibold overflow-x-auto">
           <button id="tab-intro" onclick="switchTab('intro')" class="px-3 py-1.5 rounded-lg bg-white shadow-sm text-indigo-600 font-bold transition whitespace-nowrap">
             <span data-i18n="nav_intro">Introduction</span>
@@ -89,14 +84,13 @@
             <span data-i18n="nav_tasks">Tasks</span>
           </button>
           <button id="tab-distinction" onclick="switchTab('distinction')" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition whitespace-nowrap">
-            <span data-i18n="nav_concept">Shift vs Movement</span>
+            <span data-i18n="nav_concept">Shift vs movement</span>
           </button>
           <button id="tab-quiz" onclick="switchTab('quiz')" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition whitespace-nowrap">
             <span data-i18n="nav_quiz">Quiz</span>
           </button>
         </div>
 
-        <!-- Language toggle button (Icon only) -->
         <button id="lang-btn" onclick="toggleLanguage()" title="Switch language / Zmień język (EN / PL)" aria-label="Switch language / Zmień język" class="p-2 bg-slate-100 hover:bg-slate-200 border border-slate-200 text-indigo-600 hover:text-indigo-700 rounded-xl transition active:scale-95 flex items-center justify-center">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path>
@@ -108,28 +102,23 @@
 
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 w-full">
 
-    <!-- ================= TAB 0: INTRODUCTION (THEORY & CONCEPTS) ================= -->
+    <!-- TAB 0: INTRODUCTION -->
     <section id="view-intro" class="space-y-6">
       
-      <!-- Welcome Hero Card -->
       <div class="bg-gradient-to-r from-indigo-700 via-indigo-600 to-blue-600 text-white rounded-2xl p-6 sm:p-8 shadow-sm">
         <div class="max-w-3xl space-y-3">
-          <div class="inline-flex items-center gap-2 bg-white/15 px-3 py-1 rounded-full text-xs font-semibold tracking-wide backdrop-blur-xs">
+          <div class="inline-flex items-center gap-2 bg-white/15 px-3 py-1 rounded-full text-xs font-semibold tracking-wide">
             <span data-i18n="intro_hero_tag">Microeconomics core</span>
           </div>
-          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight" data-i18n="intro_hero_title">
-            Market equilibrium theory and price shocks
-          </h2>
-          <p class="text-sm sm:text-base text-indigo-100 leading-relaxed" data-i18n="intro_hero_desc">
-            Understanding how markets establish equilibrium prices and allocate resources is fundamental to economic reasoning. Explore universal laws of supply and demand, root causes of market shocks, and market self-adjustment.
-          </p>
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight" data-i18n="intro_hero_title">Market equilibrium theory and price shocks</h2>
+          <p class="text-sm sm:text-base text-indigo-100 leading-relaxed" data-i18n="intro_hero_desc">Understanding how markets establish equilibrium prices and allocate resources is fundamental to economic reasoning. Explore universal laws of supply and demand, root causes of market shocks, and market self-adjustment.</p>
           <div class="pt-2 flex flex-wrap gap-3">
             <button onclick="switchTab('model')" class="px-4 py-2 bg-white text-indigo-700 font-bold rounded-xl text-xs shadow hover:bg-indigo-50 transition flex items-center gap-1.5">
-              <span data-i18n="intro_hero_btn_lab">Open Laboratory</span>
+              <span data-i18n="intro_hero_btn_lab">Open laboratory</span>
               <span>→</span>
             </button>
             <button onclick="switchTab('tasks')" class="px-4 py-2 bg-emerald-400/20 text-white font-bold rounded-xl text-xs border border-white/30 hover:bg-white/15 transition flex items-center gap-1.5">
-              <span data-i18n="intro_hero_btn_tasks">Interactive Tasks</span>
+              <span data-i18n="intro_hero_btn_tasks">Interactive tasks</span>
               <span>→</span>
             </button>
             <button onclick="switchTab('distinction')" class="px-4 py-2 bg-indigo-500/30 text-white font-semibold rounded-xl text-xs border border-white/20 hover:bg-white/10 transition">
@@ -139,180 +128,157 @@
         </div>
       </div>
 
-      <!-- Core Concept: Market Equilibrium -->
       <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
         <div class="border-b border-slate-100 pb-3">
-          <h3 class="text-base sm:text-lg font-bold text-slate-900" data-i18n="intro_eq_title">Równowaga rynkowa (market equilibrium)</h3>
-          <p class="text-xs text-slate-500 mt-0.5" data-i18n="intro_eq_sub">Stan równowagi rynkowej i siły samostabilizujące</p>
+          <h3 class="text-base sm:text-lg font-bold text-slate-900" data-i18n="intro_eq_title">Market equilibrium</h3>
+          <p class="text-xs text-slate-500 mt-0.5" data-i18n="intro_eq_sub">Market equilibrium state and self-stabilizing forces</p>
         </div>
 
-        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed" data-i18n="intro_eq_body">
-          Market equilibrium occurs when buyer intentions match seller intentions precisely. At the <strong>equilibrium price (P<sub>E</sub>)</strong>, consumer quantity demanded equals producer quantity supplied (<strong>Q<sub>D</sub> = Q<sub>S</sub> = Q<sub>E</sub></strong>).
-        </p>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed" data-i18n="intro_eq_body">Market equilibrium occurs when buyer intentions match seller intentions precisely. At the <strong>equilibrium price (P<sub>E</sub>)</strong>, consumer quantity demanded equals producer quantity supplied (<strong>Q<sub>D</sub> = Q<sub>S</sub> = Q<sub>E</sub></strong>).</p>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
           <div class="p-3.5 bg-rose-50/70 border border-rose-200 rounded-xl text-xs space-y-1">
-            <span class="font-bold text-rose-900 block" data-i18n="intro_shortage_h">Gdy P &lt; P<sub>E</sub>: niedobór rynkowy (shortage)</span>
-            <p class="text-slate-600" data-i18n="intro_shortage_p">Cena jest zbyt niska, więc Q<sub>D</sub> &gt; Q<sub>S</sub>. Klienci rywalizują o towar, co wywiera presję na wzrost ceny ku poziomowi równowagi.</p>
+            <span class="font-bold text-rose-900 block" data-i18n="intro_shortage_h">When P &lt; P<sub>E</sub>: market shortage (excess demand)</span>
+            <p class="text-slate-600" data-i18n="intro_shortage_p">Price is too low, so Q<sub>D</sub> &gt; Q<sub>S</sub>. Buyers bid up prices until equilibrium is restored.</p>
           </div>
           <div class="p-3.5 bg-amber-50/70 border border-amber-200 rounded-xl text-xs space-y-1">
-            <span class="font-bold text-amber-900 block" data-i18n="intro_surplus_h">Gdy P &gt; P<sub>E</sub>: nadwyżka rynkowa (surplus)</span>
-            <p class="text-slate-600" data-i18n="intro_surplus_p">Cena jest zbyt wysoka, więc Q<sub>S</sub> &gt; Q<sub>D</sub>. Niesprzedane zapasy zmuszają producentów do obniżek cen, aż rynek powróci do równowagi.</p>
+            <span class="font-bold text-amber-900 block" data-i18n="intro_surplus_h">When P &gt; P<sub>E</sub>: market surplus (excess supply)</span>
+            <p class="text-slate-600" data-i18n="intro_surplus_p">Price is too high, so Q<sub>S</sub> &gt; Q<sub>D</sub>. Unsold inventories force sellers to offer discounts until clearing.</p>
           </div>
         </div>
       </div>
 
-      <!-- Two Broad Classes: Change in Demand vs Change in Supply -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
-        <!-- Determinants of Demand (6 items) -->
         <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
           <div class="flex items-center justify-between border-b border-slate-100 pb-3">
             <div class="flex items-center gap-2">
               <span class="w-3 h-3 rounded-full bg-blue-600 inline-block"></span>
-              <h3 class="text-base font-bold text-slate-900" data-i18n="intro_d_title">Zmiana popytu (determinanty pozacenowe)</h3>
+              <h3 class="text-base font-bold text-slate-900" data-i18n="intro_d_title">Change in demand (non-price shifters)</h3>
             </div>
             <span class="text-[11px] font-mono font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded">D</span>
           </div>
 
-          <p class="text-xs text-slate-600 leading-relaxed" data-i18n="intro_d_intro">
-            Zmiana popytu oznacza przesunięcie całej krzywej (D<sub>0</sub> → D₁) pod wpływem czynników innych niż cena danego dobra:
-          </p>
+          <p class="text-xs text-slate-600 leading-relaxed" data-i18n="intro_d_intro">A change in demand represents a parallel shift of the entire curve (D₀ → D₁) driven by non-price factors:</p>
 
           <ul class="text-xs text-slate-600 space-y-2.5 list-none">
             <li class="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
-              <strong class="text-slate-900" data-i18n="intro_d_f1_h">1. Dochody konsumentów</strong>
-              <span class="text-slate-600 block mt-0.5" data-i18n="intro_d_f1_p">Dla dóbr normalnych wzrost dochodu zwiększa popyt. Dla dóbr podrzędnych wzrost dochodu powoduje spadek popytu.</span>
+              <strong class="text-slate-900" data-i18n="intro_d_f1_h">1. Consumer incomes</strong>
+              <span class="text-slate-600 block mt-0.5" data-i18n="intro_d_f1_p">For normal goods, higher income increases demand. For inferior goods, higher income reduces demand.</span>
             </li>
             <li class="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
-              <strong class="text-slate-900" data-i18n="intro_d_f2_h">2. Ceny dóbr powiązanych</strong>
-              <span class="text-slate-600 block mt-0.5" data-i18n="intro_d_f2_p">Wzrost ceny substytutu zwiększa popyt na dane dobro. Wzrost ceny dobra komplementarnego zmniejsza popyt.</span>
+              <strong class="text-slate-900" data-i18n="intro_d_f2_h">2. Prices of related goods</strong>
+              <span class="text-slate-600 block mt-0.5" data-i18n="intro_d_f2_p">A price hike for a substitute increases demand for the good. A price hike for a complement decreases demand.</span>
             </li>
             <li class="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
-              <strong class="text-slate-900" data-i18n="intro_d_f3_h">3. Preferencje, moda i wiedza konsumentów</strong>
-              <span class="text-slate-600 block mt-0.5" data-i18n="intro_d_f3_p">Kampanie reklamowe, badania medyczne czy nowe trendy kulturowe zmieniają skłonność do zakupu.</span>
+              <strong class="text-slate-900" data-i18n="intro_d_f3_h">3. Tastes, fashions, and consumer information</strong>
+              <span class="text-slate-600 block mt-0.5" data-i18n="intro_d_f3_p">Advertising, health discoveries, or lifestyle shifts alter the willingness to buy.</span>
             </li>
             <li class="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
-              <strong class="text-slate-900" data-i18n="intro_d_f4_h">4. Liczba ludności i struktura demograficzna</strong>
-              <span class="text-slate-600 block mt-0.5" data-i18n="intro_d_f4_p">Większa populacja kupujących lub starzenie się społeczeństwa zwiększają popyt na określone kategorie dóbr.</span>
+              <strong class="text-slate-900" data-i18n="intro_d_f4_h">4. Market size and demographics</strong>
+              <span class="text-slate-600 block mt-0.5" data-i18n="intro_d_f4_p">Population expansion or demographic aging increases demand for specific product categories.</span>
             </li>
             <li class="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
-              <strong class="text-slate-900" data-i18n="intro_d_f5_h">5. Oczekiwania co do przyszłości</strong>
-              <span class="text-slate-600 block mt-0.5" data-i18n="intro_d_f5_p">Spodziewany wzrost cen w przyszłości wywołuje natychmiastowe zakupy na zapas (wzrost popytu bieżącego).</span>
+              <strong class="text-slate-900" data-i18n="intro_d_f5_h">5. Buyer expectations</strong>
+              <span class="text-slate-600 block mt-0.5" data-i18n="intro_d_f5_p">Anticipated future shortages or price surges induce preemptive current buying (current demand shifts right).</span>
             </li>
             <li class="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
-              <strong class="text-slate-900" data-i18n="intro_d_f6_h">6. Warunki naturalne, sezonowość i zdarzenia losowe</strong>
-              <span class="text-slate-600 block mt-0.5" data-i18n="intro_d_f6_p">Fala upałów zwiększa popyt na lody i napoje chłodzące; ostra zima podnosi zapotrzebowanie na opał.</span>
+              <strong class="text-slate-900" data-i18n="intro_d_f6_h">6. Weather conditions, seasonality, and external shocks</strong>
+              <span class="text-slate-600 block mt-0.5" data-i18n="intro_d_f6_p">Summer heatwaves boost demand for cold refreshments; harsh winter freezes raise heating fuel demand.</span>
             </li>
           </ul>
         </div>
 
-        <!-- Determinants of Supply (5 items) -->
         <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
           <div class="flex items-center justify-between border-b border-slate-100 pb-3">
             <div class="flex items-center gap-2">
               <span class="w-3 h-3 rounded-full bg-green-600 inline-block"></span>
-              <h3 class="text-base font-bold text-slate-900" data-i18n="intro_s_title">Zmiana podaży (determinanty pozacenowe)</h3>
+              <h3 class="text-base font-bold text-slate-900" data-i18n="intro_s_title">Change in supply (non-price shifters)</h3>
             </div>
             <span class="text-[11px] font-mono font-bold text-green-700 bg-green-50 px-2 py-0.5 rounded">S</span>
           </div>
 
-          <p class="text-xs text-slate-600 leading-relaxed" data-i18n="intro_s_intro">
-            Zmiana podaży to przesunięcie całej krzywej (S<sub>0</sub> → S₁) decydujące o tym, ile dobra firmy chcą wyprodukować przy każdym poziomie ceny:
-          </p>
+          <p class="text-xs text-slate-600 leading-relaxed" data-i18n="intro_s_intro">A change in supply represents a shift of the entire curve (S₀ → S₁) determining producer quantities across all prices:</p>
 
           <ul class="text-xs text-slate-600 space-y-2.5 list-none">
             <li class="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
-              <strong class="text-slate-900" data-i18n="intro_s_f1_h">1. Koszty czynników wytwórczych (surowce, płace, energia)</strong>
-              <span class="text-slate-600 block mt-0.5" data-i18n="intro_s_f1_p">Droższe surowce podnoszą koszt krańcowy, ograniczając opłacalność produkcji (spadek podaży).</span>
+              <strong class="text-slate-900" data-i18n="intro_s_f1_h">1. Input costs (raw materials, wages, energy)</strong>
+              <span class="text-slate-600 block mt-0.5" data-i18n="intro_s_f1_p">Higher input costs inflate marginal costs, decreasing supply (shifts left).</span>
             </li>
             <li class="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
-              <strong class="text-slate-900" data-i18n="intro_s_f2_h">2. Postęp technologiczny i innowacje</strong>
-              <span class="text-slate-600 block mt-0.5" data-i18n="intro_s_f2_p">Wydajniejsze maszyny i automatyzacja obniżają jednostkowy koszt wytworzenia, zwiększając podaż.</span>
+              <strong class="text-slate-900" data-i18n="intro_s_f2_h">2. Technological progress and innovation</strong>
+              <span class="text-slate-600 block mt-0.5" data-i18n="intro_s_f2_p">More efficient machinery and automation cut unit costs, expanding supply outward.</span>
             </li>
             <li class="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
-              <strong class="text-slate-900" data-i18n="intro_s_f3_h">3. Podatki od producentów i dotacje państwowe</strong>
-              <span class="text-slate-600 block mt-0.5" data-i18n="intro_s_f3_p">Wyższa akcyza lub opłata środowiskowa działa jak wzrost kosztów; subsydia i ulgi zwiększają podaż.</span>
+              <strong class="text-slate-900" data-i18n="intro_s_f3_h">3. Producer taxes and government subsidies</strong>
+              <span class="text-slate-600 block mt-0.5" data-i18n="intro_s_f3_p">Higher excise duties shift supply left; grants and production subsidies shift supply right.</span>
             </li>
             <li class="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
-              <strong class="text-slate-900" data-i18n="intro_s_f4_h">4. Liczba przedsiębiorstw w branży</strong>
-              <span class="text-slate-600 block mt-0.5" data-i18n="intro_s_f4_p">Wejście nowych konkurentów zwiększa całkowitą podaż rynkową danego wyrobu.</span>
+              <strong class="text-slate-900" data-i18n="intro_s_f4_h">4. Number of market sellers</strong>
+              <span class="text-slate-600 block mt-0.5" data-i18n="intro_s_f4_p">New competitors entering the sector expand total aggregate industry supply.</span>
             </li>
             <li class="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
-              <strong class="text-slate-900" data-i18n="intro_s_f5_h">5. Warunki naturalne i zdarzenia losowe</strong>
-              <span class="text-slate-600 block mt-0.5" data-i18n="intro_s_f5_p">Susze, powodzie czy nieurodzaj w rolnictwie redukują podaż; doskonała pogoda powoduje jej wzrost.</span>
+              <strong class="text-slate-900" data-i18n="intro_s_f5_h">5. Weather, nature, and external shocks</strong>
+              <span class="text-slate-600 block mt-0.5" data-i18n="intro_s_f5_p">Agricultural droughts or port blockages reduce supply; ideal weather expands harvests.</span>
             </li>
           </ul>
         </div>
 
       </div>
 
-      <!-- 4 Canonical Market Shifts Card -->
       <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
         <div class="flex items-center justify-between border-b border-slate-100 pb-3">
           <div>
-            <h3 class="text-base font-bold text-slate-900" data-i18n="intro_cases_title">Cztery podstawowe szoki rynkowe (skutki dla P<sub>E</sub> i Q<sub>E</sub>)</h3>
-            <p class="text-xs text-slate-500" data-i18n="intro_cases_sub">Zestawienie zmian równowagi przy założeniu ceteris paribus</p>
+            <h3 class="text-base font-bold text-slate-900" data-i18n="intro_cases_title">Four canonical market shifts (outcomes for P<sub>E</sub> and Q<sub>E</sub>)</h3>
+            <p class="text-xs text-slate-500" data-i18n="intro_cases_sub">Equilibrium shifts summary under ceteris paribus</p>
           </div>
-          <span class="text-[11px] font-bold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-full border border-indigo-200" data-i18n="intro_cases_badge">Podsumowując</span>
+          <span class="text-[11px] font-bold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-full border border-indigo-200" data-i18n="intro_cases_badge">In summary</span>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
           
-          <!-- Shift 1: Demand Up -->
           <div class="p-4 rounded-xl border border-blue-200 bg-blue-50/40 space-y-2">
             <div class="flex items-center justify-between font-bold text-blue-950">
               <span class="flex items-center gap-1.5">
                 <span class="w-2 h-2 rounded-full bg-blue-600"></span>
-                <span data-i18n="case_dup_h">Wzrost popytu (D ↑)</span>
+                <span data-i18n="case_dup_h">Increase in demand (D ↑)</span>
               </span>
               <span class="font-mono text-xs text-blue-700 bg-white px-2 py-0.5 rounded border border-blue-200">P<sub>E</sub> ↑ &nbsp; Q<sub>E</sub> ↑</span>
             </div>
-            <p class="text-slate-600" data-i18n="case_dup_p">
-              Krzywa popytu przesuwa się w prawo. Powstaje niedobór, co prowadzi do wzrostu ceny. W rezultacie rośnie zarówno cena, jak i ilość równowagi.
-            </p>
+            <p class="text-slate-600" data-i18n="case_dup_p">Demand shifts right. A temporary shortage emerges, bidding prices up. Outcome: both equilibrium price and quantity increase.</p>
           </div>
 
-          <!-- Shift 2: Demand Down -->
           <div class="p-4 rounded-xl border border-blue-200 bg-blue-50/40 space-y-2">
             <div class="flex items-center justify-between font-bold text-blue-950">
               <span class="flex items-center gap-1.5">
                 <span class="w-2 h-2 rounded-full bg-blue-400"></span>
-                <span data-i18n="case_ddown_h">Spadek popytu (D ↓)</span>
+                <span data-i18n="case_ddown_h">Decrease in demand (D ↓)</span>
               </span>
               <span class="font-mono text-xs text-blue-700 bg-white px-2 py-0.5 rounded border border-blue-200">P<sub>E</sub> ↓ &nbsp; Q<sub>E</sub> ↓</span>
             </div>
-            <p class="text-slate-600" data-i18n="case_ddown_p">
-              Krzywa popytu przesuwa się w lewo. Powstaje nadwyżka towaru, zmuszająca sprzedawców do obniżek. Spada zarówno cena, jak i ilość równowagi.
-            </p>
+            <p class="text-slate-600" data-i18n="case_ddown_p">Demand shifts left. A temporary surplus occurs, forcing price cuts. Outcome: both equilibrium price and quantity decrease.</p>
           </div>
 
-          <!-- Shift 3: Supply Up -->
           <div class="p-4 rounded-xl border border-green-200 bg-green-50/40 space-y-2">
             <div class="flex items-center justify-between font-bold text-green-950">
               <span class="flex items-center gap-1.5">
                 <span class="w-2 h-2 rounded-full bg-green-600"></span>
-                <span data-i18n="case_sup_h">Wzrost podaży (S ↑)</span>
+                <span data-i18n="case_sup_h">Increase in supply (S ↑)</span>
               </span>
               <span class="font-mono text-xs text-green-700 bg-white px-2 py-0.5 rounded border border-green-200">P<sub>E</sub> ↓ &nbsp; Q<sub>E</sub> ↑</span>
             </div>
-            <p class="text-slate-600" data-i18n="case_sup_p">
-              Krzywa podaży przesuwa się w prawo (w dół). Nadmiar dóbr obniża cenę rynkową, co zachęca konsumentów do większych zakupów. Cena spada, a ilość rośnie.
-            </p>
+            <p class="text-slate-600" data-i18n="case_sup_p">Supply shifts right. Excess stock pushes prices down, enticing more consumption. Outcome: equilibrium price falls while quantity increases.</p>
           </div>
 
-          <!-- Shift 4: Supply Down -->
           <div class="p-4 rounded-xl border border-green-200 bg-green-50/40 space-y-2">
             <div class="flex items-center justify-between font-bold text-green-950">
               <span class="flex items-center gap-1.5">
                 <span class="w-2 h-2 rounded-full bg-green-500"></span>
-                <span data-i18n="case_sdown_h">Spadek podaży (S ↓)</span>
+                <span data-i18n="case_sdown_h">Decrease in supply (S ↓)</span>
               </span>
               <span class="font-mono text-xs text-green-700 bg-white px-2 py-0.5 rounded border border-green-200">P<sub>E</sub> ↑ &nbsp; Q<sub>E</sub> ↓</span>
             </div>
-            <p class="text-slate-600" data-i18n="case_sdown_p">
-              Krzywa podaży przesuwa się w lewo (w górę). Szok kosztowy ogranicza produkcję i rodzi niedobór. Cena równowagi rośnie, a ilość transakcyjna spada.
-            </p>
+            <p class="text-slate-600" data-i18n="case_sdown_p">Supply shifts left. Supply crunch creates a shortage, lifting prices. Outcome: equilibrium price increases while quantity falls.</p>
           </div>
 
         </div>
@@ -320,39 +286,37 @@
 
     </section>
 
-    <!-- ================= TAB 1: MODEL & SIMULATION (LABORATORY) ================= -->
-    <section id="view-model" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-6">
+    <!-- TAB 1: MODEL & SIMULATION (LABORATORY) -->
+    <section id="view-model" class="grid grid-cols-1 lg:grid-cols-12 gap-6 hidden">
 
-      <!-- Left Column: Controls & Presets (4 cols) -->
       <div class="lg:col-span-4 space-y-5">
         
-        <!-- Baseline Equation Parameters Card -->
         <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-4">
           <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
             <div>
-              <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider" data-i18n="params_title">Parametry równań rynku</h2>
-              <p class="text-[11px] text-slate-500" data-i18n="params_subtitle">Równowaga wyjściowa (przed szokiem)</p>
+              <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider" data-i18n="params_title">Market equation parameters</h2>
+              <p class="text-[11px] text-slate-500" data-i18n="params_subtitle">Baseline equilibrium (pre-shock)</p>
             </div>
-            <button onclick="resetBaselineParams()" class="text-[11px] text-indigo-600 hover:text-indigo-800 font-semibold" data-i18n="btn_defaults">Domyślne</button>
+            <button onclick="resetBaselineParams()" class="text-[11px] text-indigo-600 hover:text-indigo-800 font-semibold" data-i18n="btn_defaults">Defaults</button>
           </div>
 
           <!-- Formula display badges -->
           <div class="space-y-1.5 font-mono text-[11px]">
             <div class="p-2 rounded-lg bg-blue-50/80 border border-blue-200 text-blue-900 flex justify-between items-center">
-              <span><strong>D<sub>0</sub>:</strong> Q<sub>D</sub> = <span id="formula-b">100</span> - <span id="formula-a">1.0</span>·P</span>
-              <span class="text-[10px] text-blue-600 bg-white px-1.5 py-0.5 rounded border border-blue-200">Popyt Q(P)</span>
+              <span><strong>D<sub>0</sub>:</strong> Q<sub>D</sub> = <span id="formula-b">85</span> - <span id="formula-a">1.7</span>·P</span>
+              <span class="text-[10px] text-blue-600 bg-white px-1.5 py-0.5 rounded border border-blue-200" data-i18n="lab_tag_d">Demand Q(P)</span>
             </div>
             <div class="p-2 rounded-lg bg-green-50/80 border border-green-200 text-green-900 flex justify-between items-center">
-              <span><strong>S<sub>0</sub>:</strong> Q<sub>S</sub> = <span id="formula-d">0</span> + <span id="formula-c">1.0</span>·P</span>
-              <span class="text-[10px] text-green-600 bg-white px-1.5 py-0.5 rounded border border-green-200">Podaż Q(P)</span>
+              <span><strong>S<sub>0</sub>:</strong> Q<sub>S</sub> = <span id="formula-d">10</span> + <span id="formula-c">1.4</span>·P</span>
+              <span class="text-[10px] text-green-600 bg-white px-1.5 py-0.5 rounded border border-green-200" data-i18n="lab_tag_s">Supply Q(P)</span>
             </div>
           </div>
 
           <!-- Slider Parameter a (Demand slope) -->
           <div class="space-y-1">
             <div class="flex justify-between text-xs">
-              <span class="text-slate-700 font-medium" data-i18n="param_a_label">Popyt: nachylenie (a)</span>
-              <span id="badge-param-a" class="font-mono font-bold text-blue-600">1.0</span>
+              <span class="text-slate-700 font-medium" data-i18n="param_a_label">Demand: slope (a)</span>
+              <span id="badge-param-a" class="font-mono font-bold text-blue-600">1.7</span>
             </div>
             <input type="range" id="param-a" min="0.4" max="2.0" value="1.0" step="0.1" class="w-full custom-range cursor-pointer" oninput="onParamsChange()">
             <div class="flex justify-between text-[10px] text-slate-400">
@@ -364,10 +328,10 @@
           <!-- Slider Parameter b (Demand intercept / shift) -->
           <div class="space-y-1">
             <div class="flex justify-between text-xs">
-              <span class="text-slate-700 font-medium" data-i18n="param_b_label">Popyt: przesunięcie (b)</span>
-              <span id="badge-param-b" class="font-mono font-bold text-blue-600">100</span>
+              <span class="text-slate-700 font-medium" data-i18n="param_b_label">Demand: shift (b)</span>
+              <span id="badge-param-b" class="font-mono font-bold text-blue-600">85</span>
             </div>
-            <input type="range" id="param-b" min="60" max="140" value="100" step="5" class="w-full custom-range cursor-pointer" oninput="onParamsChange()">
+            <input type="range" id="param-b" min="60" max="140" value="100" step="1" class="w-full custom-range cursor-pointer" oninput="onParamsChange()">
             <div class="flex justify-between text-[10px] text-slate-400">
               <span>60</span>
               <span>140</span>
@@ -377,8 +341,8 @@
           <!-- Slider Parameter c (Supply slope) -->
           <div class="space-y-1">
             <div class="flex justify-between text-xs">
-              <span class="text-slate-700 font-medium" data-i18n="param_c_label">Podaż: nachylenie (c)</span>
-              <span id="badge-param-c" class="font-mono font-bold text-green-600">1.0</span>
+              <span class="text-slate-700 font-medium" data-i18n="param_c_label">Supply: slope (c)</span>
+              <span id="badge-param-c" class="font-mono font-bold text-green-600">1.4</span>
             </div>
             <input type="range" id="param-c" min="0.4" max="2.0" value="1.0" step="0.1" class="w-full custom-range cursor-pointer" oninput="onParamsChange()">
             <div class="flex justify-between text-[10px] text-slate-400">
@@ -390,10 +354,10 @@
           <!-- Slider Parameter d (Supply intercept / shift) -->
           <div class="space-y-1">
             <div class="flex justify-between text-xs">
-              <span class="text-slate-700 font-medium" data-i18n="param_d_label">Podaż: przesunięcie (d)</span>
-              <span id="badge-param-d" class="font-mono font-bold text-green-600">0</span>
+              <span class="text-slate-700 font-medium" data-i18n="param_d_label">Supply: shift (d)</span>
+              <span id="badge-param-d" class="font-mono font-bold text-green-600">10</span>
             </div>
-            <input type="range" id="param-d" min="-30" max="30" value="0" step="5" class="w-full custom-range cursor-pointer" oninput="onParamsChange()">
+            <input type="range" id="param-d" min="-30" max="30" value="0" step="1" class="w-full custom-range cursor-pointer" oninput="onParamsChange()">
             <div class="flex justify-between text-[10px] text-slate-400">
               <span>-30</span>
               <span>+30</span>
@@ -401,10 +365,9 @@
           </div>
         </div>
 
-        <!-- Preset Scenarios Card -->
         <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
           <div class="flex items-center justify-between mb-3">
-            <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider" data-i18n="presets_title">Szybkie scenariusze</h2>
+            <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider" data-i18n="presets_title">Quick scenarios</h2>
             <button onclick="resetModel()" class="text-xs text-indigo-600 hover:text-indigo-800 font-semibold flex items-center gap-1">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
               <span data-i18n="btn_reset">Reset</span>
@@ -414,58 +377,57 @@
           <div class="grid grid-cols-2 gap-2 text-xs">
             <button onclick="applyPreset('demand_up')" class="preset-btn p-2.5 rounded-xl border border-blue-200 bg-blue-50/50 hover:bg-blue-100/70 text-blue-900 font-medium text-left transition flex flex-col justify-between">
               <div class="font-bold flex items-center justify-between">
-                <span data-i18n="d_up_title">Wzrost popytu</span>
+                <span data-i18n="d_up_title">Increase in demand</span>
                 <span class="text-blue-600">D ↑</span>
               </div>
-              <span class="text-[11px] text-blue-700/80 mt-1" data-i18n="d_up_sub">Przesunięcie w prawo</span>
+              <span class="text-[11px] text-blue-700/80 mt-1" data-i18n="d_up_sub">Shift to the right</span>
             </button>
 
             <button onclick="applyPreset('demand_down')" class="preset-btn p-2.5 rounded-xl border border-blue-200 bg-blue-50/50 hover:bg-blue-100/70 text-blue-900 font-medium text-left transition flex flex-col justify-between">
               <div class="font-bold flex items-center justify-between">
-                <span data-i18n="d_down_title">Spadek popytu</span>
+                <span data-i18n="d_down_title">Decrease in demand</span>
                 <span class="text-blue-600">D ↓</span>
               </div>
-              <span class="text-[11px] text-blue-700/80 mt-1" data-i18n="d_down_sub">Przesunięcie w lewo</span>
+              <span class="text-[11px] text-blue-700/80 mt-1" data-i18n="d_down_sub">Shift to the left</span>
             </button>
 
             <button onclick="applyPreset('supply_up')" class="preset-btn p-2.5 rounded-xl border border-green-200 bg-green-50/50 hover:bg-green-100/70 text-green-900 font-medium text-left transition flex flex-col justify-between">
               <div class="font-bold flex items-center justify-between">
-                <span data-i18n="s_up_title">Wzrost podaży</span>
+                <span data-i18n="s_up_title">Increase in supply</span>
                 <span class="text-green-600">S ↑</span>
               </div>
-              <span class="text-[11px] text-green-700/80 mt-1" data-i18n="s_up_sub">Przesunięcie w prawo</span>
+              <span class="text-[11px] text-green-700/80 mt-1" data-i18n="s_up_sub">Shift to the right</span>
             </button>
 
             <button onclick="applyPreset('supply_down')" class="preset-btn p-2.5 rounded-xl border border-green-200 bg-green-50/50 hover:bg-green-100/70 text-green-900 font-medium text-left transition flex flex-col justify-between">
               <div class="font-bold flex items-center justify-between">
-                <span data-i18n="s_down_title">Spadek podaży</span>
+                <span data-i18n="s_down_title">Decrease in supply</span>
                 <span class="text-green-600">S ↓</span>
               </div>
-              <span class="text-[11px] text-green-700/80 mt-1" data-i18n="s_down_sub">Przesunięcie w lewo</span>
+              <span class="text-[11px] text-green-700/80 mt-1" data-i18n="s_down_sub">Shift to the left</span>
             </button>
           </div>
         </div>
-
         <!-- Manual Sliders Card -->
         <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-5">
           <div class="flex items-center justify-between">
-            <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider" data-i18n="sliders_title">Precyzyjne przesunięcia (shifts)</h2>
-            <span class="text-[10px] font-semibold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full" data-i18n="parallel_badge">Równoległe</span>
+            <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider" data-i18n="sliders_title">Precise curve shifts</h2>
+            <span class="text-[10px] font-semibold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full" data-i18n="parallel_badge">Parallel (fixed slope)</span>
           </div>
 
           <div class="space-y-1.5">
             <div class="flex justify-between items-center text-xs">
               <span class="font-semibold text-blue-700 flex items-center gap-1.5">
                 <span class="w-2.5 h-2.5 rounded-full bg-blue-600 inline-block"></span>
-                <span data-i18n="slider_demand_label">Przesunięcie popytu (ΔD)</span>
+                <span data-i18n="slider_demand_label">Demand shift (ΔD)</span>
               </span>
               <span id="demand-val-badge" class="font-mono font-bold bg-blue-50 text-blue-700 px-2 py-0.5 rounded">0</span>
             </div>
-            <input type="range" id="slider-demand" min="-40" max="40" value="0" step="5" class="w-full custom-range cursor-pointer" oninput="onShiftChange()">
+            <input type="range" id="slider-demand" min="-40" max="40" value="0" step="1" class="w-full custom-range cursor-pointer" oninput="onShiftChange()">
             <div class="flex justify-between text-[10px] text-slate-400">
-              <span data-i18n="slider_left">← W lewo (spadek)</span>
-              <span data-i18n="slider_base">Baza</span>
-              <span data-i18n="slider_right">W prawo (wzrost) →</span>
+              <span data-i18n="slider_left">← Left (decrease)</span>
+              <span data-i18n="slider_base">Base (0)</span>
+              <span data-i18n="slider_right">Right (increase) →</span>
             </div>
           </div>
 
@@ -473,69 +435,65 @@
             <div class="flex justify-between items-center text-xs">
               <span class="font-semibold text-green-700 flex items-center gap-1.5">
                 <span class="w-2.5 h-2.5 rounded-full bg-green-600 inline-block"></span>
-                <span data-i18n="slider_supply_label">Przesunięcie podaży (ΔS)</span>
+                <span data-i18n="slider_supply_label">Supply shift (ΔS)</span>
               </span>
               <span id="supply-val-badge" class="font-mono font-bold bg-green-50 text-green-700 px-2 py-0.5 rounded">0</span>
             </div>
-            <input type="range" id="slider-supply" min="-40" max="40" value="0" step="5" class="w-full custom-range cursor-pointer" oninput="onShiftChange()">
+            <input type="range" id="slider-supply" min="-40" max="40" value="0" step="1" class="w-full custom-range cursor-pointer" oninput="onShiftChange()">
             <div class="flex justify-between text-[10px] text-slate-400">
-              <span data-i18n="slider_left">← W lewo (spadek)</span>
-              <span data-i18n="slider_base">Baza</span>
-              <span data-i18n="slider_right">W prawo (wzrost) →</span>
+              <span data-i18n="slider_left">← Left (decrease)</span>
+              <span data-i18n="slider_base">Base (0)</span>
+              <span data-i18n="slider_right">Right (increase) →</span>
             </div>
           </div>
 
           <div class="pt-3 border-t border-slate-100">
             <label class="flex items-center justify-between cursor-pointer">
-              <span class="text-xs font-semibold text-slate-700" data-i18n="toggle_disequilibrium">Zbadaj cenę rynkową (nierównowaga)</span>
+              <span class="text-xs font-semibold text-slate-700" data-i18n="toggle_disequilibrium">Explore market price (disequilibrium)</span>
               <input type="checkbox" id="toggle-diseq" onchange="toggleDisequilibrium()" class="rounded text-indigo-600 focus:ring-indigo-500 w-4 h-4">
             </label>
             <div id="diseq-controls" class="hidden mt-3 space-y-2 pt-2 bg-slate-50 p-3 rounded-xl border border-slate-200">
               <div class="flex justify-between text-xs">
-                <span class="text-slate-600 font-medium" data-i18n="regulated_price">Cena na rynku (P):</span>
+                <span class="text-slate-600 font-medium" data-i18n="regulated_price">Price in market (P):</span>
                 <span id="reg-price-badge" class="font-mono font-bold text-indigo-700">50</span>
               </div>
-              <input type="range" id="slider-price" min="20" max="80" value="50" step="2" class="w-full custom-range cursor-pointer" oninput="onPriceSliderChange()">
+              <input type="range" id="slider-price" min="20" max="80" value="50" step="1" class="w-full custom-range cursor-pointer" oninput="onPriceSliderChange()">
               <div id="market-status-box" class="text-xs font-medium p-2 rounded-lg text-center"></div>
             </div>
           </div>
         </div>
 
-        <!-- Economic Factors Guide -->
         <div class="bg-indigo-50/60 rounded-2xl p-4 border border-indigo-100 text-xs text-slate-700 space-y-2">
           <div class="flex items-center gap-1.5 font-bold text-indigo-900">
             <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            <span data-i18n="determinants_heading">Czynniki pozacenowe (ceteris paribus)</span>
+            <span data-i18n="determinants_heading">Non-price determinants (ceteris paribus)</span>
           </div>
-          <p id="determinants-desc" class="text-slate-600 leading-relaxed">
-            Wybierz scenariusz lub przesuń krzywą, aby zobaczyć przykłady realnych czynników gospodarczych wywołujących te zmiany.
-          </p>
+          <p id="determinants-desc" class="text-slate-600 leading-relaxed">The market is in balance. Quantity demanded equals quantity supplied (Q<sub>D</sub> = Q<sub>S</sub>). No surplus or shortage pressures.</p>
         </div>
 
       </div>
 
-      <!-- Right Column: Interactive Diagram & Analysis (8 cols) -->
       <div class="lg:col-span-8 space-y-5">
         
         <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col items-center">
           <div class="w-full flex flex-wrap items-center justify-between gap-3 mb-3 pb-2 border-b border-slate-100">
             <div>
-              <span class="text-xs font-semibold uppercase tracking-wider text-slate-400" data-i18n="graph_title">Wykres równowagi rynkowej</span>
-              <h3 id="current-scenario-title" class="text-base font-bold text-slate-800">Równowaga początkowa (E<sub>0</sub>)</h3>
+              <span class="text-xs font-semibold uppercase tracking-wider text-slate-400" data-i18n="graph_title">Market equilibrium graph</span>
+              <h3 id="current-scenario-title" class="text-base font-bold text-slate-800">Initial market equilibrium (E<sub>0</sub>)</h3>
             </div>
             
             <div class="flex items-center gap-4 text-xs font-medium">
               <span class="flex items-center gap-1.5">
                 <span class="w-3 h-0.5 bg-blue-600 inline-block rounded"></span>
-                <span data-i18n="legend_demand">Popyt (D)</span>
+                <span data-i18n="legend_demand">Demand (D)</span>
               </span>
               <span class="flex items-center gap-1.5">
                 <span class="w-3 h-0.5 bg-green-600 inline-block rounded"></span>
-                <span data-i18n="legend_supply">Podaż (S)</span>
+                <span data-i18n="legend_supply">Supply (S)</span>
               </span>
               <span class="flex items-center gap-1.5">
                 <span class="w-2.5 h-2.5 rounded-full bg-indigo-600 inline-block"></span>
-                <span data-i18n="legend_eq">Równowaga (E)</span>
+                <span data-i18n="legend_eq">Equilibrium (E)</span>
               </span>
             </div>
           </div>
@@ -557,29 +515,29 @@
 
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full mt-4">
             <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
-              <span class="text-[11px] font-semibold text-slate-500 uppercase block" data-i18n="metric_p">Cena równowagi (P<sub>E</sub>)</span>
+              <span class="text-[11px] font-semibold text-slate-500 uppercase block" data-i18n="metric_p">Equilibrium price (P<sub>E</sub>)</span>
               <div class="flex items-baseline gap-2 mt-0.5">
                 <span id="metric-p-val" class="text-xl font-bold font-mono text-slate-800">50.0</span>
-                <span id="metric-p-delta" class="text-xs font-semibold px-1.5 py-0.5 rounded bg-slate-200 text-slate-600">= Bez zmian</span>
+                <span id="metric-p-delta" class="text-xs font-semibold px-1.5 py-0.5 rounded bg-slate-200 text-slate-600">= (No change)</span>
               </div>
             </div>
 
             <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
-              <span class="text-[11px] font-semibold text-slate-500 uppercase block" data-i18n="metric_q">Ilość równowagi (Q<sub>E</sub>)</span>
+              <span class="text-[11px] font-semibold text-slate-500 uppercase block" data-i18n="metric_q">Equilibrium quantity (Q<sub>E</sub>)</span>
               <div class="flex items-baseline gap-2 mt-0.5">
                 <span id="metric-q-val" class="text-xl font-bold font-mono text-slate-800">50.0</span>
-                <span id="metric-q-delta" class="text-xs font-semibold px-1.5 py-0.5 rounded bg-slate-200 text-slate-600">= Bez zmian</span>
+                <span id="metric-q-delta" class="text-xs font-semibold px-1.5 py-0.5 rounded bg-slate-200 text-slate-600">= (No change)</span>
               </div>
             </div>
 
             <div class="bg-blue-50/60 p-3 rounded-xl border border-blue-100">
-              <span class="text-[11px] font-semibold text-blue-700 uppercase block" data-i18n="metric_d_state">Krzywa popytu (D)</span>
-              <span id="metric-d-status" class="text-xs font-bold text-blue-900 mt-1 block">Pozycja wyjściowa (D<sub>0</sub>)</span>
+              <span class="text-[11px] font-semibold text-blue-700 uppercase block" data-i18n="metric_d_state">Demand curve (D)</span>
+              <span id="metric-d-status" class="text-xs font-bold text-blue-900 mt-1 block">Baseline (D<sub>0</sub>)</span>
             </div>
 
             <div class="bg-green-50/60 p-3 rounded-xl border border-green-100">
-              <span class="text-[11px] font-semibold text-green-700 uppercase block" data-i18n="metric_s_state">Krzywa podaży (S)</span>
-              <span id="metric-s-status" class="text-xs font-bold text-green-900 mt-1 block">Pozycja wyjściowa (S<sub>0</sub>)</span>
+              <span class="text-[11px] font-semibold text-green-700 uppercase block" data-i18n="metric_s_state">Supply curve (S)</span>
+              <span id="metric-s-status" class="text-xs font-bold text-green-900 mt-1 block">Baseline (S<sub>0</sub>)</span>
             </div>
           </div>
         </div>
@@ -587,7 +545,7 @@
         <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-3">
           <div class="flex items-center gap-2">
             <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-            <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider" data-i18n="mech_title">Mechanizm dostosowawczy rynku</h3>
+            <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider" data-i18n="mech_title">Market adjustment mechanism</h3>
           </div>
           <div id="market-mechanism-explanation" class="text-sm text-slate-600 leading-relaxed space-y-2"></div>
         </div>
@@ -596,9 +554,9 @@
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-2">
               <span class="w-2.5 h-2.5 rounded-full bg-indigo-600"></span>
-              <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider" data-i18n="calc_title">Wyznaczanie równowagi krok po kroku</h3>
+              <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider" data-i18n="calc_title">Step-by-step equilibrium calculation</h3>
             </div>
-            <span class="text-[10px] font-bold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200" data-i18n="calc_algebra">Algebra rynku (Q<sub>D</sub> = Q<sub>S</sub>)</span>
+            <span class="text-[10px] font-bold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200" data-i18n="calc_algebra">Market algebra (Q<sub>D</sub> = Q<sub>S</sub>)</span>
           </div>
 
           <div id="step-by-step-math" class="text-xs space-y-3 text-slate-700 leading-relaxed font-sans"></div>
@@ -608,44 +566,40 @@
 
     </section>
 
-    <!-- ================= TAB 2: TASKS (3 INTERACTIVE CHALLENGES) ================= -->
+    <!-- TAB 2: TASKS (3 CHALLENGES) -->
     <section id="view-tasks" class="hidden space-y-6">
 
-      <!-- Top Sub-Task Selector Bar -->
       <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <span class="text-[11px] font-bold text-indigo-600 uppercase tracking-wider" data-i18n="tasks_header_badge">Interactive analytical modules</span>
           <h2 class="text-lg sm:text-xl font-extrabold text-slate-900" data-i18n="tasks_header_title">Market problem-solving tasks</h2>
         </div>
 
-        <!-- 3 Task Switcher Pills -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 bg-slate-100 p-1.5 rounded-xl text-xs font-semibold">
           <button id="subtask-btn-1" onclick="switchSubTask(1)" class="px-3.5 py-2 rounded-lg bg-white shadow-sm text-indigo-600 font-bold transition text-left flex items-center gap-2">
             <span class="w-5 h-5 rounded-md bg-indigo-600 text-white flex items-center justify-center text-[11px] font-bold shrink-0">1</span>
-            <span class="truncate" data-i18n="task1_tab">Simultaneous Shocks</span>
+            <span class="truncate" data-i18n="task1_tab">Simultaneous shocks</span>
           </button>
           <button id="subtask-btn-2" onclick="switchSubTask(2)" class="px-3.5 py-2 rounded-lg text-slate-600 hover:text-slate-900 transition text-left flex items-center gap-2">
             <span class="w-5 h-5 rounded-md bg-slate-300 text-slate-700 flex items-center justify-center text-[11px] font-bold shrink-0">2</span>
-            <span class="truncate" data-i18n="task2_tab">Price Controls &amp; Welfare</span>
+            <span class="truncate" data-i18n="task2_tab">Price controls &amp; welfare</span>
           </button>
           <button id="subtask-btn-3" onclick="switchSubTask(3)" class="px-3.5 py-2 rounded-lg text-slate-600 hover:text-slate-900 transition text-left flex items-center gap-2">
             <span class="w-5 h-5 rounded-md bg-slate-300 text-slate-700 flex items-center justify-center text-[11px] font-bold shrink-0">3</span>
-            <span class="truncate" data-i18n="task3_tab">Market Detective</span>
+            <span class="truncate" data-i18n="task3_tab">Market detective</span>
           </button>
         </div>
       </div>
 
-      <!-- Main Workspace Grid for Tasks -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
-        <!-- Left Column: Task Controls (5 cols) -->
         <div class="lg:col-span-5 space-y-5">
 
-          <!-- ======= TASK 1 CONTROLS: SIMULTANEOUS SHOCKS CHALLENGE ======= -->
+          <!-- TASK 1 CONTROLS -->
           <div id="task-panel-1" class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-4">
             <div class="flex items-center justify-between border-b border-slate-100 pb-3">
               <div>
-                <span class="text-[10px] font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded" data-i18n="t1_badge">Task 1 • Predictive Challenge</span>
+                <span class="text-[10px] font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded" data-i18n="t1_badge">Task 1 • Predictive challenge</span>
                 <h3 class="text-base font-bold text-slate-900 mt-1" data-i18n="t1_title">Simultaneous market shocks</h3>
               </div>
               <button onclick="nextTask1Case()" class="text-xs bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold px-3 py-1.5 rounded-xl transition flex items-center gap-1">
@@ -654,13 +608,11 @@
               </button>
             </div>
 
-            <!-- Case selector pills -->
-            <div class="flex items-center gap-1.5" id="t1-case-pills"></div>
+            <div class="flex items-center gap-1.5 flex-wrap" id="t1-case-pills"></div>
 
-            <!-- Scenario Story Box -->
             <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
               <div class="flex items-center justify-between">
-                <span id="t1-market-name" class="text-xs font-extrabold text-slate-900">Bakery Market</span>
+                <span id="t1-market-name" class="text-xs font-extrabold text-slate-900">Artisan bakery market</span>
                 <span class="text-[11px] font-mono text-slate-500">E<sub>0</sub> = (50, 50)</span>
               </div>
               <p id="t1-scenario-desc" class="text-xs text-slate-600 leading-relaxed"></p>
@@ -670,70 +622,57 @@
               </div>
             </div>
 
-            <!-- Prediction Questions -->
             <div class="space-y-3.5 pt-1">
-              <!-- Question A: Qualitative certainty -->
               <div class="space-y-1.5">
-                <label class="text-xs font-bold text-slate-800 block" data-i18n="t1_q1_label">
-                  1. Qualitative analysis: Which variable has an unambiguous direction of change regardless of shock magnitudes?
-                </label>
+                <label class="text-xs font-bold text-slate-800 block" data-i18n="t1_q1_label">1. Qualitative analysis: which variable has an unambiguous direction of change regardless of shock magnitudes?</label>
                 <div class="grid grid-cols-2 gap-2 text-xs">
                   <button id="t1-cert-p" onclick="setTask1Pred('cert', 'P')" class="p-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white font-semibold text-slate-700 transition">
-                    <span data-i18n="t1_opt_pe">Equilibrium Price (P<sub>E</sub>)</span>
+                    <span data-i18n="t1_opt_pe">Equilibrium price (P<sub>E</sub>)</span>
                   </button>
                   <button id="t1-cert-q" onclick="setTask1Pred('cert', 'Q')" class="p-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white font-semibold text-slate-700 transition">
-                    <span data-i18n="t1_opt_qe">Equilibrium Quantity (Q<sub>E</sub>)</span>
+                    <span data-i18n="t1_opt_qe">Equilibrium quantity (Q<sub>E</sub>)</span>
                   </button>
                 </div>
               </div>
 
-              <!-- Question B: Quantitative P1 direction -->
               <div class="space-y-1.5">
-                <label class="text-xs font-bold text-slate-800 block" data-i18n="t1_q2_label">
-                  2. Quantitative outcome: Given the exact numbers above, how will P<sub>E,1</sub> change?
-                </label>
+                <label class="text-xs font-bold text-slate-800 block" data-i18n="t1_q2_label">2. Quantitative outcome: given the exact numbers above, how will P<sub>E,1</sub> change?</label>
                 <div class="grid grid-cols-3 gap-2 text-xs">
-                  <button id="t1-p-up" onclick="setTask1Pred('pDir', 'up')" class="p-2 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white font-bold text-slate-700 transition">P<sub>E</sub> ↑</button>
-                  <button id="t1-p-same" onclick="setTask1Pred('pDir', 'same')" class="p-2 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white font-bold text-slate-700 transition">P<sub>E</sub> =</button>
-                  <button id="t1-p-down" onclick="setTask1Pred('pDir', 'down')" class="p-2 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white font-bold text-slate-700 transition">P<sub>E</sub> ↓</button>
+                  <button id="t1-p-up" onclick="setTask1Pred('pDir', 'up')" class="p-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white font-semibold text-slate-700 transition">P<sub>E</sub> ↑</button>
+                  <button id="t1-p-same" onclick="setTask1Pred('pDir', 'same')" class="p-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white font-semibold text-slate-700 transition">P<sub>E</sub> =</button>
+                  <button id="t1-p-down" onclick="setTask1Pred('pDir', 'down')" class="p-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white font-semibold text-slate-700 transition">P<sub>E</sub> ↓</button>
                 </div>
               </div>
 
-              <!-- Question C: Quantitative Q1 direction -->
               <div class="space-y-1.5">
-                <label class="text-xs font-bold text-slate-800 block" data-i18n="t1_q3_label">
-                  3. Quantitative outcome: Given the exact numbers above, how will Q<sub>E,1</sub> change?
-                </label>
+                <label class="text-xs font-bold text-slate-800 block" data-i18n="t1_q3_label">3. Quantitative outcome: given the exact numbers above, how will Q<sub>E,1</sub> change?</label>
                 <div class="grid grid-cols-3 gap-2 text-xs">
-                  <button id="t1-q-up" onclick="setTask1Pred('qDir', 'up')" class="p-2 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white font-bold text-slate-700 transition">Q<sub>E</sub> ↑</button>
-                  <button id="t1-q-same" onclick="setTask1Pred('qDir', 'same')" class="p-2 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white font-bold text-slate-700 transition">Q<sub>E</sub> =</button>
-                  <button id="t1-q-down" onclick="setTask1Pred('qDir', 'down')" class="p-2 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white font-bold text-slate-700 transition">Q<sub>E</sub> ↓</button>
+                  <button id="t1-q-up" onclick="setTask1Pred('qDir', 'up')" class="p-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white font-semibold text-slate-700 transition">Q<sub>E</sub> ↑</button>
+                  <button id="t1-q-same" onclick="setTask1Pred('qDir', 'same')" class="p-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white font-semibold text-slate-700 transition">Q<sub>E</sub> =</button>
+                  <button id="t1-q-down" onclick="setTask1Pred('qDir', 'down')" class="p-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white font-semibold text-slate-700 transition">Q<sub>E</sub> ↓</button>
                 </div>
               </div>
 
-              <button onclick="verifyTask1Prediction()" class="w-full py-2.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow-sm transition" data-i18n="t1_btn_verify">
-                Verify prediction &amp; reveal curves on graph
-              </button>
+              <button onclick="verifyTask1Prediction()" class="w-full py-2.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow-sm transition" data-i18n="t1_btn_verify">Verify prediction &amp; reveal curves on graph</button>
 
               <div id="t1-feedback-box" class="hidden p-3.5 rounded-xl text-xs leading-relaxed border"></div>
             </div>
           </div>
 
-          <!-- ======= TASK 2 CONTROLS: PRICE CONTROLS & WELFARE (CS, PS, DWL) ======= -->
+          <!-- TASK 2 CONTROLS -->
           <div id="task-panel-2" class="hidden bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-4">
             <div class="border-b border-slate-100 pb-3">
-              <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded" data-i18n="t2_badge">Task 2 • Welfare Economics</span>
-              <h3 class="text-base font-bold text-slate-900 mt-1" data-i18n="t2_title">Price controls &amp; Deadweight Loss</h3>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded" data-i18n="t2_badge">Task 2 • Welfare economics</span>
+              <h3 class="text-base font-bold text-slate-900 mt-1" data-i18n="t2_title">Price controls &amp; deadweight loss</h3>
               <p class="text-xs text-slate-500 mt-0.5" data-i18n="t2_subtitle">Baseline market: Q<sub>D</sub> = 100 - P, Q<sub>S</sub> = P (E<sub>0</sub>: P<sub>E</sub>=50, Q<sub>E</sub>=50)</p>
             </div>
 
-            <!-- Policy Regime Selector -->
             <div class="space-y-1.5">
               <label class="text-xs font-bold text-slate-700 block" data-i18n="t2_regime_lbl">Select government policy intervention:</label>
               <div class="grid grid-cols-1 gap-2 text-xs">
                 <button id="t2-mode-free" onclick="setTask2Policy('free')" class="p-3 rounded-xl border-2 border-indigo-600 bg-indigo-50/60 text-left transition flex items-center justify-between">
                   <div>
-                    <span class="font-bold text-slate-900 block" data-i18n="t2_mode_free_h">Free Market (No intervention)</span>
+                    <span class="font-bold text-slate-900 block" data-i18n="t2_mode_free_h">Free market (no intervention)</span>
                     <span class="text-[11px] text-slate-500" data-i18n="t2_mode_free_p">Market clears at P<sub>E</sub> = 50, maximizing total social welfare</span>
                   </div>
                   <span class="font-mono font-bold text-indigo-700 text-xs">P = 50</span>
@@ -741,7 +680,7 @@
 
                 <button id="t2-mode-ceiling" onclick="setTask2Policy('ceiling')" class="p-3 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white text-left transition flex items-center justify-between">
                   <div>
-                    <span class="font-bold text-slate-900 block" data-i18n="t2_mode_ceil_h">Maximum Price / Price Ceiling (P<sub>max</sub>)</span>
+                    <span class="font-bold text-slate-900 block" data-i18n="t2_mode_ceil_h">Maximum price / price ceiling (P<sub>max</sub>)</span>
                     <span class="text-[11px] text-slate-500" data-i18n="t2_mode_ceil_p">Cap to protect consumers (binding when P<sub>max</sub> &lt; P<sub>E</sub>)</span>
                   </div>
                   <span class="font-mono font-bold text-blue-700 text-xs">P ≤ P<sub>max</sub></span>
@@ -749,21 +688,20 @@
 
                 <button id="t2-mode-floor" onclick="setTask2Policy('floor')" class="p-3 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white text-left transition flex items-center justify-between">
                   <div>
-                    <span class="font-bold text-slate-900 block" data-i18n="t2_mode_floor_h">Minimum Price / Price Floor (P<sub>min</sub>)</span>
+                    <span class="font-bold text-slate-900 block" data-i18n="t2_mode_floor_h">Minimum price / price floor (P<sub>min</sub>)</span>
                     <span class="text-[11px] text-slate-500" data-i18n="t2_mode_floor_p">Floor to support producers (binding when P<sub>min</sub> &gt; P<sub>E</sub>)</span>
                   </div>
                   <span class="font-mono font-bold text-green-700 text-xs">P ≥ P<sub>min</sub></span>
                 </button>
               </div>
             </div>
-
             <!-- Regulated Price Slider -->
             <div id="t2-slider-box" class="hidden p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
               <div class="flex justify-between items-center text-xs">
                 <span id="t2-slider-label" class="font-bold text-slate-700">Regulated price level:</span>
                 <span id="t2-price-badge" class="font-mono font-extrabold text-sm text-indigo-700 bg-white px-2.5 py-0.5 rounded border border-slate-200">30</span>
               </div>
-              <input type="range" id="t2-price-slider" min="15" max="85" value="30" step="5" class="w-full custom-range cursor-pointer" oninput="onTask2PriceChange()">
+              <input type="range" id="t2-price-slider" min="15" max="85" value="30" step="1" class="w-full custom-range cursor-pointer" oninput="onTask2PriceChange()">
               <div class="flex justify-between text-[10px] text-slate-400 font-mono">
                 <span>15</span>
                 <span>P<sub>E</sub> = 50</span>
@@ -772,32 +710,31 @@
               <div id="t2-binding-alert" class="p-2 rounded-lg text-[11px] font-semibold text-center"></div>
             </div>
 
-            <!-- Legend for Welfare Polygons -->
             <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-2 text-xs">
               <div class="font-bold text-slate-800" data-i18n="t2_legend_h">Welfare areas on diagram:</div>
               <div class="grid grid-cols-1 gap-1.5 text-[11px]">
                 <div class="flex items-center justify-between">
-                  <span class="flex items-center gap-2"><span class="w-3 h-3 rounded-xs bg-blue-500/40 border border-blue-600 inline-block"></span><strong data-i18n="t2_cs_lbl">Consumer Surplus (CS)</strong></span>
+                  <span class="flex items-center gap-2"><span class="w-3 h-3 rounded-xs bg-blue-500/40 border border-blue-600 inline-block"></span><strong data-i18n="t2_cs_lbl">Consumer surplus (CS)</strong></span>
                   <span id="t2-val-cs" class="font-mono font-bold text-blue-700">1250.0</span>
                 </div>
                 <div class="flex items-center justify-between">
-                  <span class="flex items-center gap-2"><span class="w-3 h-3 rounded-xs bg-emerald-500/40 border border-emerald-600 inline-block"></span><strong data-i18n="t2_ps_lbl">Producer Surplus (PS)</strong></span>
+                  <span class="flex items-center gap-2"><span class="w-3 h-3 rounded-xs bg-emerald-500/40 border border-emerald-600 inline-block"></span><strong data-i18n="t2_ps_lbl">Producer surplus (PS)</strong></span>
                   <span id="t2-val-ps" class="font-mono font-bold text-emerald-700">1250.0</span>
                 </div>
                 <div class="flex items-center justify-between border-t border-slate-200 pt-1">
-                  <span class="flex items-center gap-2"><span class="w-3 h-3 rounded-xs bg-rose-500/50 border border-rose-600 inline-block"></span><strong data-i18n="t2_dwl_lbl">Deadweight Loss (DWL)</strong></span>
+                  <span class="flex items-center gap-2"><span class="w-3 h-3 rounded-xs bg-rose-500/50 border border-rose-600 inline-block"></span><strong data-i18n="t2_dwl_lbl">Deadweight loss (DWL)</strong></span>
                   <span id="t2-val-dwl" class="font-mono font-bold text-rose-700">0.0</span>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- ======= TASK 3 CONTROLS: MARKET DETECTIVE (REVERSE ENGINEERING) ======= -->
+          <!-- TASK 3 CONTROLS -->
           <div id="task-panel-3" class="hidden bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-4">
             <div class="flex items-center justify-between border-b border-slate-100 pb-3">
               <div>
-                <span class="text-[10px] font-bold uppercase tracking-wider text-purple-700 bg-purple-50 px-2 py-0.5 rounded" data-i18n="t3_badge">Task 3 • Reverse Engineering</span>
-                <h3 class="text-base font-bold text-slate-900 mt-1" data-i18n="t3_title">Market Detective</h3>
+                <span class="text-[10px] font-bold uppercase tracking-wider text-purple-700 bg-purple-50 px-2 py-0.5 rounded" data-i18n="t3_badge">Task 3 • Reverse engineering</span>
+                <h3 class="text-base font-bold text-slate-900 mt-1" data-i18n="t3_title">Market detective</h3>
               </div>
               <button onclick="nextTask3Case()" class="text-xs bg-purple-50 hover:bg-purple-100 text-purple-700 font-bold px-3 py-1.5 rounded-xl transition flex items-center gap-1">
                 <span data-i18n="t3_next_case">Next mystery</span>
@@ -805,30 +742,25 @@
               </button>
             </div>
 
-            <!-- Case selector pills -->
-            <div class="flex items-center gap-1.5" id="t3-case-pills"></div>
+            <div class="flex items-center gap-1.5 flex-wrap" id="t3-case-pills"></div>
 
-            <!-- Detective Dossier Card -->
             <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
               <div class="flex items-center justify-between">
-                <span id="t3-case-title" class="text-xs font-extrabold text-slate-900">Case #1: Olive Oil Market</span>
+                <span id="t3-case-title" class="text-xs font-extrabold text-slate-900">Case #1: Olive oil market</span>
                 <span class="text-[10px] font-mono bg-rose-100 text-rose-800 font-bold px-2 py-0.5 rounded-full" id="t3-target-badge">Target E₁: (Q=35, P=65)</span>
               </div>
               <p id="t3-case-desc" class="text-xs text-slate-600 leading-relaxed"></p>
             </div>
-
             <!-- Step 1: Reconstruct curve shifts via sliders -->
             <div class="space-y-3 pt-1">
-              <div class="text-xs font-bold text-slate-800" data-i18n="t3_step1_h">
-                Step 1: Adjust shifts (ΔD, ΔS) so the intersection hits the pulsing target E₁:
-              </div>
+              <div class="text-xs font-bold text-slate-800" data-i18n="t3_step1_h">Step 1: Adjust shifts (ΔD, ΔS) so the intersection hits the pulsing target E₁:</div>
 
               <div class="space-y-1">
                 <div class="flex justify-between text-xs">
                   <span class="font-semibold text-blue-700" data-i18n="slider_demand_label">Demand shift (ΔD)</span>
                   <span id="t3-d-badge" class="font-mono font-bold text-blue-700">0</span>
                 </div>
-                <input type="range" id="t3-slider-d" min="-40" max="40" value="0" step="5" class="w-full custom-range cursor-pointer" oninput="onTask3SliderChange()">
+                <input type="range" id="t3-slider-d" min="-40" max="40" value="0" step="1" class="w-full custom-range cursor-pointer" oninput="onTask3SliderChange()">
               </div>
 
               <div class="space-y-1">
@@ -836,17 +768,14 @@
                   <span class="font-semibold text-green-700" data-i18n="slider_supply_label">Supply shift (ΔS)</span>
                   <span id="t3-s-badge" class="font-mono font-bold text-green-700">0</span>
                 </div>
-                <input type="range" id="t3-slider-s" min="-40" max="40" value="0" step="5" class="w-full custom-range cursor-pointer" oninput="onTask3SliderChange()">
+                <input type="range" id="t3-slider-s" min="-40" max="40" value="0" step="1" class="w-full custom-range cursor-pointer" oninput="onTask3SliderChange()">
               </div>
 
               <div id="t3-match-indicator" class="p-2 rounded-xl text-xs font-bold text-center bg-slate-100 text-slate-600"></div>
             </div>
 
-            <!-- Step 2: Select economic cause -->
             <div class="space-y-2 pt-2 border-t border-slate-100">
-              <div class="text-xs font-bold text-slate-800" data-i18n="t3_step2_h">
-                Step 2: Identify the real-world economic root cause:
-              </div>
+              <div class="text-xs font-bold text-slate-800" data-i18n="t3_step2_h">Step 2: Identify the real-world economic root cause:</div>
               <div id="t3-causes-container" class="space-y-1.5"></div>
               <div id="t3-feedback-box" class="hidden p-3.5 rounded-xl text-xs leading-relaxed border"></div>
             </div>
@@ -854,15 +783,13 @@
 
         </div>
 
-        <!-- Right Column: Shared Interactive SVG Graph & Task Breakdown (7 cols) -->
         <div class="lg:col-span-7 space-y-5">
 
-          <!-- Task Graph Card -->
           <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col items-center">
             <div class="w-full flex flex-wrap items-center justify-between gap-3 mb-3 pb-2 border-b border-slate-100">
               <div>
-                <span class="text-xs font-semibold uppercase tracking-wider text-slate-400" id="task-graph-subtitle">Task Visualization</span>
-                <h3 id="task-graph-title" class="text-base font-bold text-slate-800">Market Diagram</h3>
+                <span class="text-xs font-semibold uppercase tracking-wider text-slate-400" id="task-graph-subtitle">Task 1 • Simultaneous shocks</span>
+                <h3 id="task-graph-title" class="text-base font-bold text-slate-800">Artisan bakery market: predict E₁ before revealing!</h3>
               </div>
               <div class="flex items-center gap-3 text-xs font-medium">
                 <span class="flex items-center gap-1.5"><span class="w-3 h-0.5 bg-blue-600 inline-block rounded"></span><span>D</span></span>
@@ -871,7 +798,6 @@
               </div>
             </div>
 
-            <!-- Dedicated Task SVG -->
             <div class="w-full overflow-hidden flex justify-center bg-slate-50/50 rounded-xl p-2 border border-slate-100">
               <svg id="task-svg" viewBox="0 0 600 420" class="w-full max-w-[620px] h-auto select-none font-sans">
                 <g id="t-grid-group"></g>
@@ -887,18 +813,16 @@
               </svg>
             </div>
 
-            <!-- Task Metrics Bar -->
             <div id="task-metrics-bar" class="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full mt-4"></div>
           </div>
 
-          <!-- Task Mathematical & Economic Breakdown Card -->
           <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-3">
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-2">
                 <span class="w-2.5 h-2.5 rounded-full bg-indigo-600"></span>
                 <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider" data-i18n="task_analysis_title">Analytical &amp; mathematical breakdown</h3>
               </div>
-              <span id="task-analysis-badge" class="text-[10px] font-bold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200">Q<sub>D</sub> = Q<sub>S</sub></span>
+              <span id="task-analysis-badge" class="text-[10px] font-bold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200">ΔP<sub>E</sub> = (ΔD - ΔS)/2</span>
             </div>
             <div id="task-analysis-body" class="text-xs text-slate-700 leading-relaxed space-y-3"></div>
           </div>
@@ -909,161 +833,132 @@
 
     </section>
 
-    <!-- ================= TAB 3: DISTINCTION (SHIFT VS MOVEMENT) ================= -->
+    <!-- TAB 3: DISTINCTION (SHIFT VS MOVEMENT) -->
     <section id="view-distinction" class="hidden space-y-6">
       <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
         <div class="max-w-3xl">
-          <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider" data-i18n="dist_badge">Fundamentalna zasada ekonomii</span>
-          <h2 class="text-2xl font-bold text-slate-900 mt-1" data-i18n="dist_main_title">Zmiana popytu a zmiana wielkości popytu</h2>
-          <p class="text-sm text-slate-600 mt-2" data-i18n="dist_intro">
-            Jeden z najczęstszych błędów popełnianych na egzaminach z mikroekonomii to mylenie <strong>ruchu wzdłuż krzywej</strong> z <strong>przesunięciem całej krzywej</strong>.
-          </p>
+          <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider" data-i18n="dist_badge">Fundamental economic principle</span>
+          <h2 class="text-2xl font-bold text-slate-900 mt-1" data-i18n="dist_main_title">Change in demand vs change in quantity demanded</h2>
+          <p class="text-sm text-slate-600 mt-2" data-i18n="dist_intro">One of the most frequent mistakes in microeconomics exams is confusing a movement along the curve with a shift of the entire curve.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
           
-          <!-- Column A: Shift -->
           <div class="bg-indigo-50/50 border border-indigo-100 rounded-2xl p-5 space-y-4">
             <div class="flex items-center gap-2 text-indigo-900 font-bold text-base">
               <div class="w-7 h-7 rounded-lg bg-indigo-600 text-white flex items-center justify-center text-xs">1</div>
-              <span data-i18n="dist_shift_title">Przesunięcie krzywej (shift)</span>
+              <span data-i18n="dist_shift_title">1. Shift of the curve</span>
             </div>
-            <p class="text-xs font-semibold text-indigo-700" data-i18n="dist_shift_term">
-              „Zmiana popytu” (change in demand) lub „zmiana podaży” (change in supply)
-            </p>
+            <p class="text-xs font-semibold text-indigo-700" data-i18n="dist_shift_term">“Change in demand” or “change in supply”</p>
             <ul class="text-xs text-slate-600 space-y-2 list-disc list-inside">
-              <li><strong data-i18n="dist_shift_cause_lbl">Przyczyna:</strong> <span data-i18n="dist_shift_cause_desc">czynniki pozacenowe (dochody konsumentów, moda, ceny dóbr substytucyjnych/komplementarnych, technologia, podatki).</span></li>
-              <li><strong data-i18n="dist_shift_effect_lbl">Efekt graficzny:</strong> <span data-i18n="dist_shift_effect_desc">cała linia przesuwa się równolegle w prawo (wzrost) lub w lewo (spadek).</span></li>
-              <li><strong data-i18n="dist_shift_result_lbl">Dla każdej ceny:</strong> <span data-i18n="dist_shift_result_desc">konsumenci chcą kupić inną ilość dobra niż poprzednio.</span></li>
+              <li><strong data-i18n="dist_shift_cause_lbl">Cause:</strong> <span data-i18n="dist_shift_cause_desc">non-price determinants (consumer income, consumer tastes/fashions, prices of substitutes/complements, technology, production costs, taxes).</span></li>
+              <li><strong data-i18n="dist_shift_effect_lbl">Graphical effect:</strong> <span data-i18n="dist_shift_effect_desc">the entire curve shifts outward to the right (increase) or inward to the left (decrease).</span></li>
+              <li><strong data-i18n="dist_shift_result_lbl">At every price level:</strong> <span data-i18n="dist_shift_result_desc">consumers or producers wish to buy/sell a different quantity than before.</span></li>
             </ul>
-            <div class="p-3 bg-white rounded-xl border border-indigo-200 text-xs font-mono text-indigo-950" data-i18n="dist_shift_formula">
-              D<sub>0</sub> → D<sub>1</sub> &nbsp;|&nbsp; S<sub>0</sub> → S<sub>1</sub> &nbsp;(nachylenie pozostaje stałe!)
-            </div>
+            <div class="p-3 bg-white rounded-xl border border-indigo-200 text-xs font-mono text-indigo-950" data-i18n="dist_shift_formula">D<sub>0</sub> → D<sub>1</sub> &nbsp;|&nbsp; S<sub>0</sub> → S<sub>1</sub> &nbsp;(slope remains constant!)</div>
           </div>
 
-          <!-- Column B: Movement along curve -->
           <div class="bg-amber-50/50 border border-amber-100 rounded-2xl p-5 space-y-4">
             <div class="flex items-center gap-2 text-amber-900 font-bold text-base">
               <div class="w-7 h-7 rounded-lg bg-amber-600 text-white flex items-center justify-center text-xs">2</div>
-              <span data-i18n="dist_move_title">Ruch wzdłuż krzywej (movement along)</span>
+              <span data-i18n="dist_move_title">2. Movement along the curve</span>
             </div>
-            <p class="text-xs font-semibold text-amber-700" data-i18n="dist_move_term">
-              „Zmiana wielkości popytu” (change in quantity demanded) lub „wielkości podaży”
-            </p>
+            <p class="text-xs font-semibold text-amber-700" data-i18n="dist_move_term">“Change in quantity demanded” or “quantity supplied”</p>
             <ul class="text-xs text-slate-600 space-y-2 list-disc list-inside">
-              <li><strong data-i18n="dist_move_cause_lbl">Przyczyna:</strong> <span data-i18n="dist_move_cause_desc">wyłącznie zmiana ceny danego dobra (z P<sub>1</sub> do P<sub>2</sub>) przy założeniu ceteris paribus!</span></li>
-              <li><strong data-i18n="dist_move_effect_lbl">Efekt graficzny:</strong> <span data-i18n="dist_move_effect_desc">przesuwamy się z punktu A do punktu B po tej samej, niezmienionej krzywej.</span></li>
-              <li><strong data-i18n="dist_move_result_lbl">Zgodnie z prawami:</strong> <span data-i18n="dist_move_result_desc">prawo popytu (cena rośnie → wielkość popytu spada) i prawo podaży (cena rośnie → wielkość podaży rośnie).</span></li>
+              <li><strong data-i18n="dist_move_cause_lbl">Cause:</strong> <span data-i18n="dist_move_cause_desc">exclusively a change in the good's own price, holding all else constant (ceteris paribus)!</span></li>
+              <li><strong data-i18n="dist_move_effect_lbl">Graphical effect:</strong> <span data-i18n="dist_move_effect_desc">movement from one point to another along the exact same curve.</span></li>
+              <li><strong data-i18n="dist_move_result_lbl">Mechanism:</strong> <span data-i18n="dist_move_result_desc">higher price = lower quantity demanded and higher quantity supplied.</span></li>
             </ul>
-            <div class="p-3 bg-white rounded-xl border border-amber-200 text-xs font-mono text-amber-950" data-i18n="dist_move_formula">
-              Punkt A(P<sub>1</sub>, Q<sub>1</sub>) → Punkt B(P<sub>2</sub>, Q<sub>2</sub>) na D<sub>0</sub>
-            </div>
+            <div class="p-3 bg-white rounded-xl border border-amber-200 text-xs font-mono text-amber-950" data-i18n="dist_move_formula">Point A(P<sub>1</sub>, Q<sub>1</sub>) → Point B(P<sub>2</sub>, Q<sub>2</sub>) on D<sub>0</sub></div>
           </div>
 
         </div>
 
-        <!-- Market Mechanism Root Cause Analysis (Shift A -> Movement along B) -->
         <div class="mt-6 p-5 bg-gradient-to-br from-indigo-50/70 via-white to-slate-50 border border-indigo-200 rounded-2xl shadow-xs space-y-4">
           <div class="flex flex-wrap items-center justify-between gap-2 border-b border-indigo-100 pb-3">
             <div class="flex items-center gap-2">
               <div class="w-8 h-8 rounded-xl bg-indigo-600 text-white flex items-center justify-center shadow-xs">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
                 </svg>
               </div>
               <div>
-                <h3 class="text-sm font-bold text-slate-900" data-i18n="dist_root_title">Mechanizm rynkowy: skąd bierze się zmiana ceny? (pierwotna przyczyna)</h3>
-                <p class="text-[11px] text-slate-500" data-i18n="dist_root_sub">Cena na konkurencyjnym rynku nie zmienia się w próżni — ustala ją gra popytu i podaży.</p>
+                <h3 class="text-sm font-bold text-slate-900" data-i18n="dist_root_title">Market mechanism: what drives price changes? (root cause analysis)</h3>
+                <p class="text-[11px] text-slate-500" data-i18n="dist_root_sub">In competitive markets, price never changes in a vacuum – it is determined by the interplay of demand and supply.</p>
               </div>
             </div>
-            <span class="text-[10px] font-bold uppercase tracking-wider bg-indigo-100 text-indigo-800 px-2.5 py-1 rounded-full" data-i18n="dist_root_badge">Logika wstrząsu</span>
+            <span class="text-[10px] font-bold uppercase tracking-wider bg-indigo-100 text-indigo-800 px-2.5 py-1 rounded-full" data-i18n="dist_root_badge">Shock transmission</span>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
             <div class="p-4 rounded-xl bg-white border border-slate-200 shadow-2xs space-y-2.5">
               <div class="flex items-center justify-between text-indigo-900 font-bold">
-                <span data-i18n="dist_root_s_h">A. Zmiana podaży wywołuje ruch wzdłuż popytu</span>
-                <span class="text-[10px] bg-green-100 text-green-800 font-mono px-1.5 py-0.5 rounded" data-i18n="dist_root_s_badge">ΔS ⟹ ruch po D</span>
+                <span data-i18n="dist_root_s_h">A. Supply shift triggers movement along demand</span>
+                <span class="text-[10px] bg-green-100 text-green-800 font-mono px-1.5 py-0.5 rounded" data-i18n="dist_root_s_badge">ΔS ⟹ movement along D</span>
               </div>
-              <p class="text-slate-600 leading-relaxed" data-i18n="dist_root_s_desc">
-                Gdy następuje urodzaj lub spadek kosztów, <strong>podaż rośnie (S przesuwa się w prawo)</strong>. Powstaje nadwyżka towaru, więc producenci obniżają cenę. Konsumenci reagują na niższą cenę kupując więcej — następuje <strong>ruch wzdłuż krzywej popytu</strong> ku nowemu punktowi równowagi.
-              </p>
-              <div class="p-2 bg-slate-50 rounded-lg border border-slate-100 font-semibold text-slate-700 text-[11px]" data-i18n="dist_root_s_concl">
-                💡 Wniosek: przesunięcie S zmieniło cenę, co wymusiło adaptację popytu poprzez ruch po własnej krzywej.
-              </div>
+              <p class="text-slate-600 leading-relaxed" data-i18n="dist_root_s_desc">A bumper crop or lower costs causes <strong>supply to increase (S shifts right)</strong>. A temporary surplus occurs, forcing sellers to lower prices. Buyers respond by purchasing more – resulting in a <strong>movement along the demand curve</strong> to the new equilibrium.</p>
+              <div class="p-2 bg-slate-50 rounded-lg border border-slate-100 font-semibold text-slate-700 text-[11px]" data-i18n="dist_root_s_concl">💡 Takeaway: shift of S changed the price, which forced demand to adjust via a movement along its curve.</div>
             </div>
 
             <div class="p-4 rounded-xl bg-white border border-slate-200 shadow-2xs space-y-2.5">
               <div class="flex items-center justify-between text-indigo-900 font-bold">
-                <span data-i18n="dist_root_d_h">B. Zmiana popytu wywołuje ruch wzdłuż podaży</span>
-                <span class="text-[10px] bg-blue-100 text-blue-800 font-mono px-1.5 py-0.5 rounded" data-i18n="dist_root_d_badge">ΔD ⟹ ruch po S</span>
+                <span data-i18n="dist_root_d_h">B. Demand shift triggers movement along supply</span>
+                <span class="text-[10px] bg-blue-100 text-blue-800 font-mono px-1.5 py-0.5 rounded" data-i18n="dist_root_d_badge">ΔD ⟹ movement along S</span>
               </div>
-              <p class="text-slate-600 leading-relaxed" data-i18n="dist_root_d_desc">
-                Gdy rosną dochody lub moda na produkt, <strong>popyt rośnie (D przesuwa się w prawo)</strong>. Powstaje niedobór, więc cena rośnie. Producenci widząc wyższą opłacalność zwiększają produkcję — następuje <strong>ruch wzdłuż krzywej podaży</strong> ku wyższej ilości.
-              </p>
-              <div class="p-2 bg-slate-50 rounded-lg border border-slate-100 font-semibold text-slate-700 text-[11px]" data-i18n="dist_root_d_concl">
-                💡 Wniosek: przesunięcie D zmieniło cenę, co wywołało ruch wzdłuż krzywej podaży.
-              </div>
+              <p class="text-slate-600 leading-relaxed" data-i18n="dist_root_d_desc">Rising incomes or consumer trends cause <strong>demand to surge (D shifts right)</strong>. A shortage emerges, driving prices up. Seeing higher profits, producers ramp up production – resulting in a <strong>movement along the supply curve</strong>.</p>
+              <div class="p-2 bg-slate-50 rounded-lg border border-slate-100 font-semibold text-slate-700 text-[11px]" data-i18n="dist_root_d_concl">💡 Takeaway: shift of D changed the price, causing a movement along the supply curve.</div>
             </div>
           </div>
 
           <div class="p-3.5 bg-amber-50/70 border border-amber-200 rounded-xl space-y-2 text-xs">
             <div class="font-bold text-amber-950 flex items-center gap-1.5">
               <svg class="w-4 h-4 text-amber-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
               </svg>
-              <span data-i18n="dist_root_except_h">Kiedy ta zależność nie ma zastosowania? (cena poza grą rynkową)</span>
+              <span data-i18n="dist_root_except_h">When does this logic not apply? (exogenous price changes)</span>
             </div>
             <ul class="text-amber-900/90 space-y-1 list-disc list-inside leading-relaxed text-[11px]">
-              <li><strong data-i18n="dist_root_ex1_lbl">Ingerencja państwa (ceny urzędowe):</strong> <span data-i18n="dist_root_ex1_desc">wprowadzenie ceny minimalnej lub maksymalnej zmienia cenę odgórnie, wywołując ruch wzdłuż krzywych bez pierwotnego przesunięcia krzywych rynkowych.</span></li>
-              <li><strong data-i18n="dist_root_ex2_lbl">Siła rynkowa (monopol):</strong> <span data-i18n="dist_root_ex2_desc">monopolista arbitralnie ustala wyższą cenę, wymuszając ruch wzdłuż krzywej popytu bez tradycyjnej konkurencji rynkowej.</span></li>
+              <li><strong data-i18n="dist_root_ex1_lbl">Government regulation (price controls):</strong> <span data-i18n="dist_root_ex1_desc">price floors or ceilings impose price shifts directly, driving movements along curves without any prior shift in market curves.</span></li>
+              <li><strong data-i18n="dist_root_ex2_lbl">Monopoly power:</strong> <span data-i18n="dist_root_ex2_desc">a monopolist arbitrarily sets higher prices, forcing a movement along demand without competitive market equilibrating forces.</span></li>
             </ul>
           </div>
 
-          <div class="p-2.5 bg-indigo-900 text-indigo-50 rounded-xl text-center text-xs font-medium" data-i18n="dist_root_summary">
-            📌 <strong>Złota zasada rynku:</strong> wstrząs po jednej stronie rynku (przesunięcie krzywej A) zmienia cenę równowagi, co wymusza ruch wzdłuż krzywej B.
-          </div>
+          <div class="p-2.5 bg-indigo-900 text-indigo-50 rounded-xl text-center text-xs font-medium" data-i18n="dist_root_summary">📌 <strong>Golden market rule:</strong> a shock on one side of the market (shift of curve A) alters the equilibrium price, which forces a movement along curve B.</div>
         </div>
 
-        <!-- Dedicated educational box explaining Parallel Shift vs Rotation -->
         <div class="mt-6 p-5 bg-slate-50 border border-slate-200 rounded-2xl space-y-3">
           <div class="flex items-center gap-2 text-slate-900 font-bold text-sm">
             <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-            <span data-i18n="dist_rot_title">Dlaczego przesunięcie musi być równoległe (brak „zakotwiczenia”)?</span>
+            <span data-i18n="dist_rot_title">Why must the shift be parallel (no 'anchoring')?</span>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-600 leading-relaxed">
             <div class="p-3 bg-white rounded-xl border border-slate-200">
-              <strong class="text-slate-900 block mb-1" data-i18n="dist_rot_parallel_h">1. Przesunięcie równoległe (stały kąt)</strong>
-              <p data-i18n="dist_rot_parallel_p">
-                W modelu liniowym Q<sub>D</sub> = b - a·P, zmiana czynnika pozacenowego (np. wzrost dochodów) zmienia wyłącznie wyraz wolny b. Ponieważ parametr a (nachylenie/wrażliwość na cenę) nie ulega zmianie, krzywa przesuwa się idealnie równolegle, bez obracania i bez zakotwiczenia.
-              </p>
+              <strong class="text-slate-900 block mb-1" data-i18n="dist_rot_parallel_h">1. Parallel shift (fixed slope)</strong>
+              <p data-i18n="dist_rot_parallel_p">In linear model Q<sub>D</sub> = b - a·P, a non-price factor alters only intercept b. Because slope parameter a is unchanged, the curve shifts strictly parallel without rotating or anchoring.</p>
             </div>
             <div class="p-3 bg-white rounded-xl border border-slate-200">
-              <strong class="text-slate-900 block mb-1" data-i18n="dist_rot_pivot_h">2. Kiedy krzywa zmienia kąt nachylenia (rotacja / pivot)?</strong>
-              <p data-i18n="dist_rot_pivot_p">
-                Krzywa zmienia nachylenie i obraca się wokół punktu przecięcia wyłącznie wtedy, gdy zmienia się elastyczność cenowa (parametr a lub c) — np. w wyniku podatku procentowego (ad valorem) lub pojawienia się bliskich substytutów.
-              </p>
+              <strong class="text-slate-900 block mb-1" data-i18n="dist_rot_pivot_h">2. When does the slope change (rotation / pivot)?</strong>
+              <p data-i18n="dist_rot_pivot_p">The curve rotates around an intercept only when price elasticity/sensitivity changes (parameter a or c) – e.g. due to an ad-valorem tax or arrival of close substitutes.</p>
             </div>
           </div>
         </div>
 
-        <!-- Interactive Micro-Demonstration -->
         <div class="mt-8 pt-6 border-t border-slate-100">
-          <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-2" data-i18n="dist_demo_title">Mini-test intuicji</h3>
-          <p class="text-xs text-slate-500 mb-4" data-i18n="dist_demo_sub">Kliknij sytuację, aby sprawdzić jej klasyfikację:</p>
+          <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-2" data-i18n="dist_demo_title">Intuition mini-test</h3>
+          <p class="text-xs text-slate-500 mb-4" data-i18n="dist_demo_sub">Click a scenario to see how it is classified:</p>
           
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <button onclick="showQuickFact(1)" class="p-3 rounded-xl border border-slate-200 hover:border-indigo-400 bg-white text-left transition text-xs shadow-xs">
-              <span class="font-bold text-slate-800 block" data-i18n="fact1_q">Cena masła spada o 20%</span>
-              <span class="text-slate-500 mt-1 block" data-i18n="fact1_desc">Co dzieje się na rynku masła?</span>
+              <span class="font-bold text-slate-800 block" data-i18n="fact1_q">Butter price drops by 20%</span>
+              <span class="text-slate-500 mt-1 block" data-i18n="fact1_desc">What happens in the butter market?</span>
             </button>
             <button onclick="showQuickFact(2)" class="p-3 rounded-xl border border-slate-200 hover:border-indigo-400 bg-white text-left transition text-xs shadow-xs">
-              <span class="font-bold text-slate-800 block" data-i18n="fact2_q">Badania: jabłka wydłużają życie</span>
-              <span class="text-slate-500 mt-1 block" data-i18n="fact2_desc">Co dzieje się na rynku jabłek?</span>
+              <span class="font-bold text-slate-800 block" data-i18n="fact2_q">Study: Apples prolong life expectancy</span>
+              <span class="text-slate-500 mt-1 block" data-i18n="fact2_desc">What happens in the apple market?</span>
             </button>
             <button onclick="showQuickFact(3)" class="p-3 rounded-xl border border-slate-200 hover:border-indigo-400 bg-white text-left transition text-xs shadow-xs">
-              <span class="font-bold text-slate-800 block" data-i18n="fact3_q">Robotyzacja fabryk samochodów</span>
-              <span class="text-slate-500 mt-1 block" data-i18n="fact3_desc">Co dzieje się na rynku aut?</span>
+              <span class="font-bold text-slate-800 block" data-i18n="fact3_q">Automation in car factories</span>
+              <span class="text-slate-500 mt-1 block" data-i18n="fact3_desc">What happens in the car market?</span>
             </button>
           </div>
 
@@ -1072,7 +967,7 @@
       </div>
     </section>
 
-    <!-- ================= TAB 4: QUIZ ================= -->
+    <!-- TAB 4: QUIZ -->
     <section id="view-quiz" class="hidden space-y-6">
       <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm max-w-3xl mx-auto">
         
@@ -1083,19 +978,17 @@
           </div>
           <div class="text-right">
             <span class="text-xs text-slate-400" data-i18n="quiz_score_label">Your score:</span>
-            <div class="text-lg font-mono font-bold text-indigo-600" id="quiz-score">0 / 0</div>
+            <div class="text-lg font-mono font-bold text-indigo-600" id="quiz-score">0 / 8</div>
           </div>
         </div>
 
         <div class="py-6 space-y-5">
           <div class="flex items-center gap-2">
-            <span id="quiz-step" class="text-xs font-bold px-2 py-1 rounded bg-indigo-100 text-indigo-800">Question 1/16</span>
-            <span id="quiz-category" class="text-xs text-slate-400">Demand &amp; Supply</span>
+            <span id="quiz-step" class="text-xs font-bold px-2 py-1 rounded bg-indigo-100 text-indigo-800">Question 1/8</span>
+            <span id="quiz-category" class="text-xs text-slate-400">Demand &amp; supply</span>
           </div>
 
-          <p id="quiz-question-text" class="text-base font-semibold text-slate-800 leading-snug">
-            Loading question...
-          </p>
+          <p id="quiz-question-text" class="text-base font-semibold text-slate-800 leading-snug"></p>
 
           <div id="quiz-options-container" class="space-y-2.5"></div>
 
@@ -1103,9 +996,7 @@
         </div>
 
         <div class="border-t border-slate-100 pt-4 flex justify-between items-center">
-          <button onclick="resetQuiz()" class="text-xs text-slate-500 hover:text-slate-800 font-semibold" data-i18n="quiz_btn_reset">
-            Restart quiz
-          </button>
+          <button onclick="resetQuiz()" class="text-xs text-slate-500 hover:text-slate-800 font-semibold" data-i18n="quiz_btn_reset">Restart quiz</button>
           <button id="quiz-next-btn" onclick="nextQuizQuestion()" class="hidden bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2 rounded-xl transition shadow-md shadow-indigo-100">
             <span data-i18n="quiz_btn_next">Next question →</span>
           </button>
@@ -1116,7 +1007,6 @@
 
   </main>
 
-  <!-- Footer -->
   <footer class="bg-white border-t border-slate-200 py-4 mt-8">
     <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-400">
       <span data-i18n="footer_text">EconLab — Interactive Economics Simulator for Students. All rights reserved.</span>
@@ -1190,6 +1080,8 @@ const translations = {
     params_title: "Parametry równań rynku",
     params_subtitle: "Równowaga wyjściowa (przed szokiem)",
     btn_defaults: "Domyślne",
+    lab_tag_d: "Popyt Q(P)",
+    lab_tag_s: "Podaż Q(P)",
     param_a_label: "Popyt: nachylenie (a)",
     param_b_label: "Popyt: przesunięcie (b)",
     param_c_label: "Podaż: nachylenie (c)",
@@ -1231,7 +1123,6 @@ const translations = {
     metric_d_state: "Krzywa popytu (D)",
     metric_s_state: "Krzywa podaży (S)",
     mech_title: "Mechanizm dostosowawczy rynku",
-    // Tasks Tab translations
     tasks_header_badge: "Interaktywne moduły zadaniowe",
     tasks_header_title: "Zadania analityczne i decyzyjne",
     task1_tab: "Podwójne szoki",
@@ -1240,11 +1131,11 @@ const translations = {
     t1_badge: "Zadanie 1 • Wyzwanie predykcyjne",
     t1_title: "Jednoczesne szoki popytowe i podażowe",
     t1_next_case: "Kolejny scenariusz",
-    t1_q1_label: "1. Analiza jakościowa: Która zmienna ma kierunek zmiany pewny niezależnie od siły obu szoków?",
+    t1_q1_label: "1. Analiza jakościowa: która zmienna ma kierunek zmiany pewny niezależnie od siły obu szoków?",
     t1_opt_pe: "Cena równowagi (P<sub>E</sub>)",
     t1_opt_qe: "Ilość równowagi (Q<sub>E</sub>)",
-    t1_q2_label: "2. Analiza ilościowa: Jak zmieni się P<sub>E,1</sub> przy podanych wartościach liczbowych?",
-    t1_q3_label: "3. Analiza ilościowa: Jak zmieni się Q<sub>E,1</sub> przy podanych wartościach liczbowych?",
+    t1_q2_label: "2. Analiza ilościowa: jak zmieni się P<sub>E,1</sub> przy podanych wartościach liczbowych?",
+    t1_q3_label: "3. Analiza ilościowa: jak zmieni się Q<sub>E,1</sub> przy podanych wartościach liczbowych?",
     t1_btn_verify: "Zatwierdź predykcję i pokaż wynik na wykresie",
     t2_badge: "Zadanie 2 • Ekonomia dobrobytu",
     t2_title: "Regulacje cenowe i zbędna strata społeczna (DWL)",
@@ -1266,7 +1157,6 @@ const translations = {
     t3_step1_h: "Krok 1: Dopasuj przesunięcia (ΔD, ΔS), aby przecięcie krzywych trafiło w pulsujący cel E₁:",
     t3_step2_h: "Krok 2: Wskaż rzeczywistą przyczynę ekonomiczną tego wstrząsu:",
     task_analysis_title: "Rozbicie analityczne i matematyczne",
-    // Distinction & Quiz
     dist_badge: "Fundamentalna zasada ekonomii",
     dist_main_title: "Zmiana popytu a zmiana wielkości popytu",
     dist_intro: "Jeden z najczęstszych błędów popełnianych na egzaminach z mikroekonomii to mylenie ruchu wzdłuż krzywej z przesunięciem całej krzywej.",
@@ -1280,15 +1170,15 @@ const translations = {
     dist_shift_result_desc: "kupujący lub sprzedający chcą wymienić inną ilość dobra niż dotychczas.",
     dist_shift_formula: "D<sub>0</sub> → D<sub>1</sub> &nbsp;|&nbsp; S<sub>0</sub> → S<sub>1</sub> &nbsp;(nachylenie pozostaje stałe!)",
     dist_root_title: "Mechanizm rynkowy: skąd bierze się zmiana ceny? (pierwotna przyczyna)",
-    dist_root_sub: "Cena na konkurencyjnym rynku nie zmienia się w próżni — ustala ją gra popytu i podaży.",
+    dist_root_sub: "Cena na konkurencyjnym rynku nie zmienia się w próżni – ustala ją gra popytu i podaży.",
     dist_root_badge: "Logika wstrząsu",
     dist_root_s_h: "A. Zmiana podaży wywołuje ruch wzdłuż popytu",
     dist_root_s_badge: "ΔS ⟹ ruch po D",
-    dist_root_s_desc: "Gdy następuje urodzaj lub spadek kosztów, <strong>podaż rośnie (S przesuwa się w prawo)</strong>. Powstaje nadwyżka towaru, więc producenci obniżają cenę. Konsumenci reagują na niższą cenę kupując więcej — następuje <strong>ruch wzdłuż krzywej popytu</strong> ku nowemu punktowi równowagi.",
+    dist_root_s_desc: "Gdy następuje urodzaj lub spadek kosztów, <strong>podaż rośnie (S przesuwa się w prawo)</strong>. Powstaje nadwyżka towaru, więc producenci obniżają cenę. Konsumenci reagują na niższą cenę kupując więcej – następuje <strong>ruch wzdłuż krzywej popytu</strong> ku nowemu punktowi równowagi.",
     dist_root_s_concl: "💡 Wniosek: przesunięcie S zmieniło cenę, co wymusiło adaptację popytu poprzez ruch po własnej krzywej.",
     dist_root_d_h: "B. Zmiana popytu wywołuje ruch wzdłuż podaży",
     dist_root_d_badge: "ΔD ⟹ ruch po S",
-    dist_root_d_desc: "Gdy rosną dochody lub moda na produkt, <strong>popyt rośnie (D przesuwa się w prawo)</strong>. Powstaje niedobór, więc cena rośnie. Producenci widząc wyższą opłacalność zwiększają produkcję — następuje <strong>ruch wzdłuż krzywej podaży</strong> ku wyższej ilości.",
+    dist_root_d_desc: "Gdy rosną dochody lub moda na produkt, <strong>popyt rośnie (D przesuwa się w prawo)</strong>. Powstaje niedobór, więc cena rośnie. Producenci widząc wyższą opłacalność zwiększają produkcję – następuje <strong>ruch wzdłuż krzywej podaży</strong> ku wyższej ilości.",
     dist_root_d_concl: "💡 Wniosek: przesunięcie D zmieniło cenę, co wywołało ruch wzdłuż krzywej podaży.",
     dist_root_except_h: "Kiedy ta zależność nie ma zastosowania? (cena poza grą rynkową)",
     dist_root_ex1_lbl: "Ingerencja państwa (ceny urzędowe):",
@@ -1300,7 +1190,7 @@ const translations = {
     dist_rot_parallel_h: "1. Przesunięcie równoległe (stały kąt nachylenia)",
     dist_rot_parallel_p: "W modelu Q<sub>D</sub> = b - a·P, zmiana czynnika pozacenowego zmienia wyraz wolny b. Ponieważ nachylenie a pozostaje stałe, krzywa przesuwa się idealnie równolegle.",
     dist_rot_pivot_h: "2. Kiedy krzywa zmienia kąt nachylenia (rotacja / pivot)?",
-    dist_rot_pivot_p: "Krzywa zmienia nachylenie wyłącznie wtedy, gdy zmienia się wrażliwość na cenę (parametr a lub c) — np. podatek procentowy lub pojawienie się substytutów.",
+    dist_rot_pivot_p: "Krzywa zmienia nachylenie wyłącznie wtedy, gdy zmienia się wrażliwość na cenę (parametr a lub c) – np. podatek procentowy lub pojawienie się substytutów.",
     dist_move_title: "2. Ruch wzdłuż krzywej (movement along)",
     dist_move_term: "„Zmiana wielkości popytu” (quantity demanded) lub „wielkości podaży”",
     dist_move_cause_lbl: "Przyczyna:",
@@ -1321,7 +1211,7 @@ const translations = {
     quiz_tag: "Weryfikacja wiedzy",
     quiz_title: "Trening egzaminacyjny z mikroekonomii",
     quiz_score_label: "Twój wynik:",
-    quiz_category: "Popyt & Podaż",
+    quiz_category: "Popyt & podaż",
     quiz_btn_reset: "Rozpocznij od nowa",
     quiz_btn_next: "Następne pytanie →",
     footer_text: "EconLab — Interactive Economics Simulator for Students. All rights reserved.",
@@ -1337,13 +1227,13 @@ const translations = {
     nav_intro: "Introduction",
     nav_lab: "Laboratory",
     nav_tasks: "Tasks",
-    nav_concept: "Shift vs Movement",
+    nav_concept: "Shift vs movement",
     nav_quiz: "Quiz",
     intro_hero_tag: "Microeconomics core",
     intro_hero_title: "Market equilibrium theory and price shocks",
     intro_hero_desc: "Understanding how markets establish equilibrium prices and allocate resources is fundamental to economic reasoning. Explore universal laws of supply and demand, root causes of market shocks, and market self-adjustment.",
-    intro_hero_btn_lab: "Open Laboratory",
-    intro_hero_btn_tasks: "Interactive Tasks",
+    intro_hero_btn_lab: "Open laboratory",
+    intro_hero_btn_tasks: "Interactive tasks",
     intro_hero_btn_concept: "Shift vs movement along",
     intro_eq_title: "Market equilibrium",
     intro_eq_sub: "Market equilibrium state and self-stabilizing forces",
@@ -1382,16 +1272,18 @@ const translations = {
     intro_cases_sub: "Equilibrium shifts summary under ceteris paribus",
     intro_cases_badge: "In summary",
     case_dup_h: "Increase in demand (D ↑)",
-    case_dup_p: "Demand shifts right. A temporary shortage emerges, bidding prices up. Outcome: Both equilibrium price and quantity increase.",
+    case_dup_p: "Demand shifts right. A temporary shortage emerges, bidding prices up. Outcome: both equilibrium price and quantity increase.",
     case_ddown_h: "Decrease in demand (D ↓)",
-    case_ddown_p: "Demand shifts left. A temporary surplus occurs, forcing price cuts. Outcome: Both equilibrium price and quantity decrease.",
+    case_ddown_p: "Demand shifts left. A temporary surplus occurs, forcing price cuts. Outcome: both equilibrium price and quantity decrease.",
     case_sup_h: "Increase in supply (S ↑)",
-    case_sup_p: "Supply shifts right. Excess stock pushes prices down, enticing more consumption. Outcome: Equilibrium price falls while quantity increases.",
+    case_sup_p: "Supply shifts right. Excess stock pushes prices down, enticing more consumption. Outcome: equilibrium price falls while quantity increases.",
     case_sdown_h: "Decrease in supply (S ↓)",
-    case_sdown_p: "Supply shifts left. Supply crunch creates a shortage, lifting prices. Outcome: Equilibrium price increases while quantity falls.",
+    case_sdown_p: "Supply shifts left. Supply crunch creates a shortage, lifting prices. Outcome: equilibrium price increases while quantity falls.",
     params_title: "Market equation parameters",
     params_subtitle: "Baseline equilibrium (pre-shock)",
     btn_defaults: "Defaults",
+    lab_tag_d: "Demand Q(P)",
+    lab_tag_s: "Supply Q(P)",
     param_a_label: "Demand: slope (a)",
     param_b_label: "Demand: shift (b)",
     param_c_label: "Supply: slope (c)",
@@ -1433,37 +1325,36 @@ const translations = {
     metric_d_state: "Demand curve (D)",
     metric_s_state: "Supply curve (S)",
     mech_title: "Market adjustment mechanism",
-    // Tasks Tab translations
     tasks_header_badge: "Interactive analytical modules",
     tasks_header_title: "Market problem-solving tasks",
-    task1_tab: "Simultaneous Shocks",
-    task2_tab: "Price Controls & Welfare",
-    task3_tab: "Market Detective",
-    t1_badge: "Task 1 • Predictive Challenge",
+    task1_tab: "Simultaneous shocks",
+    task2_tab: "Price controls & welfare",
+    task3_tab: "Market detective",
+    t1_badge: "Task 1 • Predictive challenge",
     t1_title: "Simultaneous market shocks",
     t1_next_case: "Next case",
-    t1_q1_label: "1. Qualitative analysis: Which variable has an unambiguous direction of change regardless of shock magnitudes?",
-    t1_opt_pe: "Equilibrium Price (P<sub>E</sub>)",
-    t1_opt_qe: "Equilibrium Quantity (Q<sub>E</sub>)",
-    t1_q2_label: "2. Quantitative outcome: Given the exact numbers above, how will P<sub>E,1</sub> change?",
-    t1_q3_label: "3. Quantitative outcome: Given the exact numbers above, how will Q<sub>E,1</sub> change?",
+    t1_q1_label: "1. Qualitative analysis: which variable has an unambiguous direction of change regardless of shock magnitudes?",
+    t1_opt_pe: "Equilibrium price (P<sub>E</sub>)",
+    t1_opt_qe: "Equilibrium quantity (Q<sub>E</sub>)",
+    t1_q2_label: "2. Quantitative outcome: given the exact numbers above, how will P<sub>E,1</sub> change?",
+    t1_q3_label: "3. Quantitative outcome: given the exact numbers above, how will Q<sub>E,1</sub> change?",
     t1_btn_verify: "Verify prediction & reveal curves on graph",
-    t2_badge: "Task 2 • Welfare Economics",
-    t2_title: "Price controls & Deadweight Loss",
+    t2_badge: "Task 2 • Welfare economics",
+    t2_title: "Price controls & deadweight loss",
     t2_subtitle: "Baseline market: Q<sub>D</sub> = 100 - P, Q<sub>S</sub> = P (E<sub>0</sub>: P<sub>E</sub>=50, Q<sub>E</sub>=50)",
     t2_regime_lbl: "Select government policy intervention:",
-    t2_mode_free_h: "Free Market (No intervention)",
+    t2_mode_free_h: "Free market (no intervention)",
     t2_mode_free_p: "Market clears at P<sub>E</sub> = 50, maximizing total social welfare",
-    t2_mode_ceil_h: "Maximum Price / Price Ceiling (P<sub>max</sub>)",
+    t2_mode_ceil_h: "Maximum price / price ceiling (P<sub>max</sub>)",
     t2_mode_ceil_p: "Cap to protect consumers (binding when P<sub>max</sub> < P<sub>E</sub>)",
-    t2_mode_floor_h: "Minimum Price / Price Floor (P<sub>min</sub>)",
+    t2_mode_floor_h: "Minimum price / price floor (P<sub>min</sub>)",
     t2_mode_floor_p: "Floor to support producers (binding when P<sub>min</sub> > P<sub>E</sub>)",
     t2_legend_h: "Welfare areas on diagram:",
-    t2_cs_lbl: "Consumer Surplus (CS)",
-    t2_ps_lbl: "Producer Surplus (PS)",
-    t2_dwl_lbl: "Deadweight Loss (DWL)",
-    t3_badge: "Task 3 • Reverse Engineering",
-    t3_title: "Market Detective",
+    t2_cs_lbl: "Consumer surplus (CS)",
+    t2_ps_lbl: "Producer surplus (PS)",
+    t2_dwl_lbl: "Deadweight loss (DWL)",
+    t3_badge: "Task 3 • Reverse engineering",
+    t3_title: "Market detective",
     t3_next_case: "Next mystery",
     t3_step1_h: "Step 1: Adjust shifts (ΔD, ΔS) so the intersection hits the pulsing target E₁:",
     t3_step2_h: "Step 2: Identify the real-world economic root cause:",
@@ -1481,27 +1372,27 @@ const translations = {
     dist_shift_result_desc: "consumers or producers wish to buy/sell a different quantity than before.",
     dist_shift_formula: "D<sub>0</sub> → D<sub>1</sub> &nbsp;|&nbsp; S<sub>0</sub> → S<sub>1</sub> &nbsp;(slope remains constant!)",
     dist_root_title: "Market mechanism: what drives price changes? (root cause analysis)",
-    dist_root_sub: "In competitive markets, price never changes in a vacuum — it is determined by the interplay of demand and supply.",
+    dist_root_sub: "In competitive markets, price never changes in a vacuum – it is determined by the interplay of demand and supply.",
     dist_root_badge: "Shock transmission",
     dist_root_s_h: "A. Supply shift triggers movement along demand",
     dist_root_s_badge: "ΔS ⟹ movement along D",
-    dist_root_s_desc: "A bumper crop or lower costs causes <strong>supply to increase (S shifts right)</strong>. A temporary surplus occurs, forcing sellers to lower prices. Buyers respond by purchasing more — resulting in a <strong>movement along the demand curve</strong> to the new equilibrium.",
-    dist_root_s_concl: "💡 Takeaway: Shift of S changed the price, which forced demand to adjust via a movement along its curve.",
+    dist_root_s_desc: "A bumper crop or lower costs causes <strong>supply to increase (S shifts right)</strong>. A temporary surplus occurs, forcing sellers to lower prices. Buyers respond by purchasing more – resulting in a <strong>movement along the demand curve</strong> to the new equilibrium.",
+    dist_root_s_concl: "💡 Takeaway: shift of S changed the price, which forced demand to adjust via a movement along its curve.",
     dist_root_d_h: "B. Demand shift triggers movement along supply",
     dist_root_d_badge: "ΔD ⟹ movement along S",
-    dist_root_d_desc: "Rising incomes or consumer trends cause <strong>demand to surge (D shifts right)</strong>. A shortage emerges, driving prices up. Seeing higher profits, producers ramp up production — resulting in a <strong>movement along the supply curve</strong>.",
-    dist_root_d_concl: "💡 Takeaway: Shift of D changed the price, causing a movement along the supply curve.",
+    dist_root_d_desc: "Rising incomes or consumer trends cause <strong>demand to surge (D shifts right)</strong>. A shortage emerges, driving prices up. Seeing higher profits, producers ramp up production – resulting in a <strong>movement along the supply curve</strong>.",
+    dist_root_d_concl: "💡 Takeaway: shift of D changed the price, causing a movement along the supply curve.",
     dist_root_except_h: "When does this logic not apply? (exogenous price changes)",
     dist_root_ex1_lbl: "Government regulation (price controls):",
     dist_root_ex1_desc: "price floors or ceilings impose price shifts directly, driving movements along curves without any prior shift in market curves.",
     dist_root_ex2_lbl: "Monopoly power:",
     dist_root_ex2_desc: "a monopolist arbitrarily sets higher prices, forcing a movement along demand without competitive market equilibrating forces.",
-    dist_root_summary: "📌 <strong>Golden market rule:</strong> A shock on one side of the market (shift of curve A) alters the equilibrium price, which forces a movement along curve B.",
+    dist_root_summary: "📌 <strong>Golden market rule:</strong> a shock on one side of the market (shift of curve A) alters the equilibrium price, which forces a movement along curve B.",
     dist_rot_title: "Why must the shift be parallel (no 'anchoring')?",
     dist_rot_parallel_h: "1. Parallel shift (fixed slope)",
     dist_rot_parallel_p: "In linear model Q<sub>D</sub> = b - a·P, a non-price factor alters only intercept b. Because slope parameter a is unchanged, the curve shifts strictly parallel without rotating or anchoring.",
     dist_rot_pivot_h: "2. When does the slope change (rotation / pivot)?",
-    dist_rot_pivot_p: "The curve rotates around an intercept only when price elasticity/sensitivity changes (parameter a or c) — e.g. due to an ad-valorem tax or arrival of close substitutes.",
+    dist_rot_pivot_p: "The curve rotates around an intercept only when price elasticity/sensitivity changes (parameter a or c) – e.g. due to an ad-valorem tax or arrival of close substitutes.",
     dist_move_title: "2. Movement along the curve",
     dist_move_term: "“Change in quantity demanded” or “quantity supplied”",
     dist_move_cause_lbl: "Cause:",
@@ -1522,13 +1413,13 @@ const translations = {
     quiz_tag: "Knowledge check",
     quiz_title: "Microeconomics exam practice",
     quiz_score_label: "Your score:",
-    quiz_category: "Demand & Supply",
+    quiz_category: "Demand & supply",
     quiz_btn_reset: "Restart quiz",
     quiz_btn_next: "Next question →",
     footer_text: "EconLab — Interactive Economics Simulator for Students. All rights reserved.",
-    status_equilibrium: "Market Equilibrium: Demand = Supply",
-    status_shortage: "Market Shortage (excess demand Q<sub>D</sub> > Q<sub>S</sub>)",
-    status_surplus: "Market Surplus (excess supply Q<sub>S</sub> > Q<sub>D</sub>)",
+    status_equilibrium: "Market equilibrium: Demand = Supply",
+    status_shortage: "Market shortage (excess demand Q<sub>D</sub> > Q<sub>S</sub>)",
+    status_surplus: "Market surplus (excess supply Q<sub>S</sub> > Q<sub>D</sub>)",
   }
 };
 
@@ -1604,7 +1495,7 @@ function resetBaselineParams() {
 }
 
 function toggleLanguage() {
-  currentLang = currentLang === 'pl' ? 'en' : 'pl';
+  currentLang = currentLang === 'en' ? 'pl' : 'en';
   document.documentElement.lang = currentLang;
 
   document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -1785,7 +1676,7 @@ function renderSVG() {
     <line x1="${eqX}" y1="${eqY}" x2="${eqX}" y2="${svgConfig.originY}" stroke="#4f46e5" stroke-width="1.8" stroke-dasharray="4,4" />
   `;
 
-  if (isShifted) {
+  if (isShifted && d0Seg && s0Seg) {
     const e0_x = qToX(q0), e0_y = pToY(p0);
     pointsGroup.innerHTML += `<circle cx="${e0_x}" cy="${e0_y}" r="4.5" fill="#94a3b8" stroke="#ffffff" stroke-width="1.5" />`;
     labelsGroup.innerHTML += `
@@ -2039,25 +1930,24 @@ function updateDisequilibriumState() {
   const eqP = (activeB - activeD) / (paramA + paramC);
   const statusBox = document.getElementById('market-status-box');
   const diff = marketPrice - eqP;
-  if (Math.abs(diff) < 1.5) {
+  if (Math.abs(diff) < 1.0) {
     statusBox.className = "text-xs font-semibold p-2 rounded-lg text-center bg-indigo-50 text-indigo-800 border border-indigo-200";
     statusBox.innerHTML = translations[currentLang].status_equilibrium;
   } else if (diff > 0) {
     statusBox.className = "text-xs font-semibold p-2 rounded-lg text-center bg-amber-50 text-amber-900 border border-amber-200";
-    statusBox.innerHTML = `${translations[currentLang].status_surplus} — ${isEn ? 'Tendency for price to drop' : 'presja na spadek ceny'}`;
+    statusBox.innerHTML = `${translations[currentLang].status_surplus} – ${isEn ? 'tendency for price to drop' : 'presja na spadek ceny'}`;
   } else {
     statusBox.className = "text-xs font-semibold p-2 rounded-lg text-center bg-rose-50 text-rose-900 border border-rose-200";
-    statusBox.innerHTML = `${translations[currentLang].status_shortage} — ${isEn ? 'Tendency for price to rise' : 'presja na wzrost ceny'}`;
+    statusBox.innerHTML = `${translations[currentLang].status_shortage} – ${isEn ? 'tendency for price to rise' : 'presja na wzrost ceny'}`;
   }
 }
 
 let currentSubTask = 1;
 
-// TASK 1 DATA: Simultaneous Shocks
 const task1Cases = [
   {
     name_pl: "Rynek pieczywa rzemieślniczego",
-    name_en: "Artisan Bakery Market",
+    name_en: "Artisan bakery market",
     desc_pl: "Przed świętami gwałtownie rośnie zapotrzebowanie konsumentów na wypieki (<strong>ΔD = +30</strong>), ale jednocześnie drożeje energia elektryczna i mąka dla piekarni (<strong>ΔS = -20</strong>).",
     desc_en: "Ahead of the holidays, consumer demand for baked goods surges (<strong>ΔD = +30</strong>), while commercial electricity and flour costs rise for bakeries (<strong>ΔS = -20</strong>).",
     dShift: 30,
@@ -2068,7 +1958,7 @@ const task1Cases = [
   },
   {
     name_pl: "Rynek laptopów konsumenckich",
-    name_en: "Consumer Laptops Market",
+    name_en: "Consumer laptops market",
     desc_pl: "Automatyzacja fabryk półprzewodników zwiększa podaż komputerów (<strong>ΔS = +35</strong>), a jednocześnie po zakończeniu roku szkolnego sezonowo spada popyt (<strong>ΔD = -15</strong>).",
     desc_en: "Semiconductor factory automation expands laptop supply (<strong>ΔS = +35</strong>), while the end of the back-to-school season reduces consumer demand (<strong>ΔD = -15</strong>).",
     dShift: -15,
@@ -2079,7 +1969,7 @@ const task1Cases = [
   },
   {
     name_pl: "Rynek aut elektrycznych (EV)",
-    name_en: "Electric Vehicles (EV) Market",
+    name_en: "Electric vehicles (EV) market",
     desc_pl: "Rosnąca świadomość ekologiczna zwiększa popyt na auta elektryczne (<strong>ΔD = +25</strong>), a tańsze baterie litowo-jonowe zwiększają ich podaż o dokładnie tę samą wartość (<strong>ΔS = +25</strong>).",
     desc_en: "Environmental awareness boosts EV demand (<strong>ΔD = +25</strong>), while cheaper lithium-ion batteries expand EV supply by the exact same magnitude (<strong>ΔS = +25</strong>).",
     dShift: 25,
@@ -2090,7 +1980,7 @@ const task1Cases = [
   },
   {
     name_pl: "Rynek drukowanej prasy codziennej",
-    name_en: "Printed Daily Newspapers Market",
+    name_en: "Printed daily newspapers market",
     desc_pl: "Czytelnicy przenoszą się do internetu, co zmniejsza popyt na gazety papierowe (<strong>ΔD = -30</strong>), a jednocześnie drożeje papier celulozowy i druk (<strong>ΔS = -10</strong>).",
     desc_en: "Readers migrate to digital news, reducing print newspaper demand (<strong>ΔD = -30</strong>), while newsprint paper and ink costs increase (<strong>ΔS = -10</strong>).",
     dShift: -30,
@@ -2105,74 +1995,159 @@ let t1Index = 0;
 let t1Pred = { cert: null, pDir: null, qDir: null };
 let t1Revealed = false;
 
-// TASK 2 STATE: Price Controls & Welfare (CS, PS, DWL)
-let t2Policy = 'free'; // 'free' | 'ceiling' | 'floor'
+let t2Policy = 'free';
 let t2RegPrice = 30;
-
 // TASK 3 DATA: Market Detective (Reverse Engineering)
 const task3Cases = [
   {
-    title_pl: "Sprawa #1: Rynek oliwy z oliwek z pierwszego tłoczenia",
-    title_en: "Case #1: Extra Virgin Olive Oil Market",
+    title_pl: "Sprawa #1: Rynek oliwy z oliwek extra virgin",
+    title_en: "Case #1: Extra virgin olive oil market",
     desc_pl: "Raport giełdy towarowej: cena oliwy wzrosła z <strong>P₀ = 50</strong> do <strong>P₁ = 65</strong>, natomiast wolumen transakcji spadł z <strong>Q₀ = 50</strong> do <strong>Q₁ = 35</strong>.",
     desc_en: "Commodity exchange report: olive oil price jumped from <strong>P₀ = 50</strong> to <strong>P₁ = 65</strong>, while traded volume fell from <strong>Q₀ = 50</strong> to <strong>Q₁ = 35</strong>.",
     targetD: 0,
     targetS: -30,
     options_pl: [
-      "Ekstremalna susza w Hiszpanii i we Włoszech zniszczyła zbiory oliwek (szok podażowy S ↓)",
-      "Kampania dietetyków o prozdrowotnych właściwościach diety śródziemnomorskiej (D ↑)",
-      "Spadek cen oleju rzepakowego będącego substytutem oliwy (D ↓)"
+      "Ekstremalna susza i fala upałów w basenie Morza Śródziemnego zniszczyły zbiory oliwek (S ↓)",
+      "Ogólnokrajowa kampania dietetyków promująca zdrowotne zalety diety śródziemnomorskiej (D ↑)",
+      "Gwałtowny spadek cen oleju rzepakowego będącego bliskim substytutem oliwy (D ↓)",
+      "Wprowadzenie rządowych dopłat bezpośrednich do nawozów dla plantatorów oliwek (S ↑)",
+      "Urzędowe ustalenie wiążącej ceny maksymalnej na tłuszcze roślinne"
     ],
     options_en: [
-      "Severe drought in Spain and Italy devastated olive harvests (supply shock S ↓)",
-      "Nutritionist campaign praising the Mediterranean diet (demand shock D ↑)",
-      "Price drop of rapeseed oil, a close substitute (demand shock D ↓)"
+      "Severe heatwave and agricultural drought in the Mediterranean devastated olive harvests (S ↓)",
+      "Major dietitian public campaign highlighting health benefits of the Mediterranean diet (D ↑)",
+      "Plummeting retail prices of rapeseed oil, a close culinary substitute (D ↓)",
+      "Government per-hectare fertilizer subsidies granted to commercial olive groves (S ↑)",
+      "Imposition of an administrative binding price ceiling on cooking oils"
     ],
     correctCause: 0,
-    explanation_pl: "Zauważ, że nowy punkt E₁ = (35, 65) spełnia pierwotne równanie popytu: Q_D = 100 - 65 = 35! Oznacza to, że krzywa popytu D₀ w ogóle się nie przesunęła (nastąpił po niej jedynie ruch wzdłuż), a przyczyną był spadek podaży o ΔS = -30.",
-    explanation_en: "Notice that E₁ = (35, 65) satisfies the original demand equation: Q_D = 100 - 65 = 35! Thus, the demand curve D₀ did not shift at all (only movement along D₀ occurred), caused by a supply contraction of ΔS = -30."
+    explanation_pl: "Punkt E₁ = (35, 65) leży dokładnie na pierwotnej krzywej popytu: Q_D = 100 - 65 = 35. Oznacza to, że krzywa popytu nie zmieniła położenia (nastąpił po niej jedynie ruch wzdłuż), a jedyną przyczyną był spadek podaży o ΔS = -30.",
+    explanation_en: "Point E₁ = (35, 65) satisfies the baseline demand equation: Q_D = 100 - 65 = 35. This confirms that demand remained stationary (undergoing only a movement along D₀), driven exclusively by a supply contraction of ΔS = -30."
   },
   {
     title_pl: "Sprawa #2: Rynek układów pamięci HBM do serwerów AI",
-    title_en: "Case #2: AI Server HBM Memory Chips Market",
+    title_en: "Case #2: AI server HBM memory chips market",
     desc_pl: "Raport branżowy: średnia cena kontraktu wzrosła z <strong>P₀ = 50</strong> do <strong>P₁ = 67.5</strong>, a liczba dostarczonych układów wzrosła z <strong>Q₀ = 50</strong> do <strong>Q₁ = 67.5</strong>.",
     desc_en: "Industry report: contract price surged from <strong>P₀ = 50</strong> to <strong>P₁ = 67.5</strong>, while shipped volume expanded from <strong>Q₀ = 50</strong> to <strong>Q₁ = 67.5</strong>.",
     targetD: 35,
     targetS: 0,
     options_pl: [
-      "Globalny boom na budowę centrów danych sztucznej inteligencji (szok popytowy D ↑)",
-      "Awaria w fabrykach wafli krzemowych na Tajwanie (szok podażowy S ↓)",
-      "Wprowadzenie dotacji rządowych obniżających koszt produkcji chipów (S ↑)"
+      "Globalny boom inwestycyjny na budowę centrów danych i klastrów modeli AI (D ↑)",
+      "Awaria zasilania i zanieczyszczenie linii czystych w kluczowych fabrykach wafli krzemowych (S ↓)",
+      "Przełom w fotolitografii EUV obniżający jednostkowy koszt wytworzenia chipów o 30% (S ↑)",
+      "Wprowadzenie ceł importowych ograniczających budżety działów IT na całym świecie (D ↓)",
+      "Wprowadzenie urzędowych marż maksymalnych na komponenty serwerowe"
     ],
     options_en: [
-      "Global boom in AI data center infrastructure investments (demand shock D ↑)",
-      "Power outage at silicon wafer fabrication plants (supply shock S ↓)",
-      "Government production subsidies cutting chip manufacturing costs (supply shock S ↑)"
+      "Global infrastructure boom in generative AI training and enterprise data centers (D ↑)",
+      "Power outage and cleanroom contamination at key silicon fabrication plants (S ↓)",
+      "Lithography breakthrough cutting unit packaging costs by 30% (S ↑)",
+      "Global hardware tariffs forcing enterprises to freeze server upgrade budgets (D ↓)",
+      "Imposition of an administrative price cap on server hardware components"
     ],
     correctCause: 0,
-    explanation_pl: "Punkt E₁ = (67.5, 67.5) leży dokładnie na pierwotnej krzywej podaży S₀ (Q_S = P = 67.5). Podaż nie uległa przesunięciu (nastąpił ruch wzdłuż S₀), a cały impuls pochodził ze wzrostu popytu o ΔD = +35.",
-    explanation_en: "Point E₁ = (67.5, 67.5) lies directly on the baseline supply curve S₀ (Q_S = P = 67.5). Supply did not shift (movement along S₀), and the entire change was driven by a demand surge of ΔD = +35."
+    explanation_pl: "Punkt E₁ = (67.5, 67.5) leży dokładnie na pierwotnej krzywej podaży S₀ (Q_S = P = 67.5). Podaż nie uległa przesunięciu (nastąpił ruch wzdłuż S₀), a impuls wynikał w całości ze wzrostu popytu o ΔD = +35.",
+    explanation_en: "Point E₁ = (67.5, 67.5) lies directly on the baseline supply curve S₀ (Q_S = P = 67.5). Supply did not shift (movement along S₀), with the entire shift driven by an outward demand shock of ΔD = +35."
   },
   {
     title_pl: "Sprawa #3: Rynek paneli fotowoltaicznych",
-    title_en: "Case #3: Photovoltaic Solar Panels Market",
+    title_en: "Case #3: Photovoltaic solar panels market",
     desc_pl: "Dane rynkowe: cena modułów spadła z <strong>P₀ = 50</strong> do <strong>P₁ = 35</strong>, natomiast wolumen sprzedaży wzrósł z <strong>Q₀ = 50</strong> do <strong>Q₁ = 65</strong>.",
     desc_en: "Market data: module price dropped from <strong>P₀ = 50</strong> to <strong>P₁ = 35</strong>, while quantity installed increased from <strong>Q₀ = 50</strong> to <strong>Q₁ = 65</strong>.",
     targetD: 0,
     targetS: 30,
     options_pl: [
-      "Innowacja technologiczna i spadek kosztu polikrzemu (wzrost podaży S ↑)",
-      "Wzrost cen prądu z elektrowni węglowych zwiększający popyt na fotowoltaikę (D ↑)",
-      "Wprowadzenie ceł importowych na panele słoneczne (S ↓)"
+      "Innowacja produkcyjna i załamanie cen polikrzemu w fabrykach modułów (S ↑)",
+      "Wzrost taryf na prąd z sieci skłaniający gospodarstwa do montażu mikroinstalacji (D ↑)",
+      "Wycofanie dotacji konsumenckich na domowe instalacje słoneczne (D ↓)",
+      "Zablokowanie dostaw metali ziem rzadkich przez kluczowych eksporterów surowców (S ↓)",
+      "Ustanowienie administracyjnej ceny minimalnej na instalacje OZE"
     ],
     options_en: [
-      "Manufacturing innovation and plummeting polysilicon costs (supply expansion S ↑)",
-      "Higher grid electricity tariffs boosting household demand for solar (D ↑)",
-      "Import tariffs imposed on solar panels (supply contraction S ↓)"
+      "Manufacturing scale economies and plunging polysilicon raw material costs (S ↑)",
+      "Grid electricity tariff hikes driving homeowners to install rooftop panels (D ↑)",
+      "Cancellations of household green energy rebates and feed-in premium programs (D ↓)",
+      "Export embargo on refined quartz and rare materials used in solar ingots (S ↓)",
+      "Administrative price floor established by energy regulators"
     ],
     correctCause: 0,
-    explanation_pl: "Punkt E₁ = (65, 35) spełnia wyjściowe równanie popytu Q_D = 100 - 35 = 65. Oznacza to ruch wzdłuż niezmienionej krzywej popytu D₀ wywołany przesunięciem krzywej podaży w prawo o ΔS = +30.",
-    explanation_en: "Point E₁ = (65, 35) satisfies the baseline demand equation Q_D = 100 - 35 = 65. This confirms a movement along the stationary demand curve D₀ triggered by a rightward supply shift of ΔS = +30."
+    explanation_pl: "Punkt E₁ = (65, 35) spełnia wyjściowe równanie popytu: Q_D = 100 - 35 = 65. Krzywa popytu nie zmieniła się, a niższa cena i większa ilość to wynik przesunięcia podaży w prawo o ΔS = +30.",
+    explanation_en: "Point E₁ = (65, 35) satisfies the baseline demand equation: Q_D = 100 - 35 = 65. The demand curve remained unchanged; the lower price and higher quantity stemmed from an outward supply shift of ΔS = +30."
+  },
+  {
+    title_pl: "Sprawa #4: Rynek miejskich rowerów elektrycznych (e-bike)",
+    title_en: "Case #4: Urban electric bicycles (e-bike) market",
+    desc_pl: "Dane rynkowe: cena rowerów elektrycznych spadła z <strong>P₀ = 50</strong> do <strong>P₁ = 45</strong>, a wolumen rocznej sprzedaży wzrósł z <strong>Q₀ = 50</strong> do <strong>Q₁ = 75</strong>.",
+    desc_en: "Market registry: e-bike price fell from <strong>P₀ = 50</strong> to <strong>P₁ = 45</strong>, while annual sales surged from <strong>Q₀ = 50</strong> to <strong>Q₁ = 75</strong>.",
+    targetD: 20,
+    targetS: 30,
+    options_pl: [
+      "Rozwój tras rowerowych i wzrost opłat parkingowych (D ↑) oraz jednoczesna automatyzacja produkcji baterii (S ↑)",
+      "Drogie paliwo zachęcające do jazdy rowerem (D ↑), podczas gdy pożar zniszczył jedyną fabrykę ram (S ↓)",
+      "Pogorszenie pogody i spadek dochodów (D ↓) przy wzroście kosztów importu silników elektrycznych (S ↓)",
+      "Tylko i wyłącznie spadek cen biletów komunikacji miejskiej będącej substytutem (D ↓)",
+      "Wprowadzenie urzędowej ceny sztywnej na jednoślady elektryczne"
+    ],
+    options_en: [
+      "Urban bike infrastructure and parking fees (D ↑) combined with automated battery mass production (S ↑)",
+      "High petrol prices driving bicycle commuting (D ↑) while battery factory fires restrict frame supply (S ↓)",
+      "Prolonged bad weather and recession (D ↓) alongside soaring electric motor tariffs (S ↓)",
+      "Solely a fare reduction in municipal public transport, a substitute service (D ↓)",
+      "Enactment of a statutory fixed price mandate on electric micromobility"
+    ],
+    correctCause: 0,
+    explanation_pl: "W tym przypadku przesunęły się obie krzywe naraz: popyt wzrósł o ΔD = +20, a podaż wzrosła silniej o ΔS = +30. Nowa równowaga to P₁ = (100 + 20 - 30)/2 = 45 oraz Q₁ = 75.",
+    explanation_en: "Both curves shifted simultaneously: demand shifted right by ΔD = +20, while supply expanded further by ΔS = +30. The resulting equilibrium is P₁ = (100 + 20 - 30)/2 = 45 and Q₁ = 75."
+  },
+  {
+    title_pl: "Sprawa #5: Rynek wyrobów z ciemnej czekolady",
+    title_en: "Case #5: Premium dark chocolate market",
+    desc_pl: "Raport konsumencki: cena tabliczki czekolady wzrosła z <strong>P₀ = 50</strong> do <strong>P₁ = 75</strong>, podczas gdy wolumen sprzedaży spadł z <strong>Q₀ = 50</strong> do <strong>Q₁ = 45</strong>.",
+    desc_en: "Consumer report: premium chocolate bar price jumped from <strong>P₀ = 50</strong> to <strong>P₁ = 75</strong>, while market quantity contracted from <strong>Q₀ = 50</strong> to <strong>Q₁ = 45</strong>.",
+    targetD: 20,
+    targetS: -30,
+    options_pl: [
+      "Moda na zdrowotne walory flawonoidów w kakao (D ↑), połączona z katastrofalnym nieurodzajem w Afryce Zachodniej (S ↓)",
+      "Urodzaj w Ghanie i spadek cen ziaren kakaowych (S ↑) przy równoczesnym spadku spożycia słodyczy (D ↓)",
+      "Tylko i wyłącznie wzrost podatku akcyzowego od cukru bez żadnych zmian preferencji konsumentów (S ↓)",
+      "Pojawienie się tanich syntetycznych zamienników masła kakaowego (D ↓)",
+      "Wprowadzenie ceny minimalnej wspierającej plantatorów kakao na poziomie 75"
+    ],
+    options_en: [
+      "Health trends favoring dark chocolate flavonoids (D ↑) coupled with severe drought and disease in West African cocoa farms (S ↓)",
+      "Bumper harvest in Ghana lowering cocoa bean prices (S ↑) alongside declining confectionery consumption (D ↓)",
+      "Solely an excise tax on confectionery sugar with completely unchanged consumer tastes (S ↓)",
+      "Market arrival of cheap synthetic cocoa butter substitutes (D ↓)",
+      "Statutory price floor set at 75 to support cocoa agricultural workers"
+    ],
+    correctCause: 0,
+    explanation_pl: "Równoczesne przesunięcie obu krzywych: wzrost popytu o ΔD = +20 podniósłby cenę i ilość, ale silny spadek podaży o ΔS = -30 wywindował cenę do P₁ = 75 i zredukował ilość do Q₁ = 45.",
+    explanation_en: "Both curves shifted concurrently: demand rose by ΔD = +20, while supply contracted sharply by ΔS = -30. The joint effect pushed price up to P₁ = 75 and compressed volume to Q₁ = 45."
+  },
+  {
+    title_pl: "Sprawa #6: Rynek drukowanych podręczników akademickich",
+    title_en: "Case #6: Printed academic textbooks market",
+    desc_pl: "Analiza wydawnicza: cena książek papierowych spadła z <strong>P₀ = 50</strong> do <strong>P₁ = 40</strong>, a wolumen drukowanych egzemplarzy skurczył się z <strong>Q₀ = 50</strong> do <strong>Q₁ = 30</strong>.",
+    desc_en: "Publishing study: printed textbook price dropped from <strong>P₀ = 50</strong> to <strong>P₁ = 40</strong>, while traded print volume shrank from <strong>Q₀ = 50</strong> to <strong>Q₁ = 30</strong>.",
+    targetD: -30,
+    targetS: -10,
+    options_pl: [
+      "Masowe przejście uczelni na bezpłatne repozytoria cyfrowe (D ↓) przy jednoczesnym wzroście cen celulozy i druku (S ↓)",
+      "Wzrost liczby studentów na uczelniach (D ↑) połączony z tanim importem papieru z Azji (S ↑)",
+      "Dotacje państwowe dla wydawnictw naukowych obniżające koszty druku (S ↑)",
+      "Prawny zakaz odsprzedaży używanych podręczników zwiększający zakupy nowych wydań (D ↑)",
+      "Wprowadzenie urzędowego pułapu cenowego na materiały edukacyjne na poziomie 40"
+    ],
+    options_en: [
+      "University migration to open-access digital platforms (D ↓) alongside higher paper pulp and small-batch print costs (S ↓)",
+      "Record university enrollments (D ↑) combined with cheap paper imports from Asia (S ↑)",
+      "State production subsidies granted to scientific printing presses (S ↑)",
+      "Legislative ban on second-hand textbook reselling driving demand for new copies (D ↑)",
+      "Administrative price ceiling established on academic course materials at 40"
+    ],
+    correctCause: 0,
+    explanation_pl: "W tym scenariuszu zaszły dwa negatywne wstrząsy: głęboki spadek popytu o ΔD = -30 oraz umiarkowany spadek podaży o ΔS = -10, co doprowadziło do P₁ = 40 oraz Q₁ = 30.",
+    explanation_en: "Two concurrent negative shocks occurred: a steep demand contraction of ΔD = -30 accompanied by a mild supply reduction of ΔS = -10, yielding P₁ = 40 and Q₁ = 30."
   }
 ];
 
@@ -2259,7 +2234,7 @@ function verifyTask1Prediction() {
     fb.className = "p-3.5 rounded-xl text-xs leading-relaxed border bg-emerald-50 border-emerald-200 text-emerald-900";
     fb.innerHTML = `<strong>${isEn ? 'Spot on! All 3 predictions are correct.' : 'Doskonale! Wszystkie 3 odpowiedzi są poprawne.'}</strong> ${
       isEn
-        ? 'See the animated shift vectors and partial-effect decomposition on the right.'
+        ? 'See the shift vectors and decomposition on the right.'
         : 'Zobacz nowe położenie krzywych na wykresie oraz rozbicie na efekty cząstkowe po prawej stronie.'
     }`;
   } else {
@@ -2277,7 +2252,6 @@ function renderTask1() {
   const isEn = currentLang === 'en';
   const c = task1Cases[t1Index];
 
-  // Pills
   const pillsBox = document.getElementById('t1-case-pills');
   pillsBox.innerHTML = task1Cases.map((item, idx) => `
     <button onclick="setTask1Case(${idx})" class="px-2.5 py-1 rounded-lg text-[11px] font-bold transition ${idx === t1Index ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}">
@@ -2291,14 +2265,12 @@ function renderTask1() {
   document.getElementById('t1-shock-s-badge').textContent = `ΔS = ${c.sShift > 0 ? '+' : ''}${c.sShift}`;
   updateTask1ButtonsUI();
 
-  // Equilibrium calculations (base: b=100, d=0, a=1, c=1 => P0=50, Q0=50)
-  const p0 = 50, q0 = 50;
   const b1 = 100 + c.dShift;
   const d1 = 0 + c.sShift;
   const p1 = (b1 - d1) / 2;
   const q1 = b1 - p1;
 
-  document.getElementById('task-graph-subtitle').textContent = isEn ? "Task 1 • Simultaneous Shocks" : "Zadanie 1 • Podwójne szoki rynkowe";
+  document.getElementById('task-graph-subtitle').textContent = isEn ? "Task 1 • Simultaneous shocks" : "Zadanie 1 • Podwójne szoki rynkowe";
   document.getElementById('task-graph-title').innerHTML = t1Revealed
     ? `${isEn ? c.name_en : c.name_pl}: E<sub>0</sub>(50, 50) → E<sub>1</sub>(${q1.toFixed(1)}, ${p1.toFixed(1)})`
     : `${isEn ? c.name_en : c.name_pl}: ${isEn ? 'Predict E₁ before revealing!' : 'Przewidź punkt E₁ przed odsłonięciem!'}`;
@@ -2311,7 +2283,6 @@ function renderTask1() {
     targetPoint: null
   });
 
-  // Metrics Bar
   const metricsBar = document.getElementById('task-metrics-bar');
   metricsBar.innerHTML = `
     <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
@@ -2323,16 +2294,15 @@ function renderTask1() {
       <span class="text-base font-bold font-mono text-slate-800 mt-0.5 block">${t1Revealed ? `50.0 → ${q1.toFixed(1)}` : '50.0 → ?'}</span>
     </div>
     <div class="bg-blue-50/60 p-3 rounded-xl border border-blue-100">
-      <span class="text-[11px] font-semibold text-blue-700 uppercase block">${isEn ? 'Demand Shock' : 'Szok popytowy'}</span>
+      <span class="text-[11px] font-semibold text-blue-700 uppercase block">${isEn ? 'Demand shock' : 'Szok popytowy'}</span>
       <span class="text-xs font-bold font-mono text-blue-900 mt-1 block">ΔD = ${c.dShift > 0 ? '+' : ''}${c.dShift}</span>
     </div>
     <div class="bg-green-50/60 p-3 rounded-xl border border-green-100">
-      <span class="text-[11px] font-semibold text-green-700 uppercase block">${isEn ? 'Supply Shock' : 'Szok podażowy'}</span>
+      <span class="text-[11px] font-semibold text-green-700 uppercase block">${isEn ? 'Supply shock' : 'Szok podażowy'}</span>
       <span class="text-xs font-bold font-mono text-green-900 mt-1 block">ΔS = ${c.sShift > 0 ? '+' : ''}${c.sShift}</span>
     </div>
   `;
 
-  // Breakdown Card
   const dOnlyP = c.dShift / 2, dOnlyQ = c.dShift / 2;
   const sOnlyP = -c.sShift / 2, sOnlyQ = c.sShift / 2;
   const body = document.getElementById('task-analysis-body');
@@ -2348,16 +2318,16 @@ function renderTask1() {
     body.innerHTML = `
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div class="p-3 bg-blue-50/60 rounded-xl border border-blue-200 space-y-1">
-          <div class="font-bold text-blue-900">${isEn ? '1. Pure Demand Effect (ΔD = ' + c.dShift + ')' : '1. Czysty efekt popytowy (ΔD = ' + c.dShift + ')'}</div>
+          <div class="font-bold text-blue-900">${isEn ? '1. Pure demand effect (ΔD = ' + c.dShift + ')' : '1. Czysty efekt popytowy (ΔD = ' + c.dShift + ')'}</div>
           <div class="font-mono text-[11px] text-blue-950">ΔP<sub>D</sub> = ${dOnlyP > 0 ? '+' : ''}${dOnlyP.toFixed(1)}, &nbsp; ΔQ<sub>D</sub> = ${dOnlyQ > 0 ? '+' : ''}${dOnlyQ.toFixed(1)}</div>
         </div>
         <div class="p-3 bg-green-50/60 rounded-xl border border-green-200 space-y-1">
-          <div class="font-bold text-green-900">${isEn ? '2. Pure Supply Effect (ΔS = ' + c.sShift + ')' : '2. Czysty efekt podażowy (ΔS = ' + c.sShift + ')'}</div>
+          <div class="font-bold text-green-900">${isEn ? '2. Pure supply effect (ΔS = ' + c.sShift + ')' : '2. Czysty efekt podażowy (ΔS = ' + c.sShift + ')'}</div>
           <div class="font-mono text-[11px] text-green-950">ΔP<sub>S</sub> = ${sOnlyP > 0 ? '+' : ''}${sOnlyP.toFixed(1)}, &nbsp; ΔQ<sub>S</sub> = ${sOnlyQ > 0 ? '+' : ''}${sOnlyQ.toFixed(1)}</div>
         </div>
       </div>
       <div class="p-3 bg-indigo-50/70 rounded-xl border border-indigo-200 font-mono text-xs text-indigo-950 space-y-1">
-        <div class="font-sans font-bold text-indigo-900">${isEn ? '3. Superposition (Net Equilibrium Shift):' : '3. Złożenie obu efektów (wynik netto):'}</div>
+        <div class="font-sans font-bold text-indigo-900">${isEn ? '3. Superposition (net equilibrium shift):' : '3. Złożenie obu efektów (wynik netto):'}</div>
         <div>P<sub>E,1</sub> = 50 + (${dOnlyP.toFixed(1)}) + (${sOnlyP.toFixed(1)}) = <strong>${p1.toFixed(1)}</strong></div>
         <div>Q<sub>E,1</sub> = 50 + (${dOnlyQ.toFixed(1)}) + (${sOnlyQ.toFixed(1)}) = <strong>${q1.toFixed(1)}</strong></div>
       </div>
@@ -2400,7 +2370,6 @@ function renderTask2() {
       : (isEn ? 'Minimum price floor (P<sub>min</sub>):' : 'Cena minimalna (P<sub>min</sub>):');
   }
 
-  // Determine effective market price and binding status (Baseline E0: P=50, Q=50, Choke P=100)
   let isBinding = false;
   let pEff = 50;
   if (t2Policy === 'ceiling' && t2RegPrice < 50) {
@@ -2413,21 +2382,17 @@ function renderTask2() {
 
   const qD = 100 - pEff;
   const qS = pEff;
-  const qTrans = Math.min(qD, qS); // Short side of the market rule
+  const qTrans = Math.min(qD, qS);
 
-  // Welfare areas calculation for Q_D = 100 - P, Q_S = P
-  // At Q_trans, marginal willingness to pay on D is P_high = 100 - Q_trans, marginal cost on S is P_low = Q_trans
   const pHigh = 100 - qTrans;
   const pLow = qTrans;
 
   let cs = 1250, ps = 1250, dwl = 0;
   if (isBinding) {
     if (t2Policy === 'ceiling') {
-      // Price is pEff = qTrans. Consumers pay pEff, demand choke is 100 => Trapezoid from Q=0 to qTrans
       cs = ((100 - pEff) + (pHigh - pEff)) * qTrans / 2;
       ps = (pEff * qTrans) / 2;
     } else if (t2Policy === 'floor') {
-      // Price is pEff = 100 - qTrans. Consumers get triangle above pEff
       cs = ((100 - pEff) * qTrans) / 2;
       ps = (pEff + (pEff - pLow)) * qTrans / 2;
     }
@@ -2453,9 +2418,9 @@ function renderTask2() {
     }
   }
 
-  document.getElementById('task-graph-subtitle').textContent = isEn ? "Task 2 • Welfare Economics & Price Controls" : "Zadanie 2 • Ekonomia dobrobytu i ceny urzędowe";
+  document.getElementById('task-graph-subtitle').textContent = isEn ? "Task 2 • Welfare economics & price controls" : "Zadanie 2 • Ekonomia dobrobytu i ceny urzędowe";
   document.getElementById('task-graph-title').innerHTML = isEn
-    ? `Total Surplus TS = ${(cs + ps).toFixed(1)} | Deadweight Loss DWL = ${dwl.toFixed(1)}`
+    ? `Total surplus TS = ${(cs + ps).toFixed(1)} | Deadweight loss DWL = ${dwl.toFixed(1)}`
     : `Dobrobyt całkowity TS = ${(cs + ps).toFixed(1)} | Zbędna strata społeczna DWL = ${dwl.toFixed(1)}`;
 
   drawTaskSVG({
@@ -2474,7 +2439,6 @@ function renderTask2() {
     targetPoint: null
   });
 
-  // Metrics Bar
   const metricsBar = document.getElementById('task-metrics-bar');
   metricsBar.innerHTML = `
     <div class="bg-blue-50/70 p-3 rounded-xl border border-blue-200">
@@ -2486,7 +2450,7 @@ function renderTask2() {
       <span class="text-lg font-bold font-mono text-emerald-900 mt-0.5 block">${ps.toFixed(1)}</span>
     </div>
     <div class="bg-rose-50/70 p-3 rounded-xl border border-rose-200">
-      <span class="text-[11px] font-semibold text-rose-700 uppercase block">DWL (${isEn ? 'Deadweight Loss' : 'Zbędna strata społeczna'})</span>
+      <span class="text-[11px] font-semibold text-rose-700 uppercase block">DWL (${isEn ? 'Deadweight loss' : 'Zbędna strata społeczna'})</span>
       <span class="text-lg font-bold font-mono text-rose-900 mt-0.5 block">${dwl.toFixed(1)}</span>
     </div>
     <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
@@ -2495,20 +2459,19 @@ function renderTask2() {
     </div>
   `;
 
-  // Breakdown Card
   document.getElementById('task-analysis-badge').innerHTML = `TS = CS + PS = ${(cs + ps).toFixed(1)}`;
   const body = document.getElementById('task-analysis-body');
   body.innerHTML = `
     <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-      <div class="font-bold text-slate-800">${isEn ? '1. Short-Side of the Market Rule:' : '1. Zasada krótszej strony rynku:'}</div>
+      <div class="font-bold text-slate-800">${isEn ? '1. Short-side of the market rule:' : '1. Zasada krótszej strony rynku:'}</div>
       <p class="text-slate-600">${
         isEn
-          ? `At effective price P = ${pEff}, buyers demand Q<sub>D</sub> = ${100 - pEff} and sellers offer Q<sub>S</sub> = ${pEff}. Voluntary exchange requires both parties, so actual volume traded is <strong>Q<sub>trans</sub> = min(${100 - pEff}, ${pEff}) = ${qTrans}</strong>.`
+          ? `At effective price P = ${pEff}, buyers demand Q<sub>D</sub> = ${100 - pEff} and sellers offer Q<sub>S</sub> = ${pEff}. Voluntary exchange requires mutual agreement, so actual volume traded is <strong>Q<sub>trans</sub> = min(${100 - pEff}, ${pEff}) = ${qTrans}</strong>.`
           : `Przy efektywnej cenie P = ${pEff}, wielkość popytu wynosi Q<sub>D</sub> = ${100 - pEff}, a wielkość podaży Q<sub>S</sub> = ${pEff}. Faktyczny wolumen transakcji wyznacza zawsze krótsza strona rynku: <strong>Q<sub>trans</sub> = min(${100 - pEff}, ${pEff}) = ${qTrans}</strong>.`
       }</p>
     </div>
     <div class="p-3 bg-rose-50/60 rounded-xl border border-rose-200 space-y-1">
-      <div class="font-bold text-rose-900">${isEn ? '2. Deadweight Loss (DWL) Geometry:' : '2. Geometria zbędnej straty społecznej (DWL):'}</div>
+      <div class="font-bold text-rose-900">${isEn ? '2. Deadweight loss (DWL) geometry:' : '2. Geometria zbędnej straty społecznej (DWL):'}</div>
       <div class="font-mono text-xs text-rose-950">
         DWL = ½ · (P<sub>D</sub>(Q<sub>trans</sub>) - P<sub>S</sub>(Q<sub>trans</sub>)) · (Q<sub>E</sub> - Q<sub>trans</sub>) = ½ · (${pHigh} - ${pLow}) · (50 - ${qTrans}) = <strong>${dwl.toFixed(1)}</strong>
       </div>
@@ -2549,7 +2512,7 @@ function selectTask3Cause(idx) {
 
   if (isCurveMatched && isCauseCorrect) {
     fb.className = "p-3.5 rounded-xl text-xs leading-relaxed border bg-emerald-50 border-emerald-200 text-emerald-900";
-    fb.innerHTML = `<strong>${isEn ? 'Case Solved!' : 'Sprawa rozwiązana bezbłędnie!'}</strong> ${isEn ? c.explanation_en : c.explanation_pl}`;
+    fb.innerHTML = `<strong>${isEn ? 'Case solved!' : 'Sprawa rozwiązana bezbłędnie!'}</strong> ${isEn ? c.explanation_en : c.explanation_pl}`;
   } else if (!isCurveMatched && isCauseCorrect) {
     fb.className = "p-3.5 rounded-xl text-xs leading-relaxed border bg-amber-50 border-amber-200 text-amber-900";
     fb.innerHTML = `<strong>${isEn ? 'Correct economic cause!' : 'Wskazano właściwą przyczynę ekonomiczną!'}</strong> ${
@@ -2602,11 +2565,10 @@ function renderTask3() {
   } else {
     matchInd.className = "p-2 rounded-xl text-xs font-semibold text-center bg-slate-100 text-slate-600";
     matchInd.innerHTML = isEn
-      ? `Current intersection: (Q=${userQ.toFixed(1)}, P=${userP.toFixed(1)}) — Target: (Q=${targetQ.toFixed(1)}, P=${targetP.toFixed(1)})`
-      : `Obecne przecięcie: (Q=${userQ.toFixed(1)}, P=${userP.toFixed(1)}) — Cel: (Q=${targetQ.toFixed(1)}, P=${targetP.toFixed(1)})`;
+      ? `Current intersection: (Q=${userQ.toFixed(1)}, P=${userP.toFixed(1)}) – Target: (Q=${targetQ.toFixed(1)}, P=${targetP.toFixed(1)})`
+      : `Obecne przecięcie: (Q=${userQ.toFixed(1)}, P=${userP.toFixed(1)}) – Cel: (Q=${targetQ.toFixed(1)}, P=${targetP.toFixed(1)})`;
   }
 
-  // Causes buttons
   const causesBox = document.getElementById('t3-causes-container');
   const opts = isEn ? c.options_en : c.options_pl;
   causesBox.innerHTML = opts.map((opt, idx) => {
@@ -2619,7 +2581,7 @@ function renderTask3() {
     return `<button onclick="selectTask3Cause(${idx})" class="${cls}">${opt}</button>`;
   }).join('');
 
-  document.getElementById('task-graph-subtitle').textContent = isEn ? "Task 3 • Reverse Engineering (Market Detective)" : "Zadanie 3 • Odwrócona inżynieria (Detektyw rynkowy)";
+  document.getElementById('task-graph-subtitle').textContent = isEn ? "Task 3 • Reverse engineering (Market detective)" : "Zadanie 3 • Odwrócona inżynieria (Detektyw rynkowy)";
   document.getElementById('task-graph-title').innerHTML = isEn ? c.title_en : c.title_pl;
 
   drawTaskSVG({
@@ -2630,15 +2592,14 @@ function renderTask3() {
     targetPoint: { q: targetQ, p: targetP, matched: isMatched }
   });
 
-  // Metrics Bar
   const metricsBar = document.getElementById('task-metrics-bar');
   metricsBar.innerHTML = `
     <div class="bg-rose-50/70 p-3 rounded-xl border border-rose-200">
-      <span class="text-[11px] font-semibold text-rose-700 uppercase block">${isEn ? 'Observed Target E₁' : 'Zaobserwowany cel E₁'}</span>
+      <span class="text-[11px] font-semibold text-rose-700 uppercase block">${isEn ? 'Observed target E₁' : 'Zaobserwowany cel E₁'}</span>
       <span class="text-sm font-bold font-mono text-rose-900 mt-0.5 block">P=${targetP.toFixed(1)}, Q=${targetQ.toFixed(1)}</span>
     </div>
     <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
-      <span class="text-[11px] font-semibold text-slate-500 uppercase block">${isEn ? 'Your Intersection' : 'Twoje przecięcie'}</span>
+      <span class="text-[11px] font-semibold text-slate-500 uppercase block">${isEn ? 'Your intersection' : 'Twoje przecięcie'}</span>
       <span class="text-sm font-bold font-mono text-slate-800 mt-0.5 block">P=${userP.toFixed(1)}, Q=${userQ.toFixed(1)}</span>
     </div>
     <div class="bg-blue-50/60 p-3 rounded-xl border border-blue-100">
@@ -2650,25 +2611,32 @@ function renderTask3() {
       <span class="text-xs font-bold font-mono text-green-900 mt-1 block">Q<sub>S,0</sub> = ${targetP.toFixed(1)}</span>
     </div>
   `;
-
   // Breakdown Card
   document.getElementById('task-analysis-badge').innerHTML = `E<sub>0</sub>(50, 50) → E<sub>1</sub>(${targetQ.toFixed(1)}, ${targetP.toFixed(1)})`;
   const body = document.getElementById('task-analysis-body');
   const onD0 = Math.abs((100 - targetP) - targetQ) < 0.01;
   const onS0 = Math.abs(targetP - targetQ) < 0.01;
+  const isDual = (c.targetD !== 0 && c.targetS !== 0);
 
   body.innerHTML = `
     <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
       <div class="font-bold text-slate-800">${isEn ? 'How to solve an inverse market problem algebraically:' : 'Jak rozwiązać zadanie odwrotne metodą algebraiczną:'}</div>
       <p class="text-slate-600">${
         isEn
-          ? `Plug the observed price <strong>P₁ = ${targetP.toFixed(1)}</strong> into the baseline equations D₀ (Q = 100 - P) and S₀ (Q = P) to see which curve still passes through E₁:`
-          : `Podstaw zaobserwowaną cenę <strong>P₁ = ${targetP.toFixed(1)}</strong> do wyjściowych równań D₀ (Q = 100 - P) oraz S₀ (Q = P), aby sprawdzić, która krzywa nadal przechodzi przez punkt E₁:`
+          ? `Plug the observed price <strong>P₁ = ${targetP.toFixed(1)}</strong> into the baseline equations D₀ (Q = 100 - P) and S₀ (Q = P) to diagnose curve shifts:`
+          : `Podstaw zaobserwowaną cenę <strong>P₁ = ${targetP.toFixed(1)}</strong> do wyjściowych równań D₀ (Q = 100 - P) oraz S₀ (Q = P), aby zdiagnozować przesunięcia krzywych:`
       }</p>
       <div class="p-2 bg-white rounded border border-slate-200 font-mono text-xs space-y-1">
         <div>• D₀(P₁): Q<sub>D,0</sub> = 100 - ${targetP.toFixed(1)} = <strong>${(100 - targetP).toFixed(1)}</strong> ${onD0 ? '(= Q₁ ✓ ' + (isEn ? 'movement along D₀' : 'ruch wzdłuż D₀') + ')' : '(≠ Q₁ ✗ ' + (isEn ? 'D shifted!' : 'krzywa D uległa przesunięciu!') + ')'}</div>
         <div>• S₀(P₁): Q<sub>S,0</sub> = ${targetP.toFixed(1)} = <strong>${targetP.toFixed(1)}</strong> ${onS0 ? '(= Q₁ ✓ ' + (isEn ? 'movement along S₀' : 'ruch wzdłuż S₀') + ')' : '(≠ Q₁ ✗ ' + (isEn ? 'S shifted!' : 'krzywa S uległa przesunięciu!') + ')'}</div>
       </div>
+      ${isDual ? `
+      <div class="mt-2 p-2 bg-purple-50 rounded border border-purple-200 text-purple-950 font-semibold text-[11px]">
+        ${isEn 
+          ? 'Notice: Neither equation matches Q₁! Both demand and supply shifted concurrently (ΔD = ' + (c.targetD > 0 ? '+' : '') + c.targetD + ', ΔS = ' + (c.targetS > 0 ? '+' : '') + c.targetS + ').' 
+          : 'Uwaga: Żadne równanie bazowe nie daje Q₁! Obie krzywe popytu i podaży przesunęły się jednocześnie (ΔD = ' + (c.targetD > 0 ? '+' : '') + c.targetD + ', ΔS = ' + (c.targetS > 0 ? '+' : '') + c.targetS + ').'
+        }
+      </div>` : ''}
     </div>
   `;
 }
@@ -2719,7 +2687,6 @@ function drawTaskSVG(opts) {
   const d0Seg = getClippedSegmentQP(100, -1);
   const s0Seg = getClippedSegmentQP(0, 1);
 
-  // Welfare polygons for Task 2
   if (opts.welfareMode) {
     const wm = opts.welfareMode;
     const x0 = qToX(0);
@@ -2732,13 +2699,10 @@ function drawTaskSVG(opts) {
     const yLow = pToY(wm.pLow);
     const yEq = pToY(50);
 
-    // CS polygon: (0, 100) -> (qTrans, pHigh) -> (qTrans, pEff) -> (0, pEff)
     welfareG.innerHTML += `<polygon points="${x0},${yChoke} ${xTrans},${yHigh} ${xTrans},${yEff} ${x0},${yEff}" fill="rgba(59, 130, 246, 0.28)" stroke="#2563eb" stroke-width="1" />`;
-    // PS polygon: (0, 0) -> (qTrans, pLow) -> (qTrans, pEff) -> (0, pEff)
     welfareG.innerHTML += `<polygon points="${x0},${yZero} ${xTrans},${yLow} ${xTrans},${yEff} ${x0},${yEff}" fill="rgba(16, 185, 129, 0.28)" stroke="#16a34a" stroke-width="1" />`;
 
     if (wm.isBinding) {
-      // DWL triangle: (qTrans, pHigh) -> (50, 50) -> (qTrans, pLow)
       welfareG.innerHTML += `<polygon points="${xTrans},${yHigh} ${xEq},${yEq} ${xTrans},${yLow}" fill="rgba(244, 63, 94, 0.38)" stroke="#e11d48" stroke-width="1.5" />`;
       lblG.innerHTML += `<text x="${qToX((wm.qTrans + 50) / 2)}" y="${pToY(50) + 4}" font-size="11" font-weight="bold" fill="#9f1239" text-anchor="middle">DWL</text>`;
     }
@@ -2790,7 +2754,6 @@ function drawTaskSVG(opts) {
     lblG.innerHTML += `<text x="${x0 - 14}" y="${y0 - 8}" font-size="11" font-weight="bold" fill="#64748b">E<tspan baseline-shift="sub" font-size="9">0</tspan></text>`;
   }
 
-  // Target point ring for Task 3 (Market Detective)
   if (opts.targetPoint) {
     const tx = qToX(opts.targetPoint.q), ty = pToY(opts.targetPoint.p);
     const ringCol = opts.targetPoint.matched ? '#10b981' : '#e11d48';
@@ -2821,20 +2784,20 @@ function showQuickFact(id) {
 
   if (id === 1) {
     resBox.className = "mt-4 p-4 rounded-xl text-xs leading-relaxed border bg-amber-50 border-amber-200 text-amber-950";
-    resBox.innerHTML = `<div class="font-bold text-sm mb-1">${isEn ? "Answer: Movement along the curve (change in quantity demanded)" : "Odpowiedź: ruch wzdłuż krzywej (zmiana wielkości popytu)"}</div><p>${isEn ? "Because the price of the good itself (butter) changed, the demand curve <strong>does not shift</strong>! Instead, we move downward along the existing demand curve to a higher quantity demanded." : "Ponieważ zmieniła się cena samego masła, krzywa popytu na masło <strong>nie przesuwa się</strong>! Poruszamy się w dół po tej samej krzywej popytu ku większej wielkości popytu."}</p>`;
+    resBox.innerHTML = `<div class="font-bold text-sm mb-1">${isEn ? "Answer: movement along the curve (change in quantity demanded)" : "Odpowiedź: ruch wzdłuż krzywej (zmiana wielkości popytu)"}</div><p>${isEn ? "Because the price of the good itself (butter) changed, the demand curve <strong>does not shift</strong>! Instead, we move downward along the existing demand curve to a higher quantity demanded." : "Ponieważ zmieniła się cena samego masła, krzywa popytu na masło <strong>nie przesuwa się</strong>! Poruszamy się w dół po tej samej krzywej popytu ku większej wielkości popytu."}</p>`;
   } else if (id === 2) {
     resBox.className = "mt-4 p-4 rounded-xl text-xs leading-relaxed border bg-indigo-50 border-indigo-200 text-indigo-950";
-    resBox.innerHTML = `<div class="font-bold text-sm mb-1">${isEn ? "Answer: Shift of the curve (increase in demand)" : "Odpowiedź: przesunięcie całej krzywej (wzrost popytu)"}</div><p>${isEn ? "Scientific reports change <strong>consumer preferences/tastes</strong> (a non-price factor). As a result, the entire demand curve for apples shifts to the right (D<sub>0</sub> → D₁)." : "Informacja o walorach zdrowotnych zmienia <strong>preferencje konsumentów</strong> (czynnik pozacenowy). Cała krzywa popytu na jabłka przesuwa się w prawo (D<sub>0</sub> → D₁)."}</p>`;
+    resBox.innerHTML = `<div class="font-bold text-sm mb-1">${isEn ? "Answer: shift of the curve (increase in demand)" : "Odpowiedź: przesunięcie całej krzywej (wzrost popytu)"}</div><p>${isEn ? "Scientific reports change <strong>consumer preferences/tastes</strong> (a non-price factor). As a result, the entire demand curve for apples shifts to the right (D<sub>0</sub> → D₁)." : "Informacja o walorach zdrowotnych zmienia <strong>preferencje konsumentów</strong> (czynnik pozacenowy). Cała krzywa popytu na jabłka przesuwa się w prawo (D<sub>0</sub> → D₁)."}</p>`;
   } else if (id === 3) {
     resBox.className = "mt-4 p-4 rounded-xl text-xs leading-relaxed border bg-green-50 border-green-200 text-green-950";
-    resBox.innerHTML = `<div class="font-bold text-sm mb-1">${isEn ? "Answer: Shift of the curve (increase in supply)" : "Odpowiedź: przesunięcie całej krzywej (wzrost podaży)"}</div><p>${isEn ? "Automation improves production technology and cuts unit costs. The supply curve shifts rightward (S<sub>0</sub> → S₁), leading to lower equilibrium car prices and higher quantity." : "Robotyzacja to ulepszenie technologii produkcji i redukcja kosztów jednostkowych. Cała krzywa podaży samochodów przesuwa się w prawo (S<sub>0</sub> → S₁)."}</p>`;
+    resBox.innerHTML = `<div class="font-bold text-sm mb-1">${isEn ? "Answer: shift of the curve (increase in supply)" : "Odpowiedź: przesunięcie całej krzywej (wzrost podaży)"}</div><p>${isEn ? "Automation improves production technology and cuts unit costs. The supply curve shifts rightward (S<sub>0</sub> → S₁), leading to lower equilibrium car prices and higher quantity." : "Robotyzacja to ulepszenie technologii produkcji i redukcja kosztów jednostkowych. Cała krzywa podaży samochodów przesuwa się w prawo (S<sub>0</sub> → S₁)."}</p>`;
   }
 }
 
 const quizQuestions = [
   {
-    q_pl: "Na rynku hurtowym Unii Europejskiej odnotowano gwałtowny spadek cen gazu ziemnego, który jest kluczowym surowcem w syntezie amoniaku. Jak to zdarzenie wpłynie na właściwy rynek nawozów azotowych w UE?",
-    q_en: "Wholesale natural gas prices in the EU have plunged sharply. Natural gas is the primary raw feedstock for ammonia synthesis. How does this event affect the EU relevant market for nitrogen fertilizers?",
+    q_pl: "Na rynku hurtowym Unii Europejskiej odnotowano spadek cen gazu ziemnego, będącego podstawowym surowcem w syntezie amoniaku. Jak to zdarzenie wpłynie na właściwy rynek nawozów azotowych w UE?",
+    q_en: "Wholesale natural gas prices in the EU have plunged. Natural gas is the primary raw feedstock for ammonia synthesis. How does this event affect the EU relevant market for nitrogen fertilizers?",
     options_pl: [
       "Wzrost podaży (przesunięcie krzywej podaży w prawo)",
       "Spadek podaży (przesunięcie krzywej podaży w lewo)",
@@ -2848,12 +2811,12 @@ const quizQuestions = [
       "Decrease in demand (demand curve shifts left)"
     ],
     correct: 0,
-    explanation_pl: "Gaz ziemny stanowi główny koszt zmienny produkcji nawozów azotowych. Spadek cen surowca przesuwa całą krzywą podaży w prawo.",
+    explanation_pl: "Gaz ziemny stanowi główny składnik kosztów zmiennych produkcji nawozów azotowych. Tańszy surowiec przesuwa całą krzywą podaży w prawo.",
     explanation_en: "Natural gas accounts for a major share of variable costs in nitrogen fertilizer production. Cheaper input costs shift the entire supply curve outward to the right."
   },
   {
-    q_pl: "Przymrozki i susza w Brazylii drastycznie zredukowały zbiory ziaren kawy, powodując gwałtowny wzrost ich cen. Jaki będzie skutek tego zjawiska na krajowym rynku herbaty (będącej bliskim substytutem kawy)?",
-    q_en: "Severe frost and drought in Brazil have devastated coffee bean harvests, triggering steep coffee price hikes. What is the expected outcome in the domestic market for tea (a close substitute for coffee)?",
+    q_pl: "Przymrozki i susza w Brazylii zredukowały zbiory ziaren kawy, powodując wzrost ich cen. Jaki będzie skutek tego zjawiska na rynku herbaty (będącej bliskim substytutem kawy)?",
+    q_en: "Severe frost and drought in Brazil have devastated coffee bean harvests, triggering coffee price hikes. What is the expected outcome in the market for tea (a close substitute for coffee)?",
     options_pl: [
       "Wzrost ceny równowagi (P<sub>E</sub> ↑) oraz wzrost ilości równowagi (Q<sub>E</sub> ↑)",
       "Spadek ceny równowagi (P<sub>E</sub> ↓) oraz wzrost ilości równowagi (Q<sub>E</sub> ↑)",
@@ -2867,33 +2830,33 @@ const quizQuestions = [
       "Lower equilibrium price (P<sub>E</sub> ↓) and lower equilibrium quantity (Q<sub>E</sub> ↓)"
     ],
     correct: 0,
-    explanation_pl: "Drożejąca kawa skłania konsumentów do wyboru herbaty. Na rynku herbaty wzrasta popyt (D w prawo), co podnosi P<sub>E</sub> oraz Q<sub>E</sub>.",
-    explanation_en: "Higher coffee prices lead consumers to substitute into tea. Demand for tea shifts right, leading to both higher equilibrium price and higher equilibrium quantity."
+    explanation_pl: "Droższa kawa skłania konsumentów do zakupu herbaty. Na rynku herbaty rośnie popyt (D przesuwa się w prawo), co podnosi P<sub>E</sub> oraz Q<sub>E</sub>.",
+    explanation_en: "Higher coffee prices lead consumers to substitute into tea. Demand for tea shifts right, raising both equilibrium price and quantity."
   },
   {
-    q_pl: "Na krajowym rynku masła zaobserwowano jednoczesny wzrost ceny równowagi oraz spadek ilości sprzedawanego masła (P<sub>E</sub> ↑, Q<sub>E</sub> ↓). Co było najbardziej prawdopodobną przyczyną tej zmiany?",
-    q_en: "In the domestic market for butter, observers recorded a concurrent increase in the equilibrium price and a decrease in the equilibrium quantity sold (P<sub>E</sub> ↑, Q<sub>E</sub> ↓). What was the most plausible cause?",
+    q_pl: "Na rynku masła zaobserwowano wzrost ceny równowagi przy jednoczesnym spadku ilości sprzedawanego towaru (P<sub>E</sub> ↑, Q<sub>E</sub> ↓). Co było najbardziej prawdopodobną przyczyną tej zmiany?",
+    q_en: "In the butter market, observers recorded a concurrent increase in the equilibrium price and a decrease in the equilibrium quantity sold (P<sub>E</sub> ↑, Q<sub>E</sub> ↓). What was the most plausible cause?",
     options_pl: [
-      "Wzrost cen skupu surowego mleka oraz kosztów energii dla mleczarni (spadek podaży masła)",
+      "Wzrost cen skupu mleka oraz kosztów energii dla mleczarni (spadek podaży masła)",
       "Wzrost zamożności gospodarstw domowych i moda na domowe wypieki (wzrost popytu na masło)",
-      "Gwałtowny spadek cen margaryny jako substytutu masła (spadek popytu na masło)",
-      "Wprowadzenie wydajnych automatycznych linii produkcyjnych w mleczarniach (wzrost podaży)"
+      "Spadek cen margaryny jako substytutu masła (spadek popytu na masło)",
+      "Wprowadzenie wydajniejszych linii produkcyjnych w mleczarniach (wzrost podaży)"
     ],
     options_en: [
-      "Higher raw milk procurement prices and elevated energy costs for dairies (decrease in butter supply)",
-      "Higher household incomes and a surge in holiday home-baking trends (increase in butter demand)",
-      "A steep price cut for margarine, a close substitute (decrease in butter demand)",
-      "Adoption of ultra-efficient continuous churning technologies in dairy plants (increase in butter supply)"
+      "Higher raw milk procurement prices and elevated dairy processing energy costs (decrease in butter supply)",
+      "Higher household incomes and increased interest in home baking (increase in butter demand)",
+      "Price cut for margarine, a close substitute (decrease in butter demand)",
+      "Adoption of more efficient processing lines in dairy plants (increase in butter supply)"
     ],
     correct: 0,
-    explanation_pl: "Kombinacja wyższej ceny (P<sub>E</sub> ↑) i mniejszej ilości (Q<sub>E</sub> ↓) jest jednoznacznym efektem negatywnego szoku podażowego (S w lewo).",
-    explanation_en: "A higher equilibrium price combined with lower quantity is the definitive hallmark of a supply contraction (S shifts left)."
+    explanation_pl: "Wyższa cena (P<sub>E</sub> ↑) połączona z mniejszym wolumenem sprzedaży (Q<sub>E</sub> ↓) to bezpośredni rezultat spadku podaży (S przesuwa się w lewo).",
+    explanation_en: "A higher equilibrium price combined with lower traded volume is the direct hallmark of a supply contraction (S shifts left)."
   },
   {
-    q_pl: "Jeżeli dochody konsumentów rosną, a dane dobro jest dobrem normalnym, co stanie się na jego rynku?",
+    q_pl: "Jeżeli dochody konsumentów rosną, a analizowane dobro jest dobrem normalnym, co stanie się na jego rynku?",
     q_en: "If consumer incomes rise and the good in question is a normal good, what happens in its market?",
     options_pl: [
-      "Wzrośnie popyt (przesunięcie równoległe w prawo), rośnie cena i ilość równowagi",
+      "Wzrośnie popyt (przesunięcie w prawo), rośnie cena i ilość równowagi",
       "Spadnie popyt (przesunięcie w lewo), spada cena i ilość równowagi",
       "Wzrośnie wielkość popytu (ruch wzdłuż krzywej bez przesunięcia)",
       "Wzrośnie podaż (przesunięcie w prawo)"
@@ -2905,12 +2868,12 @@ const quizQuestions = [
       "Supply increases (shift right)"
     ],
     correct: 0,
-    explanation_pl: "Wzrost dochodu dla dobra normalnego przesuwa krzywą popytu równolegle w prawo, podnosząc cenę i ilość równowagi.",
-    explanation_en: "An increase in income for a normal good shifts the demand curve parallel to the right, leading to higher equilibrium P and Q."
+    explanation_pl: "Wzrost dochodu dla dobra normalnego przesuwa krzywą popytu w prawo, co podnosi cenę oraz ilość równowagi.",
+    explanation_en: "An increase in income for a normal good shifts the demand curve parallel to the right, raising equilibrium price and quantity."
   },
   {
-    q_pl: "W okresie trwałego ożywienia gospodarczego realne dochody konsumentów wzrosły o 8%. Jak wpłynie to na rynek dóbr podrzędnych (inferior goods)?",
-    q_en: "During a prolonged economic boom, real disposable household incomes grew by 8%. How does this income growth affect the market for inferior goods?",
+    q_pl: "W okresie ożywienia gospodarczego realne dochody konsumentów wzrosły o 8%. Jak wpłynie to na rynek dóbr podrzędnych (inferior goods)?",
+    q_en: "During an economic expansion, real disposable household incomes grew by 8%. How does this income growth affect the market for inferior goods?",
     options_pl: [
       "Spadek popytu (przesunięcie krzywej popytu w lewo)",
       "Wzrost popytu (przesunięcie krzywej popytu w prawo)",
@@ -2924,11 +2887,11 @@ const quizQuestions = [
       "Decrease in supply (supply curve shifts left)"
     ],
     correct: 0,
-    explanation_pl: "Dla dobra podrzędnego wyższe dochody skłaniają konsumentów do przejścia na produkty wyższej jakości, co przesuwa popyt w lewo.",
-    explanation_en: "By definition, demand for an inferior good moves inversely with income, shifting the demand curve to the left."
+    explanation_pl: "Dla dobra podrzędnego wyższe dochody skłaniają konsumentów do zakupu produktów wyższej jakości, co zmniejsza popyt (D przesuwa się w lewo).",
+    explanation_en: "Demand for an inferior good moves inversely with income, shifting the demand curve to the left."
   },
   {
-    q_pl: "Ceny konsol do gier spadły o 35%. Jak zmieni się sytuacja na rynku gier wideo dedykowanych na te konsole (dobro komplementarne)?",
+    q_pl: "Ceny konsol do gier spadły o 35%. Jak zmieni się sytuacja na rynku gier wideo przeznaczonych na te urządzenia (dobro komplementarne)?",
     q_en: "Retail prices of gaming consoles fell by 35%. What will happen in the market for video games developed for these consoles (a complementary good)?",
     options_pl: [
       "Cena równowagi wzrośnie, a ilość równowagi wzrośnie",
@@ -2943,35 +2906,35 @@ const quizQuestions = [
       "Equilibrium price decreases and equilibrium quantity increases"
     ],
     correct: 0,
-    explanation_pl: "Spadek ceny dobra komplementarnego (konsol) zwiększa popyt na gry (D w prawo), co podnosi zarówno cenę, jak i ilość równowagi.",
+    explanation_pl: "Spadek ceny dobra komplementarnego (konsol) zwiększa popyt na powiązane gry (D w prawo), co podnosi zarówno cenę, jak i ilość równowagi.",
     explanation_en: "Cheaper consoles expand demand for complementary video games (D shifts right), raising both equilibrium price and quantity."
   },
   {
-    q_pl: "Które ze zjawisk spowoduje ruch wzdłuż krzywej popytu na kawę, a nie jej przesunięcie?",
+    q_pl: "Które ze zjawisk wywoła ruch wzdłuż krzywej popytu na kawę, a nie jej przesunięcie?",
     q_en: "Which of the following causes a movement along the demand curve for coffee, rather than a shift?",
     options_pl: [
       "Wzrost ceny samej kawy wywołany nieurodzajem w Brazylii",
       "Wzrost popularności picia herbaty (substytut kawy)",
-      "Artykuł w prasie o negatywnym wpływie kawy na serce",
+      "Artykuł w prasie o negatywnym wpływie kawy na ciśnienie",
       "Wzrost zamożności społeczeństwa"
     ],
     options_en: [
-      "An increase in the retail price of coffee itself due to frost in Brazil",
+      "An increase in the retail price of coffee itself due to poor harvests in Brazil",
       "An increase in the popularity of tea (a substitute)",
-      "A viral news story detailing harmful health effects of coffee",
-      "A general increase in household wealth"
+      "A news story detailing adverse cardiovascular effects of coffee",
+      "A general rise in household wealth"
     ],
     correct: 0,
-    explanation_pl: "Zmiana ceny samego dobra (wywołana szokiem podażowym) powoduje ruch wzdłuż istniejącej krzywej popytu.",
+    explanation_pl: "Zmiana ceny samego dobra (wywołana wstrząsem podażowym) powoduje ruch wzdłuż istniejącej krzywej popytu.",
     explanation_en: "A change in the good's own price generates a movement along the stationary demand curve."
   },
   {
-    q_pl: "Cena ropy naftowej spadła, co obniżyło koszty transportu (podaż ↑). Jednocześnie konsumenci zubożeli przez kryzys (popyt ↓). Co wiemy na pewno o nowej równowadze?",
-    q_en: "Crude oil prices plummet, lowering logistics costs (Supply ↑). Simultaneously, a recession lowers consumer incomes (Demand ↓). What is certain?",
+    q_pl: "Cena ropy naftowej spadła, obniżając koszty transportu (podaż ↑). Jednocześnie konsumenci zubożeli przez kryzys (popyt ↓). Co wiemy na pewno o nowej równowadze?",
+    q_en: "Crude oil prices drop, lowering logistics costs (Supply ↑). Simultaneously, a recession lowers consumer incomes (Demand ↓). What is certain?",
     options_pl: [
-      "Cena równowagi (P<sub>E</sub>) z całą pewnością spadnie",
-      "Ilość równowagi (Q<sub>E</sub>) z całą pewnością wzrośnie",
-      "Cena równowagi (P<sub>E</sub>) z całą pewnością wzrośnie",
+      "Cena równowagi (P<sub>E</sub>) na pewno spadnie",
+      "Ilość równowagi (Q<sub>E</sub>) na pewno wzrośnie",
+      "Cena równowagi (P<sub>E</sub>) na pewno wzrośnie",
       "Nie da się określić kierunku zmiany żadnej ze zmiennych"
     ],
     options_en: [
@@ -2981,7 +2944,7 @@ const quizQuestions = [
       "Neither direction can be determined"
     ],
     correct: 0,
-    explanation_pl: "Zarówno spadek popytu, jak i wzrost podaży działają w kierunku obniżki ceny, więc P<sub>E</sub> na pewno spadnie.",
+    explanation_pl: "Zarówno spadek popytu, jak i wzrost podaży wywierają presję na spadek ceny, więc P<sub>E</sub> obniży się bez względu na siłę obu szoków.",
     explanation_en: "Both a demand decrease and a supply increase push price downward, so P<sub>E</sub> unambiguously falls."
   }
 ];
@@ -3031,7 +2994,7 @@ function renderQuizQuestion() {
     : `Pytanie ${currentQuestionIndex + 1}/${activeQuizQuestions.length}`;
 
   const categoryEl = document.getElementById('quiz-category');
-  if (categoryEl) categoryEl.textContent = isEn ? "Demand & Supply" : "Popyt & Podaż";
+  if (categoryEl) categoryEl.textContent = isEn ? "Demand & supply" : "Popyt & podaż";
 
   document.getElementById('quiz-score').textContent = `${score} / ${activeQuizQuestions.length}`;
   document.getElementById('quiz-question-text').innerHTML = isEn ? qData.q_en : qData.q_pl;
@@ -3110,7 +3073,7 @@ function showQuizCompletion() {
   const total = activeQuizQuestions.length || quizQuestions.length;
 
   document.getElementById('quiz-question-text').textContent = isEn
-    ? `Quiz Completed! Your Final Score: ${score} of ${total}`
+    ? `Quiz completed! Your final score: ${score} of ${total}`
     : `Gratulacje! Ukończono quiz z wynikiem: ${score} z ${total}`;
 
   container.innerHTML = `
