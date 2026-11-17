@@ -95,7 +95,7 @@
             <span data-i18n="nav_distinction">Slope vs elasticity</span>
           </button>
           <button id="tab-quiz" onclick="switchTab('quiz')" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition whitespace-nowrap">
-            <span data-i18n="nav_quiz">Knowledge check</span>
+            <span data-i18n="nav_quiz">Quiz</span>
           </button>
         </div>
 
@@ -138,31 +138,55 @@
         </div>
       </div>
 
-      <!-- Formal Mathematical Definitions Card -->
+      <!-- General Concept of PED Card -->
       <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
         <div class="border-b border-slate-100 pb-3 flex flex-wrap items-center justify-between gap-2">
           <div>
-            <h2 class="text-base sm:text-lg font-bold text-slate-900" data-i18n="intro_def_title">
-              Formal mathematical definitions of price elasticity of demand
+            <h2 class="text-base sm:text-lg font-bold text-slate-900" data-i18n="intro_gen_title">
+              General concept of price elasticity of demand (PED)
             </h2>
-            <p class="text-xs text-slate-500 mt-0.5" data-i18n="intro_def_sub">
-              Point elasticity vs arc (midpoint) method
+            <p class="text-xs text-slate-500 mt-0.5" data-i18n="intro_gen_sub">
+              Percentage responsiveness of quantity demanded to price changes
             </p>
           </div>
-          <span data-katex="PED = \frac{\%\Delta Q_D}{\%\Delta P}" data-katex-display="false" class="text-xs sm:text-sm font-bold text-indigo-700 bg-indigo-50 px-3 py-1.5 rounded-lg border border-indigo-200">
-            PED = %ΔQ<sub>D</sub> / %ΔP
+          <span class="text-xs font-bold text-indigo-700 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-200" data-i18n="intro_gen_badge">
+            Core formula
           </span>
+        </div>
+
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed" data-i18n="intro_gen_p1">
+          In general terms, price elasticity of demand (<span data-katex="PED" data-katex-display="false">PED</span>) expresses the ratio of the percentage change in quantity demanded (<span data-katex="\%\Delta Q_D" data-katex-display="false">%ΔQ<sub>D</sub></span>) to the percentage change in the good's price (<span data-katex="\%\Delta P" data-katex-display="false">%ΔP</span>), holding all other factors constant (<em>ceteris paribus</em>).
+        </p>
+
+        <p class="text-xs text-slate-600 leading-relaxed" data-i18n="intro_gen_p2">
+          Interpretation: if <span data-katex="PED = -2" data-katex-display="false">PED = −2</span>, a <span data-katex="1\%" data-katex-display="false">1%</span> rise in price leads to a <span data-katex="2\%" data-katex-display="false">2%</span> drop in quantity demanded. Because elasticity is a ratio of two percentages, it is completely unit-free.
+        </p>
+
+        <div data-katex="PED = \frac{\%\Delta Q_D}{\%\Delta P} = \frac{\Delta Q_D / Q_D}{\Delta P / P}" class="p-4 bg-slate-50 rounded-xl border border-indigo-200/80 text-center text-sm sm:text-base text-indigo-950 overflow-x-auto">
+          PED = %ΔQ<sub>D</sub> / %ΔP = (ΔQ<sub>D</sub> / Q<sub>D</sub>) / (ΔP / P)
+        </div>
+      </div>
+
+      <!-- Formal Mathematical Definitions Card -->
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
+        <div class="border-b border-slate-100 pb-3">
+          <h2 class="text-base sm:text-lg font-bold text-slate-900" data-i18n="intro_def_title">
+            Formal mathematical definitions of price elasticity of demand
+          </h2>
+          <p class="text-xs text-slate-500 mt-0.5" data-i18n="intro_def_sub">
+            Point elasticity vs arc (midpoint) method
+          </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
           <!-- Point Elasticity Formula -->
           <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2.5 flex flex-col justify-between">
             <div class="space-y-2">
-              <div class="flex items-center justify-between">
+              <div class="flex items-center justify-between gap-2">
                 <h3 class="font-bold text-xs sm:text-sm text-slate-900" data-i18n="intro_point_h">
-                  1. Point price elasticity of demand (Point PED)
+                  1. Derivative method (point elasticity)
                 </h3>
-                <span class="text-[10px] uppercase font-bold text-blue-700 bg-blue-100 px-2 py-0.5 rounded">Infinitesimal</span>
+                <span class="text-[10px] uppercase font-bold text-blue-700 bg-blue-100 px-2 py-0.5 rounded shrink-0" data-i18n="intro_point_badge">Infinitesimal</span>
               </div>
               <p class="text-xs text-slate-600 leading-relaxed" data-i18n="intro_point_p">
                 Used when evaluating elasticity at a single specific coordinate <span data-katex="(P, Q)" data-katex-display="false">(P, Q)</span> along a continuous demand function:
@@ -183,17 +207,17 @@
                 <h3 class="font-bold text-xs sm:text-sm text-slate-900" data-i18n="intro_arc_h">
                   2. Midpoint method (Arc elasticity)
                 </h3>
-                <span class="text-[10px] uppercase font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">Discrete</span>
+                <span class="text-[10px] uppercase font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded" data-i18n="intro_arc_badge">Discrete</span>
               </div>
               <p class="text-xs text-slate-600 leading-relaxed" data-i18n="intro_arc_p">
                 Used when measuring elasticity across two distinct observable price points <span data-katex="(P_1, Q_1)" data-katex-display="false">(P<sub>1</sub>, Q<sub>1</sub>)</span> and <span data-katex="(P_2, Q_2)" data-katex-display="false">(P<sub>2</sub>, Q<sub>2</sub>)</span>:
               </p>
-              <div data-katex="PED_{\text{arc}} = \frac{Q_2 - Q_1}{Q_1 + Q_2} \div \frac{P_2 - P_1}{P_1 + P_2}" class="p-3 bg-white rounded-lg border border-slate-200 text-center text-sm sm:text-base text-emerald-950 overflow-x-auto">
-                PED<sub>arc</sub> = [ (Q<sub>2</sub> − Q<sub>1</sub>) / (Q<sub>1</sub> + Q<sub>2</sub>) ] ÷ [ (P<sub>2</sub> − P<sub>1</sub>) / (P<sub>1</sub> + P<sub>2</sub>) ]
+              <div data-katex="\begin{gathered} PED_{\text{arc}} = \%\Delta Q_D \div \%\Delta P \\[0.55em] PED_{\text{arc}} = \frac{Q_2 - Q_1}{\dfrac{Q_1 + Q_2}{2}} \div \frac{P_2 - P_1}{\dfrac{P_1 + P_2}{2}} \end{gathered}" class="p-3 bg-white rounded-lg border border-slate-200 text-center text-sm sm:text-base text-emerald-950 overflow-x-auto">
+                PED<sub>arc</sub> = %ΔQ<sub>D</sub> ÷ %ΔP<br>PED<sub>arc</sub> = [ (Q<sub>2</sub> − Q<sub>1</sub>) / ((Q<sub>1</sub> + Q<sub>2</sub>)/2) ] ÷ [ (P<sub>2</sub> − P<sub>1</sub>) / ((P<sub>1</sub> + P<sub>2</sub>)/2) ]
               </div>
             </div>
             <p class="text-[11px] text-slate-500 leading-relaxed" data-i18n="intro_arc_note">
-              Advantage: divides by the average base value, delivering identical symmetric results regardless of whether price rises or falls.
+              Advantage: dividing each change by its midpoint average <span data-katex="\frac{X_1 + X_2}{2}" data-katex-display="false">(X<sub>1</sub> + X<sub>2</sub>)/2</span> preserves the separate percentage expressions <span data-katex="\%\Delta Q_D" data-katex-display="false">%ΔQ<sub>D</sub></span> and <span data-katex="\%\Delta P" data-katex-display="false">%ΔP</span> (so mixed data can be combined) while delivering symmetric results whether price rises or falls.
             </p>
           </div>
         </div>
@@ -263,15 +287,15 @@
               <div class="flex items-center justify-between mb-1.5">
                 <span class="text-xs font-bold text-slate-900 flex items-center gap-1.5">
                   <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
-                  <span data-i18n="det3_h">3. Nature of the need (necessity vs luxury)</span>
+                  <span data-i18n="det3_h">3. Urgency and postponability of purchase</span>
                 </span>
               </div>
               <p class="text-xs text-slate-600 leading-relaxed" data-i18n="det3_p">
-                Basic necessities and life-saving goods must be consumed regardless of cost, generating rigid or highly inelastic demand. Luxuries and non-essential recreational activities can easily be postponed or foregone, yielding high elasticity.
+                Urgent, non-postponable purchases (such as emergency repairs or acute medical care) leave buyers no room to delay, generating rigid or highly inelastic demand. Postponable or durable goods allow buyers to wait for sales or defer replacement, amplifying price sensitivity. (Note: "necessity vs. luxury" is formally defined via income elasticity <span data-katex="\eta_I" data-katex-display="false">η<sub>I</sub></span> rather than own-price elasticity.)
               </p>
             </div>
             <div class="text-[11px] bg-white p-2 rounded-lg border border-slate-200 font-medium text-slate-700" data-i18n="det3_eg">
-              Example: emergency surgery or insulin (<span data-katex="|PED| \approx 0" data-katex-display="false">|PED| ≈ 0</span>) vs luxury yacht charters or weekend spa getaways (<span data-katex="|PED| > 2" data-katex-display="false">|PED| &gt; 2</span>).
+              Example: emergency locksmith or insulin (<span data-katex="|PED| \approx 0" data-katex-display="false">|PED| ≈ 0</span>) vs postponable appliance upgrade or vacation (<span data-katex="|PED| > 2" data-katex-display="false">|PED| &gt; 2</span>).
             </div>
           </div>
 
@@ -352,12 +376,15 @@
           
           <!-- Zone 1: Elastic -->
           <div class="p-4 rounded-xl border border-indigo-200 bg-indigo-50/40 space-y-2">
-            <div class="flex items-center justify-between font-bold text-indigo-950">
-              <span class="flex items-center gap-1.5">
-                <span class="w-2.5 h-2.5 rounded-full bg-indigo-600"></span>
-                <span data-i18n="zone_el_h">Price elastic (<span data-katex="|PED| > 1" data-katex-display="false">|PED| &gt; 1</span>)</span>
-              </span>
-              <span data-katex="\%\Delta Q > \%\Delta P" data-katex-display="false" class="text-xs text-indigo-700 bg-white px-2 py-0.5 rounded border border-indigo-200">%ΔQ &gt; %ΔP</span>
+            <div class="flex items-start justify-between gap-2 font-bold text-indigo-950">
+              <div class="flex items-start gap-1.5 min-w-0">
+                <span class="w-2.5 h-2.5 rounded-full bg-indigo-600 shrink-0 mt-1"></span>
+                <div class="leading-snug" data-i18n="zone_el_h">
+                  <div>Price elastic</div>
+                  <div class="font-normal text-indigo-900 mt-0.5">(<span data-katex="|PED| > 1" data-katex-display="false">|PED| &gt; 1</span>)</div>
+                </div>
+              </div>
+              <span data-katex="\%\Delta Q > \%\Delta P" data-katex-display="false" class="text-xs text-indigo-700 bg-white px-2 py-0.5 rounded border border-indigo-200 whitespace-nowrap shrink-0">%ΔQ &gt; %ΔP</span>
             </div>
             <p class="text-slate-600 leading-relaxed" data-i18n="zone_el_p">
               Consumers react intensely. Quantity change outstrips price change.
@@ -370,12 +397,15 @@
 
           <!-- Zone 2: Unit Elastic -->
           <div class="p-4 rounded-xl border border-emerald-200 bg-emerald-50/40 space-y-2">
-            <div class="flex items-center justify-between font-bold text-emerald-950">
-              <span class="flex items-center gap-1.5">
-                <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
-                <span data-i18n="zone_unit_h">Unit elastic (<span data-katex="|PED| = 1" data-katex-display="false">|PED| = 1</span>)</span>
-              </span>
-              <span data-katex="\%\Delta Q = \%\Delta P" data-katex-display="false" class="text-xs text-emerald-700 bg-white px-2 py-0.5 rounded border border-emerald-200">%ΔQ = %ΔP</span>
+            <div class="flex items-start justify-between gap-2 font-bold text-emerald-950">
+              <div class="flex items-start gap-1.5 min-w-0">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-600 shrink-0 mt-1"></span>
+                <div class="leading-snug" data-i18n="zone_unit_h">
+                  <div>Unit elastic</div>
+                  <div class="font-normal text-emerald-900 mt-0.5">(<span data-katex="|PED| = 1" data-katex-display="false">|PED| = 1</span>)</div>
+                </div>
+              </div>
+              <span data-katex="\%\Delta Q = \%\Delta P" data-katex-display="false" class="text-xs text-emerald-700 bg-white px-2 py-0.5 rounded border border-emerald-200 whitespace-nowrap shrink-0">%ΔQ = %ΔP</span>
             </div>
             <p class="text-slate-600 leading-relaxed" data-i18n="zone_unit_p">
               Exact proportionality. Quantity change exactly offsets price change.
@@ -388,12 +418,15 @@
 
           <!-- Zone 3: Inelastic -->
           <div class="p-4 rounded-xl border border-amber-200 bg-amber-50/40 space-y-2">
-            <div class="flex items-center justify-between font-bold text-amber-950">
-              <span class="flex items-center gap-1.5">
-                <span class="w-2.5 h-2.5 rounded-full bg-amber-600"></span>
-                <span data-i18n="zone_inel_h">Price inelastic (<span data-katex="|PED| < 1" data-katex-display="false">|PED| &lt; 1</span>)</span>
-              </span>
-              <span data-katex="\%\Delta Q < \%\Delta P" data-katex-display="false" class="text-xs text-amber-700 bg-white px-2 py-0.5 rounded border border-amber-200">%ΔQ &lt; %ΔP</span>
+            <div class="flex items-start justify-between gap-2 font-bold text-amber-950">
+              <div class="flex items-start gap-1.5 min-w-0">
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-600 shrink-0 mt-1"></span>
+                <div class="leading-snug" data-i18n="zone_inel_h">
+                  <div>Price inelastic</div>
+                  <div class="font-normal text-amber-900 mt-0.5">(<span data-katex="|PED| < 1" data-katex-display="false">|PED| &lt; 1</span>)</div>
+                </div>
+              </div>
+              <span data-katex="\%\Delta Q < \%\Delta P" data-katex-display="false" class="text-xs text-amber-700 bg-white px-2 py-0.5 rounded border border-amber-200 whitespace-nowrap shrink-0">%ΔQ &lt; %ΔP</span>
             </div>
             <p class="text-slate-600 leading-relaxed" data-i18n="zone_inel_p">
               Consumers are insensitive. Price change dominates the small volume change.
@@ -417,16 +450,16 @@
         
         <!-- Active Price Slider Card -->
         <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-4">
-          <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
-            <div>
-              <h2 class="text-xs font-bold text-slate-900 uppercase tracking-wider" data-i18n="ctrl_price_title">
+          <div class="flex items-start justify-between gap-2.5 border-b border-slate-100 pb-2.5">
+            <div class="min-w-0">
+              <h2 class="text-xs font-bold text-slate-900 uppercase tracking-wider leading-snug" data-i18n="ctrl_price_title">
                 Market price control (P)
               </h2>
-              <p class="text-[11px] text-slate-500" data-i18n="ctrl_price_sub">
+              <p class="text-[11px] text-slate-500 mt-0.5 leading-snug" data-i18n="ctrl_price_sub">
                 Move operating point along demand curve
               </p>
             </div>
-            <span id="badge-current-price" class="font-mono text-xs font-bold bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded border border-indigo-200">
+            <span id="badge-current-price" class="font-mono text-xs font-bold bg-indigo-50 text-indigo-700 px-2.5 py-0.5 rounded-lg border border-indigo-200 whitespace-nowrap shrink-0">
               P = 50.0
             </span>
           </div>
@@ -450,68 +483,62 @@
 
         <!-- Non-Price Determinants Explorer -->
         <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-4">
-          <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
-            <div>
-              <h2 class="text-xs font-bold text-slate-900 uppercase tracking-wider" data-i18n="ctrl_det_title">
+          <div class="flex items-start justify-between gap-2.5 border-b border-slate-100 pb-2.5">
+            <div class="min-w-0">
+              <h2 class="text-xs font-bold text-slate-900 uppercase tracking-wider leading-snug" data-i18n="ctrl_det_title">
                 Non-price determinants explorer
               </h2>
-              <p class="text-[11px] text-slate-500" data-i18n="ctrl_det_sub">
+              <p class="text-[11px] text-slate-500 mt-0.5 leading-snug" data-i18n="ctrl_det_sub">
                 Shapes slope and baseline price responsiveness
               </p>
             </div>
-            <span id="badge-slope-responsiveness" class="font-mono text-[10px] font-bold bg-blue-50 text-blue-700 px-2 py-0.5 rounded border border-blue-200">
+            <span id="badge-slope-responsiveness" class="font-mono text-xs font-bold bg-blue-50 text-blue-700 px-2.5 py-0.5 rounded-lg border border-blue-200 whitespace-nowrap shrink-0">
               b = 1.00
             </span>
           </div>
 
-          <!-- Determinant 1: Substitutes Toggle -->
+          <!-- Determinant 1: Substitutes Slider (Continuous: None -> Few -> Moderate -> Many) -->
           <div class="space-y-1.5">
             <label class="text-xs font-semibold text-slate-700 flex items-center justify-between">
               <span data-i18n="det_ctrl_sub_title">Availability of substitutes:</span>
               <span id="det-sub-label" class="text-[11px] font-bold text-indigo-600" data-i18n="det_opt_mod">Moderate</span>
             </label>
-            <div class="grid grid-cols-3 gap-1.5 text-xs">
-              <button id="btn-sub-low" onclick="setSubstitutes('low')" class="py-1.5 px-2 rounded-lg border border-slate-200 bg-slate-50 hover:bg-white text-slate-700 font-medium transition text-center" data-i18n="det_opt_few">
-                Few
-              </button>
-              <button id="btn-sub-mod" onclick="setSubstitutes('mod')" class="py-1.5 px-2 rounded-lg border-2 border-indigo-600 bg-indigo-50 text-indigo-900 font-bold transition text-center" data-i18n="det_opt_mod">
-                Moderate
-              </button>
-              <button id="btn-sub-high" onclick="setSubstitutes('high')" class="py-1.5 px-2 rounded-lg border border-slate-200 bg-slate-50 hover:bg-white text-slate-700 font-medium transition text-center" data-i18n="det_opt_many">
-                Many
-              </button>
+            <input type="range" id="slider-sub" min="0" max="3" value="2" step="0.01" class="w-full custom-range cursor-pointer" oninput="onDeterminantSliderChange()">
+            <div class="grid grid-cols-4 text-[10px] text-slate-400 pt-0.5">
+              <span class="text-left" data-i18n="det_opt_none">None</span>
+              <span class="text-center" data-i18n="det_opt_few">Few</span>
+              <span class="text-center" data-i18n="det_opt_mod">Moderate</span>
+              <span class="text-right" data-i18n="det_opt_many">Many</span>
             </div>
           </div>
 
-          <!-- Determinant 2: Time Horizon Toggle -->
+          <!-- Determinant 2: Time Horizon Slider (Continuous: Ultra-short -> Short -> Medium -> Long) -->
           <div class="space-y-1.5">
             <label class="text-xs font-semibold text-slate-700 flex items-center justify-between">
               <span data-i18n="det_ctrl_time_title">Time horizon:</span>
-              <span id="det-time-label" class="text-[11px] font-bold text-indigo-600" data-i18n="det_opt_short">Short-run</span>
+              <span id="det-time-label" class="text-[11px] font-bold text-indigo-600" data-i18n="det_opt_short">Short</span>
             </label>
-            <div class="grid grid-cols-2 gap-1.5 text-xs">
-              <button id="btn-time-short" onclick="setTimeHorizon('short')" class="py-1.5 px-2 rounded-lg border-2 border-indigo-600 bg-indigo-50 text-indigo-900 font-bold transition text-center" data-i18n="det_opt_short">
-                Short-run
-              </button>
-              <button id="btn-time-long" onclick="setTimeHorizon('long')" class="py-1.5 px-2 rounded-lg border border-slate-200 bg-slate-50 hover:bg-white text-slate-700 font-medium transition text-center" data-i18n="det_opt_long">
-                Long-run
-              </button>
+            <input type="range" id="slider-time" min="0" max="3" value="1" step="0.01" class="w-full custom-range cursor-pointer" oninput="onDeterminantSliderChange()">
+            <div class="grid grid-cols-4 text-[10px] text-slate-400 pt-0.5">
+              <span class="text-left" data-i18n="det_opt_ultrashort">Ultra-short</span>
+              <span class="text-center" data-i18n="det_opt_short">Short</span>
+              <span class="text-center" data-i18n="det_opt_medium">Medium</span>
+              <span class="text-right" data-i18n="det_opt_long">Long</span>
             </div>
           </div>
 
-          <!-- Determinant 3: Nature of Need Toggle -->
+          <!-- Determinant 3: Budget Share Slider (Continuous: Negligible -> Small -> Moderate -> Large) -->
           <div class="space-y-1.5">
             <label class="text-xs font-semibold text-slate-700 flex items-center justify-between">
-              <span data-i18n="det_ctrl_need_title">Nature of need:</span>
-              <span id="det-need-label" class="text-[11px] font-bold text-indigo-600" data-i18n="det_opt_necessity">Necessity</span>
+              <span data-i18n="det_ctrl_budget_title">Budget share:</span>
+              <span id="det-budget-label" class="text-[11px] font-bold text-indigo-600" data-i18n="det_opt_budget_mod">Moderate</span>
             </label>
-            <div class="grid grid-cols-2 gap-1.5 text-xs">
-              <button id="btn-need-nec" onclick="setNeedNature('nec')" class="py-1.5 px-2 rounded-lg border-2 border-indigo-600 bg-indigo-50 text-indigo-900 font-bold transition text-center" data-i18n="det_opt_necessity">
-                Necessity
-              </button>
-              <button id="btn-need-lux" onclick="setNeedNature('lux')" class="py-1.5 px-2 rounded-lg border border-slate-200 bg-slate-50 hover:bg-white text-slate-700 font-medium transition text-center" data-i18n="det_opt_luxury">
-                Luxury
-              </button>
+            <input type="range" id="slider-budget" min="0" max="3" value="2" step="0.01" class="w-full custom-range cursor-pointer" oninput="onDeterminantSliderChange()">
+            <div class="grid grid-cols-4 text-[10px] text-slate-400 pt-0.5">
+              <span class="text-left" data-i18n="det_opt_negligible">Negligible</span>
+              <span class="text-center" data-i18n="det_opt_small">Small</span>
+              <span class="text-center" data-i18n="det_opt_budget_mod">Moderate</span>
+              <span class="text-right" data-i18n="det_opt_large">Large</span>
             </div>
           </div>
 
@@ -520,15 +547,22 @@
           </p>
         </div>
 
+        <!-- Standalone Reset Simulator Box -->
+        <div class="bg-white rounded-2xl p-3.5 border border-slate-200 shadow-sm">
+          <button onclick="resetLabToDefault()" class="w-full py-2.5 px-4 bg-slate-100 hover:bg-slate-200/80 text-slate-800 hover:text-indigo-700 font-bold rounded-xl border border-slate-200 transition text-xs flex items-center justify-center gap-2 active:scale-[0.99]">
+            <svg class="w-3.5 h-3.5 text-indigo-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+            </svg>
+            <span data-i18n="btn_reset_sim">Reset simulator</span>
+          </button>
+        </div>
+
         <!-- Canonical Market Presets Card -->
         <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-3">
           <div class="flex items-center justify-between border-b border-slate-100 pb-2">
             <h2 class="text-xs font-bold text-slate-900 uppercase tracking-wider" data-i18n="presets_title">
               Canonical market presets
             </h2>
-            <button onclick="resetLabToDefault()" class="text-[11px] text-indigo-600 hover:text-indigo-800 font-semibold" data-i18n="btn_reset">
-              Reset
-            </button>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
@@ -540,20 +574,20 @@
               <p class="text-[11px] text-slate-500" data-i18n="preset1_sub">Max total revenue (TR)</p>
             </button>
 
-            <button onclick="applyPreset('luxury')" class="p-2.5 rounded-xl border border-slate-200 hover:border-indigo-400 bg-slate-50 hover:bg-indigo-50/40 text-left transition space-y-0.5">
+            <button onclick="applyPreset('high_elastic')" class="p-2.5 rounded-xl border border-slate-200 hover:border-indigo-400 bg-slate-50 hover:bg-indigo-50/40 text-left transition space-y-0.5">
               <div class="font-bold text-slate-900 flex items-center justify-between">
-                <span data-i18n="preset2_h">Luxury good</span>
+                <span data-i18n="preset2_h">Big-ticket rival good</span>
                 <span data-katex="|PED|>2" data-katex-display="false" class="text-[10px] text-indigo-700 font-bold">|PED| &gt; 2</span>
               </div>
-              <p class="text-[11px] text-slate-500" data-i18n="preset2_sub">Many substitutes, high sensitivity</p>
+              <p class="text-[11px] text-slate-500" data-i18n="preset2_sub">Many substitutes, large budget share</p>
             </button>
 
-            <button onclick="applyPreset('necessity')" class="p-2.5 rounded-xl border border-slate-200 hover:border-amber-400 bg-slate-50 hover:bg-amber-50/40 text-left transition space-y-0.5">
+            <button onclick="applyPreset('low_inelastic')" class="p-2.5 rounded-xl border border-slate-200 hover:border-amber-400 bg-slate-50 hover:bg-amber-50/40 text-left transition space-y-0.5">
               <div class="font-bold text-slate-900 flex items-center justify-between">
-                <span data-i18n="preset3_h">Basic necessity</span>
+                <span data-i18n="preset3_h">Minor staple item</span>
                 <span data-katex="|PED|<0.5" data-katex-display="false" class="text-[10px] text-amber-700 font-bold">|PED| &lt; 0.5</span>
               </div>
-              <p class="text-[11px] text-slate-500" data-i18n="preset3_sub">No substitutes, low sensitivity</p>
+              <p class="text-[11px] text-slate-500" data-i18n="preset3_sub">Few substitutes, negligible share</p>
             </button>
 
             <button onclick="applyPreset('perfect_inelastic')" class="p-2.5 rounded-xl border border-slate-200 hover:border-rose-400 bg-slate-50 hover:bg-rose-50/40 text-left transition space-y-0.5">
@@ -568,14 +602,14 @@
 
         <!-- Simulation Tool: ±10% Price Shock Test on Revenue -->
         <div class="bg-indigo-50/70 rounded-2xl p-4 border border-indigo-200 text-xs text-slate-700 space-y-3">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-1.5 font-bold text-indigo-900">
-              <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="flex items-center justify-between gap-2">
+            <div class="flex items-center gap-1.5 font-bold text-indigo-900 min-w-0">
+              <svg class="w-4 h-4 text-indigo-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
               </svg>
-              <span data-i18n="sim_title">Price shock test on revenue (±10%)</span>
+              <span class="whitespace-nowrap truncate" data-i18n="sim_title">Price shock test on revenue (±10%)</span>
             </div>
-            <span class="text-[10px] uppercase font-bold text-indigo-700 bg-white px-2 py-0.5 rounded border border-indigo-200">
+            <span class="text-[10px] uppercase font-bold text-indigo-700 bg-white px-2 py-0.5 rounded border border-indigo-200 shrink-0">
               Simulation
             </span>
           </div>
@@ -593,7 +627,7 @@
             </button>
           </div>
 
-          <div id="sim-feedback-box" class="p-2.5 bg-white rounded-xl border border-indigo-200 text-[11px] leading-relaxed text-slate-700">
+          <div id="sim-feedback-box" class="p-3 bg-white rounded-xl border border-indigo-200 text-[11px] leading-relaxed text-slate-700">
             <span data-i18n="sim_initial_msg">Click a shock button above to test consumer volume and revenue change.</span>
           </div>
         </div>
@@ -606,27 +640,27 @@
         <!-- Interactive Dual SVG Container -->
         <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col items-center">
           
-          <div class="w-full flex flex-wrap items-center justify-between gap-3 mb-2 pb-2 border-b border-slate-100">
-            <div>
-              <span class="text-[11px] font-semibold uppercase tracking-wider text-slate-400" data-i18n="graph_top_tag">
+          <div class="w-full flex flex-col sm:flex-row sm:items-end justify-between gap-2.5 mb-2 pb-2.5 border-b border-slate-100">
+            <div class="min-w-0">
+              <span class="block text-[11px] font-semibold uppercase tracking-wider text-slate-400" data-i18n="graph_top_tag">
                 Interactive dual synchronized diagram
               </span>
-              <h2 id="current-graph-status-title" class="text-sm sm:text-base font-bold text-slate-800" data-i18n="graph_main_title">
+              <h2 id="current-graph-status-title" class="text-sm sm:text-base font-bold text-slate-800 mt-0.5 leading-snug" data-i18n="graph_main_title">
                 Demand curve P(Q) & total revenue parabola TR(Q)
               </h2>
             </div>
             
             <!-- Legend Indicators -->
-            <div class="flex items-center gap-3 text-xs font-medium flex-wrap">
-              <span class="flex items-center gap-1.5">
+            <div class="flex items-center gap-3 text-xs font-medium flex-wrap sm:justify-end shrink-0">
+              <span class="flex items-center gap-1.5 whitespace-nowrap">
                 <span class="w-3 h-0.5 bg-blue-600 inline-block rounded"></span>
                 <span data-i18n="leg_demand">Demand (D)</span>
               </span>
-              <span class="flex items-center gap-1.5">
+              <span class="flex items-center gap-1.5 whitespace-nowrap">
                 <span class="w-3 h-0.5 bg-emerald-600 inline-block rounded"></span>
                 <span data-i18n="leg_revenue">Total revenue (TR)</span>
               </span>
-              <span class="flex items-center gap-1.5">
+              <span class="flex items-center gap-1.5 whitespace-nowrap">
                 <span class="w-2.5 h-2.5 rounded-full bg-indigo-600 inline-block"></span>
                 <span data-i18n="leg_point">Operating point A</span>
               </span>
@@ -791,23 +825,31 @@
 
         </div>
 
-        <!-- Market Elasticity vs Individual Firm Elasticity -->
-        <div class="mt-6 p-5 bg-slate-50 border border-slate-200 rounded-2xl space-y-3">
-          <div class="flex items-center gap-2 text-slate-900 font-bold text-sm">
-            <div class="w-7 h-7 rounded-lg bg-slate-800 text-white flex items-center justify-center text-xs">3</div>
-            <span data-i18n="dist_firm_title">Market elasticity vs individual firm elasticity</span>
+        <!-- Market Elasticity vs Individual Firm Elasticity & Substitutability Layers -->
+        <div class="mt-6 p-5 bg-slate-50 border border-slate-200 rounded-2xl space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center gap-2 text-slate-900 font-bold text-sm">
+              <div class="w-7 h-7 rounded-lg bg-slate-800 text-white flex items-center justify-center text-xs">3</div>
+              <span data-i18n="dist_firm_title">What is substitutability? Within-market vs across-market substitution</span>
+            </div>
+            <span class="text-[10px] font-bold uppercase tracking-wider bg-slate-200/80 text-slate-700 px-2.5 py-1 rounded-full" data-i18n="dist_firm_badge">
+              Relevant market boundary
+            </span>
           </div>
+          <p class="text-xs text-slate-600 leading-relaxed" data-i18n="dist_firm_intro">
+            Substitutability is not defined inside a pre-existing market—rather, <strong>substitutability defines the boundary of the relevant market itself</strong>. Economists distinguish between two distinct layers of substitution:
+          </p>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-600 leading-relaxed">
             <div class="p-3.5 bg-white rounded-xl border border-slate-200 space-y-1.5">
-              <strong class="text-slate-900 block" data-i18n="dist_firm_market_h">A. Whole market demand (broad relevant market)</strong>
-              <p data-i18n="dist_firm_market_p">
-                The total aggregate demand for an entire industry (e.g., passenger cars, commercial flights, or bread) has relatively few broad substitutes. Consequently, broad market demand is moderately inelastic or modest in elasticity.
+              <strong class="text-slate-900 block" data-i18n="dist_firm_single_h">A. Intra-market substitutability (close substitutes & single firm demand)</strong>
+              <p data-i18n="dist_firm_single_p">
+                Measures how easily buyers switch between competing varieties or brands serving the <strong>same core need</strong> (e.g., Pepsi vs. Coca-Cola, or competing airlines on the same route). Because these goods are close replacements, they form a single relevant market. High intra-market substitutability makes an individual firm's demand curve flatter and highly elastic (<span data-katex="|PED_{\text{firm}}| > 1" data-katex-display="false">|PED<sub>firm</sub>| &gt; 1</span>).
               </p>
             </div>
             <div class="p-3.5 bg-white rounded-xl border border-slate-200 space-y-1.5">
-              <strong class="text-slate-900 block" data-i18n="dist_firm_single_h">B. Single firm demand (specific brand within market)</strong>
-              <p data-i18n="dist_firm_single_p">
-                A single producer (e.g., Ford Focus, Ryanair, or Bakery "Złoty Kłos") operates surrounded by direct rivals. If that single firm raises price alone, consumers immediately defect to competing brands. Thus, a firm's demand is vastly more elastic than total market demand.
+              <strong class="text-slate-900 block" data-i18n="dist_firm_market_h">B. Inter-market substitutability (outside options & market-wide demand)</strong>
+              <p data-i18n="dist_firm_market_p">
+                Measures whether buyers abandon the entire product category for goods in <strong>other markets</strong> when all brands raise prices together (SSNIP test). Because cross-market alternatives are distant substitutes, a properly defined relevant market has relatively inelastic aggregate demand (<span data-katex="|PED_{\text{market}}| \lesssim 1" data-katex-display="false">|PED<sub>market</sub>| ≲ 1</span>), enabling a hypothetical monopolist to sustain a 5–10% price hike.
               </p>
             </div>
           </div>
@@ -930,7 +972,7 @@
 
     </section>
 
-    <!-- Tab 4: Knowledge Check -->
+    <!-- Tab 4: Quiz -->
     <section id="view-quiz" class="hidden space-y-6">
       
       <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm max-w-4xl mx-auto space-y-6">
@@ -942,7 +984,7 @@
               Price elasticity & revenue strategy
             </span>
             <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mt-0.5" data-i18n="quiz_title">
-              Exam knowledge check: PED & market mechanisms
+              Exam quiz: PED & market mechanisms
             </h2>
           </div>
           
@@ -1030,10 +1072,9 @@
 
     let state = {
       price: 50.0,
-      substitutes: 'mod',
-      timeHorizon: 'short',
-      needNature: 'nec',
-      isPerfectInelastic: false,
+      substitutes: 2, // 0: none, 1: few, 2: moderate, 3: many
+      timeHorizon: 1, // 0: ultra-short, 1: short, 2: medium, 3: long
+      budgetShare: 2, // 0: negligible, 1: small, 2: moderate, 3: large
     };
 
     const PIVOT_Q = 50.0;
@@ -1063,27 +1104,45 @@
       return svgConfig.upperAxisY - (Math.max(0, Math.min(svgConfig.maxP_scale, p)) / svgConfig.maxP_scale) * svgConfig.upperGraphHeight;
     }
 
-    function trToLowerY(tr) {
-      const normalizedTR = Math.max(0, Math.min(svgConfig.maxTR_scale, tr));
-      return svgConfig.lowerAxisY - (normalizedTR / svgConfig.maxTR_scale) * svgConfig.lowerGraphHeight;
+    function trToLowerY(tr, scaleMax = svgConfig.maxTR_scale) {
+      const normalizedTR = Math.max(0, Math.min(scaleMax, tr));
+      return svgConfig.lowerAxisY - (normalizedTR / scaleMax) * svgConfig.lowerGraphHeight;
+    }
+
+    /* Piecewise-linear interpolation helper for continuous determinant sliders */
+    function interpolateScale(val, anchors) {
+      const clamped = Math.max(0, Math.min(anchors.length - 1, val));
+      const idx = Math.floor(clamped);
+      if (idx >= anchors.length - 1) return anchors[anchors.length - 1];
+      const frac = clamped - idx;
+      return anchors[idx] + frac * (anchors[idx + 1] - anchors[idx]);
     }
 
     function getDeterminantsSlopeMultiplier() {
-      if (state.isPerfectInelastic) return 0.0;
+      // Unified boundary calibration: when all three sliders sit at 0 (far left),
+      // total price responsiveness converges smoothly to b = 0 (perfectly inelastic).
+      if (state.substitutes <= 0.001 && state.timeHorizon <= 0.001 && state.budgetShare <= 0.001) {
+        return 0.0;
+      }
 
-      let multSub = 1.0;
-      if (state.substitutes === 'low') multSub = 0.55;
-      else if (state.substitutes === 'high') multSub = 1.70;
+      // Continuous anchors: 0 (none) -> 1 (few) -> 2 (moderate) -> 3 (many)
+      const multSub = interpolateScale(state.substitutes, [0.15, 0.60, 1.10, 1.75]);
 
-      let multTime = 1.0;
-      if (state.timeHorizon === 'short') multTime = 0.75;
-      else if (state.timeHorizon === 'long') multTime = 1.35;
+      // Continuous anchors: 0 (ultra-short) -> 1 (short) -> 2 (medium) -> 3 (long)
+      const multTime = interpolateScale(state.timeHorizon, [0.55, 0.95, 1.25, 1.55]);
 
-      let multNeed = 1.0;
-      if (state.needNature === 'nec') multNeed = 0.70;
-      else if (state.needNature === 'lux') multNeed = 1.45;
+      // Continuous anchors via Slutsky income-effect channel (-s * eta_I):
+      // 0 (negligible) -> 1 (small) -> 2 (moderate) -> 3 (large)
+      const multBudget = interpolateScale(state.budgetShare, [0.40, 0.72, 0.96, 1.38]);
 
-      return 1.0 * multSub * multTime * multNeed;
+      const rawB = 1.0 * multSub * multTime * multBudget;
+      // Smoothly taper the residual floor near (0, 0, 0) so approaching the far left reaches b = 0 continuously
+      const minFloor = 0.15 * 0.55 * 0.40; // 0.033
+      return Math.max(0, (rawB - minFloor) / (1 - minFloor));
+    }
+
+    function isDemandPerfectlyInelastic(b = getDeterminantsSlopeMultiplier()) {
+      return b <= 0.0001;
     }
 
     function calcQ(price, b) {
@@ -1127,7 +1186,7 @@
         nav_intro: "Introduction",
         nav_lab: "Laboratory",
         nav_distinction: "Slope vs elasticity",
-        nav_quiz: "Knowledge check",
+        nav_quiz: "Quiz",
 
         intro_hero_tag: "Microeconomics & behavioral pricing",
         intro_hero_title: "Price elasticity of demand, behavioral drivers & revenue strategy",
@@ -1135,14 +1194,22 @@
         intro_hero_btn_lab: "Open interactive laboratory",
         intro_hero_btn_dist: "Slope vs elasticity distinction",
 
+        intro_gen_title: "General concept of price elasticity of demand (PED)",
+        intro_gen_sub: "Percentage responsiveness of quantity demanded to price changes",
+        intro_gen_badge: "Core formula",
+        intro_gen_p1: 'In general terms, price elasticity of demand (<span data-katex="PED" data-katex-display="false">PED</span>) expresses the ratio of the percentage change in quantity demanded (<span data-katex="\\%\\Delta Q_D" data-katex-display="false">%ΔQ<sub>D</sub></span>) to the percentage change in the good\'s price (<span data-katex="\\%\\Delta P" data-katex-display="false">%ΔP</span>), holding all other factors constant (<em>ceteris paribus</em>).',
+        intro_gen_p2: 'Interpretation: if <span data-katex="PED = -2" data-katex-display="false">PED = −2</span>, a <span data-katex="1\\%" data-katex-display="false">1%</span> rise in price leads to a <span data-katex="2\\%" data-katex-display="false">2%</span> drop in quantity demanded. Because elasticity is a ratio of two percentages, it is completely unit-free.',
+
         intro_def_title: "Formal mathematical definitions of price elasticity of demand",
         intro_def_sub: "Point elasticity vs arc (midpoint) method",
-        intro_point_h: "1. Point price elasticity of demand (Point PED)",
+        intro_point_h: "1. Derivative method (point elasticity)",
+        intro_point_badge: "Infinitesimal",
         intro_point_p: 'Used when evaluating elasticity at a single specific coordinate <span data-katex="(P, Q)" data-katex-display="false">(P, Q)</span> along a continuous demand function:',
         intro_point_note: 'Note: because demand slopes downward by the Law of Demand (<span data-katex="\\frac{dQ}{dP} < 0" data-katex-display="false">dQ/dP &lt; 0</span>), <span data-katex="PED" data-katex-display="false">PED</span> is naturally negative. Economists frequently analyze its absolute modulus <span data-katex="|PED|" data-katex-display="false">|PED|</span>.',
         intro_arc_h: "2. Midpoint method (Arc elasticity)",
+        intro_arc_badge: "Discrete",
         intro_arc_p: 'Used when measuring elasticity across two distinct observable price points <span data-katex="(P_1, Q_1)" data-katex-display="false">(P<sub>1</sub>, Q<sub>1</sub>)</span> and <span data-katex="(P_2, Q_2)" data-katex-display="false">(P<sub>2</sub>, Q<sub>2</sub>)</span>:',
-        intro_arc_note: "Advantage: divides by the average base value, delivering identical symmetric results regardless of whether price rises or falls.",
+        intro_arc_note: 'Advantage: dividing each change by its midpoint average <span data-katex="\\frac{X_1 + X_2}{2}" data-katex-display="false">(X<sub>1</sub> + X<sub>2</sub>)/2</span> preserves the separate percentage expressions <span data-katex="\\%\\Delta Q_D" data-katex-display="false">%ΔQ<sub>D</sub></span> and <span data-katex="\\%\\Delta P" data-katex-display="false">%ΔP</span> (so mixed data can be combined) while delivering symmetric results whether price rises or falls.',
 
         intro_det_title: "Non-price determinants of price elasticity in the relevant market",
         intro_det_sub: "Microeconomic and behavioral roots of consumer price sensitivity",
@@ -1157,9 +1224,9 @@
         det2_p: "Goods consuming an infinitesimal share of total income exhibit low elasticity because price hikes barely register on total purchasing power. Goods requiring large budget commitments induce intense price comparison and high elasticity.",
         det2_eg: 'Example: table salt or toothpicks (negligible share = low <span data-katex="|PED|" data-katex-display="false">|PED|</span>) vs car purchase or apartment rent (large share = high <span data-katex="|PED|" data-katex-display="false">|PED|</span>).',
 
-        det3_h: "3. Nature of the need (necessity vs luxury)",
-        det3_p: "Basic necessities and life-saving goods must be consumed regardless of cost, generating rigid or highly inelastic demand. Luxuries and non-essential recreational activities can easily be postponed or foregone, yielding high elasticity.",
-        det3_eg: 'Example: emergency surgery or insulin (<span data-katex="|PED| \\approx 0" data-katex-display="false">|PED| ≈ 0</span>) vs luxury yacht charters or weekend spa getaways (<span data-katex="|PED| > 2" data-katex-display="false">|PED| &gt; 2</span>).',
+        det3_h: "3. Urgency and postponability of purchase",
+        det3_p: 'Urgent, non-postponable purchases (such as emergency repairs or acute medical care) leave buyers no room to delay, generating rigid or highly inelastic demand. Postponable or durable goods allow buyers to wait for sales or defer replacement, amplifying price sensitivity. (Note: "necessity vs. luxury" is formally defined via income elasticity <span data-katex="\\eta_I" data-katex-display="false">η<sub>I</sub></span> rather than own-price elasticity.)',
+        det3_eg: 'Example: emergency locksmith or insulin (<span data-katex="|PED| \\approx 0" data-katex-display="false">|PED| ≈ 0</span>) vs postponable appliance upgrade or vacation (<span data-katex="|PED| > 2" data-katex-display="false">|PED| &gt; 2</span>).',
 
         det4_h: "4. Time horizon of consumer response",
         det4_p: "In the short run, consumers are locked into existing habits, equipment, and housing contracts (low elasticity). Over a multi-year horizon, buyers adapt technologies, relocate, and switch behavioral patterns (elasticity increases).",
@@ -1175,15 +1242,15 @@
 
         intro_regimes_title: "Classification of elasticity regimes & total revenue (TR) rules",
         intro_regimes_sub: "Revenue maximization principles across elasticity zones",
-        zone_el_h: 'Price elastic (<span data-katex="|PED| > 1" data-katex-display="false">|PED| &gt; 1</span>)',
+        zone_el_h: '<div>Price elastic</div><div class="font-normal text-indigo-900 mt-0.5">(<span data-katex="|PED| > 1" data-katex-display="false">|PED| &gt; 1</span>)</div>',
         zone_el_p: "Consumers react intensely. Quantity change outstrips price change.",
         zone_el_rule1: 'Price hike (<span data-katex="P \\uparrow" data-katex-display="false">P ↑</span>) ⟹ Total revenue falls (<span data-katex="TR \\downarrow" data-katex-display="false">TR ↓</span>)',
         zone_el_rule2: 'Price cut (<span data-katex="P \\downarrow" data-katex-display="false">P ↓</span>) ⟹ Total revenue rises (<span data-katex="TR \\uparrow" data-katex-display="false">TR ↑</span>)',
-        zone_unit_h: 'Unit elastic (<span data-katex="|PED| = 1" data-katex-display="false">|PED| = 1</span>)',
+        zone_unit_h: '<div>Unit elastic</div><div class="font-normal text-emerald-900 mt-0.5">(<span data-katex="|PED| = 1" data-katex-display="false">|PED| = 1</span>)</div>',
         zone_unit_p: "Exact proportionality. Quantity change exactly offsets price change.",
         zone_unit_rule1: 'Revenue maximum: marginal revenue <span data-katex="MR = 0" data-katex-display="false">MR = 0</span>',
         zone_unit_rule2: 'Any price change leaves <span data-katex="TR" data-katex-display="false">TR</span> virtually unchanged',
-        zone_inel_h: 'Price inelastic (<span data-katex="|PED| < 1" data-katex-display="false">|PED| &lt; 1</span>)',
+        zone_inel_h: '<div>Price inelastic</div><div class="font-normal text-amber-900 mt-0.5">(<span data-katex="|PED| < 1" data-katex-display="false">|PED| &lt; 1</span>)</div>',
         zone_inel_p: "Consumers are insensitive. Price change dominates the small volume change.",
         zone_inel_rule1: 'Price hike (<span data-katex="P \\uparrow" data-katex-display="false">P ↑</span>) ⟹ Total revenue rises (<span data-katex="TR \\uparrow" data-katex-display="false">TR ↑</span>)',
         zone_inel_rule2: 'Price cut (<span data-katex="P \\downarrow" data-katex-display="false">P ↓</span>) ⟹ Total revenue falls (<span data-katex="TR \\downarrow" data-katex-display="false">TR ↓</span>)',
@@ -1199,24 +1266,29 @@
         ctrl_det_sub: "Shapes slope and baseline price responsiveness",
         det_ctrl_sub_title: "Availability of substitutes:",
         det_ctrl_time_title: "Time horizon:",
-        det_ctrl_need_title: "Nature of need:",
+        det_ctrl_budget_title: "Budget share:",
+        det_opt_none: "None",
         det_opt_few: "Few",
         det_opt_mod: "Moderate",
         det_opt_many: "Many",
-        det_opt_short: "Short-run",
-        det_opt_long: "Long-run",
-        det_opt_necessity: "Necessity",
-        det_opt_luxury: "Luxury",
+        det_opt_ultrashort: "Ultra-short",
+        det_opt_short: "Short",
+        det_opt_medium: "Medium",
+        det_opt_long: "Long",
+        det_opt_negligible: "Negligible",
+        det_opt_small: "Small",
+        det_opt_budget_mod: "Moderate",
+        det_opt_large: "Large",
         det_slope_hint: "Adjusting these behavioral factors pivots the demand curve, showing how determinants alter consumer sensitivity at any price level.",
 
         presets_title: "Canonical market presets",
-        btn_reset: "Reset",
+        btn_reset_sim: "Reset simulator",
         preset1_h: "Unit elasticity",
         preset1_sub: "Max total revenue (TR)",
-        preset2_h: "Luxury good",
-        preset2_sub: "Many substitutes, high sensitivity",
-        preset3_h: "Basic necessity",
-        preset3_sub: "No substitutes, low sensitivity",
+        preset2_h: "Big-ticket rival good",
+        preset2_sub: "Many substitutes, large budget share",
+        preset3_h: "Minor staple item",
+        preset3_sub: "Few substitutes, negligible share",
         preset4_h: "Perfect inelastic",
         preset4_sub: "Vital medicine, rigid demand",
 
@@ -1264,11 +1336,13 @@
         dist_ped_low_desc: 'near the horizontal axis, <span data-katex="P" data-katex-display="false">P</span> is small and <span data-katex="Q" data-katex-display="false">Q</span> is large, so <span data-katex="P/Q" data-katex-display="false">P/Q</span> approaches zero (<span data-katex="|PED| \\to 0" data-katex-display="false">|PED| → 0</span>).',
         dist_ped_tex: "PED = (-b) \\cdot \\frac{P}{Q} \\implies |PED| \\in [0, \\infty)",
 
-        dist_firm_title: "Market elasticity vs individual firm elasticity",
-        dist_firm_market_h: "A. Whole market demand (broad relevant market)",
-        dist_firm_market_p: "The total aggregate demand for an entire industry (e.g., passenger cars, commercial flights, or bread) has relatively few broad substitutes. Consequently, broad market demand is moderately inelastic or modest in elasticity.",
-        dist_firm_single_h: "B. Single firm demand (specific brand within market)",
-        dist_firm_single_p: "A single producer (e.g., Ford Focus, Ryanair, or Bakery \"Złoty Kłos\") operates surrounded by direct rivals. If that single firm raises price alone, consumers immediately defect to competing brands. Thus, a firm's demand is vastly more elastic than total market demand.",
+        dist_firm_title: "What is substitutability? Within-market vs across-market substitution",
+        dist_firm_badge: "Relevant market boundary",
+        dist_firm_intro: "Substitutability is not defined inside a pre-existing market—rather, <strong>substitutability defines the boundary of the relevant market itself</strong>. Economists distinguish between two distinct layers of substitution:",
+        dist_firm_single_h: "A. Intra-market substitutability (close substitutes & single firm demand)",
+        dist_firm_single_p: 'Measures how easily buyers switch between competing varieties or brands serving the <strong>same core need</strong> (e.g., Pepsi vs. Coca-Cola, or competing airlines on the same route). Because these goods are close replacements, they form a single relevant market. High intra-market substitutability makes an individual firm\'s demand curve flatter and highly elastic (<span data-katex="|PED_{\\text{firm}}| > 1" data-katex-display="false">|PED<sub>firm</sub>| &gt; 1</span>).',
+        dist_firm_market_h: "B. Inter-market substitutability (outside options & market-wide demand)",
+        dist_firm_market_p: 'Measures whether buyers abandon the entire product category for goods in <strong>other markets</strong> when all brands raise prices together (SSNIP test). Because cross-market alternatives are distant substitutes, a properly defined relevant market has relatively inelastic aggregate demand (<span data-katex="|PED_{\\text{market}}| \\lesssim 1" data-katex-display="false">|PED<sub>market</sub>| ≲ 1</span>), enabling a hypothetical monopolist to sustain a 5–10% price hike.',
 
         dist_time_title: "Empirical case study: the time horizon dilemma (energy price shocks)",
         dist_time_sub: "Why price hikes generate short-run revenue windfalls but trigger long-run market collapse",
@@ -1293,7 +1367,7 @@
         mini_default_text: "Click on any good above to reveal its detailed microeconomic and behavioral elasticity profile.",
 
         quiz_cat: "Price elasticity & revenue strategy",
-        quiz_title: "Exam knowledge check: PED & market mechanisms",
+        quiz_title: "Exam quiz: PED & market mechanisms",
         quiz_btn_next: "Next question",
         quiz_comp_title: "Quiz completed!",
         quiz_btn_retry: "Retake quiz (new shuffle)",
@@ -1302,13 +1376,13 @@
       },
 
       pl: {
-        subtitle: "Cenowa elastyczność popytu (PED) i utarg całkowity",
+        subtitle: "Cenowa elastyczność popytu (PED) i przychód całkowity",
         author_lbl: "Autor:",
         ai_collab: "Wsparcie w implementacji AI: Gemini",
         nav_intro: "Wprowadzenie",
         nav_lab: "Laboratorium",
         nav_distinction: "Nachylenie a elastyczność",
-        nav_quiz: "Quiz egzaminacyjny",
+        nav_quiz: "Quiz",
 
         intro_hero_tag: "Mikroekonomia i pricing behawioralny",
         intro_hero_title: "Cenowa elastyczność popytu, determinanty i strategie przychodowe",
@@ -1316,14 +1390,22 @@
         intro_hero_btn_lab: "Przejdź do laboratorium",
         intro_hero_btn_dist: "Rozróżnienie nachylenia i elastyczności",
 
+        intro_gen_title: "Ogólne pojęcie cenowej elastyczności popytu (PED)",
+        intro_gen_sub: "Procentowa wrażliwość wielkości popytu na zmiany ceny",
+        intro_gen_badge: "Wzór bazowy",
+        intro_gen_p1: 'W ujęciu ogólnym cenowa elastyczność popytu (<span data-katex="PED" data-katex-display="false">PED</span>) wyraża stosunek procentowej zmiany wielkości popytu (<span data-katex="\\%\\Delta Q_D" data-katex-display="false">%ΔQ<sub>D</sub></span>) do procentowej zmiany ceny dobra (<span data-katex="\\%\\Delta P" data-katex-display="false">%ΔP</span>), przy założeniu stałości pozostałych czynników (<em>ceteris paribus</em>).',
+        intro_gen_p2: 'Interpretacja: jeśli <span data-katex="PED = -2" data-katex-display="false">PED = −2</span>, to wzrost ceny o <span data-katex="1\\%" data-katex-display="false">1%</span> prowadzi do spadku wielkości popytu o <span data-katex="2\\%" data-katex-display="false">2%</span>. Ponieważ elastyczność jest ilorazem dwóch wielkości procentowych, jest całkowicie bezwymiarowa (niezależna od jednostek miary).',
+
         intro_def_title: "Formalne definicje matematyczne cenowej elastyczności popytu",
         intro_def_sub: "Elastyczność punktowa a metoda punktu środkowego (łukowa)",
-        intro_point_h: "1. Punktowa cenowa elastyczność popytu (Point PED)",
+        intro_point_h: "1. Metoda pochodnych (elastyczność punktowa)",
+        intro_point_badge: "Infinitezymalna",
         intro_point_p: 'Stosowana do precyzyjnego wyznaczenia elastyczności w konkretnym punkcie <span data-katex="(P, Q)" data-katex-display="false">(P, Q)</span> na ciągłej funkcji popytu:',
         intro_point_note: 'Uwaga: ze względu na prawo popytu (<span data-katex="\\frac{dQ}{dP} < 0" data-katex-display="false">dQ/dP &lt; 0</span>) elastyczność cenowa jest wartością ujemną. W analizie ekonomicznej najczęściej operujemy jej wartością bezwzględną <span data-katex="|PED|" data-katex-display="false">|PED|</span>.',
         intro_arc_h: "2. Metoda punktu środkowego (elastyczność łukowa)",
+        intro_arc_badge: "Dyskretna",
         intro_arc_p: 'Stosowana w praktyce gospodarczej przy porównywaniu dwóch obserwowalnych stanów rynkowych <span data-katex="(P_1, Q_1)" data-katex-display="false">(P<sub>1</sub>, Q<sub>1</sub>)</span> oraz <span data-katex="(P_2, Q_2)" data-katex-display="false">(P<sub>2</sub>, Q<sub>2</sub>)</span>:',
-        intro_arc_note: "Zaleta: dzielenie przez średnią arytmetyczną bazy eliminuje asymetrię — daje ten sam wynik bez względu na to, czy cena rosła, czy malała.",
+        intro_arc_note: 'Zaleta: dzielenie każdego przyrostu przez średnią środkową <span data-katex="\\frac{X_1 + X_2}{2}" data-katex-display="false">(X<sub>1</sub> + X<sub>2</sub>)/2</span> zachowuje osobne wyrażenia procentowe <span data-katex="\\%\\Delta Q_D" data-katex-display="false">%ΔQ<sub>D</sub></span> i <span data-katex="\\%\\Delta P" data-katex-display="false">%ΔP</span> (co pozwala łączyć dane mieszane) oraz eliminuje asymetrię kierunku zmiany ceny.',
 
         intro_det_title: "Pozacenowe determinanty elastyczności popytu na rynku właściwym",
         intro_det_sub: "Mikroekonomiczne i behawioralne źródła wrażliwości cenowej konsumentów",
@@ -1338,9 +1420,9 @@
         det2_p: "Dobra o znikomym udziale w dochodzie charakteryzują się niską elastycznością, ponieważ ich podrożenie jest niemal niezauważalne dla portfela. Dobra pochłaniające znaczną część budżetu zmuszają do wnikliwego porównywania cen (wysoka elastyczność).",
         det2_eg: 'Przykład: sól kuchenna lub zapałki (znikomy udział = niskie <span data-katex="|PED|" data-katex-display="false">|PED|</span>) vs zakup samochodu lub wynajem mieszkania (duży udział = wysokie <span data-katex="|PED|" data-katex-display="false">|PED|</span>).',
 
-        det3_h: "3. Charakter zaspokajanej potrzeby (dobra podstawowe a luksusowe)",
-        det3_p: "Dobra pierwszej potrzeby i ratujące życie muszą być nabyte bez względu na cenę, co rodzi popyt sztywny lub wysoce nieelastyczny. Dobra luksusowe i rekreacyjne można bez problemu odłożyć w czasie lub porzucić (wysoka elastyczność).",
-        det3_eg: 'Przykład: operacja ratująca życie lub insulina (<span data-katex="|PED| \\approx 0" data-katex-display="false">|PED| ≈ 0</span>) vs czarter jachtu na wakacje (<span data-katex="|PED| > 2" data-katex-display="false">|PED| &gt; 2</span>).',
+        det3_h: "3. Pilność i możliwość odroczenia zakupu",
+        det3_p: 'Pilne zakupy niepodlegające odroczeniu (np. awaryjna naprawa lub nagła pomoc medyczna) nie dają nabywcy czasu na zwłokę, co rodzi sztywny lub wysoce nieelastyczny popyt. Zakupy odkładalne w czasie lub dobra trwałe pozwalają czekać na promocje i silnie zwiększają wrażliwość cenową. (Uwaga: podział na dobra podstawowe i luksusowe definiuje się formalnie przez dochodową elastyczność popytu <span data-katex="\\eta_I" data-katex-display="false">η<sub>I</sub></span>, a nie elastyczność cenową).',
+        det3_eg: 'Przykład: awaryjny ślusarz lub insulina (<span data-katex="|PED| \\approx 0" data-katex-display="false">|PED| ≈ 0</span>) vs odkładalna wymiana sprzętu AGD lub urlop (<span data-katex="|PED| > 2" data-katex-display="false">|PED| &gt; 2</span>).',
 
         det4_h: "4. Horyzont czasowy reakcji nabywcy",
         det4_p: "W krótkim okresie konsumenci są związani posiadaną technologią, umowami i nawykami (niska elastyczność). W długim okresie nabywcy adaptują się: zmieniają piec grzewczy, kupują oszczędniejsze auta lub przeprowadzają się (elastyczność rośnie).",
@@ -1354,68 +1436,73 @@
         det6_p: "Uzależnienie fizjologiczne oraz utrwalone nawyki dnia codziennego osłabiają racjonalną kalkulację cenową. Konsumenci akceptują drastyczne podwyżki cen bez proporcjonalnego spadku wolumenu, co rządy wykorzystują w akcyzie.",
         det6_eg: 'Przykład: wyroby tytoniowe, markowa kawa, leki pobudzające (niskie <span data-katex="|PED|" data-katex-display="false">|PED|</span>).',
 
-        intro_regimes_title: "Klasyfikacja stref elastyczności i reguły utargu całkowitego (TR)",
+        intro_regimes_title: "Klasyfikacja stref elastyczności i reguły przychodu całkowitego (TR)",
         intro_regimes_sub: "Zasady maksymalizacji przychodów w zależności od strefy wrażliwości",
-        zone_el_h: 'Popyt elastyczny (<span data-katex="|PED| > 1" data-katex-display="false">|PED| &gt; 1</span>)',
+        zone_el_h: '<div>Popyt elastyczny</div><div class="font-normal text-indigo-900 mt-0.5">(<span data-katex="|PED| > 1" data-katex-display="false">|PED| &gt; 1</span>)</div>',
         zone_el_p: "Konsumenci reagują bardzo silnie. Zmiana ilościowa dominuje nad zmianą ceny.",
-        zone_el_rule1: 'Podwyżka ceny (<span data-katex="P \\uparrow" data-katex-display="false">P ↑</span>) ⟹ Spadek utargu całkowitego (<span data-katex="TR \\downarrow" data-katex-display="false">TR ↓</span>)',
-        zone_el_rule2: 'Obniżka ceny (<span data-katex="P \\downarrow" data-katex-display="false">P ↓</span>) ⟹ Wzrost utargu całkowitego (<span data-katex="TR \\uparrow" data-katex-display="false">TR ↑</span>)',
-        zone_unit_h: 'Elastyczność jednostkowa (<span data-katex="|PED| = 1" data-katex-display="false">|PED| = 1</span>)',
+        zone_el_rule1: 'Podwyżka ceny (<span data-katex="P \\uparrow" data-katex-display="false">P ↑</span>) ⟹ Spadek przychodu całkowitego (<span data-katex="TR \\downarrow" data-katex-display="false">TR ↓</span>)',
+        zone_el_rule2: 'Obniżka ceny (<span data-katex="P \\downarrow" data-katex-display="false">P ↓</span>) ⟹ Wzrost przychodu całkowitego (<span data-katex="TR \\uparrow" data-katex-display="false">TR ↑</span>)',
+        zone_unit_h: '<div>Elastyczność jednostkowa</div><div class="font-normal text-emerald-900 mt-0.5">(<span data-katex="|PED| = 1" data-katex-display="false">|PED| = 1</span>)</div>',
         zone_unit_p: "Idealna proporcjonalność. Procentowa zmiana ilości dokładnie równoważy zmianę ceny.",
-        zone_unit_rule1: 'Maksimum utargu: utarg krańcowy <span data-katex="MR = 0" data-katex-display="false">MR = 0</span>',
-        zone_unit_rule2: 'Drobna zmiana ceny nie zmienia utargu <span data-katex="TR" data-katex-display="false">TR</span>',
-        zone_inel_h: 'Popyt nieelastyczny (<span data-katex="|PED| < 1" data-katex-display="false">|PED| &lt; 1</span>)',
+        zone_unit_rule1: 'Maksimum przychodu: przychód krańcowy <span data-katex="MR = 0" data-katex-display="false">MR = 0</span>',
+        zone_unit_rule2: 'Drobna zmiana ceny nie zmienia przychodu <span data-katex="TR" data-katex-display="false">TR</span>',
+        zone_inel_h: '<div>Popyt nieelastyczny</div><div class="font-normal text-amber-900 mt-0.5">(<span data-katex="|PED| < 1" data-katex-display="false">|PED| &lt; 1</span>)</div>',
         zone_inel_p: "Konsumenci reagują słabo. Zmiana ceny dominuje nad małą zmianą ilości.",
-        zone_inel_rule1: 'Podwyżka ceny (<span data-katex="P \\uparrow" data-katex-display="false">P ↑</span>) ⟹ Wzrost utargu całkowitego (<span data-katex="TR \\uparrow" data-katex-display="false">TR ↑</span>)',
-        zone_inel_rule2: 'Obniżka ceny (<span data-katex="P \\downarrow" data-katex-display="false">P ↓</span>) ⟹ Spadek utargu całkowitego (<span data-katex="TR \\downarrow" data-katex-display="false">TR ↓</span>)',
+        zone_inel_rule1: 'Podwyżka ceny (<span data-katex="P \\uparrow" data-katex-display="false">P ↑</span>) ⟹ Wzrost przychodu całkowitego (<span data-katex="TR \\uparrow" data-katex-display="false">TR ↑</span>)',
+        zone_inel_rule2: 'Obniżka ceny (<span data-katex="P \\downarrow" data-katex-display="false">P ↓</span>) ⟹ Spadek przychodu całkowitego (<span data-katex="TR \\downarrow" data-katex-display="false">TR ↓</span>)',
 
-        ctrl_price_title: "Sterowanie ceną rynkową (P)",
-        ctrl_price_sub: "Przesuwanie punktu roboczego wzdłuż krzywej popytu",
+        ctrl_price_title: "Sterowanie ceną (P)",
+        ctrl_price_sub: "Ruch punktu wzdłuż krzywej popytu",
         slider_price_lbl: "Aktualna cena rynkowa:",
         slider_low_p: "Niska cena (P = 5)",
         slider_mid_p: "Środek (P = 50)",
         slider_high_p: "Wysoka cena (P = 95)",
 
-        ctrl_det_title: "Eksplorator determinant pozacenowych",
-        ctrl_det_sub: "Kształtowanie nachylenia i bazowej wrażliwości",
+        ctrl_det_title: "Determinanty pozacenowe",
+        ctrl_det_sub: "Nachylenie i bazowa wrażliwość cenowa",
         det_ctrl_sub_title: "Dostępność substytutów:",
         det_ctrl_time_title: "Horyzont czasowy:",
-        det_ctrl_need_title: "Ranga dobra:",
+        det_ctrl_budget_title: "Udział w budżecie:",
+        det_opt_none: "Brak",
         det_opt_few: "Mało",
         det_opt_mod: "Umiarkowanie",
         det_opt_many: "Dużo",
-        det_opt_short: "Krótki okres",
-        det_opt_long: "Długi okres",
-        det_opt_necessity: "Podstawowe",
-        det_opt_luxury: "Luksusowe",
+        det_opt_ultrashort: "Ultra-krótki",
+        det_opt_short: "Krótki",
+        det_opt_medium: "Średni",
+        det_opt_long: "Długi",
+        det_opt_negligible: "Znikomy",
+        det_opt_small: "Mały",
+        det_opt_budget_mod: "Umiarkowany",
+        det_opt_large: "Duży",
         det_slope_hint: "Zmiana tych parametrów dynamicznie obraca krzywą popytu, pokazując jak determinanty zmieniają reakcję nabywców przy danej cenie.",
 
         presets_title: "Szybkie presety rynkowe",
-        btn_reset: "Resetuj",
+        btn_reset_sim: "Resetuj symulator",
         preset1_h: "Optimum przychodowe",
-        preset1_sub: "Maksimum utargu całkowitego (TR)",
-        preset2_h: "Dobra luksusowe",
-        preset2_sub: "Liczne substytuty, wysoka wrażliwość",
-        preset3_h: "Dobra podstawowe",
-        preset3_sub: "Brak zamienników, niska wrażliwość",
+        preset1_sub: "Maksimum przychodu całkowitego (TR)",
+        preset2_h: "Duży wydatek z rywalami",
+        preset2_sub: "Liczne substytuty, duży udział w budżecie",
+        preset3_h: "Drobny artykuł codzienny",
+        preset3_sub: "Mało substytutów, znikomy udział",
         preset4_h: "Popyt doskonale sztywny",
         preset4_sub: "Lek ratujący życie, stała ilość",
 
-        sim_title: "Test szoku cenowego na utarg (±10%)",
+        sim_title: "Test szoku cenowego na przychód (±10%)",
         sim_desc: "Sprawdź, jak bezpośredni szok cenowy o 10% wpłynie na wolumen sprzedaży i przychód firmy:",
         sim_btn_cut: "Test obniżki −10%",
         sim_btn_hike: "Test podwyżki +10%",
-        sim_initial_msg: "Kliknij jeden z przycisków szoku powyżej, aby przetestować reakcję wolumenu i utargu.",
+        sim_initial_msg: "Kliknij jeden z przycisków szoku powyżej, aby przetestować reakcję wolumenu i przychodu.",
 
         graph_top_tag: "Zsynchronizowany wykres podwójny",
-        graph_main_title: "Krzywa popytu P(Q) i parabola utargu całkowitego TR(Q)",
+        graph_main_title: "Krzywa popytu P(Q) i parabola przychodu TR(Q)",
         leg_demand: "Popyt (D)",
-        leg_revenue: "Utarg całkowity (TR)",
+        leg_revenue: "Przychód całkowity (TR)",
         leg_point: "Punkt roboczy A",
 
         metric_ped_title: "Punktowe PED (wartość)",
         metric_regime_title: "Klasyfikacja popytu",
-        metric_tr_title: "Utarg całkowity (TR = P·Q)",
+        metric_tr_title: "Przychód całkowity (TR = P·Q)",
         metric_advice_title: "Skutek podwyżki ceny (P ↑):",
 
         comm_title: "Dynamiczny komentarz mikroekonomiczny i behawioralny",
@@ -1445,17 +1532,19 @@
         dist_ped_low_desc: 'przy osi poziomej cena <span data-katex="P" data-katex-display="false">P</span> jest niska, a ilość <span data-katex="Q" data-katex-display="false">Q</span> bardzo duża, stąd iloraz <span data-katex="P/Q" data-katex-display="false">P/Q</span> dąży do zera (<span data-katex="|PED| \\to 0" data-katex-display="false">|PED| → 0</span>).',
         dist_ped_tex: "PED = (-b) \\cdot \\frac{P}{Q} \\implies |PED| \\in [0, \\infty)",
 
-        dist_firm_title: "Elastyczność rynkowa a elastyczność popytu na produkt pojedynczej firmy",
-        dist_firm_market_h: "A. Popyt na całym rynku (szeroki rynek właściwy)",
-        dist_firm_market_p: "Całkowite zapotrzebowanie na całą kategorię dóbr (np. samochody osobowe, chleb, bilety lotnicze) ma niewiele bezpośrednich substytutów. Z tego względu popyt rynkowy jest umiarkowanie nieelastyczny lub umiarkowanie elastyczny.",
-        dist_firm_single_h: "B. Popyt na wyrób pojedynczej firmy (konkretna marka)",
-        dist_firm_single_p: "Pojedynczy producent (np. model Ford Focus, linia lotnicza Ryanair, piekarnia \"Złoty Kłos\") działa w otoczeniu bliskich rywali. Podwyżka ceny przez jedną firmę powoduje natychmiastowe przejście klientów do konkurencji. Popyt na produkt firmy jest wielokrotnie bardziej elastyczny.",
+        dist_firm_title: "Czym jest substytucyjność? Substytucja wewnątrz rynku a między rynkami",
+        dist_firm_badge: "Granica rynku właściwego",
+        dist_firm_intro: "Substytucyjność nie jest definiowana wewnątrz z góry ustalonego rynku – to <strong>substytucyjność wyznacza granice samego rynku właściwego</strong>. Ekonomia wyróżnia dwie odrębne warstwy substytucji:",
+        dist_firm_single_h: "A. Substytucyjność wewnątrzrynkowa (bliskie substytuty i popyt pojedynczej firmy)",
+        dist_firm_single_p: 'Mierzy skłonność nabywców do przechodzenia między konkurencyjnymi markami zaspokajającymi <strong>tę samą potrzebę</strong> (np. Pepsi a Coca-Cola lub różne linie lotnicze na tej samej trasie). Ponieważ są to bliskie zamienniki, tworzą jeden rynek właściwy. Wysoka substytucyjność wewnątrz rynku czyni krzywą popytu pojedynczej firmy bardziej płaską i elastyczną (<span data-katex="|PED_{\\text{firm}}| > 1" data-katex-display="false">|PED<sub>firm</sub>| &gt; 1</span>).',
+        dist_firm_market_h: "B. Substytucyjność międzyrynkowa (opcje zewnętrzne i popyt całego rynku)",
+        dist_firm_market_p: 'Mierzy skłonność nabywców do porzucenia całej kategorii dóbr na rzecz produktów z <strong>innych rynków</strong>, gdy wszyscy producenci podnoszą ceny jednocześnie (test SSNIP). Ponieważ dobra z innych rynków są odległymi substytutami, właściwie wyznaczony rynek cechuje się stosunkowo nieelastycznym popytem zagregowanym (<span data-katex="|PED_{\\text{market}}| \\lesssim 1" data-katex-display="false">|PED<sub>market</sub>| ≲ 1</span>), co pozwala hipotetycznemu monopolistowi utrzymać podwyżkę o 5–10%.',
 
         dist_time_title: "Analiza empiryczna: dylemat horyzontu czasowego (szoki energetyczne)",
         dist_time_sub: "Dlaczego podwyżki cen dają krótkookresowy skok zysków, lecz wywołują długookresową zapaść popytu",
         dist_time_badge: "Dynamika horyzontu czasowego",
         dist_time_sr_h: 'Krótki okres: pułapka sztywności (<span data-katex="|PED| < 0{,}2" data-katex-display="false">|PED| &lt; 0,2</span>)',
-        dist_time_sr_p: 'Gdy w wyniku kryzysu naftowego ceny ropy skoczyły czterokrotnie, kierowcy nie mogli z dnia na dzień zmienić aut, ocieplić domów czy zmienić miejsca pracy. Popyt był uwięziony i skrajnie nieelastyczny. Kraje naftowe notowały rekordowe wzrosty utargu (<span data-katex="TR \\uparrow" data-katex-display="false">TR ↑</span>).',
+        dist_time_sr_p: 'Gdy w wyniku kryzysu naftowego ceny ropy skoczyły czterokrotnie, kierowcy nie mogli z dnia na dzień zmienić aut, ocieplić domów czy zmienić miejsca pracy. Popyt był uwięziony i skrajnie nieelastyczny. Kraje naftowe notowały rekordowe wzrosty przychodu (<span data-katex="TR \\uparrow" data-katex-display="false">TR ↑</span>).',
         dist_time_sr_concl: "Wniosek: w krótkim okresie siła monopolistyczna wydaje się nieograniczona, bo klienci nie mają alternatywy.",
         dist_time_lr_h: 'Długi okres: pełna adaptacja (<span data-katex="|PED| > 1{,}1" data-katex-display="false">|PED| &gt; 1,1</span>)',
         dist_time_lr_p: 'W ciągu kolejnych lat koncerny motoryzacyjne skonstruowały oszczędne silniki i auta elektryczne, wprowadzono alternatywne źródła energii i ocieplono budynki. Popyt przeszedł w strefę elastyczną (<span data-katex="|PED| > 1" data-katex-display="false">|PED| &gt; 1</span>). Wysoka cena wywołała spadek sprzedaży, uderzając w przychody producentów.',
@@ -1473,13 +1562,13 @@
         mini_g4_hint: "Kliknij, aby poznać uzasadnienie",
         mini_default_text: "Kliknij dowolne dobro powyżej, aby wyświetlić szczegółową analizę mikroekonomiczną i behawioralną.",
 
-        quiz_cat: "Cenowa elastyczność popytu i strategie utargu",
-        quiz_title: "Quiz egzaminacyjny: cenowa elastyczność popytu i strategie utargu",
+        quiz_cat: "Cenowa elastyczność popytu i strategie przychodu",
+        quiz_title: "Quiz egzaminacyjny: cenowa elastyczność popytu i strategie przychodu",
         quiz_btn_next: "Następne pytanie",
         quiz_comp_title: "Quiz zakończony!",
         quiz_btn_retry: "Rozwiąż ponownie (nowe losowanie)",
         quiz_btn_review: "Wróć do laboratorium",
-        footer_text: "EconLab — Interaktywny symulator ekonomiczny dla studentów. Wszelkie prawa zastrzeżone.",
+        footer_text: "EconLab — Interaktywny symulator ekonomiczny dla studentów. Wszelkie prawa zastrzeżone."
       }
     };
 
@@ -1488,117 +1577,148 @@
        ========================================================================== */
     function onPriceSliderChange() {
       state.price = parseFloat(document.getElementById('slider-price').value);
-      state.isPerfectInelastic = false;
       updateSimulator();
     }
 
-    function setSubstitutes(val) {
-      state.substitutes = val;
-      state.isPerfectInelastic = false;
-      updateDeterminantButtons();
+    function onDeterminantSliderChange() {
+      const subSlider = document.getElementById('slider-sub');
+      const timeSlider = document.getElementById('slider-time');
+      const budgetSlider = document.getElementById('slider-budget');
+      if (subSlider) state.substitutes = parseFloat(subSlider.value);
+      if (timeSlider) state.timeHorizon = parseFloat(timeSlider.value);
+      if (budgetSlider) state.budgetShare = parseFloat(budgetSlider.value);
+      updateDeterminantControls();
       updateSimulator();
     }
 
-    function setTimeHorizon(val) {
-      state.timeHorizon = val;
-      state.isPerfectInelastic = false;
-      updateDeterminantButtons();
-      updateSimulator();
-    }
-
-    function setNeedNature(val) {
-      state.needNature = val;
-      state.isPerfectInelastic = false;
-      updateDeterminantButtons();
-      updateSimulator();
-    }
-
-    function updateDeterminantButtons() {
+    function updateDeterminantControls() {
       const isEn = currentLang === 'en';
 
-      ['low', 'mod', 'high'].forEach(key => {
-        const btn = document.getElementById(`btn-sub-${key}`);
-        if (!btn) return;
-        if (state.substitutes === key && !state.isPerfectInelastic) {
-          btn.className = "py-1.5 px-2 rounded-lg border-2 border-indigo-600 bg-indigo-50 text-indigo-900 font-bold transition text-center";
-        } else {
-          btn.className = "py-1.5 px-2 rounded-lg border border-slate-200 bg-slate-50 hover:bg-white text-slate-700 font-medium transition text-center";
-        }
-      });
+      // Substitutes slider & continuous regime label
+      const subSlider = document.getElementById('slider-sub');
+      if (subSlider) subSlider.value = state.substitutes;
       const subLabel = document.getElementById('det-sub-label');
       if (subLabel) {
-        if (state.substitutes === 'low') subLabel.textContent = isEn ? "Few" : "Mało";
-        else if (state.substitutes === 'mod') subLabel.textContent = isEn ? "Moderate" : "Umiarkowanie";
-        else subLabel.textContent = isEn ? "Many" : "Dużo";
+        const subIdx = Math.min(3, Math.max(0, Math.round(state.substitutes)));
+        const subNamesEn = ["None", "Few", "Moderate", "Many"];
+        const subNamesPl = ["Brak", "Mało", "Umiarkowanie", "Dużo"];
+        subLabel.textContent = isEn ? subNamesEn[subIdx] : subNamesPl[subIdx];
       }
 
-      ['short', 'long'].forEach(key => {
-        const btn = document.getElementById(`btn-time-${key}`);
-        if (!btn) return;
-        if (state.timeHorizon === key && !state.isPerfectInelastic) {
-          btn.className = "py-1.5 px-2 rounded-lg border-2 border-indigo-600 bg-indigo-50 text-indigo-900 font-bold transition text-center";
-        } else {
-          btn.className = "py-1.5 px-2 rounded-lg border border-slate-200 bg-slate-50 hover:bg-white text-slate-700 font-medium transition text-center";
-        }
-      });
+      // Time horizon slider & continuous regime label
+      const timeSlider = document.getElementById('slider-time');
+      if (timeSlider) timeSlider.value = state.timeHorizon;
       const timeLabel = document.getElementById('det-time-label');
       if (timeLabel) {
-        timeLabel.textContent = state.timeHorizon === 'short' 
-          ? (isEn ? "Short-run" : "Krótki okres") 
-          : (isEn ? "Long-run" : "Długi okres");
+        const timeIdx = Math.min(3, Math.max(0, Math.round(state.timeHorizon)));
+        const timeNamesEn = ["Ultra-short", "Short", "Medium", "Long"];
+        const timeNamesPl = ["Ultra-krótki", "Krótki", "Średni", "Długi"];
+        timeLabel.textContent = isEn ? timeNamesEn[timeIdx] : timeNamesPl[timeIdx];
       }
 
-      ['nec', 'lux'].forEach(key => {
-        const btn = document.getElementById(`btn-need-${key}`);
-        if (!btn) return;
-        if (state.needNature === key && !state.isPerfectInelastic) {
-          btn.className = "py-1.5 px-2 rounded-lg border-2 border-indigo-600 bg-indigo-50 text-indigo-900 font-bold transition text-center";
-        } else {
-          btn.className = "py-1.5 px-2 rounded-lg border border-slate-200 bg-slate-50 hover:bg-white text-slate-700 font-medium transition text-center";
-        }
-      });
-      const needLabel = document.getElementById('det-need-label');
-      if (needLabel) {
-        needLabel.textContent = state.needNature === 'nec' 
-          ? (isEn ? "Necessity" : "Podstawowe") 
-          : (isEn ? "Luxury" : "Luksusowe");
+      // Budget share slider & continuous regime label
+      const budgetSlider = document.getElementById('slider-budget');
+      if (budgetSlider) budgetSlider.value = state.budgetShare;
+      const budgetLabel = document.getElementById('det-budget-label');
+      if (budgetLabel) {
+        const budgetIdx = Math.min(3, Math.max(0, Math.round(state.budgetShare)));
+        const budgetNamesEn = ["Negligible", "Small", "Moderate", "Large"];
+        const budgetNamesPl = ["Znikomy", "Mały", "Umiarkowany", "Duży"];
+        budgetLabel.textContent = isEn ? budgetNamesEn[budgetIdx] : budgetNamesPl[budgetIdx];
       }
     }
 
     function applyPreset(presetKey) {
       if (presetKey === 'unit') {
-        state.substitutes = 'mod';
-        state.timeHorizon = 'short';
-        state.needNature = 'nec';
-        state.isPerfectInelastic = false;
+        state.substitutes = 2; // Moderate
+        state.timeHorizon = 1; // Short
+        state.budgetShare = 2; // Moderate -> b = 1.00
         state.price = 50.0;
-      } else if (presetKey === 'luxury') {
-        state.substitutes = 'high';
-        state.timeHorizon = 'long';
-        state.needNature = 'lux';
-        state.isPerfectInelastic = false;
+      } else if (presetKey === 'high_elastic') {
+        state.substitutes = 3; // Many
+        state.timeHorizon = 3; // Long
+        state.budgetShare = 3; // Large -> high b
         state.price = 56.0;
-      } else if (presetKey === 'necessity') {
-        state.substitutes = 'low';
-        state.timeHorizon = 'short';
-        state.needNature = 'nec';
-        state.isPerfectInelastic = false;
+      } else if (presetKey === 'low_inelastic') {
+        state.substitutes = 1; // Few
+        state.timeHorizon = 0; // Ultra-short
+        state.budgetShare = 0; // Negligible -> low b (~0.10)
         state.price = 30.0;
       } else if (presetKey === 'perfect_inelastic') {
-        state.isPerfectInelastic = true;
+        // Unified with sliders: all three determinant sliders moved all the way to the left (0)
+        state.substitutes = 0; // None
+        state.timeHorizon = 0; // Ultra-short
+        state.budgetShare = 0; // Negligible -> b = 0.00
         state.price = 60.0;
       }
       document.getElementById('slider-price').value = state.price;
-      updateDeterminantButtons();
+      updateDeterminantControls();
       updateSimulator();
     }
 
     function resetLabToDefault() {
+      state.lastShock = null;
       applyPreset('unit');
+      clearSimFeedbackBox();
+    }
+
+    function clearSimFeedbackBox() {
+      const box = document.getElementById('sim-feedback-box');
+      if (!box) return;
+      const msg = (translations[currentLang] && translations[currentLang].sim_initial_msg)
+        ? translations[currentLang].sim_initial_msg
+        : "Click a shock button above to test consumer volume and revenue change.";
+      box.innerHTML = `<span data-i18n="sim_initial_msg">${msg}</span>`;
+    }
+
+    function renderSimFeedbackBox() {
+      if (!state.lastShock) {
+        clearSimFeedbackBox();
+        return;
+      }
+
+      const isEn = currentLang === 'en';
+      const { pctChange, p0, p1, deltaQ_pct, deltaTR, deltaTR_pct, arcPED } = state.lastShock;
+      const box = document.getElementById('sim-feedback-box');
+      if (!box) return;
+
+      const trDirection = deltaTR >= 0 ? (isEn ? "increased" : "wzrósł") : (isEn ? "decreased" : "spadł");
+      const trBadgeClass = deltaTR >= 0
+        ? "text-emerald-800 bg-emerald-50 border-emerald-200"
+        : "text-rose-800 bg-rose-50 border-rose-200";
+
+      let analysis = "";
+      if (Math.abs(arcPED) > 1.05) {
+        analysis = isEn
+          ? `Because demand is <strong>elastic (<span data-katex="|PED| = ${Math.abs(arcPED).toFixed(2)} > 1" data-katex-display="false">|PED| = ${Math.abs(arcPED).toFixed(2)} &gt; 1</span>)</strong>, the ${Math.abs(deltaQ_pct).toFixed(1)}% volume change dominated the price change. Total revenue ${trDirection} by ${Math.abs(deltaTR_pct).toFixed(1)}%.`
+          : `Ponieważ popyt jest <strong>elastyczny (<span data-katex="|PED| = ${Math.abs(arcPED).toFixed(2)} > 1" data-katex-display="false">|PED| = ${Math.abs(arcPED).toFixed(2)} &gt; 1</span>)</strong>, zmiana sprzedaży o ${Math.abs(deltaQ_pct).toFixed(1)}% przeważyła nad zmianą ceny. Przychód całkowity ${trDirection} o ${Math.abs(deltaTR_pct).toFixed(1)}%.`;
+      } else if (Math.abs(arcPED) < 0.95) {
+        analysis = isEn
+          ? `Because demand is <strong>inelastic (<span data-katex="|PED| = ${Math.abs(arcPED).toFixed(2)} < 1" data-katex-display="false">|PED| = ${Math.abs(arcPED).toFixed(2)} &lt; 1</span>)</strong>, consumers barely altered volume (${deltaQ_pct.toFixed(1)}%). Total revenue ${trDirection} by ${Math.abs(deltaTR_pct).toFixed(1)}%.`
+          : `Ponieważ popyt jest <strong>nieelastyczny (<span data-katex="|PED| = ${Math.abs(arcPED).toFixed(2)} < 1" data-katex-display="false">|PED| = ${Math.abs(arcPED).toFixed(2)} &lt; 1</span>)</strong>, klienci niemal nie zmienili zakupów (${deltaQ_pct.toFixed(1)}%). Przychód całkowity ${trDirection} o ${Math.abs(deltaTR_pct).toFixed(1)}%.`;
+      } else {
+        analysis = isEn
+          ? `At <strong>unit elasticity (<span data-katex="|PED| \\approx 1.0" data-katex-display="false">|PED| ≈ 1.0</span>)</strong>, quantity change exactly offset price change. Total revenue remained virtually constant.`
+          : `W strefie <strong>elastyczności jednostkowej (<span data-katex="|PED| \\approx 1{,}0" data-katex-display="false">|PED| ≈ 1,0</span>)</strong> zmiana ilości dokładnie zrównoważyła zmianę ceny. Przychód całkowity pozostał praktycznie stały.`;
+      }
+
+      const shockTitle = pctChange > 0
+        ? (isEn ? '+10% price hike' : 'Podwyżka +10%')
+        : (isEn ? '−10% price cut' : 'Obniżka −10%');
+
+      box.innerHTML = `
+        <div class="space-y-2">
+          <div class="flex flex-wrap items-center justify-between gap-1.5 border-b border-slate-100 pb-1.5">
+            <span class="font-bold text-slate-900 whitespace-nowrap">${shockTitle} (<span data-katex="P: ${p0.toFixed(1)} \\to ${p1.toFixed(1)}" data-katex-display="false">P: ${p0.toFixed(1)} → ${p1.toFixed(1)}</span>)</span>
+            <span class="font-mono font-bold text-[10px] px-2 py-0.5 rounded border whitespace-nowrap ${trBadgeClass}">ΔTR: ${deltaTR >= 0 ? '+' : ''}${deltaTR.toFixed(0)} (${deltaTR_pct >= 0 ? '+' : ''}${deltaTR_pct.toFixed(1)}%)</span>
+          </div>
+          <p class="text-slate-600">${analysis}</p>
+        </div>
+      `;
+      renderMathFormulas(box);
     }
 
     function simulatePriceShock(pctChange) {
-      const isEn = currentLang === 'en';
       const b = getDeterminantsSlopeMultiplier();
       const p0 = state.price;
       const q0 = calcQ(p0, b);
@@ -1619,38 +1739,10 @@
         : 0;
 
       state.price = Math.round(p1 * 10) / 10;
+      state.lastShock = { pctChange, p0, p1: state.price, deltaQ_pct, deltaTR, deltaTR_pct, arcPED };
       document.getElementById('slider-price').value = state.price;
       updateSimulator();
-
-      const box = document.getElementById('sim-feedback-box');
-      const trDirection = deltaTR >= 0 ? (isEn ? "increased" : "wzrósł") : (isEn ? "decreased" : "spadł");
-      const trClass = deltaTR >= 0 ? "text-emerald-700" : "text-rose-700";
-
-      let analysis = "";
-      if (Math.abs(arcPED) > 1.05) {
-        analysis = isEn 
-          ? `Because demand is <strong>elastic (<span data-katex="|PED| = ${Math.abs(arcPED).toFixed(2)} > 1" data-katex-display="false">|PED| = ${Math.abs(arcPED).toFixed(2)} &gt; 1</span>)</strong>, the ${deltaQ_pct.toFixed(1)}% volume change dominated the price change. Total revenue ${trDirection} by ${Math.abs(deltaTR_pct).toFixed(1)}%.`
-          : `Ponieważ popyt jest <strong>elastyczny (<span data-katex="|PED| = ${Math.abs(arcPED).toFixed(2)} > 1" data-katex-display="false">|PED| = ${Math.abs(arcPED).toFixed(2)} &gt; 1</span>)</strong>, zmiana sprzedaży o ${Math.abs(deltaQ_pct).toFixed(1)}% przeważyła nad zmianą ceny. Utarg całkowity ${trDirection} o ${Math.abs(deltaTR_pct).toFixed(1)}%.`;
-      } else if (Math.abs(arcPED) < 0.95) {
-        analysis = isEn
-          ? `Because demand is <strong>inelastic (<span data-katex="|PED| = ${Math.abs(arcPED).toFixed(2)} < 1" data-katex-display="false">|PED| = ${Math.abs(arcPED).toFixed(2)} &lt; 1</span>)</strong>, consumers barely altered volume (${deltaQ_pct.toFixed(1)}%). Total revenue ${trDirection} by ${Math.abs(deltaTR_pct).toFixed(1)}%.`
-          : `Ponieważ popyt jest <strong>nieelastyczny (<span data-katex="|PED| = ${Math.abs(arcPED).toFixed(2)} < 1" data-katex-display="false">|PED| = ${Math.abs(arcPED).toFixed(2)} &lt; 1</span>)</strong>, klienci niemal nie zmienili zakupów (${deltaQ_pct.toFixed(1)}%). Utarg całkowity ${trDirection} o ${Math.abs(deltaTR_pct).toFixed(1)}%.`;
-      } else {
-        analysis = isEn
-          ? `At <strong>unit elasticity (<span data-katex="|PED| \\approx 1.0" data-katex-display="false">|PED| ≈ 1.0</span>)</strong>, quantity change exactly offset price change. Total revenue remained virtually constant.`
-          : `W strefie <strong>elastyczności jednostkowej (<span data-katex="|PED| \\approx 1{,}0" data-katex-display="false">|PED| ≈ 1,0</span>)</strong> zmiana ilości dokładnie zrównoważyła zmianę ceny. Utarg całkowity pozostał praktycznie stały.`;
-      }
-
-      box.innerHTML = `
-        <div class="space-y-1">
-          <div class="flex justify-between items-center font-bold">
-            <span>${pctChange > 0 ? '+10%' : '−10%'} ${isEn ? 'Price shock applied' : 'Szok cenowy'} (<span data-katex="P: ${p0.toFixed(1)} \\to ${p1.toFixed(1)}" data-katex-display="false">P: ${p0.toFixed(1)} → ${p1.toFixed(1)}</span>)</span>
-            <span class="${trClass}">ΔTR: ${deltaTR >= 0 ? '+' : ''}${deltaTR.toFixed(0)} (${deltaTR_pct >= 0 ? '+' : ''}${deltaTR_pct.toFixed(1)}%)</span>
-          </div>
-          <p class="text-slate-600">${analysis}</p>
-        </div>
-      `;
-      renderMathFormulas(box);
+      renderSimFeedbackBox();
     }
 
     /* Switch tabs */
@@ -1702,8 +1794,9 @@
         }
       });
 
-      updateDeterminantButtons();
+      updateDeterminantControls();
       updateSimulator();
+      renderSimFeedbackBox();
 
       if (currentQuestionIndex >= activeQuizQuestions.length) {
         showQuizCompletion();
@@ -1724,6 +1817,7 @@
     function renderDualSVG() {
       const isEn = currentLang === 'en';
       const b = getDeterminantsSlopeMultiplier();
+      const isPerfectInelastic = isDemandPerfectlyInelastic(b);
       const currentP = state.price;
       const currentQ = calcQ(currentP, b);
       const currentTR = currentP * currentQ;
@@ -1735,11 +1829,16 @@
       let unitQ = 50.0;
       let maxTR = 2500.0;
 
-      if (!state.isPerfectInelastic) {
+      if (!isPerfectInelastic) {
         unitP = chokeP / 2;
         unitQ = maxQ / 2;
         maxTR = unitP * unitQ;
       }
+
+      // Dynamic TR scale so parabola peak never clips flat at top
+      const dynamicTRScale = isPerfectInelastic
+        ? Math.max(2750, Math.ceil((currentTR * 1.15) / 500) * 500)
+        : Math.max(2750, Math.ceil((maxTR * 1.15) / 500) * 500);
 
       const gridGroup = document.getElementById('svg-grid-group');
       const trRectGroup = document.getElementById('svg-tr-rectangle-group');
@@ -1764,23 +1863,27 @@
         const y = pToUpperY(p);
         gridHtml += `<line x1="${svgConfig.originX}" y1="${y}" x2="${qToX(100)}" y2="${y}" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3,3" />`;
       }
-      for (let tr = 500; tr <= 2500; tr += 500) {
-        const y = trToLowerY(tr);
+      for (let i = 1; i <= 5; i++) {
+        const trTick = (dynamicTRScale / 5) * i;
+        const y = trToLowerY(trTick, dynamicTRScale);
         gridHtml += `<line x1="${svgConfig.originX}" y1="${y}" x2="${qToX(100)}" y2="${y}" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3,3" />`;
       }
       gridGroup.innerHTML = gridHtml;
 
-      // 2. Shaded Revenue Rectangle on Upper Graph
+      // 2. Shaded Revenue Rectangle on Upper Graph (clamped cleanly to [0, 100] plot box)
+      const clampedPlotQ = Math.max(0, Math.min(100, currentQ));
+      const clampedPlotP = currentQ > 100 ? Math.max(0, chokeP - (100 / b)) : currentP;
       const rectX = svgConfig.originX;
       const rectY = pToUpperY(currentP);
-      const rectW = Math.max(0, qToX(currentQ) - svgConfig.originX);
+      const rectW = Math.max(0, qToX(clampedPlotQ) - svgConfig.originX);
       const rectH = Math.max(0, svgConfig.upperAxisY - rectY);
 
       trRectGroup.innerHTML = `
         <rect x="${rectX}" y="${rectY}" width="${rectW}" height="${rectH}" fill="#4f46e5" fill-opacity="0.10" stroke="#4f46e5" stroke-width="1.5" stroke-dasharray="4,3" />
+        ${rectW > 55 && rectH > 22 ? `
         <text x="${rectX + rectW / 2}" y="${rectY + rectH / 2 + 4}" font-size="11" font-weight="700" fill="#4338ca" text-anchor="middle">
           TR = ${Math.round(currentTR)}
-        </text>
+        </text>` : ''}
       `;
 
       // 3. Axes, Dividers & Labels
@@ -1805,7 +1908,7 @@
         <text x="${qToX(100) + 18}" y="${svgConfig.upperAxisY + 16}" font-size="9" font-weight="600" fill="#64748b">${isEn ? '(Quantity)' : '(Ilość)'}</text>
 
         <text x="${svgConfig.originX - 16}" y="${svgConfig.lowerTopY - 6}" font-size="12" font-weight="800" fill="#065f46" text-anchor="end">TR</text>
-        <text x="${svgConfig.originX - 12}" y="${svgConfig.lowerTopY + 8}" font-size="9" font-weight="600" fill="#059669" text-anchor="end">${isEn ? '(Revenue)' : '(Utarg)'}</text>
+        <text x="${svgConfig.originX - 12}" y="${svgConfig.lowerTopY + 8}" font-size="9" font-weight="600" fill="#059669" text-anchor="end">${isEn ? '(Revenue)' : '(Przychód)'}</text>
         <text x="${qToX(100) + 18}" y="${svgConfig.lowerAxisY + 4}" font-size="13" font-weight="800" fill="#0f172a">Q</text>
         <text x="${qToX(100) + 18}" y="${svgConfig.lowerAxisY + 16}" font-size="9" font-weight="600" fill="#64748b">${isEn ? '(Quantity)' : '(Ilość)'}</text>
 
@@ -1813,90 +1916,116 @@
         <text x="${svgConfig.originX - 10}" y="${svgConfig.lowerAxisY + 12}" font-size="10" font-weight="bold" fill="#94a3b8" text-anchor="end">0</text>
       `;
 
-      // 4. Active Curves
+      // 4. Active Curves (Exact geometric clipping to [0, 100] × [0, 100] box)
       let curvesHtml = '';
 
-      if (state.isPerfectInelastic) {
+      if (isPerfectInelastic) {
         const x50 = qToX(50);
         curvesHtml += `
           <line x1="${x50}" y1="${svgConfig.upperAxisY}" x2="${x50}" y2="${pToUpperY(100)}" stroke="#dc2626" stroke-width="3.5" />
           <text x="${x50 + 8}" y="${pToUpperY(95)}" font-size="12" font-weight="800" fill="#dc2626">D (|PED| = 0)</text>
         `;
       } else {
-        const pTopClamped = Math.min(100, chokeP);
-        const qAtTopClamped = calcQ(pTopClamped, b);
-        const xTop = qToX(qAtTopClamped);
-        const yTop = pToUpperY(pTopClamped);
+        // True visible line endpoints inside Q in [0, 100] and P in [0, 100]
+        const qStart = Math.max(0, calcQ(100, b));
+        const pStart = Math.min(100, chokeP);
 
-        const xUnit = qToX(unitQ);
-        const yUnit = pToUpperY(unitP);
+        const qEnd = Math.min(100, maxQ);
+        const pEnd = maxQ > 100 ? Math.max(0, chokeP - (100 / b)) : 0;
 
-        const pBottomClamped = 0;
-        const qAtBottomClamped = Math.min(100, maxQ);
-        const xBottom = qToX(qAtBottomClamped);
-        const yBottom = pToUpperY(pBottomClamped);
+        const xStart = qToX(qStart);
+        const yStart = pToUpperY(pStart);
+        const xEnd = qToX(qEnd);
+        const yEnd = pToUpperY(pEnd);
 
-        curvesHtml += `
-          <line x1="${xTop}" y1="${yTop}" x2="${xUnit}" y2="${yUnit}" stroke="#4338ca" stroke-width="3.5" stroke-linecap="round" />
-          <line x1="${xUnit}" y1="${yUnit}" x2="${xBottom}" y2="${yBottom}" stroke="#d97706" stroke-width="3.5" stroke-linecap="round" />
-          
-          <text x="${(xTop + xUnit) / 2 + 10}" y="${(yTop + yUnit) / 2 - 6}" font-size="10" font-weight="700" fill="#4338ca">
-            ${isEn ? 'Elastic (|PED| > 1)' : 'Elastyczny (|PED| > 1)'}
-          </text>
-          <text x="${(xUnit + xBottom) / 2 + 10}" y="${(yUnit + yBottom) / 2 - 6}" font-size="10" font-weight="700" fill="#d97706">
-            ${isEn ? 'Inelastic (|PED| < 1)' : 'Nieelastyczny (|PED| < 1)'}
-          </text>
-          
-          <circle cx="${xUnit}" cy="${yUnit}" r="5" fill="#10b981" stroke="#ffffff" stroke-width="2" />
-          <text x="${xUnit + 8}" y="${yUnit + 4}" font-size="10" font-weight="800" fill="#059669">
-            |PED| = 1.0
-          </text>
-        `;
+        const unitVisible = unitQ >= qStart && unitQ <= qEnd && unitP >= pEnd && unitP <= pStart;
+
+        if (unitVisible) {
+          const xUnit = qToX(unitQ);
+          const yUnit = pToUpperY(unitP);
+
+          curvesHtml += `
+            <line x1="${xStart}" y1="${yStart}" x2="${xUnit}" y2="${yUnit}" stroke="#4338ca" stroke-width="3.5" stroke-linecap="round" />
+            <line x1="${xUnit}" y1="${yUnit}" x2="${xEnd}" y2="${yEnd}" stroke="#d97706" stroke-width="3.5" stroke-linecap="round" />
+            
+            ${Math.hypot(xUnit - xStart, yUnit - yStart) > 45 ? `
+            <text x="${(xStart + xUnit) / 2 + 10}" y="${(yStart + yUnit) / 2 - 6}" font-size="10" font-weight="700" fill="#4338ca">
+              ${isEn ? 'Elastic (|PED| > 1)' : 'Elastyczny (|PED| > 1)'}
+            </text>` : ''}
+
+            ${Math.hypot(xEnd - xUnit, yEnd - yUnit) > 45 ? `
+            <text x="${(xUnit + xEnd) / 2 + 10}" y="${(yUnit + yEnd) / 2 - 6}" font-size="10" font-weight="700" fill="#d97706">
+              ${isEn ? 'Inelastic (|PED| < 1)' : 'Nieelastyczny (|PED| < 1)'}
+            </text>` : ''}
+            
+            <circle cx="${xUnit}" cy="${yUnit}" r="5" fill="#10b981" stroke="#ffffff" stroke-width="2" />
+            <text x="${Math.min(xUnit + 8, qToX(100) - 55)}" y="${yUnit + 4}" font-size="10" font-weight="800" fill="#059669">
+              |PED| = 1.0
+            </text>
+          `;
+        } else {
+          // Entire visible segment within [0, 100] is in a single regime
+          const isAllElastic = pEnd > unitP;
+          const segColor = isAllElastic ? '#4338ca' : '#d97706';
+          const segLabel = isAllElastic
+            ? (isEn ? 'Elastic (|PED| > 1)' : 'Elastyczny (|PED| > 1)')
+            : (isEn ? 'Inelastic (|PED| < 1)' : 'Nieelastyczny (|PED| < 1)');
+
+          curvesHtml += `
+            <line x1="${xStart}" y1="${yStart}" x2="${xEnd}" y2="${yEnd}" stroke="${segColor}" stroke-width="3.5" stroke-linecap="round" />
+            <text x="${(xStart + xEnd) / 2 + 10}" y="${(yStart + yEnd) / 2 - 8}" font-size="10" font-weight="700" fill="${segColor}">
+              ${segLabel}
+            </text>
+          `;
+        }
       }
 
-      // Total Revenue Curve
-      if (state.isPerfectInelastic) {
+      // Total Revenue Curve on Lower Graph (with dynamic vertical scale so peak never clips)
+      if (isPerfectInelastic) {
         const x50 = qToX(50);
         curvesHtml += `
-          <line x1="${x50}" y1="${svgConfig.lowerAxisY}" x2="${x50}" y2="${trToLowerY(currentTR)}" stroke="#059669" stroke-width="4" />
-          <text x="${x50 + 10}" y="${trToLowerY(currentTR) - 5}" font-size="11" font-weight="800" fill="#059669">TR = P · 50</text>
+          <line x1="${x50}" y1="${svgConfig.lowerAxisY}" x2="${x50}" y2="${trToLowerY(currentTR, dynamicTRScale)}" stroke="#059669" stroke-width="4" />
+          <text x="${x50 + 10}" y="${trToLowerY(currentTR, dynamicTRScale) - 5}" font-size="11" font-weight="800" fill="#059669">TR = P · 50</text>
         `;
       } else {
-        const numPoints = 50;
+        const qVisibleMax = Math.min(100, maxQ);
+        const numPoints = 60;
         let pathD = `M ${qToX(0)} ${svgConfig.lowerAxisY}`;
         for (let i = 1; i <= numPoints; i++) {
-          const qVal = (i / numPoints) * maxQ;
-          if (qVal > 100) break;
+          const qVal = (i / numPoints) * qVisibleMax;
           const pVal = Math.max(0, chokeP - (qVal / b));
           const trVal = pVal * qVal;
           const x = qToX(qVal);
-          const y = trToLowerY(trVal);
+          const y = trToLowerY(trVal, dynamicTRScale);
           pathD += ` L ${x.toFixed(1)} ${y.toFixed(1)}`;
         }
 
-        curvesHtml += `
-          <path d="${pathD}" fill="none" stroke="#059669" stroke-width="3" />
-          <circle cx="${qToX(unitQ)}" cy="${trToLowerY(maxTR)}" r="4.5" fill="#059669" stroke="#ffffff" stroke-width="2" />
-          <text x="${qToX(unitQ)}" y="${trToLowerY(maxTR) - 8}" font-size="10" font-weight="800" fill="#047857" text-anchor="middle">
-            ${isEn ? 'Max TR' : 'Maksimum TR'} (${Math.round(maxTR)})
-          </text>
-        `;
+        curvesHtml += `<path d="${pathD}" fill="none" stroke="#059669" stroke-width="3" />`;
+
+        if (unitQ <= 100) {
+          curvesHtml += `
+            <circle cx="${qToX(unitQ)}" cy="${trToLowerY(maxTR, dynamicTRScale)}" r="4.5" fill="#059669" stroke="#ffffff" stroke-width="2" />
+            <text x="${Math.min(qToX(unitQ), qToX(100) - 45)}" y="${trToLowerY(maxTR, dynamicTRScale) - 8}" font-size="10" font-weight="800" fill="#047857" text-anchor="middle">
+              ${isEn ? 'Max TR' : 'Maksimum TR'} (${Math.round(maxTR)})
+            </text>
+          `;
+        }
       }
       curvesGroup.innerHTML = curvesHtml;
 
       // 5. Dynamic Projection Lines
       let projsHtml = '';
-      const currentX = qToX(currentQ);
-      const currentUpperY = pToUpperY(currentP);
-      const currentLowerY = trToLowerY(currentTR);
+      const pointOnCurveX = qToX(clampedPlotQ);
+      const pointOnCurveY = pToUpperY(currentQ > 100 ? clampedPlotP : currentP);
+      const currentLowerY = trToLowerY(currentTR, dynamicTRScale);
 
       projsHtml += `
-        <line x1="${svgConfig.originX}" y1="${currentUpperY}" x2="${currentX}" y2="${currentUpperY}" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="3,3" />
-        <line x1="${currentX}" y1="${currentUpperY}" x2="${currentX}" y2="${svgConfig.lowerAxisY}" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="3,3" />
-        <line x1="${svgConfig.originX}" y1="${currentLowerY}" x2="${currentX}" y2="${currentLowerY}" stroke="#059669" stroke-width="1.5" stroke-dasharray="3,3" />
+        <line x1="${svgConfig.originX}" y1="${pointOnCurveY}" x2="${pointOnCurveX}" y2="${pointOnCurveY}" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="3,3" />
+        <line x1="${pointOnCurveX}" y1="${pointOnCurveY}" x2="${pointOnCurveX}" y2="${svgConfig.lowerAxisY}" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="3,3" />
+        <line x1="${svgConfig.originX}" y1="${currentLowerY}" x2="${pointOnCurveX}" y2="${currentLowerY}" stroke="#059669" stroke-width="1.5" stroke-dasharray="3,3" />
       `;
 
-      if (!state.isPerfectInelastic) {
+      if (!isPerfectInelastic && unitQ <= 100 && unitP <= 100) {
         const unitX = qToX(unitQ);
         projsHtml += `
           <line x1="${unitX}" y1="${pToUpperY(unitP)}" x2="${unitX}" y2="${svgConfig.lowerAxisY}" stroke="#10b981" stroke-width="1.5" stroke-dasharray="4,4" opacity="0.65" />
@@ -1904,25 +2033,31 @@
       }
       projGroup.innerHTML = projsHtml;
 
-      // 6. Active Points
+      // 6. Active Points (Always anchored on the curve)
       pointsGroup.innerHTML = `
-        <circle cx="${currentX}" cy="${currentUpperY}" r="7" fill="#4f46e5" stroke="#ffffff" stroke-width="2.5" class="shadow-sm" />
-        <circle cx="${currentX}" cy="${currentUpperY}" r="11" fill="none" stroke="#4f46e5" stroke-width="1.5" opacity="0.4" />
-        <circle cx="${currentX}" cy="${currentLowerY}" r="6" fill="#059669" stroke="#ffffff" stroke-width="2" />
+        <circle cx="${pointOnCurveX}" cy="${pointOnCurveY}" r="7" fill="#4f46e5" stroke="#ffffff" stroke-width="2.5" class="shadow-sm" />
+        <circle cx="${pointOnCurveX}" cy="${pointOnCurveY}" r="11" fill="none" stroke="#4f46e5" stroke-width="1.5" opacity="0.4" />
+        <circle cx="${pointOnCurveX}" cy="${currentLowerY}" r="6" fill="#059669" stroke="#ffffff" stroke-width="2" />
       `;
 
-      // 7. Text Labels & Values
+      // 7. Text Labels & Values (Smart edge-aware placement so labels never clip off SVG)
+      const calloutAnchor = pointOnCurveX > qToX(78) ? 'end' : 'start';
+      const calloutX = pointOnCurveX > qToX(78) ? pointOnCurveX - 12 : pointOnCurveX + 12;
+      const calloutY = pointOnCurveY < svgConfig.upperTopY + 18 ? pointOnCurveY + 18 : pointOnCurveY - 8;
+
+      const trLabelY = currentLowerY > svgConfig.lowerAxisY - 12 ? svgConfig.lowerAxisY - 12 : currentLowerY + 4;
+
       labelsGroup.innerHTML = `
-        <text x="${svgConfig.originX - 6}" y="${currentUpperY + 4}" font-size="11" font-weight="bold" fill="#4338ca" text-anchor="end">
-          P = ${currentP.toFixed(1)}
+        <text x="${svgConfig.originX - 6}" y="${pointOnCurveY + 4}" font-size="11" font-weight="bold" fill="#4338ca" text-anchor="end">
+          P = ${(currentQ > 100 ? clampedPlotP : currentP).toFixed(1)}
         </text>
-        <text x="${currentX}" y="${svgConfig.upperAxisY + 15}" font-size="11" font-weight="bold" fill="#4338ca" text-anchor="middle">
+        <text x="${pointOnCurveX}" y="${svgConfig.upperAxisY + 15}" font-size="11" font-weight="bold" fill="#4338ca" text-anchor="middle">
           Q = ${currentQ.toFixed(1)}
         </text>
-        <text x="${svgConfig.originX - 6}" y="${currentLowerY + 4}" font-size="11" font-weight="bold" fill="#065f46" text-anchor="end">
+        <text x="${svgConfig.originX - 6}" y="${trLabelY}" font-size="11" font-weight="bold" fill="#065f46" text-anchor="end">
           TR = ${Math.round(currentTR)}
         </text>
-        <text x="${currentX + 12}" y="${currentUpperY - 8}" font-size="12" font-weight="800" fill="#1e1b4b">
+        <text x="${calloutX}" y="${calloutY}" font-size="12" font-weight="800" fill="#1e1b4b" text-anchor="${calloutAnchor}">
           A(${currentP.toFixed(1)}, ${currentQ.toFixed(1)})
         </text>
       `;
@@ -1934,15 +2069,16 @@
     function updateSimulator() {
       const isEn = currentLang === 'en';
       const b = getDeterminantsSlopeMultiplier();
+      const isPerfectInelastic = isDemandPerfectlyInelastic(b);
       const p = state.price;
       const q = calcQ(p, b);
       const tr = p * q;
       const chokeP = calcChokePrice(b);
-      const maxTR = state.isPerfectInelastic ? (100 * 50) : ((chokeP / 2) * ((calcQ(0, b)) / 2));
+      const maxTR = isPerfectInelastic ? (100 * 50) : ((chokeP / 2) * ((calcQ(0, b)) / 2));
 
       let ped = 0;
       let absPED = 0;
-      if (state.isPerfectInelastic) {
+      if (isPerfectInelastic) {
         ped = 0;
         absPED = 0;
       } else {
@@ -1952,11 +2088,11 @@
 
       document.getElementById('slider-price-val').textContent = p.toFixed(1);
       document.getElementById('badge-current-price').textContent = `P = ${p.toFixed(1)}`;
-      document.getElementById('badge-slope-responsiveness').textContent = state.isPerfectInelastic ? 'b = 0.00' : `b = ${b.toFixed(2)}`;
+      document.getElementById('badge-slope-responsiveness').textContent = isPerfectInelastic ? 'b = 0.00' : `b = ${b.toFixed(2)}`;
 
       const pedValEl = document.getElementById('metric-ped-val');
       const pedModEl = document.getElementById('metric-ped-mod');
-      if (state.isPerfectInelastic) {
+      if (isPerfectInelastic) {
         pedValEl.textContent = "0.00";
         pedModEl.textContent = "|0.00|";
       } else if (!isFinite(ped)) {
@@ -1970,7 +2106,7 @@
       const regimeBox = document.getElementById('tile-regime-box');
       const regimeStatus = document.getElementById('metric-regime-status');
 
-      if (state.isPerfectInelastic || absPED === 0) {
+      if (isPerfectInelastic || absPED === 0) {
         regimeBox.className = "bg-rose-50/70 p-3 rounded-xl border border-rose-200";
         regimeStatus.className = "text-xs font-bold text-rose-950 mt-1 block leading-tight";
         regimeStatus.textContent = isEn ? "Perfect inelastic (|PED| = 0)" : "Doskonale sztywny (|PED| = 0)";
@@ -1995,18 +2131,18 @@
       const adviceBox = document.getElementById('tile-revenue-advice-box');
       const adviceText = document.getElementById('metric-revenue-advice');
 
-      if (state.isPerfectInelastic) {
+      if (isPerfectInelastic) {
         adviceBox.className = "bg-emerald-50/60 p-3 rounded-xl border border-emerald-200";
         adviceText.className = "text-xs font-bold text-emerald-900 mt-1 block leading-tight";
         adviceText.textContent = isEn ? "TR rises strictly proportional (TR ↑)" : "TR rośnie ściśle proporcjonalnie (TR ↑)";
       } else if (absPED > 1.05) {
         adviceBox.className = "bg-rose-50/60 p-3 rounded-xl border border-rose-200";
         adviceText.className = "text-xs font-bold text-rose-900 mt-1 block leading-tight";
-        adviceText.textContent = isEn ? "Total revenue falls (TR ↓)" : "Utarg całkowity spada (TR ↓)";
+        adviceText.textContent = isEn ? "Total revenue falls (TR ↓)" : "Przychód całkowity spada (TR ↓)";
       } else if (absPED < 0.95) {
         adviceBox.className = "bg-emerald-50/60 p-3 rounded-xl border border-emerald-200";
         adviceText.className = "text-xs font-bold text-emerald-900 mt-1 block leading-tight";
-        adviceText.textContent = isEn ? "Total revenue rises (TR ↑)" : "Utarg całkowity rośnie (TR ↑)";
+        adviceText.textContent = isEn ? "Total revenue rises (TR ↑)" : "Przychód całkowity rośnie (TR ↑)";
       } else {
         adviceBox.className = "bg-slate-50 p-3 rounded-xl border border-slate-200";
         adviceText.className = "text-xs font-bold text-slate-900 mt-1 block leading-tight";
@@ -2020,46 +2156,80 @@
 
     function updateCommentaryText(p, q, tr, absPED, b) {
       const isEn = currentLang === 'en';
+      const isPerfectInelastic = isDemandPerfectlyInelastic(b);
       const commBox = document.getElementById('dynamic-commentary-text');
 
       let detDesc = "";
-      if (state.isPerfectInelastic) {
+      if (isPerfectInelastic) {
         detDesc = isEn
-          ? '<strong>Perfect inelasticity (<span data-katex="|PED| = 0" data-katex-display="false">|PED| = 0</span>):</strong> buyers consume an invariant quantity <span data-katex="Q = 50" data-katex-display="false">Q = 50</span> regardless of price (e.g., life-saving emergency medicine). Because quantity does not drop, sellers hold maximal pricing power: every price hike translates directly into pure revenue gains.'
-          : '<strong>Popyt doskonale sztywny (<span data-katex="|PED| = 0" data-katex-display="false">|PED| = 0</span>):</strong> nabywcy kupują niezmienną ilość <span data-katex="Q = 50" data-katex-display="false">Q = 50</span> bez względu na poziom ceny (np. lek ratujący życie). Brak spadku popytu oznacza maksymalną siłę rynkową: każda podwyżka ceny wprost proporcjonalnie powiększa utarg.';
+          ? '<strong>Perfect inelasticity (<span data-katex="|PED| = 0" data-katex-display="false">|PED| = 0</span>):</strong> With zero substitutes, an ultra-short horizon, and a negligible budget share, buyers consume an invariant quantity <span data-katex="Q = 50" data-katex-display="false">Q = 50</span> regardless of price (e.g., life-saving emergency medicine). Sellers hold maximal pricing power: every price hike translates directly into pure revenue gains.'
+          : '<strong>Popyt doskonale sztywny (<span data-katex="|PED| = 0" data-katex-display="false">|PED| = 0</span>):</strong> Przy braku substytutów, ultra-krótkim horyzoncie czasowym i znikomym udziale w budżecie nabywcy kupują niezmienną ilość <span data-katex="Q = 50" data-katex-display="false">Q = 50</span> bez względu na poziom ceny (np. lek ratujący życie). Każda podwyżka ceny wprost proporcjonalnie powiększa przychód.';
       } else {
-        const subTxt = state.substitutes === 'high' 
-          ? (isEn ? "abundant close substitutes" : "liczne bliskie substytuty") 
-          : (state.substitutes === 'low' ? (isEn ? "scarce substitutes" : "brak bliskich zamienników") : (isEn ? "moderate substitutes" : "umiarkowane substytuty"));
-        const timeTxt = state.timeHorizon === 'long' 
-          ? (isEn ? "long-run horizon allowing full technological adaptation" : "długi horyzont pozwalający na pełną adaptację") 
-          : (isEn ? "short-run locked-in horizon" : "krótki horyzont uniemożliwiający zmianę nawyków");
-        const needTxt = state.needNature === 'lux' 
-          ? (isEn ? "luxury/discretionary good" : "dobro luksusowe") 
-          : (isEn ? "essential necessity" : "dobro podstawowe");
+        const subDescriptionsEn = [
+          "no close substitutes",
+          "few substitutes",
+          "moderate substitutes",
+          "abundant close substitutes"
+        ];
+        const subDescriptionsPl = [
+          "brak bliskich substytutów",
+          "niewiele substytutów",
+          "umiarkowane substytuty",
+          "liczne bliskie substytuty"
+        ];
+        const timeDescriptionsEn = [
+          "ultra-short horizon with rigid habits",
+          "short-run horizon",
+          "medium-run adjustment horizon",
+          "long-run horizon allowing full technological adaptation"
+        ];
+        const timeDescriptionsPl = [
+          "ultra-krótki horyzont ze sztywnymi nawykami",
+          "krótki horyzont czasowy",
+          "średni horyzont dostosowawczy",
+          "długi horyzont pozwalający na pełną adaptację"
+        ];
+        const budgetDescriptionsEn = [
+          "a negligible budget share (imperceptible income effect)",
+          "a small budget share",
+          "a moderate budget share",
+          "a large budget share (strong Slutsky income effect)"
+        ];
+        const budgetDescriptionsPl = [
+          "znikomy udział w budżecie (niezauważalny efekt dochodowy)",
+          "mały udział w budżecie",
+          "umiarkowany udział w budżecie",
+          "duży udział w budżecie (silny efekt dochodowy Słuckiego)"
+        ];
+        const subIdx = Math.min(3, Math.max(0, Math.round(state.substitutes)));
+        const timeIdx = Math.min(3, Math.max(0, Math.round(state.timeHorizon)));
+        const budgetIdx = Math.min(3, Math.max(0, Math.round(state.budgetShare)));
+        const subTxt = isEn ? subDescriptionsEn[subIdx] : subDescriptionsPl[subIdx];
+        const timeTxt = isEn ? timeDescriptionsEn[timeIdx] : timeDescriptionsPl[timeIdx];
+        const budgetTxt = isEn ? budgetDescriptionsEn[budgetIdx] : budgetDescriptionsPl[budgetIdx];
 
         detDesc = isEn
-          ? `<strong>Behavioral market context:</strong> The current market has ${subTxt}, a ${timeTxt}, and is a ${needTxt}. Together, these determinants establish a curve slope responsiveness of <span data-katex="b = ${b.toFixed(2)}" data-katex-display="false">b = ${b.toFixed(2)}</span>.`
-          : `<strong>Kontekst behawioralny rynku:</strong> Rynek charakteryzują ${subTxt}, ${timeTxt} oraz ranga dobra jako ${needTxt}. Te czynniki pozacenowe wyznaczają nachylenie krzywej i bazową wrażliwość <span data-katex="b = ${b.toFixed(2)}" data-katex-display="false">b = ${b.toFixed(2)}</span>.`;
+          ? `<strong>Behavioral market context:</strong> The current market has ${subTxt}, a ${timeTxt}, and ${budgetTxt}. Together, these determinants establish a curve slope responsiveness of <span data-katex="b = ${b.toFixed(2)}" data-katex-display="false">b = ${b.toFixed(2)}</span>.`
+          : `<strong>Kontekst behawioralny rynku:</strong> Rynek charakteryzują ${subTxt}, ${timeTxt} oraz ${budgetTxt}. Te czynniki pozacenowe wyznaczają nachylenie krzywej i bazową wrażliwość <span data-katex="b = ${b.toFixed(2)}" data-katex-display="false">b = ${b.toFixed(2)}</span>.`;
       }
 
       let revenueVerdict = "";
-      if (state.isPerfectInelastic) {
+      if (isPerfectInelastic) {
         revenueVerdict = isEn
           ? "<strong>Pricing rule:</strong> Raise price. Since volume is fixed, total revenue expands linearly with price."
-          : "<strong>Reguła cenowa:</strong> Podnoś cenę. Stały wolumen oznacza, że utarg rośnie liniowo wraz z każdą podwyżką.";
+          : "<strong>Reguła cenowa:</strong> Podnoś cenę. Stały wolumen oznacza, że przychód rośnie liniowo wraz z każdą podwyżką.";
       } else if (absPED > 1.05) {
         revenueVerdict = isEn
           ? `<strong>Elastic zone (<span data-katex="|PED| = ${absPED.toFixed(2)} > 1" data-katex-display="false">|PED| = ${absPED.toFixed(2)} &gt; 1</span>):</strong> Price sensitivity is dominant. Raising price by 1% causes sales volume to contract by ${absPED.toFixed(2)}%. Because volume losses outweigh the price premium, <strong>raising price reduces total revenue (<span data-katex="TR \\downarrow" data-katex-display="false">TR ↓</span>)</strong>. To maximize revenue, the firm should <strong>lower prices</strong>.`
-          : `<strong>Strefa elastyczna (<span data-katex="|PED| = ${absPED.toFixed(2)} > 1" data-katex-display="false">|PED| = ${absPED.toFixed(2)} &gt; 1</span>):</strong> Wrażliwość na cenę jest bardzo wysoka. Podwyżka ceny o 1% wywołuje spadek sprzedaży aż o ${absPED.toFixed(2)}%. Ponieważ ubytek wolumenu przeważa nad wyższą ceną, <strong>podwyżka obniża utarg całkowity (<span data-katex="TR \\downarrow" data-katex-display="false">TR ↓</span>)</strong>. Aby zwiększyć przychód, firma powinna <strong>obniżać cenę</strong>.`;
+          : `<strong>Strefa elastyczna (<span data-katex="|PED| = ${absPED.toFixed(2)} > 1" data-katex-display="false">|PED| = ${absPED.toFixed(2)} &gt; 1</span>):</strong> Wrażliwość na cenę jest bardzo wysoka. Podwyżka ceny o 1% wywołuje spadek sprzedaży aż o ${absPED.toFixed(2)}%. Ponieważ ubytek wolumenu przeważa nad wyższą ceną, <strong>podwyżka obniża przychód całkowity (<span data-katex="TR \\downarrow" data-katex-display="false">TR ↓</span>)</strong>. Aby zwiększyć przychód, firma powinna <strong>obniżać cenę</strong>.`;
       } else if (absPED < 0.95) {
         revenueVerdict = isEn
           ? `<strong>Inelastic zone (<span data-katex="|PED| = ${absPED.toFixed(2)} < 1" data-katex-display="false">|PED| = ${absPED.toFixed(2)} &lt; 1</span>):</strong> Price insensitivity is dominant. A 1% price hike induces only a modest ${absPED.toFixed(2)}% volume decline. The gain from higher unit price dominates the minor drop in quantities sold, meaning <strong>raising price increases total revenue (<span data-katex="TR \\uparrow" data-katex-display="false">TR ↑</span>)</strong>.`
-          : `<strong>Strefa nieelastyczna (<span data-katex="|PED| = ${absPED.toFixed(2)} < 1" data-katex-display="false">|PED| = ${absPED.toFixed(2)} &lt; 1</span>):</strong> Niewielka wrażliwość klientów. Wzrost ceny o 1% wywołuje spadek ilości zaledwie o ${absPED.toFixed(2)}%. Korzyść z wyższej ceny jednostkowej przewyższa drobny ubytek wolumenu, co oznacza, że <strong>podwyżka ceny powiększa utarg całkowity (<span data-katex="TR \\uparrow" data-katex-display="false">TR ↑</span>)</strong>.`;
+          : `<strong>Strefa nieelastyczna (<span data-katex="|PED| = ${absPED.toFixed(2)} < 1" data-katex-display="false">|PED| = ${absPED.toFixed(2)} &lt; 1</span>):</strong> Niewielka wrażliwość klientów. Wzrost ceny o 1% wywołuje spadek ilości zaledwie o ${absPED.toFixed(2)}%. Korzyść z wyższej ceny jednostkowej przewyższa drobny ubytek wolumenu, co oznacza, że <strong>podwyżka ceny powiększa przychód całkowity (<span data-katex="TR \\uparrow" data-katex-display="false">TR ↑</span>)</strong>.`;
       } else {
         revenueVerdict = isEn
           ? `<strong>Unit elastic optimum (<span data-katex="|PED| \\approx 1.0" data-katex-display="false">|PED| ≈ 1.0</span>):</strong> Revenue is maximized at the vertex of the parabola (<span data-katex="TR = ${Math.round(tr)}" data-katex-display="false">TR = ${Math.round(tr)}</span>). At this exact coordinate, marginal revenue equals zero (<span data-katex="MR = 0" data-katex-display="false">MR = 0</span>). Proportional price changes are offset by equal proportional quantity adjustments (<span data-katex="\\%\\Delta P = -\\%\\Delta Q" data-katex-display="false">%ΔP = −%ΔQ</span>).`
-          : `<strong>Optimum przychodowe (<span data-katex="|PED| \\approx 1{,}0" data-katex-display="false">|PED| ≈ 1,0</span>):</strong> Utarg osiąga wierzchołek paraboli (<span data-katex="TR = ${Math.round(tr)}" data-katex-display="false">TR = ${Math.round(tr)}</span>). W tym punkcie utarg krańcowy wynosi zero (<span data-katex="MR = 0" data-katex-display="false">MR = 0</span>). Wszelkie procentowe zmiany ceny są równoważone przez odwrotne zmiany wielkości sprzedaży (<span data-katex="\\%\\Delta P = -\\%\\Delta Q" data-katex-display="false">%ΔP = −%ΔQ</span>).`;
+          : `<strong>Optimum przychodowe (<span data-katex="|PED| \\approx 1{,}0" data-katex-display="false">|PED| ≈ 1,0</span>):</strong> Przychód osiąga wierzchołek paraboli (<span data-katex="TR = ${Math.round(tr)}" data-katex-display="false">TR = ${Math.round(tr)}</span>). W tym punkcie przychód krańcowy wynosi zero (<span data-katex="MR = 0" data-katex-display="false">MR = 0</span>). Wszelkie procentowe zmiany ceny są równoważone przez odwrotne zmiany wielkości sprzedaży (<span data-katex="\\%\\Delta P = -\\%\\Delta Q" data-katex-display="false">%ΔP = −%ΔQ</span>).`;
       }
 
       commBox.innerHTML = `
@@ -2071,9 +2241,10 @@
 
     function updateMathCalculations(p, q, tr, absPED, b) {
       const isEn = currentLang === 'en';
+      const isPerfectInelastic = isDemandPerfectlyInelastic(b);
       const calcBox = document.getElementById('step-by-step-math-content');
 
-      if (state.isPerfectInelastic) {
+      if (isPerfectInelastic) {
         calcBox.innerHTML = isEn ? `
           <div class="space-y-2.5">
             <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
@@ -2100,7 +2271,7 @@
               <div data-katex="PED = \\frac{dQ}{dP} \\cdot \\frac{P}{Q} = 0 \\cdot \\frac{${p.toFixed(1)}}{50{,}0} = 0{,}00" class="text-center text-indigo-950 overflow-x-auto">PED = 0,00</div>
             </div>
             <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-              <strong class="text-slate-900">Krok 3: Utarg całkowity</strong>
+              <strong class="text-slate-900">Krok 3: Przychód całkowity</strong>
               <div data-katex="TR = P \\cdot Q = ${p.toFixed(1)} \\cdot 50{,}0 = ${Math.round(tr)}" class="text-center text-emerald-900 overflow-x-auto">TR = ${Math.round(tr)}</div>
             </div>
           </div>
@@ -2152,7 +2323,7 @@
             </div>
           </div>
           <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-            <strong class="text-slate-900">Krok 3: Utarg całkowity (TR) oraz utarg krańcowy (MR)</strong>
+            <strong class="text-slate-900">Krok 3: Przychód całkowity (TR) oraz przychód krańcowy (MR)</strong>
             <div data-katex="TR = P \\cdot Q = ${p.toFixed(1)} \\cdot ${q.toFixed(2)} = ${Math.round(tr)}, \\qquad MR = P\\left(1 - \\frac{1}{|PED|}\\right) = ${mrVal}" class="text-center text-emerald-950 overflow-x-auto">
               TR = ${Math.round(tr)}, MR = ${mrVal}
             </div>
@@ -2170,26 +2341,26 @@
       {
         title_en: 'Insulin for diabetic patient (<span data-katex="|PED| \\approx 0" data-katex-display="false">|PED| ≈ 0</span>)',
         title_pl: 'Insulina dla diabetyka (<span data-katex="|PED| \\approx 0" data-katex-display="false">|PED| ≈ 0</span>)',
-        body_en: "<strong>Behavioral determinants:</strong> Life-critical physiological necessity, zero viable therapeutic substitutes, negligible habit substitution. Buyers cannot reduce quantity even if price doubles without risking severe mortality. Demand is perfectly inelastic.",
-        body_pl: "<strong>Determinanty behawioralne:</strong> Dobro ratujące życie, całkowity brak medycznych zamienników, natychmiastowa konieczność. Pacjent nie może zredukować dawki przy podwyżce ceny bez zagrożenia życia. Popyt jest skrajnie nieelastyczny lub sztywny."
+        body_en: '<strong>Behavioral determinants:</strong> Urgent, life-sustaining medical purchase with zero therapeutic substitutes and no possibility of postponing consumption. Buyers cannot reduce dosage even if price doubles without severe health consequences. Demand is virtually inelastic.',
+        body_pl: '<strong>Determinanty behawioralne:</strong> Pilny wydatek ratujący życie, całkowity brak zamienników terapeutycznych oraz brak możliwości odroczenia zakupu. Pacjent nie może ograniczyć dawki bez zagrożenia życia. Popyt jest skrajnie nieelastyczny.'
       },
       {
         title_en: 'Charter flight to Greece (<span data-katex="|PED| > 2.0" data-katex-display="false">|PED| &gt; 2.0</span>)',
         title_pl: 'Wakacyjny lot do Grecji (<span data-katex="|PED| > 2{,}0" data-katex-display="false">|PED| &gt; 2,0</span>)',
-        body_en: "<strong>Behavioral determinants:</strong> Pure discretionary luxury, substantial fraction of annual holiday budget, extensive substitutes (Spain, Italy, domestic lakes, train travel), long advance booking window. A 10% price increase diverts travelers to competing destinations. Highly elastic.",
-        body_pl: "<strong>Determinanty behawioralne:</strong> Wydatek luksusowo-rekreacyjny, znaczący udział w rocznym budżecie urlopowym, ogromna liczba bliskich substytutów (Turcja, Włochy, wyjazd nad morze), długi czas planowania. Podwyżka o 10% powoduje masowy odpływ do innych kurortów. Wysoce elastyczny."
+        body_en: '<strong>Behavioral determinants:</strong> Easily postponable discretionary trip, substantial fraction of annual vacation budget, and abundant close substitutes (Spain, Italy, domestic resorts, rail travel). A 10% fare hike diverts travelers to competing destinations. Highly elastic.',
+        body_pl: '<strong>Determinanty behawioralne:</strong> Wydatek łatwy do odroczenia w czasie, znaczący udział w rocznym budżecie urlopowym oraz liczne bliskie substytuty (Hiszpania, Włochy, krajowe kurorty). Podwyżka o 10% wywołuje odpływ turystów do innych kierunków. Wysoce elastyczny.'
       },
       {
         title_en: 'Table salt (<span data-katex="|PED| \\approx 0.1" data-katex-display="false">|PED| ≈ 0.1</span>)',
         title_pl: 'Sól kuchenna (<span data-katex="|PED| \\approx 0{,}1" data-katex-display="false">|PED| ≈ 0,1</span>)',
-        body_en: "<strong>Behavioral determinants:</strong> Minuscule share of consumer expenditure (<0.01% of household income), physiological necessity in food preparation, habitual consumption. When price jumps from 2 PLN to 3 PLN (+50%), nobody notices or alters purchase frequency. Deeply inelastic.",
-        body_pl: "<strong>Determinanty behawioralne:</strong> Znikomy udział w budżecie (<0,01% dochodu), biologiczna konieczność kulinarna, głęboki nawyk. Skok ceny o 50% (np. z 2 zł na 3 zł) jest dla konsumenta niezauważalny i nie zmienia częstotliwości zakupów. Skrajnie nieelastyczny."
+        body_en: '<strong>Behavioral determinants:</strong> Infinitesimal share of household expenditure (<0.01% of income), daily culinary routine, and no direct dietary substitute. Doubling the retail price is barely noticed in total household spending. Deeply inelastic.',
+        body_pl: '<strong>Determinanty behawioralne:</strong> Znikomy udział w budżecie domowym (<0,01% dochodu), codzienny nawyk kulinarny i brak bezpośredniego zamiennika. Podwojenie ceny detalicznej jest niemal niezauważalne w domowych wydatkach. Skrajnie nieelastyczny.'
       },
       {
         title_en: 'Premium brand flagship smartphone (<span data-katex="|PED| \\approx 1.3" data-katex-display="false">|PED| ≈ 1.3</span>)',
         title_pl: 'Smartfon marki premium (<span data-katex="|PED| \\approx 1{,}3" data-katex-display="false">|PED| ≈ 1,3</span>)',
-        body_en: "<strong>Behavioral determinants:</strong> Large single capital expense, but cushioned by powerful brand equity, proprietary operating ecosystem, and status signaling. Significantly more elastic than mobile phones in general, yet less elastic than unbranded commodity electronics.",
-        body_pl: "<strong>Determinanty behawioralne:</strong> Poważny wydatek budżetowy, ale zamortyzowany przez potężną siłę marki, zamknięty ekosystem i prestiż społeczny. Popyt jest znacznie bardziej elastyczny niż na całą kategorię łączności telefonicznej, lecz mniej elastyczny niż na bezmarkowy sprzęt elektroniczny."
+        body_en: '<strong>Behavioral determinants:</strong> Large single outlay and postponable upgrade cycle, but cushioned by brand loyalty and proprietary operating ecosystem. More elastic than mobile phones as a whole, yet less elastic than unbranded commodity electronics.',
+        body_pl: '<strong>Determinanty behawioralne:</strong> Poważny wydatek budżetowy i możliwość odroczenia wymiany telefonu, ale zamortyzowane przez lojalność wobec marki i zamknięty ekosystem. Popyt jest bardziej elastyczny niż na całą kategorię telefonów, lecz mniej elastyczny niż na sprzęt bezmarkowy.'
       }
     ];
 
@@ -2217,85 +2388,85 @@
         q_pl: "Dlaczego cenowa elastyczność popytu na benzynę w horyzoncie 3 lat jest wielokrotnie wyższa niż w horyzoncie 1 miesiąca po szoku naftowym?",
         q_en: "Why is the price elasticity of demand for gasoline significantly higher over a 3-year horizon than over a 1-month horizon following a price spike?",
         options_pl: [
-          "W długim okresie kierowcy mogą wymienić auta na oszczędniejsze, zamontować instalację LPG lub zmienić codzienny sposób dojazdu do pracy",
-          "W długim okresie rząd wprowadza urzędowe ceny maksymalne paliwa, co automatycznie zwiększa wrażliwość cenową wszystkich kierowców",
-          "W krótkim okresie benzyna jest dobrem luksusowym o niskim udziale w wydatkach, a w długim staje się podstawowym dobrem pierwszej potrzeby",
-          "W długim okresie krzywa podaży ropy naftowej staje się całkowicie pionowa, co wymusza szybszą reakcję po stronie popytu rynkowego"
+          "W długim okresie konsumenci mają czas na wymianę samochodów na oszczędniejsze lub zmianę nawyków transportowych",
+          "W długim okresie rządy zawsze wprowadzają sztywne ceny maksymalne na stacjach paliw",
+          "W krótkim okresie kierowcy zawsze dysponują większą liczbą bliskich substytutów niż po kilku latach",
+          "Krzywa podaży ropy naftowej staje się w długim okresie całkowicie pionowa i nieelastyczna"
         ],
         options_en: [
-          "Over several years, drivers can purchase fuel-efficient vehicles, install alternative fuel systems, or relocate closer to work",
-          "Over several years, governments impose statutory price ceilings on motor fuels that mechanically amplify buyer price sensitivity",
-          "In the short run, gasoline acts as a discretionary luxury good, whereas over multiple years it turns into a rigid necessity",
-          "Over several years, the crude oil supply curve turns completely vertical, forcing consumers to absorb larger quantity adjustments"
+          "In the long run, consumers have time to buy fuel-efficient vehicles or adjust commuting habits",
+          "In the long run, governments invariably impose binding statutory price ceilings on motor fuels",
+          "In the short run, drivers always have access to more close substitutes than over several years",
+          "The global crude oil supply curve becomes completely vertical and inelastic in the long run"
         ],
         correct: 0,
-        explanation_pl: "Horyzont czasowy to kluczowa determinanta: w krótkim okresie nabywcy są uwięzieni w istniejącej technologii i nawykach (niska elastyczność). W długim okresie pojawiają się substytuty i adaptacja technologiczna, co podnosi elastyczność.",
-        explanation_en: "Time horizon is a primary determinant: short-run demand is captive to existing capital goods and habits. Over multi-year horizons, consumers adopt fuel-efficient alternatives and alter commute patterns, substantially increasing price elasticity."
+        explanation_pl: "Horyzont czasowy to kluczowa determinanta: w krótkim okresie nabywcy są związani posiadaną technologią i nawykami (niska elastyczność). W długim okresie pojawiają się substytuty i adaptacja technologiczna, co podnosi elastyczność.",
+        explanation_en: "Time horizon is a core determinant: short-run demand is constrained by existing vehicles and habits. Over multi-year horizons, consumers adopt fuel-efficient alternatives and alter commute patterns, increasing price elasticity."
       },
       {
-        q_pl: 'Linie lotnicze stosują znacznie wyższe taryfy dla pasażerów biznesowych rezerwujących loty z 2-dniowym wyprzedzeniem niż dla turystów rezerwujących z 3-miesięcznym wyprzedzeniem. Z czego to wynika?',
-        q_en: 'Airlines charge much higher fares to business travelers booking 2 days prior to departure than to vacationers booking 3 months in advance. What economic principle explains this?',
+        q_pl: 'Linie lotnicze stosują wyższe taryfy dla pasażerów biznesowych rezerwujących loty z 2-dniowym wyprzedzeniem niż dla turystów rezerwujących z 3-miesięcznym wyprzedzeniem. Z czego to wynika?',
+        q_en: 'Airlines charge higher fares to business travelers booking 2 days prior to departure than to vacationers booking 3 months in advance. What economic principle explains this?',
         options_pl: [
-          'Pasażerowie biznesowi mają sztywny termin podróży i brak substytutów (<span data-katex="|PED| < 1" data-katex-display="false">|PED| &lt; 1</span>), natomiast turyści są elastyczni (<span data-katex="|PED| > 1" data-katex-display="false">|PED| &gt; 1</span>)',
-          'Koszty krańcowe obsługi pasażera biznesowego na pokładzie są czterokrotnie wyższe niż koszty obsługi pasażera turystycznego',
-          'Pasażerowie turystyczni podlegają prawu malejących przychodów krańcowych, co obniża ich skłonność do płacenia za bilet lotniczy',
-          'W krótkim okresie przewoźnik lotniczy nie ponosi kosztów stałych, więc może swobodnie różnicować ceny w zależności od daty lotu'
+          'Pasażerowie biznesowi mają pilny termin i brak substytutów (niska <span data-katex="|PED|" data-katex-display="false">|PED|</span>), a turyści mają wysoką elastyczność (<span data-katex="|PED| > 1" data-katex-display="false">|PED| &gt; 1</span>)',
+          'Koszty obsługi pasażera biznesowego na pokładzie samolotu są czterokrotnie wyższe niż pasażera turystycznego',
+          'Pasażerowie turystyczni mają niższy udział wydatku w budżecie niż korporacje opłacające delegacje służbowe',
+          'W krótkim okresie linia lotnicza ponosi wyłącznie koszty zmienne, które rosną przy późnej rezerwacji biletu'
         ],
         options_en: [
-          'Business travelers face rigid schedules and few substitutes (<span data-katex="|PED| < 1" data-katex-display="false">|PED| &lt; 1</span>), whereas vacationers are price elastic (<span data-katex="|PED| > 1" data-katex-display="false">|PED| &gt; 1</span>)',
-          'Marginal operating costs of transporting a last-minute business passenger are four times higher than those of a leisure traveler',
-          'Leisure travelers are uniquely subject to diminishing marginal utility, which lowers their willingness to pay for advance bookings',
-          'In the short run, commercial airlines incur zero fixed overhead costs and therefore discount seats solely to fill empty rows'
+          'Business travelers face urgent schedules and few substitutes (low <span data-katex="|PED|" data-katex-display="false">|PED|</span>), whereas tourists are elastic (<span data-katex="|PED| > 1" data-katex-display="false">|PED| &gt; 1</span>)',
+          'The marginal operating cost of carrying a business passenger is four times higher than carrying a tourist',
+          'Leisure travelers devote a smaller share of their household budget to airfare than corporations do',
+          'In the short run, airlines incur only variable costs that rise sharply as departure approaches'
         ],
         correct: 0,
-        explanation_pl: 'To klasyczna dyskryminacja cenowa III stopnia: linia lotnicza segmentuje rynek według elastyczności. Klienci o niskiej elastyczności płacą wyższą stawkę (zwiększając <span data-katex="TR" data-katex-display="false">TR</span> linii), a elastyczni turyści otrzymują zniżki stymulujące wolumen.',
-        explanation_en: 'Third-degree price discrimination leverages differing price sensitivities. Inflexible business travelers have low <span data-katex="|PED|" data-katex-display="false">|PED|</span> and absorb high fares, while price-sensitive leisure travelers are attracted via promotional fares.'
+        explanation_pl: "To dyskryminacja cenowa III stopnia: linia lotnicza segmentuje rynek według elastyczności. Klienci o pilnej podróży i niskiej elastyczności płacą wyższą stawkę (zwiększając przychód linii), a elastyczni turyści otrzymują niższe ceny.",
+        explanation_en: "Third-degree price discrimination leverages differing price sensitivities. Urgent business travelers have low |PED| and absorb high fares, while price-sensitive leisure travelers are attracted via advance discounts."
       },
       {
         q_pl: 'Z jakiego powodu popyt na sól kuchenną charakteryzuje się znikomą cenową elastycznością popytu (<span data-katex="|PED| \\approx 0{,}1" data-katex-display="false">|PED| ≈ 0,1</span>)?',
         q_en: 'Why does consumer demand for table salt exhibit negligible price elasticity (<span data-katex="|PED| \\approx 0.1" data-katex-display="false">|PED| ≈ 0.1</span>)?',
         options_pl: [
-          "Sól stanowi znikomy ułamek budżetu domowego i nie ma bliskich substytutów w codziennej diecie",
-          "Sól jest klasycznym dobrem Giffena, dla którego wzrost ceny automatycznie zwiększa zakupioną ilość",
-          "Sól jest dobrem trwałym o wysokim koszcie magazynowania, co stabilizuje wielkość zakupów w ciągu roku",
-          "Popyt na sól zależy wyłącznie od polityki stóp procentowych oraz poziomu inflacji bazowej w kraju"
+          'Sól ma znikomy udział w budżecie domowym oraz brak bliskich substytutów w codziennej diecie',
+          'Sól ma dodatnią elastyczność cenową popytu, co oznacza wzrost zakupów przy każdej podwyżce ceny',
+          'Sól jest dobrem trwałym o bardzo wysokim udziale wydatków w miesięcznym dochodzie gospodarstwa',
+          'Popyt na sól reaguje wyłącznie na zmiany stóp procentowych oraz podaży pieniądza w gospodarce'
         ],
         options_en: [
-          "Salt absorbs a tiny fraction of household income and lacks close dietary substitutes",
-          "Salt is a classic Giffen good whose upward-sloping demand curve offsets price increases",
-          "Salt is a durable commodity with high storage costs that keep annual purchases constant",
-          "Aggregate salt consumption depends solely on central bank interest rates and inflation"
+          'Salt takes a tiny share of household budgets and lacks close dietary substitutes',
+          'Salt exhibits a positive own-price elasticity, causing quantity bought to rise with price',
+          'Salt is a durable good that consumes a large fraction of monthly household disposable income',
+          'Aggregate salt demand responds exclusively to central bank interest rate adjustments'
         ],
         correct: 0,
-        explanation_pl: "Dwa czynniki decydują o nieelastyczności soli: niemal zerowy udział w budżecie (podwojenie ceny soli kosztuje kilka złotych rocznie) oraz brak chemicznego i kulinarnego zamiennika.",
-        explanation_en: "Two joint non-price determinants govern salt's extreme inelasticity: an infinitesimal budget share (doubling the price is imperceptible to consumers) combined with an absence of close dietary substitutes."
+        explanation_pl: "Dwa czynniki decydują o nieelastyczności soli: niemal zerowy udział w budżecie (podwojenie ceny soli kosztuje kilka złotych rocznie) oraz brak zamiennika.",
+        explanation_en: "Two non-price determinants govern salt's extreme inelasticity: an infinitesimal budget share combined with an absence of close dietary substitutes."
       },
       {
-        q_pl: "Dlaczego ministerstwa finansów nakładają najwyższe podatki akcyzowe na wyroby tytoniowe, alkohol i paliwa silnikowe (reguła Ramseya)?",
-        q_en: "Why do fiscal authorities levy the heaviest excise taxes on tobacco, alcohol, and motor fuels (Ramsey taxation rule)?",
+        q_pl: "Dlaczego ministerstwa finansów nakładają wysokie podatki akcyzowe na wyroby tytoniowe, alkohol i paliwa silnikowe (reguła Ramseya)?",
+        q_en: "Why do fiscal authorities levy heavy excise taxes on tobacco, alcohol, and motor fuels (Ramsey taxation rule)?",
         options_pl: [
-          "Niska elastyczność cenowa zapewnia stabilne wpływy podatkowe przy niewielkim spadku opodatkowanego wolumenu",
-          "Wysoka elastyczność cenowa powoduje, że akcyza niemal całkowicie eliminuje konsumpcję tych dóbr na rynku",
-          "Dobra te mają najniższy udział kosztów stałych w strukturze produkcji spośród wszystkich sektorów przemysłu",
-          "Przepisy podatkowe dopuszczają nakładanie akcyzy wyłącznie na dobra o popycie doskonale elastycznym"
+          "Niska elastyczność cenowa tych dóbr zapewnia stabilne wpływy budżetowe przy niewielkim spadku sprzedaży",
+          "Wysoka elastyczność cenowa sprawia, że podatek całkowicie eliminuje ich konsumpcję w gospodarce",
+          "Dobra te charakteryzują się zerowymi kosztami produkcji i doskonale elastyczną krzywą popytu",
+          "Przepisy podatkowe dopuszczają akcyzę wyłącznie na dobra o elastyczności jednostkowej"
         ],
         options_en: [
-          "Low price elasticity ensures predictable tax revenues with minimal contraction of the taxed volume",
-          "High price elasticity ensures that excise levies rapidly eliminate domestic consumption of these goods",
-          "These industries exhibit the lowest share of fixed capital costs across the manufacturing sector",
-          "Statutory fiscal codes restrict excise duties exclusively to markets with perfectly elastic demand"
+          "Low price elasticity yields stable tax revenue with only a modest drop in taxed sales volume",
+          "High price elasticity ensures the excise levy eliminates domestic consumption completely",
+          "These commodities have zero marginal production costs and perfectly elastic demand curves",
+          "Fiscal rules restrict excise levies exclusively to commodities with unitary price elasticity"
         ],
         correct: 0,
-        explanation_pl: "Zgodnie z regułą Ramseya, opodatkowanie dóbr o małej elastyczności cenowej minimalizuje zbędną stratę społeczną (deadweight loss) i generuje stabilne wpływy do budżetu, ponieważ konsumenci uzależnieni lub zmuszeni do zakupu nie rezygnują z produktu.",
+        explanation_pl: "Zgodnie z regułą Ramseya, opodatkowanie dóbr o małej elastyczności cenowej minimalizuje stratę dobrobytu (deadweight loss) i generuje stabilne wpływy do budżetu, ponieważ konsumenci uzależnieni lub zmuszeni do zakupu nie rezygnują z produktu.",
         explanation_en: "Under the Ramsey taxation framework, taxing commodities with low price elasticity generates stable fiscal yields with minimal deadweight loss, as addicted or captive consumers maintain purchases despite price hikes."
       },
       {
-        q_pl: 'Zarząd firmy technologicznej podniósł cenę abonamentu o 15% i zaobserwował spadek utargu całkowitego (<span data-katex="TR" data-katex-display="false">TR</span>) o 8%. W jakiej strefie elastyczności działa firma?',
+        q_pl: 'Zarząd firmy technologicznej podniósł cenę abonamentu o 15% i zaobserwował spadek przychodu całkowitego (<span data-katex="TR" data-katex-display="false">TR</span>) o 8%. W jakiej strefie elastyczności działa firma?',
         q_en: 'Management raised its software subscription fee by 15% and observed an 8% decline in total revenue (<span data-katex="TR" data-katex-display="false">TR</span>). In which elasticity regime was the firm operating?',
         options_pl: [
           'W strefie popytu elastycznego (<span data-katex="|PED| > 1" data-katex-display="false">|PED| &gt; 1</span>), gdzie spadek liczby klientów przeważył nad wzrostem ceny',
           'W strefie popytu nieelastycznego (<span data-katex="|PED| < 1" data-katex-display="false">|PED| &lt; 1</span>), gdzie wzrost ceny zrekompensował ubytek klientów',
-          'W punkcie elastyczności jednostkowej (<span data-katex="|PED| = 1" data-katex-display="false">|PED| = 1</span>), gdzie utarg całkowity osiąga swoje maksimum',
+          'W punkcie elastyczności jednostkowej (<span data-katex="|PED| = 1" data-katex-display="false">|PED| = 1</span>), gdzie przychód całkowity osiąga swoje maksimum',
           'W strefie popytu doskonale sztywnego (<span data-katex="|PED| = 0" data-katex-display="false">|PED| = 0</span>), gdzie ilość abonentów pozostaje niezmienna'
         ],
         options_en: [
@@ -2305,7 +2476,7 @@
           'In the perfectly inelastic regime (<span data-katex="|PED| = 0" data-katex-display="false">|PED| = 0</span>), where quantity demanded stays completely fixed'
         ],
         correct: 0,
-        explanation_pl: 'Zgodnie z regułą utargu całkowitego: jeżeli wzrost ceny powoduje spadek przychodu (<span data-katex="TR \\downarrow" data-katex-display="false">TR ↓</span>), popyt jest cenowo elastyczny (<span data-katex="|PED| > 1" data-katex-display="false">|PED| &gt; 1</span>). Procentowy ubytek liczby abonentów był większy niż 15%.',
+        explanation_pl: 'Zgodnie z regułą przychodu całkowitego: jeżeli wzrost ceny powoduje spadek przychodu (<span data-katex="TR \\downarrow" data-katex-display="false">TR ↓</span>), popyt jest cenowo elastyczny (<span data-katex="|PED| > 1" data-katex-display="false">|PED| &gt; 1</span>). Procentowy ubytek liczby abonentów był większy niż 15%.',
         explanation_en: 'By the Total Revenue test: when a price increase causes total revenue to fall, demand is price elastic (<span data-katex="|PED| > 1" data-katex-display="false">|PED| &gt; 1</span>). The percentage loss in subscriber volume exceeded the 15% price increase.'
       },
       {
@@ -2314,7 +2485,7 @@
         options_pl: [
           'Popyt jest nieelastyczny (<span data-katex="|PED| < 1" data-katex-display="false">|PED| &lt; 1</span>), więc wyższa taryfa przeważyła nad niewielkim spadkiem zużycia prądu',
           'Popyt jest wysoce elastyczny (<span data-katex="|PED| > 2" data-katex-display="false">|PED| &gt; 2</span>), więc gospodarstwa domowe silnie ograniczyły pobór energii',
-          'Utarg krańcowy dostawcy w tym przedziale był ujemny (<span data-katex="MR < 0" data-katex-display="false">MR &lt; 0</span>) i obniżał zysk operacyjny',
+          'Przychód krańcowy dostawcy w tym przedziale był dodatni (<span data-katex="MR > 0" data-katex-display="false">MR &gt; 0</span>), co oznacza wzrost wolumenu sprzedaży',
           'Konsumenci natychmiast zastąpili energię z sieci własnymi instalacjami i innymi źródłami zasilania'
         ],
         options_en: [
@@ -2324,7 +2495,7 @@
           'Consumers immediately substituted grid power with off-grid generation and alternative fuel sources'
         ],
         correct: 0,
-        explanation_pl: 'W strefie nieelastycznej (<span data-katex="|PED| < 1" data-katex-display="false">|PED| &lt; 1</span>) podwyżka ceny zawsze powiększa utarg całkowity (<span data-katex="TR \\uparrow" data-katex-display="false">TR ↑</span>), ponieważ konsumenci nie są w stanie szybko ograniczyć zużycia prądu.',
+        explanation_pl: 'W strefie nieelastycznej (<span data-katex="|PED| < 1" data-katex-display="false">|PED| &lt; 1</span>) podwyżka ceny zawsze powiększa przychód całkowity (<span data-katex="TR \\uparrow" data-katex-display="false">TR ↑</span>), ponieważ konsumenci nie są w stanie szybko ograniczyć zużycia prądu.',
         explanation_en: 'In the inelastic regime (<span data-katex="|PED| < 1" data-katex-display="false">|PED| &lt; 1</span>), raising prices always boosts total revenue (<span data-katex="TR \\uparrow" data-katex-display="false">TR ↑</span>), as residential consumers cannot readily reduce electricity consumption.'
       },
       {
@@ -2347,10 +2518,10 @@
         explanation_en: 'Even though linear slope <span data-katex="\\frac{dQ}{dP}" data-katex-display="false">dQ/dP</span> is constant, elasticity formula <span data-katex="PED = \\frac{dQ}{dP}\\cdot\\frac{P}{Q}" data-katex-display="false">PED = (dQ/dP)·(P/Q)</span> contains the base ratio <span data-katex="P/Q" data-katex-display="false">P/Q</span>. At high prices <span data-katex="P/Q" data-katex-display="false">P/Q</span> is enormous (<span data-katex="|PED| \\to \\infty" data-katex-display="false">|PED| → ∞</span>); near the horizontal axis <span data-katex="P/Q" data-katex-display="false">P/Q</span> approaches zero (<span data-katex="|PED| \\to 0" data-katex-display="false">|PED| → 0</span>).'
       },
       {
-        q_pl: 'W którym punkcie na liniowej krzywej popytu przedsiębiorstwo osiąga absolutne maksimum utargu całkowitego (<span data-katex="TR" data-katex-display="false">TR</span>)?',
+        q_pl: 'W którym punkcie na liniowej krzywej popytu przedsiębiorstwo osiąga absolutne maksimum przychodu całkowitego (<span data-katex="TR" data-katex-display="false">TR</span>)?',
         q_en: 'At which specific point along a linear demand curve does a firm achieve its absolute maximum total revenue (<span data-katex="TR" data-katex-display="false">TR</span>)?',
         options_pl: [
-          'W punkcie elastyczności jednostkowej (<span data-katex="|PED| = 1" data-katex-display="false">|PED| = 1</span>), gdzie utarg krańcowy wynosi <span data-katex="MR = 0" data-katex-display="false">MR = 0</span>',
+          'W punkcie elastyczności jednostkowej (<span data-katex="|PED| = 1" data-katex-display="false">|PED| = 1</span>), gdzie przychód krańcowy wynosi <span data-katex="MR = 0" data-katex-display="false">MR = 0</span>',
           'Przy cenie maksymalnej (choke price), gdzie wielkość sprzedaży spada do poziomu <span data-katex="Q = 0" data-katex-display="false">Q = 0</span>',
           'W punkcie przecięcia krzywej z osią ilości, gdzie cena rynkowa spada do <span data-katex="P = 0" data-katex-display="false">P = 0</span>',
           'W górnej strefie elastycznej, gdzie współczynnik <span data-katex="|PED|" data-katex-display="false">|PED|</span> dąży do nieskończoności (<span data-katex="\\infty" data-katex-display="false">∞</span>)'
@@ -2362,7 +2533,7 @@
           'In the upper elastic segment, where <span data-katex="|PED|" data-katex-display="false">|PED|</span> approaches infinity (<span data-katex="\\infty" data-katex-display="false">∞</span>)'
         ],
         correct: 0,
-        explanation_pl: 'Maksimum utargu całkowitego występuje dokładnie w wierzchołku paraboli <span data-katex="TR" data-katex-display="false">TR</span>, co odpowiada punktowi <span data-katex="|PED| = 1" data-katex-display="false">|PED| = 1</span> na krzywej popytu. W tym punkcie pochodna <span data-katex="\\frac{dTR}{dQ} = MR = 0" data-katex-display="false">dTR/dQ = MR = 0</span>.',
+        explanation_pl: 'Maksimum przychodu całkowitego występuje dokładnie w wierzchołku paraboli <span data-katex="TR" data-katex-display="false">TR</span>, co odpowiada punktowi <span data-katex="|PED| = 1" data-katex-display="false">|PED| = 1</span> na krzywej popytu. W tym punkcie pochodna <span data-katex="\\frac{dTR}{dQ} = MR = 0" data-katex-display="false">dTR/dQ = MR = 0</span>.',
         explanation_en: 'Total revenue reaches its absolute mathematical maximum at the vertex of the <span data-katex="TR" data-katex-display="false">TR</span> parabola, which maps directly to unit elasticity <span data-katex="|PED| = 1" data-katex-display="false">|PED| = 1</span> on the demand curve, where marginal revenue <span data-katex="MR = 0" data-katex-display="false">MR = 0</span>.'
       },
       {
@@ -2400,7 +2571,7 @@
           'For cultural services, lower morning ticket prices create a prestige effect that reverses the downward slope of market demand'
         ],
         correct: 0,
-        explanation_pl: 'Grupy o elastycznym popycie (<span data-katex="|PED| > 1" data-katex-display="false">|PED| &gt; 1</span>) reagują na obniżkę cen skokowym wzrostem frekwencji. Wypełnienie pustych rannych sal kinowych generuje dodatkowy utarg przewyższający stratę z niższej ceny jednostkowej.',
+        explanation_pl: 'Grupy o elastycznym popycie (<span data-katex="|PED| > 1" data-katex-display="false">|PED| &gt; 1</span>) reagują na obniżkę cen skokowym wzrostem frekwencji. Wypełnienie pustych rannych sal kinowych generuje dodatkowy przychód przewyższający stratę z niższej ceny jednostkowej.',
         explanation_en: 'Price-elastic cohorts (<span data-katex="|PED| > 1" data-katex-display="false">|PED| &gt; 1</span>) respond to discounts with disproportionate volume growth. Filling otherwise vacant morning seats expands total revenue beyond the modest unit price reduction.'
       },
       {
@@ -2423,13 +2594,13 @@
         explanation_en: "Patent protection legally bars competitors from offering generic equivalents. The absence of substitutes lowers price elasticity, providing the patent holder with significant pricing power."
       },
       {
-        q_pl: 'Nowy dyrektor sprzedaży postanowił obniżyć cenę podstawowego wyrobu o 20%, wiedząc, że <span data-katex="|PED| = 0{,}4" data-katex-display="false">|PED| = 0,4</span>. Jaki będzie skutek tej decyzji dla utargu całkowitego?',
+        q_pl: 'Nowy dyrektor sprzedaży postanowił obniżyć cenę podstawowego wyrobu o 20%, wiedząc, że <span data-katex="|PED| = 0{,}4" data-katex-display="false">|PED| = 0,4</span>. Jaki będzie skutek tej decyzji dla przychodu całkowitego?',
         q_en: 'A new sales director discounted a core product by 20%, knowing that <span data-katex="|PED| = 0.4" data-katex-display="false">|PED| = 0.4</span>. What will happen to the company\'s total revenue?',
         options_pl: [
-          'Utarg całkowity spadnie, ponieważ wzrost wolumenu o ok. <span data-katex="8\\%" data-katex-display="false">8%</span> nie zrekompensuje <span data-katex="20\\%" data-katex-display="false">20%</span> obniżki ceny',
-          'Utarg całkowity wzrośnie o ok. <span data-katex="8\\%" data-katex-display="false">8%</span>, ponieważ niższa cena zawsze przyciąga nowych nabywców',
-          'Utarg całkowity pozostanie bez zmian, ponieważ zmiana ilości dokładnie zrównoważy obniżkę ceny',
-          'Utarg całkowity wzrośnie o ok. <span data-katex="20\\%" data-katex-display="false">20%</span>, ponieważ popyt nieelastyczny chroni marżę przed spadkiem'
+          'Przychód całkowity spadnie, ponieważ wzrost wolumenu o ok. <span data-katex="8\\%" data-katex-display="false">8%</span> nie zrekompensuje <span data-katex="20\\%" data-katex-display="false">20%</span> obniżki ceny',
+          'Przychód całkowity wzrośnie o ok. <span data-katex="8\\%" data-katex-display="false">8%</span>, ponieważ niższa cena zawsze przyciąga nowych nabywców',
+          'Przychód całkowity pozostanie bez zmian, ponieważ zmiana ilości dokładnie zrównoważy obniżkę ceny',
+          'Przychód całkowity wzrośnie o ok. <span data-katex="20\\%" data-katex-display="false">20%</span>, ponieważ popyt nieelastyczny chroni marżę przed spadkiem'
         ],
         options_en: [
           'Total revenue will fall because the ~<span data-katex="8\\%" data-katex-display="false">8%</span> volume gain fails to offset the <span data-katex="20\\%" data-katex-display="false">20%</span> price cut',
@@ -2438,7 +2609,7 @@
           'Total revenue will rise by ~<span data-katex="20\\%" data-katex-display="false">20%</span> because inelastic demand insulates unit revenue from cuts'
         ],
         correct: 0,
-        explanation_pl: 'W strefie nieelastycznej (<span data-katex="|PED| = 0{,}4 < 1" data-katex-display="false">|PED| = 0,4 &lt; 1</span>) obniżka ceny jest błędem handlowym: sprzedaż wzrośnie tylko o <span data-katex="0{,}4 \\times 20\\% = 8\\%" data-katex-display="false">0,4 × 20% = 8%</span>. Spadek ceny o 20% przeważy nad 8% wzrostem ilości, powodując spadek utargu całkowitego (<span data-katex="TR \\downarrow" data-katex-display="false">TR ↓</span>).',
+        explanation_pl: 'W strefie nieelastycznej (<span data-katex="|PED| = 0{,}4 < 1" data-katex-display="false">|PED| = 0,4 &lt; 1</span>) obniżka ceny jest błędem handlowym: sprzedaż wzrośnie tylko o <span data-katex="0{,}4 \\times 20\\% = 8\\%" data-katex-display="false">0,4 × 20% = 8%</span>. Spadek ceny o 20% przeważy nad 8% wzrostem ilości, powodując spadek przychodu całkowitego (<span data-katex="TR \\downarrow" data-katex-display="false">TR ↓</span>).',
         explanation_en: 'In the inelastic zone (<span data-katex="|PED| = 0.4 < 1" data-katex-display="false">|PED| = 0.4 &lt; 1</span>), discounting destroys revenue: volume expands by only <span data-katex="0.4 \\times 20\\% = 8\\%" data-katex-display="false">0.4 × 20% = 8%</span>. The 20% price loss overwhelms the modest 8% quantity gain, shrinking total revenue.'
       },
       {
@@ -2480,12 +2651,12 @@
         explanation_en: "Budget share is a primary determinant: a 10% hike in housing costs impacts hundreds of dollars monthly, driving active substitution. A 10% hike in matches costs pennies and triggers zero behavioral response."
       },
       {
-        q_pl: 'W jakiej sytuacji utarg krańcowy (<span data-katex="MR" data-katex-display="false">MR</span>) przedsiębiorstwa jest ujemny (<span data-katex="MR < 0" data-katex-display="false">MR &lt; 0</span>)?',
+        q_pl: 'W jakiej sytuacji przychód krańcowy (<span data-katex="MR" data-katex-display="false">MR</span>) przedsiębiorstwa jest ujemny (<span data-katex="MR < 0" data-katex-display="false">MR &lt; 0</span>)?',
         q_en: 'Under what market conditions is a firm\'s marginal revenue strictly negative (<span data-katex="MR < 0" data-katex-display="false">MR &lt; 0</span>)?',
         options_pl: [
           'Gdy przedsiębiorstwo sprzedaje w strefie popytu nieelastycznego (<span data-katex="|PED| < 1" data-katex-display="false">|PED| &lt; 1</span>)',
           'Gdy przedsiębiorstwo sprzedaje w strefie popytu elastycznego (<span data-katex="|PED| > 1" data-katex-display="false">|PED| &gt; 1</span>)',
-          'Dokładnie w punkcie maksimum utargu całkowitego (<span data-katex="|PED| = 1" data-katex-display="false">|PED| = 1</span>)',
+          'Dokładnie w punkcie maksimum przychodu całkowitego (<span data-katex="|PED| = 1" data-katex-display="false">|PED| = 1</span>)',
           'Gdy firma działa w warunkach konkurencji doskonałej (<span data-katex="|PED| \\to \\infty" data-katex-display="false">|PED| → ∞</span>)'
         ],
         options_en: [
@@ -2495,7 +2666,7 @@
           'Under conditions of perfect competition (<span data-katex="|PED| \\to \\infty" data-katex-display="false">|PED| → ∞</span>)'
         ],
         correct: 0,
-        explanation_pl: 'Z formuły Amoroso-Robinsona: <span data-katex="MR = P\\left(1 - \\frac{1}{|PED|}\\right)" data-katex-display="false">MR = P·(1 − 1/|PED|)</span>. Gdy <span data-katex="|PED| < 1" data-katex-display="false">|PED| &lt; 1</span>, wyrażenie <span data-katex="1 - \\frac{1}{|PED|}" data-katex-display="false">(1 − 1/|PED|)</span> jest ujemne, a więc <span data-katex="MR < 0" data-katex-display="false">MR &lt; 0</span>. Sprzedaż dodatkowej jednostki wymaga tak dużej obniżki ceny, że utarg całkowity spada.',
+        explanation_pl: 'Z formuły Amoroso-Robinsona: <span data-katex="MR = P\\left(1 - \\frac{1}{|PED|}\\right)" data-katex-display="false">MR = P·(1 − 1/|PED|)</span>. Gdy <span data-katex="|PED| < 1" data-katex-display="false">|PED| &lt; 1</span>, wyrażenie <span data-katex="1 - \\frac{1}{|PED|}" data-katex-display="false">(1 − 1/|PED|)</span> jest ujemne, a więc <span data-katex="MR < 0" data-katex-display="false">MR &lt; 0</span>. Sprzedaż dodatkowej jednostki wymaga tak dużej obniżki ceny, że przychód całkowity spada.',
         explanation_en: 'By the Amoroso-Robinson relation: <span data-katex="MR = P\\left(1 - \\frac{1}{|PED|}\\right)" data-katex-display="false">MR = P·(1 − 1/|PED|)</span>. When <span data-katex="|PED| < 1" data-katex-display="false">|PED| &lt; 1</span>, the term <span data-katex="1 - \\frac{1}{|PED|}" data-katex-display="false">(1 − 1/|PED|)</span> is negative, producing <span data-katex="MR < 0" data-katex-display="false">MR &lt; 0</span>. Selling an incremental unit forces such a steep price concession that total revenue declines.'
       },
       {
@@ -2694,7 +2865,7 @@
       if (pct >= 85) {
         feedback = isEn 
           ? `Outstanding! You scored ${score} out of ${activeQuizQuestions.length} (${pct}%). You demonstrate a strong command of price elasticity determinants and corporate revenue optimization.`
-          : `Znakomicie! Twój wynik to ${score} z ${activeQuizQuestions.length} (${pct}%). Doskonale rozumiesz mikroekonomiczne mechanizmy elastyczności cenowej popytu i strategie utargu.`;
+          : `Znakomicie! Twój wynik to ${score} z ${activeQuizQuestions.length} (${pct}%). Doskonale rozumiesz mikroekonomiczne mechanizmy elastyczności cenowej popytu i strategie przychodu.`;
       } else if (pct >= 60) {
         feedback = isEn
           ? `Good work! You scored ${score} out of ${activeQuizQuestions.length} (${pct}%). You understand the core principles, but review the non-price determinants and time horizon dilemmas.`
@@ -2719,7 +2890,7 @@
     window.addEventListener('DOMContentLoaded', () => {
       initializeQuizSession();
       renderQuizQuestion();
-      updateDeterminantButtons();
+      updateDeterminantControls();
       updateSimulator();
       renderMathFormulas();
     });
