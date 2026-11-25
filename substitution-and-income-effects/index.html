@@ -1,0 +1,1690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EconLab - Hicksian Substitution and Income Effects | Dekompozycja efektu substytucyjnego i dochodowego</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Outfit', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    .custom-range {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      background: #e2e8f0;
+      border-radius: 9999px;
+      outline: none;
+    }
+    .custom-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #4f46e5;
+      cursor: pointer;
+      border: 2px solid #ffffff;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+      transition: transform 0.15s ease;
+    }
+    .custom-range::-webkit-slider-thumb:hover {
+      transform: scale(1.12);
+    }
+    .custom-range.range-blue::-webkit-slider-thumb { background: #2563eb; }
+    .custom-range.range-emerald::-webkit-slider-thumb { background: #16a34a; }
+    .custom-range.range-rose::-webkit-slider-thumb { background: #dc2626; }
+    .custom-range.range-slate::-webkit-slider-thumb { background: #64748b; }
+    .custom-range.range-amber::-webkit-slider-thumb { background: #d97706; }
+
+    .custom-range::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #4f46e5;
+      cursor: pointer;
+      border: 2px solid #ffffff;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+      transition: transform 0.15s ease;
+    }
+    .custom-range.range-blue::-moz-range-thumb { background: #2563eb; }
+    .custom-range.range-emerald::-moz-range-thumb { background: #16a34a; }
+    .custom-range.range-rose::-moz-range-thumb { background: #dc2626; }
+    .custom-range.range-slate::-moz-range-thumb { background: #64748b; }
+    .custom-range.range-amber::-moz-range-thumb { background: #d97706; }
+
+    .custom-range.range-transparent {
+      background: transparent;
+      height: 20px;
+      margin: 0;
+    }
+    .custom-range.range-transparent::-moz-range-track {
+      background: transparent;
+      border: none;
+    }
+
+    @keyframes pulsePoint {
+      0%, 100% { r: 6; opacity: 1; }
+      50% { r: 9; opacity: 0.7; }
+    }
+    .pulse-node {
+      animation: pulsePoint 2.2s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col antialiased selection:bg-indigo-500 selection:text-white">
+
+  <header class="bg-white border-b border-slate-200 shadow-sm sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-16 py-2.5 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <button onclick="switchTab('intro')" class="focus:outline-none flex items-center" title="EconLab">
+          <img src="econlab_poziomo_v2.png" onerror="this.onerror=null;this.src='https://placehold.co/240x60/ffffff/0e2b46?text=EconLab';" alt="EconLab Logo" class="h-9 sm:h-10 w-auto max-h-11 object-contain">
+        </button>
+        <div class="border-l border-slate-200 pl-3">
+          <div class="text-sm font-semibold text-slate-800 leading-tight" data-i18n="subtitle">Hicksian substitution and income effects</div>
+          <div class="text-xs text-slate-500 mt-0.5 flex flex-wrap items-center gap-x-1.5 gap-y-0.5">
+            <span>
+              <span data-i18n="authorLabel">Author:</span>
+              <a href="https://orcid.org/0000-0003-4761-3421" target="_blank" rel="noopener noreferrer" class="text-slate-700 hover:text-indigo-600 font-medium inline-flex items-center gap-1 transition-colors">
+                Mikołaj Klimczak
+                <svg class="w-3.5 h-3.5 text-emerald-600 inline" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
+                  <path d="M128 0C57.3 0 0 57.3 0 128s57.3 128 128 128 128-57.3 128-128S198.7 0 128 0zM86.3 186.2H70.9V79.1h15.4v107.1zm-7.7-121.3c-5.4 0-9.7-4.4-9.7-9.7s4.4-9.7 9.7-9.7 9.7 4.4 9.7 9.7-4.3 9.7-9.7 9.7zm109.7 69.8c0 31.8-22.8 51.5-56.2 51.5H103V79.1h30.1c32.4 0 55.2 19.3 55.2 55.6zm-16.1.3c0-25.6-15.6-41.8-40.3-41.8h-13.5v79.1h14.4c24.4 0 39.4-14.6 39.4-37.3z"/>
+                </svg>
+              </a>
+            </span>
+            <span class="text-slate-300">•</span>
+            <span class="text-indigo-600/90 font-medium" data-i18n="aiSupport">AI implementation support: Gemini</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <nav class="bg-slate-100 p-1 rounded-xl flex text-xs font-semibold overflow-x-auto" aria-label="Tabs">
+          <button onclick="switchTab('intro')" id="nav-btn-intro" class="px-3 py-1.5 rounded-lg transition-all whitespace-nowrap bg-white shadow-sm text-indigo-600 font-bold" data-i18n="tabIntro">Introduction</button>
+          <button onclick="switchTab('lab')" id="nav-btn-lab" class="px-3 py-1.5 rounded-lg transition-all whitespace-nowrap text-slate-600 hover:text-slate-900" data-i18n="tabLab">Laboratory</button>
+          <button onclick="switchTab('tasks')" id="nav-btn-tasks" class="px-3 py-1.5 rounded-lg transition-all whitespace-nowrap text-slate-600 hover:text-slate-900" data-i18n="tabTasks">Tasks</button>
+          <button onclick="switchTab('concepts')" id="nav-btn-concepts" class="px-3 py-1.5 rounded-lg transition-all whitespace-nowrap text-slate-600 hover:text-slate-900" data-i18n="tabConcepts">Concepts</button>
+          <button onclick="switchTab('quiz')" id="nav-btn-quiz" class="px-3 py-1.5 rounded-lg transition-all whitespace-nowrap text-slate-600 hover:text-slate-900" data-i18n="tabQuiz">Quiz</button>
+        </nav>
+
+        <button onclick="toggleLanguage()" class="p-2 bg-slate-100 hover:bg-slate-200 border border-slate-200 text-indigo-600 rounded-xl transition-colors shrink-0" aria-label="Switch language" title="Switch language / Zmień język">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 w-full">
+
+    <!-- TAB 1: INTRODUCTION -->
+    <section id="tab-intro" class="space-y-6">
+      <div class="bg-gradient-to-r from-indigo-700 via-indigo-600 to-blue-600 text-white rounded-2xl p-6 sm:p-8 shadow-sm">
+        <span class="inline-block bg-white/15 px-3 py-1 rounded-full text-xs font-semibold mb-3" data-i18n="heroBadge">Microeconomics I • Consumer theory</span>
+        <h1 class="font-display text-2xl sm:text-3xl font-bold tracking-tight mb-2" data-i18n="heroTitle">Hicksian decomposition of price changes</h1>
+        <p class="text-indigo-100 text-sm sm:text-base max-w-3xl leading-relaxed mb-5" data-i18n="heroDesc">
+          A price change in good X alters both the relative price ratio between goods and the real purchasing power of nominal income. John Hicks' method separates these two forces by holding consumer utility constant.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <button onclick="switchTab('lab')" class="bg-white text-indigo-700 hover:bg-indigo-50 px-4 py-2 rounded-xl text-sm font-semibold shadow-sm transition-colors" data-i18n="ctaLab">Open laboratory</button>
+          <button onclick="switchTab('tasks')" class="bg-indigo-800/60 hover:bg-indigo-800 text-white border border-white/20 px-4 py-2 rounded-xl text-sm font-semibold transition-colors" data-i18n="ctaTasks">Workshop tasks</button>
+          <button onclick="switchTab('concepts')" class="bg-indigo-800/60 hover:bg-indigo-800 text-white border border-white/20 px-4 py-2 rounded-xl text-sm font-semibold transition-colors" data-i18n="ctaConcepts">Compare concepts</button>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+          <h2 class="font-display text-lg font-bold text-slate-800" data-i18n="eqCardTitle">Central decomposition identity</h2>
+          <span class="text-xs bg-indigo-50 text-indigo-700 border border-indigo-200 px-3 py-1 rounded-lg font-semibold" data-katex="\Delta X_C = \Delta X_S + \Delta X_D" data-katex-display="false">\Delta X_C = \Delta X_S + \Delta X_D</span>
+        </div>
+        <p class="text-sm text-slate-600 leading-relaxed mb-4" data-i18n="eqCardDesc">
+          Moving from the initial equilibrium bundle <span data-katex="A" data-katex-display="false">A</span> to the final bundle <span data-katex="C" data-katex-display="false">C</span> passes through an intermediate compensated bundle <span data-katex="B" data-katex-display="false">B</span> located on the initial indifference curve <span data-katex="U_1" data-katex-display="false">U_1</span>.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="p-4 bg-blue-50/70 rounded-xl border border-blue-100">
+            <div class="text-xs font-bold text-blue-700 uppercase tracking-wide mb-1" data-i18n="compSubTag">Substitution effect</div>
+            <div class="text-base font-bold text-slate-800 mb-1" data-katex="\Delta X_S = X_B - X_A" data-katex-display="false">\Delta X_S = X_B - X_A</div>
+            <p class="text-xs text-slate-600 leading-relaxed" data-i18n="compSubDesc">Movement along the initial indifference curve <span data-katex="U_1" data-katex-display="false">U_1</span> caused purely by the new relative price ratio <span data-katex="P_{X2} / P_Y" data-katex-display="false">P_{X2} / P_Y</span>.</p>
+          </div>
+          <div class="p-4 bg-amber-50/70 rounded-xl border border-amber-100">
+            <div class="text-xs font-bold text-amber-700 uppercase tracking-wide mb-1" data-i18n="compIncTag">Income effect</div>
+            <div class="text-base font-bold text-slate-800 mb-1" data-katex="\Delta X_D = X_C - X_B" data-katex-display="false">\Delta X_D = X_C - X_B</div>
+            <p class="text-xs text-slate-600 leading-relaxed" data-i18n="compIncDesc">Parallel shift from the compensated budget line <span data-katex="BL_H" data-katex-display="false">BL_H</span> to the final budget line <span data-katex="BL_2" data-katex-display="false">BL_2</span> as nominal income <span data-katex="M" data-katex-display="false">M</span> is restored.</p>
+          </div>
+          <div class="p-4 bg-emerald-50/70 rounded-xl border border-emerald-100">
+            <div class="text-xs font-bold text-emerald-700 uppercase tracking-wide mb-1" data-i18n="compTotTag">Total price effect</div>
+            <div class="text-base font-bold text-slate-800 mb-1" data-katex="\Delta X_C = X_C - X_A" data-katex-display="false">\Delta X_C = X_C - X_A</div>
+            <p class="text-xs text-slate-600 leading-relaxed" data-i18n="compTotDesc">Net change in observed quantity demanded between initial equilibrium <span data-katex="A" data-katex-display="false">A</span> on <span data-katex="BL_1" data-katex-display="false">BL_1</span> and final equilibrium <span data-katex="C" data-katex-display="false">C</span> on <span data-katex="BL_2" data-katex-display="false">BL_2</span>.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm">
+        <h2 class="font-display text-lg font-bold text-slate-800 mb-1" data-i18n="casesTitle">Three canonical cases for a price decrease (<span data-katex="P_{X2} < P_{X1}" data-katex-display="false">P_{X2} &lt; P_{X1}</span>)</h2>
+        <p class="text-xs text-slate-500 mb-4" data-i18n="casesSubtitle">Direction of substitution, income, and total effects depending on the nature of good <span data-katex="X" data-katex-display="false">X</span>.</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <h3 class="font-bold text-sm text-slate-800" data-i18n="caseNormalTitle">Normal good</h3>
+                <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-semibold" data-katex="\Delta X_C > 0" data-katex-display="false">\Delta X_C &gt; 0</span>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed mb-3" data-i18n="caseNormalDesc">Higher real purchasing power increases consumption of good <span data-katex="X" data-katex-display="false">X</span>. Both substitution and income effects work in the same direction.</p>
+            </div>
+            <div class="text-xs bg-white p-2 rounded-lg border border-slate-200 text-slate-700" data-katex="\Delta X_S > 0, \quad \Delta X_D > 0" data-katex-display="false">
+              \Delta X_S &gt; 0, \quad \Delta X_D &gt; 0
+            </div>
+          </div>
+
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <h3 class="font-bold text-sm text-slate-800" data-i18n="caseInferiorTitle">Inferior good</h3>
+                <span class="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded font-semibold" data-katex="\Delta X_C > 0" data-katex-display="false">\Delta X_C &gt; 0</span>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed mb-3" data-i18n="caseInferiorDesc">Higher real income reduces demand for good <span data-katex="X" data-katex-display="false">X</span>, so the income effect is negative, yet weaker than the positive substitution effect.</p>
+            </div>
+            <div class="text-xs bg-white p-2 rounded-lg border border-slate-200 text-slate-700" data-katex="\Delta X_S > 0, \quad \Delta X_D < 0, \quad |\Delta X_D| < \Delta X_S" data-katex-display="false">
+              \Delta X_S &gt; 0, \quad \Delta X_D &lt; 0, \quad |\Delta X_D| &lt; \Delta X_S
+            </div>
+          </div>
+
+          <div class="p-4 bg-amber-50/60 rounded-xl border border-amber-200 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <h3 class="font-bold text-sm text-slate-800" data-i18n="caseGiffenTitle">Giffen good*</h3>
+                <span class="text-xs bg-rose-100 text-rose-800 px-2 py-0.5 rounded font-semibold" data-katex="\Delta X_C < 0" data-katex-display="false">\Delta X_C &lt; 0</span>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed mb-3" data-i18n="caseGiffenDesc">A theoretical boundary case where a strong negative income effect outweighs the positive substitution effect, reducing total demand when price falls.</p>
+            </div>
+            <div class="text-xs bg-white p-2 rounded-lg border border-amber-200 text-slate-700" data-katex="\Delta X_S > 0, \quad \Delta X_D < 0, \quad |\Delta X_D| > \Delta X_S" data-katex-display="false">
+              \Delta X_S &gt; 0, \quad \Delta X_D &lt; 0, \quad |\Delta X_D| &gt; \Delta X_S
+            </div>
+          </div>
+        </div>
+        <div class="mt-4 p-3.5 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-900 leading-relaxed" data-i18n="giffenNote">
+          *Methodological note on Giffen goods: Giffen goods are primarily theoretical constructs in microeconomics. Empirical literature lacks unambiguous evidence of persistent Giffen behavior in real markets; the concept defines the theoretical boundary of the law of demand.
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: LABORATORY -->
+    <section id="tab-lab" class="hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+        <div class="lg:col-span-4 space-y-5">
+          <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+            <div class="flex items-center justify-between mb-3">
+              <h2 class="font-display text-base font-bold text-slate-800" data-i18n="controlsTitle">Model parameters</h2>
+              <button onclick="resetSim()" class="text-xs font-semibold text-indigo-600 hover:text-indigo-800 bg-indigo-50 hover:bg-indigo-100 px-2.5 py-1 rounded-lg transition-colors" data-i18n="btnReset">Defaults</button>
+            </div>
+
+            <div class="mb-4">
+              <label class="block text-xs font-semibold text-slate-600 mb-2" data-i18n="goodTypeLabel">Nature of good X</label>
+              <div class="grid grid-cols-3 gap-1.5 bg-slate-100 p-1 rounded-xl">
+                <button id="btn-normal" onclick="setGoodType('normal')" class="py-1.5 px-2 rounded-lg text-xs font-semibold transition-all bg-white text-indigo-600 shadow-sm" data-i18n="btnNormal">Normal</button>
+                <button id="btn-inferior" onclick="setGoodType('inferior')" class="py-1.5 px-2 rounded-lg text-xs font-semibold transition-all text-slate-600 hover:text-slate-900" data-i18n="btnInferior">Inferior</button>
+                <button id="btn-giffen" onclick="setGoodType('giffen')" class="py-1.5 px-2 rounded-lg text-xs font-semibold transition-all text-slate-600 hover:text-slate-900" data-i18n="btnGiffen">Giffen*</button>
+              </div>
+            </div>
+
+            <div class="space-y-4">
+              <div>
+                <div class="flex justify-between items-center text-xs font-semibold mb-1.5">
+                  <span class="text-slate-700" data-i18n="lblIncome">Nominal income (<span data-katex="M" data-katex-display="false">M</span>)</span>
+                  <span id="val-M" class="font-mono bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded font-bold">120</span>
+                </div>
+                <input type="range" id="slider-M" class="custom-range" min="80" max="180" step="1" value="120" oninput="updateSim()">
+                <div class="flex justify-between text-[11px] text-slate-400 mt-1">
+                  <span>80</span>
+                  <span>180</span>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between items-center text-xs font-semibold mb-1.5">
+                  <span class="text-slate-700" data-i18n="lblPx1">Initial price (<span data-katex="P_{X1}" data-katex-display="false">P_{X1}</span>)</span>
+                  <span id="val-Px1" class="font-mono bg-blue-50 text-blue-700 px-2 py-0.5 rounded font-bold">6.0</span>
+                </div>
+                <input type="range" id="slider-Px1" class="custom-range range-blue" min="2" max="10" step="0.1" value="6" oninput="updateSim()">
+                <div class="flex justify-between text-[11px] text-slate-400 mt-1">
+                  <span>2.0</span>
+                  <span>10.0</span>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between items-center text-xs font-semibold mb-1.5 gap-2">
+                  <span class="text-slate-700" data-i18n="lblPx2">New price (<span data-katex="P_{X2}" data-katex-display="false">P_{X2}</span>)</span>
+                  <div class="flex items-center gap-1.5 shrink-0">
+                    <span id="val-Px2-pct" class="font-mono text-[11px] px-1.5 py-0.5 rounded font-bold border whitespace-nowrap bg-emerald-50 text-emerald-700 border-emerald-200">−50%</span>
+                    <span id="val-Px2" class="font-mono bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded font-bold whitespace-nowrap">3.0</span>
+                  </div>
+                </div>
+                <div class="relative flex items-center h-5">
+                  <div class="absolute inset-x-0 h-1.5 bg-slate-200 rounded-full pointer-events-none"></div>
+                  <div class="absolute left-[9px] right-[9px] h-1.5 pointer-events-none">
+                    <div id="px2-delta-bar" class="absolute top-0 h-1.5 rounded-full transition-colors duration-150"></div>
+                    <div id="px2-ref-dot" class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-blue-600 border-2 border-white shadow-sm"></div>
+                  </div>
+                  <input type="range" id="slider-Px2" class="custom-range range-transparent range-emerald relative z-10" min="2" max="10" step="0.1" value="3" oninput="updateSim()">
+                </div>
+                <div class="flex justify-between text-[11px] text-slate-400 mt-1">
+                  <span>2.0</span>
+                  <span>10.0</span>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between items-center text-xs font-semibold mb-1.5">
+                  <span class="text-slate-700" data-i18n="lblPy">Price of good Y (<span data-katex="P_Y" data-katex-display="false">P_Y</span>)</span>
+                  <span id="val-Py" class="font-mono bg-amber-50 text-amber-700 px-2 py-0.5 rounded font-bold">4.0</span>
+                </div>
+                <input type="range" id="slider-Py" class="custom-range range-amber" min="2" max="8" step="0.1" value="4" oninput="updateSim()">
+                <div class="flex justify-between text-[11px] text-slate-400 mt-1">
+                  <span>2.0</span>
+                  <span>8.0</span>
+                </div>
+              </div>
+            </div>
+
+            <div id="giffen-warning" class="hidden mt-4 p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-900 leading-relaxed" data-i18n="giffenSimWarn">
+              Note: Hypothetical Giffen case selected. The negative income effect outweighs the positive substitution effect when price falls.
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+            <h3 class="font-display text-sm font-bold text-slate-800 mb-2.5" data-i18n="presetsTitle">Quick scenarios</h3>
+            <div class="grid grid-cols-2 gap-2">
+              <button onclick="loadTaskPreset('normal', 120, 6, 3, 4, false)" class="p-2.5 text-left rounded-xl border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/50 transition-colors">
+                <div class="text-xs font-bold text-slate-800" data-i18n="pre1Title">Price drop 50%</div>
+                <div class="text-[11px] text-slate-500" data-i18n="pre1Sub">Normal good</div>
+              </button>
+              <button onclick="loadTaskPreset('normal', 120, 4, 8, 4, false)" class="p-2.5 text-left rounded-xl border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/50 transition-colors">
+                <div class="text-xs font-bold text-slate-800" data-i18n="pre2Title">Price hike 100%</div>
+                <div class="text-[11px] text-slate-500" data-i18n="pre2Sub">Normal good</div>
+              </button>
+              <button onclick="loadTaskPreset('inferior', 120, 8, 4, 4, false)" class="p-2.5 text-left rounded-xl border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/50 transition-colors">
+                <div class="text-xs font-bold text-slate-800" data-i18n="pre3Title">Opposing effects</div>
+                <div class="text-[11px] text-slate-500" data-i18n="pre3Sub">Inferior good</div>
+              </button>
+              <button onclick="loadTaskPreset('giffen', 100, 6, 3, 4, false)" class="p-2.5 text-left rounded-xl border border-amber-200 bg-amber-50/40 hover:bg-amber-50 transition-colors">
+                <div class="text-xs font-bold text-amber-900" data-i18n="pre4Title">Giffen paradox*</div>
+                <div class="text-[11px] text-amber-700" data-i18n="pre4Sub">Demand reversal</div>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-8 space-y-5">
+          <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2 mb-3">
+              <div>
+                <span class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 block" data-i18n="chartOverline">Indifference curves & budget lines</span>
+                <h2 class="font-display text-lg font-bold text-slate-800" data-i18n="chartTitle">Hicksian decomposition diagram</h2>
+              </div>
+              <div class="flex flex-wrap gap-3 text-xs text-slate-600">
+                <span class="inline-flex items-center gap-1.5"><span class="w-4 h-0.5 bg-blue-600 inline-block"></span><span data-i18n="legBL1">Initial <span data-katex="BL_1" data-katex-display="false">BL_1</span></span></span>
+                <span class="inline-flex items-center gap-1.5"><span class="w-4 h-0.5 bg-emerald-600 inline-block"></span><span data-i18n="legBL2">New <span data-katex="BL_2" data-katex-display="false">BL_2</span></span></span>
+                <span class="inline-flex items-center gap-1.5"><span class="w-4 h-0.5 border-t-2 border-dashed border-amber-600 inline-block"></span><span data-i18n="legBLH">Compensated <span data-katex="BL_H" data-katex-display="false">BL_H</span></span></span>
+              </div>
+            </div>
+
+            <div class="w-full bg-slate-50/60 border border-slate-200 rounded-xl p-2">
+              <svg id="hicksSvg" viewBox="0 0 680 420" class="w-full h-auto block" role="img" aria-label="Hicksian decomposition SVG chart">
+                <defs>
+                  <marker id="arrow-axis" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#475569"/>
+                  </marker>
+                  <marker id="arrow-sub" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb"/>
+                  </marker>
+                  <marker id="arrow-inc" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#d97706"/>
+                  </marker>
+                  <marker id="arrow-tot" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#7c3aed"/>
+                  </marker>
+                </defs>
+                <g id="grid-group"></g>
+                <g id="areas-group"></g>
+                <g id="vectors-group"></g>
+                <g id="axis-group"></g>
+                <g id="baseline-curves-group"></g>
+                <g id="active-curves-group"></g>
+                <g id="projections-group"></g>
+                <g id="diseq-group"></g>
+                <g id="eq-vector-group"></g>
+                <g id="points-group"></g>
+                <g id="labels-group"></g>
+              </svg>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
+              <div class="p-3.5 rounded-xl bg-blue-50/70 border border-blue-100">
+                <div class="text-[11px] font-bold uppercase tracking-wide text-blue-700" data-i18n="resSub">Substitution effect (<span data-katex="\Delta X_S" data-katex-display="false">\Delta X_S</span>)</div>
+                <div id="out-sub" class="font-mono text-xl font-extrabold text-slate-800 mt-0.5">+0.00</div>
+                <div id="out-sub-pts" class="text-xs text-slate-500 mt-0.5"><span data-katex="X_A \to X_B" data-katex-display="false">X_A &rarr; X_B</span></div>
+              </div>
+              <div class="p-3.5 rounded-xl bg-amber-50/70 border border-amber-100">
+                <div class="text-[11px] font-bold uppercase tracking-wide text-amber-700" data-i18n="resInc">Income effect (<span data-katex="\Delta X_D" data-katex-display="false">\Delta X_D</span>)</div>
+                <div id="out-inc" class="font-mono text-xl font-extrabold text-slate-800 mt-0.5">+0.00</div>
+                <div id="out-inc-pts" class="text-xs text-slate-500 mt-0.5"><span data-katex="X_B \to X_C" data-katex-display="false">X_B &rarr; X_C</span></div>
+              </div>
+              <div class="p-3.5 rounded-xl bg-purple-50/70 border border-purple-100">
+                <div class="text-[11px] font-bold uppercase tracking-wide text-purple-700" data-i18n="resTot">Total effect (<span data-katex="\Delta X_C" data-katex-display="false">\Delta X_C</span>)</div>
+                <div id="out-tot" class="font-mono text-xl font-extrabold text-slate-800 mt-0.5">+0.00</div>
+                <div id="out-tot-pts" class="text-xs text-slate-500 mt-0.5"><span data-katex="X_A \to X_C" data-katex-display="false">X_A &rarr; X_C</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+            <h3 class="font-display text-base font-bold text-slate-800 mb-2" data-i18n="stepsHeading">Step-by-step decomposition</h3>
+            <div id="math-breakdown" class="space-y-2 text-xs sm:text-sm text-slate-700"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: TASKS -->
+    <section id="tab-tasks" class="hidden space-y-6">
+      <div class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-5 pb-4 border-b border-slate-200">
+          <div>
+            <h2 class="font-display text-lg font-bold text-slate-800" data-i18n="tasksTitle">Workshop tasks</h2>
+            <p class="text-xs text-slate-500 mt-0.5" data-i18n="tasksIntro">Load each scenario into the laboratory, observe the transition <span data-katex="A \to B \to C" data-katex-display="false">A &rarr; B &rarr; C</span>, and verify your economic reasoning.</p>
+          </div>
+          <div class="bg-slate-100 p-1 rounded-xl flex text-xs font-semibold">
+            <button onclick="switchTask(1)" id="task-nav-1" class="px-3 py-1.5 rounded-lg bg-white shadow-sm text-indigo-600 font-bold" data-i18n="taskTab1">Task 1</button>
+            <button onclick="switchTask(2)" id="task-nav-2" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900" data-i18n="taskTab2">Task 2</button>
+            <button onclick="switchTask(3)" id="task-nav-3" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900" data-i18n="taskTab3">Task 3</button>
+          </div>
+        </div>
+
+        <div id="task-panel-1" class="space-y-4">
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <h3 class="font-display text-base font-bold text-slate-800" data-i18n="t1Title">Task 1: Normal good and 50% price reduction</h3>
+            <span class="text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-0.5 rounded-full" data-i18n="t1Level">Foundational</span>
+          </div>
+          <p class="text-sm text-slate-600 leading-relaxed" data-i18n="t1Desc">
+            Select a normal good with nominal income <span data-katex="M = 120" data-katex-display="false">M = 120</span>, <span data-katex="P_{X1} = 6.0" data-katex-display="false">P_{X1} = 6.0</span>, <span data-katex="P_{X2} = 3.0" data-katex-display="false">P_{X2} = 3.0</span>, and <span data-katex="P_Y = 4.0" data-katex-display="false">P_Y = 4.0</span>. Identify the coordinates of bundles <span data-katex="A" data-katex-display="false">A</span>, <span data-katex="B" data-katex-display="false">B</span>, and <span data-katex="C" data-katex-display="false">C</span>. What share of the total increase in good <span data-katex="X" data-katex-display="false">X</span> comes from the substitution effect versus the income effect?
+          </p>
+          <div class="flex flex-wrap gap-2.5 pt-1">
+            <button onclick="loadTaskPreset('normal', 120, 6, 3, 4, true)" class="px-4 py-2 rounded-xl text-xs font-semibold bg-indigo-600 hover:bg-indigo-700 text-white transition-colors" data-i18n="btnLoadPreset">Load into laboratory</button>
+            <button onclick="toggleAnswer('ans-1')" class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-800 transition-colors" data-i18n="btnShowAns">Show solution</button>
+          </div>
+          <div id="ans-1" class="hidden p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed" data-i18n="t1Ans">
+            Initial equilibrium: <span data-katex="A = (10.00;\, 15.00)" data-katex-display="false">A = (10.00; 15.00)</span>. After <span data-katex="P_X" data-katex-display="false">P_X</span> drops to <span data-katex="3.0" data-katex-display="false">3.0</span>, the Hicksian compensated bundle is <span data-katex="B = (14.14;\, 10.61)" data-katex-display="false">B = (14.14; 10.61)</span>, and the final equilibrium is <span data-katex="C = (20.00;\, 15.00)" data-katex-display="false">C = (20.00; 15.00)</span>. The total effect equals <span data-katex="\Delta X_C = +10.00" data-katex-display="false">\Delta X_C = +10.00</span> units, consisting of <span data-katex="\Delta X_S = +4.14" data-katex-display="false">\Delta X_S = +4.14</span> (41.4%) from substitution and <span data-katex="\Delta X_D = +5.86" data-katex-display="false">\Delta X_D = +5.86</span> (58.6%) from higher real income.
+          </div>
+        </div>
+
+        <div id="task-panel-2" class="hidden space-y-4">
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <h3 class="font-display text-base font-bold text-slate-800" data-i18n="t2Title">Task 2: Inferior good and opposing effects</h3>
+            <span class="text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200 px-2.5 py-0.5 rounded-full" data-i18n="t2Level">Intermediate</span>
+          </div>
+          <p class="text-sm text-slate-600 leading-relaxed" data-i18n="t2Desc">
+            Switch the good type to inferior with <span data-katex="M = 120" data-katex-display="false">M = 120</span>, <span data-katex="P_{X1} = 8.0" data-katex-display="false">P_{X1} = 8.0</span>, <span data-katex="P_{X2} = 4.0" data-katex-display="false">P_{X2} = 4.0</span>, and <span data-katex="P_Y = 4.0" data-katex-display="false">P_Y = 4.0</span>. Explain why bundle <span data-katex="C" data-katex-display="false">C</span> lies to the left of bundle <span data-katex="B" data-katex-display="false">B</span> even though final consumption <span data-katex="X_C" data-katex-display="false">X_C</span> exceeds initial consumption <span data-katex="X_A" data-katex-display="false">X_A</span>.
+          </p>
+          <div class="flex flex-wrap gap-2.5 pt-1">
+            <button onclick="loadTaskPreset('inferior', 120, 8, 4, 4, true)" class="px-4 py-2 rounded-xl text-xs font-semibold bg-indigo-600 hover:bg-indigo-700 text-white transition-colors" data-i18n="btnLoadPreset">Load into laboratory</button>
+            <button onclick="toggleAnswer('ans-2')" class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-800 transition-colors" data-i18n="btnShowAns">Show solution</button>
+          </div>
+          <div id="ans-2" class="hidden p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed" data-i18n="t2Ans">
+            Lower <span data-katex="P_X" data-katex-display="false">P_X</span> generates a positive substitution effect (<span data-katex="X_B > X_A" data-katex-display="false">X_B &gt; X_A</span>). Simultaneously, higher real purchasing power induces the consumer to shift away from the inferior good toward good <span data-katex="Y" data-katex-display="false">Y</span> (<span data-katex="X_C < X_B" data-katex-display="false">X_C &lt; X_B</span>). Because the substitution effect outweighs the negative income effect (<span data-katex="|\Delta X_D| < \Delta X_S" data-katex-display="false">|\Delta X_D| &lt; \Delta X_S</span>), net quantity demanded rises (<span data-katex="X_C > X_A" data-katex-display="false">X_C &gt; X_A</span>).
+          </div>
+        </div>
+
+        <div id="task-panel-3" class="hidden space-y-4">
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <h3 class="font-display text-base font-bold text-slate-800" data-i18n="t3Title">Task 3: Hypothetical Giffen good and demand reversal</h3>
+            <span class="text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200 px-2.5 py-0.5 rounded-full" data-i18n="t3Level">Theoretical analysis</span>
+          </div>
+          <p class="text-sm text-slate-600 leading-relaxed" data-i18n="t3Desc">
+            Load the Giffen good case (<span data-katex="M = 100" data-katex-display="false">M = 100</span>, <span data-katex="P_{X1} = 6.0" data-katex-display="false">P_{X1} = 6.0</span>, <span data-katex="P_{X2} = 3.0" data-katex-display="false">P_{X2} = 3.0</span>, <span data-katex="P_Y = 4.0" data-katex-display="false">P_Y = 4.0</span>). Compare the horizontal positions of <span data-katex="A" data-katex-display="false">A</span>, <span data-katex="B" data-katex-display="false">B</span>, and <span data-katex="C" data-katex-display="false">C</span>. Which structural conditions would be required for this theoretical paradox to emerge?
+          </p>
+          <div class="flex flex-wrap gap-2.5 pt-1">
+            <button onclick="loadTaskPreset('giffen', 100, 6, 3, 4, true)" class="px-4 py-2 rounded-xl text-xs font-semibold bg-indigo-600 hover:bg-indigo-700 text-white transition-colors" data-i18n="btnLoadPreset">Load into laboratory</button>
+            <button onclick="toggleAnswer('ans-3')" class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-800 transition-colors" data-i18n="btnShowAns">Show solution</button>
+          </div>
+          <div id="ans-3" class="hidden p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed" data-i18n="t3Ans">
+            In the hypothetical Giffen case, bundle <span data-katex="C" data-katex-display="false">C</span> lies to the left of initial bundle <span data-katex="A" data-katex-display="false">A</span> (<span data-katex="X_C < X_A" data-katex-display="false">X_C &lt; X_A</span>). The negative income effect exceeds the positive substitution effect in absolute magnitude (<span data-katex="|\Delta X_D| > \Delta X_S" data-katex-display="false">|\Delta X_D| &gt; \Delta X_S</span>). Theoretically, this requires a strongly inferior staple good that absorbs a large share of the household budget and lacks close substitutes.
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm">
+        <h3 class="font-display text-base font-bold text-slate-800 mb-3" data-i18n="glossaryTitle">Notation reference</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+            <span class="font-bold text-indigo-700" data-katex="BL_1,\, BL_2" data-katex-display="false">BL_1, BL_2</span>
+            <p class="text-slate-600 mt-1" data-i18n="glBL">Initial and final budget lines for nominal income <span data-katex="M" data-katex-display="false">M</span>.</p>
+          </div>
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+            <span class="font-bold text-amber-700" data-katex="BL_H,\, M_H" data-katex-display="false">BL_H, M_H</span>
+            <p class="text-slate-600 mt-1" data-i18n="glBLH">Hicksian compensated budget line and adjusted income keeping utility at <span data-katex="U_1" data-katex-display="false">U_1</span>.</p>
+          </div>
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+            <span class="font-bold text-blue-700" data-katex="\Delta X_S,\, \Delta X_D" data-katex-display="false">\Delta X_S, \Delta X_D</span>
+            <p class="text-slate-600 mt-1" data-i18n="glEffects">Substitution effect (<span data-katex="X_B - X_A" data-katex-display="false">X_B - X_A</span>) and income effect (<span data-katex="X_C - X_B" data-katex-display="false">X_C - X_B</span>).</p>
+          </div>
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+            <span class="font-bold text-purple-700" data-katex="U_1,\, U_2" data-katex-display="false">U_1, U_2</span>
+            <p class="text-slate-600 mt-1" data-i18n="glUtil">Initial and final indifference curves representing consumer utility levels.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: CONCEPTS -->
+    <section id="tab-concepts" class="hidden space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm">
+          <span class="inline-block text-xs font-bold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-full mb-2" data-i18n="conHicksTag">Constant utility approach</span>
+          <h2 class="font-display text-lg font-bold text-slate-800 mb-2" data-i18n="conHicksTitle">Hicksian compensation (<span data-katex="BL_H" data-katex-display="false">BL_H</span>)</h2>
+          <p class="text-sm text-slate-600 leading-relaxed mb-3" data-i18n="conHicksDesc">
+            Hicks adjusts nominal income to <span data-katex="M_H" data-katex-display="false">M_H</span> so the consumer can reach the exact same indifference curve <span data-katex="U_1" data-katex-display="false">U_1</span> under the new price ratio <span data-katex="P_{X2} / P_Y" data-katex-display="false">P_{X2} / P_Y</span>. The compensated line <span data-katex="BL_H" data-katex-display="false">BL_H</span> is tangent to <span data-katex="U_1" data-katex-display="false">U_1</span> at point <span data-katex="B" data-katex-display="false">B</span>.
+          </p>
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 text-xs text-slate-700" data-i18n="conHicksFoot">
+            Advantage: Directly links to compensated (Hicksian) demand curves and expenditure minimization.
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm">
+          <span class="inline-block text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full mb-2" data-i18n="conSlutskyTag">Constant purchasing power approach</span>
+          <h2 class="font-display text-lg font-bold text-slate-800 mb-2" data-i18n="conSlutskyTitle">Slutsky compensation (comparison)</h2>
+          <p class="text-sm text-slate-600 leading-relaxed mb-3" data-i18n="conSlutskyDesc">
+            Unlike Hicks, Eugen Slutsky pivots the budget line through the original bundle <span data-katex="A" data-katex-display="false">A</span> so the consumer can afford the exact same basket at new prices. This places the intermediate bundle on a slightly higher indifference curve than <span data-katex="U_1" data-katex-display="false">U_1</span>.
+          </p>
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 text-xs text-slate-700" data-i18n="conSlutskyFoot">
+            Advantage: Observable directly from market prices and initial quantities without knowing utility functions.
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm">
+        <h3 class="font-display text-base font-bold text-slate-800 mb-1" data-i18n="microCheckTitle">Intuition micro-check</h3>
+        <p class="text-xs text-slate-500 mb-4" data-i18n="microCheckSub">Click a scenario to inspect the classification of substitution and income effects.</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
+          <button onclick="showMiniFact(0)" class="p-3 text-left rounded-xl border border-slate-200 hover:border-indigo-400 hover:bg-indigo-50/40 text-xs font-semibold text-slate-800 transition-colors" data-i18n="mfBtn0">1. Price of coffee rises (normal good)</button>
+          <button onclick="showMiniFact(1)" class="p-3 text-left rounded-xl border border-slate-200 hover:border-indigo-400 hover:bg-indigo-50/40 text-xs font-semibold text-slate-800 transition-colors" data-i18n="mfBtn1">2. Price of instant noodles falls (inferior good)</button>
+          <button onclick="showMiniFact(2)" class="p-3 text-left rounded-xl border border-slate-200 hover:border-indigo-400 hover:bg-indigo-50/40 text-xs font-semibold text-slate-800 transition-colors" data-i18n="mfBtn2">3. Perfect complements (left and right shoes)</button>
+          <button onclick="showMiniFact(3)" class="p-3 text-left rounded-xl border border-slate-200 hover:border-indigo-400 hover:bg-indigo-50/40 text-xs font-semibold text-slate-800 transition-colors" data-i18n="mfBtn3">4. Quasilinear utility for good X</button>
+        </div>
+        <div id="mini-fact-box" class="hidden mt-4 p-4 rounded-xl bg-indigo-50 border border-indigo-200 text-xs sm:text-sm text-indigo-950 leading-relaxed"></div>
+      </div>
+    </section>
+
+    <!-- TAB 5: QUIZ -->
+    <section id="tab-quiz" class="hidden">
+      <div class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm max-w-3xl mx-auto">
+        <div id="quiz-active-view">
+          <div class="flex flex-wrap items-center justify-between gap-2 pb-4 mb-5 border-b border-slate-200">
+            <div class="flex items-center gap-2">
+              <span id="quiz-counter" class="text-xs font-bold bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded-lg">Question 1/8</span>
+              <span id="quiz-category" class="text-xs font-medium text-slate-500">Hicksian method</span>
+            </div>
+            <div id="quiz-score-badge" class="font-mono text-xs font-bold text-slate-700 bg-slate-100 px-3 py-1 rounded-lg">Score: 0 / 8</div>
+          </div>
+
+          <h2 id="quiz-question-text" class="font-display text-base sm:text-lg font-bold text-slate-800 mb-4 leading-snug"></h2>
+          <div id="quiz-options-list" class="space-y-2.5"></div>
+
+          <div id="quiz-explanation" class="hidden mt-4 p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-700 leading-relaxed"></div>
+
+          <div class="mt-5 flex justify-end">
+            <button id="quiz-next-btn" onclick="nextQuizQuestion()" class="hidden px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold transition-colors" data-i18n="btnNextQ">Next question</button>
+          </div>
+        </div>
+
+        <div id="quiz-result-view" class="hidden text-center py-6 space-y-4">
+          <div class="text-xs font-bold uppercase tracking-wider text-indigo-600" data-i18n="quizDoneTag">Assessment complete</div>
+          <div id="quiz-final-pct" class="font-mono text-4xl font-extrabold text-indigo-700">100%</div>
+          <p id="quiz-final-summary" class="text-sm text-slate-600 max-w-md mx-auto"></p>
+          <button onclick="initializeQuizSession()" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold transition-colors" data-i18n="btnRestartQuiz">Start new session</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-white border-t border-slate-200 py-4 mt-8">
+    <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-400">
+      <span data-i18n="footer_text">EconLab — Interactive Economics Simulator for Students. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+    let currentLang = 'en';
+    let currentTab = 'intro';
+    let currentTask = 1;
+    let goodType = 'normal';
+    let selectedMiniFact = null;
+
+    const translations = {
+      en: {
+        subtitle: "Hicksian substitution and income effects",
+        authorLabel: "Author:",
+        aiSupport: "AI implementation support: Gemini",
+        tabIntro: "Introduction",
+        tabLab: "Laboratory",
+        tabTasks: "Tasks",
+        tabConcepts: "Concepts",
+        tabQuiz: "Quiz",
+        heroBadge: "Microeconomics I • Consumer theory",
+        heroTitle: "Hicksian decomposition of price changes",
+        heroDesc: "A price change in good X alters both the relative price ratio between goods and the real purchasing power of nominal income. John Hicks' method separates these two forces by holding consumer utility constant.",
+        ctaLab: "Open laboratory",
+        ctaTasks: "Workshop tasks",
+        ctaConcepts: "Compare concepts",
+        eqCardTitle: "Central decomposition identity",
+        eqCardDesc: "Moving from the initial equilibrium bundle <span data-katex=\"A\" data-katex-display=\"false\">A</span> to the final bundle <span data-katex=\"C\" data-katex-display=\"false\">C</span> passes through an intermediate compensated bundle <span data-katex=\"B\" data-katex-display=\"false\">B</span> located on the initial indifference curve <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span>.",
+        compSubTag: "Substitution effect",
+        compSubDesc: "Movement along the initial indifference curve <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span> caused purely by the new relative price ratio <span data-katex=\"P_{X2} / P_Y\" data-katex-display=\"false\">P_{X2} / P_Y</span>.",
+        compIncTag: "Income effect",
+        compIncDesc: "Parallel shift from the compensated budget line <span data-katex=\"BL_H\" data-katex-display=\"false\">BL_H</span> to the final budget line <span data-katex=\"BL_2\" data-katex-display=\"false\">BL_2</span> as nominal income <span data-katex=\"M\" data-katex-display=\"false\">M</span> is restored.",
+        compTotTag: "Total price effect",
+        compTotDesc: "Net change in observed quantity demanded between initial equilibrium <span data-katex=\"A\" data-katex-display=\"false\">A</span> on <span data-katex=\"BL_1\" data-katex-display=\"false\">BL_1</span> and final equilibrium <span data-katex=\"C\" data-katex-display=\"false\">C</span> on <span data-katex=\"BL_2\" data-katex-display=\"false\">BL_2</span>.",
+        casesTitle: "Three canonical cases for a price decrease (<span data-katex=\"P_{X2} < P_{X1}\" data-katex-display=\"false\">P_{X2} &lt; P_{X1}</span>)",
+        casesSubtitle: "Direction of substitution, income, and total effects depending on the nature of good <span data-katex=\"X\" data-katex-display=\"false\">X</span>.",
+        caseNormalTitle: "Normal good",
+        caseNormalDesc: "Higher real purchasing power increases consumption of good <span data-katex=\"X\" data-katex-display=\"false\">X</span>. Both substitution and income effects work in the same direction.",
+        caseInferiorTitle: "Inferior good",
+        caseInferiorDesc: "Higher real income reduces demand for good <span data-katex=\"X\" data-katex-display=\"false\">X</span>, so the income effect is negative, yet weaker than the positive substitution effect.",
+        caseGiffenTitle: "Giffen good*",
+        caseGiffenDesc: "A theoretical boundary case where a strong negative income effect outweighs the positive substitution effect, reducing total demand when price falls.",
+        giffenNote: "*Methodological note on Giffen goods: Giffen goods are primarily theoretical constructs in microeconomics. Empirical literature lacks unambiguous evidence of persistent Giffen behavior in real markets; the concept defines the theoretical boundary of the law of demand.",
+        controlsTitle: "Model parameters",
+        btnReset: "Defaults",
+        goodTypeLabel: "Nature of good X",
+        btnNormal: "Normal",
+        btnInferior: "Inferior",
+        btnGiffen: "Giffen*",
+        lblIncome: "Nominal income (<span data-katex=\"M\" data-katex-display=\"false\">M</span>)",
+        lblPx1: "Initial price (<span data-katex=\"P_{X1}\" data-katex-display=\"false\">P_{X1}</span>)",
+        lblPx2: "New price (<span data-katex=\"P_{X2}\" data-katex-display=\"false\">P_{X2}</span>)",
+        lblPy: "Price of good Y (<span data-katex=\"P_Y\" data-katex-display=\"false\">P_Y</span>)",
+        giffenSimWarn: "Giffen regime active: under these parameters, the negative income effect outweighs the substitution effect, reversing the direction of total demand.",
+        giffenOutOfZone: "Outside the local Giffen zone: a Giffen good exists only within a specific income and price window (high budget share near subsistence). Lower nominal income M or load the Giffen paradox scenario to observe demand reversal.",
+        presetsTitle: "Quick scenarios",
+        pre1Title: "Price drop 50%",
+        pre1Sub: "Normal good",
+        pre2Title: "Price hike 100%",
+        pre2Sub: "Normal good",
+        pre3Title: "Opposing effects",
+        pre3Sub: "Inferior good",
+        pre4Title: "Giffen paradox*",
+        pre4Sub: "Demand reversal",
+        chartOverline: "Indifference curves & budget lines",
+        chartTitle: "Hicksian decomposition diagram",
+        legBL1: "Initial <span data-katex=\"BL_1\" data-katex-display=\"false\">BL_1</span>",
+        legBL2: "New <span data-katex=\"BL_2\" data-katex-display=\"false\">BL_2</span>",
+        legBLH: "Compensated <span data-katex=\"BL_H\" data-katex-display=\"false\">BL_H</span>",
+        resSub: "Substitution effect (<span data-katex=\"\\Delta X_S\" data-katex-display=\"false\">\\Delta X_S</span>)",
+        resInc: "Income effect (<span data-katex=\"\\Delta X_D\" data-katex-display=\"false\">\\Delta X_D</span>)",
+        resTot: "Total effect (<span data-katex=\"\\Delta X_C\" data-katex-display=\"false\">\\Delta X_C</span>)",
+        stepsHeading: "Step-by-step decomposition",
+        tasksTitle: "Workshop tasks",
+        tasksIntro: "Load each scenario into the laboratory, observe the transition <span data-katex=\"A \\to B \\to C\" data-katex-display=\"false\">A &rarr; B &rarr; C</span>, and verify your economic reasoning.",
+        taskTab1: "Task 1",
+        taskTab2: "Task 2",
+        taskTab3: "Task 3",
+        t1Title: "Task 1: Normal good and 50% price reduction",
+        t1Level: "Foundational",
+        t1Desc: "Select a normal good with nominal income <span data-katex=\"M = 120\" data-katex-display=\"false\">M = 120</span>, <span data-katex=\"P_{X1} = 6.0\" data-katex-display=\"false\">P_{X1} = 6.0</span>, <span data-katex=\"P_{X2} = 3.0\" data-katex-display=\"false\">P_{X2} = 3.0</span>, and <span data-katex=\"P_Y = 4.0\" data-katex-display=\"false\">P_Y = 4.0</span>. Identify the coordinates of bundles <span data-katex=\"A\" data-katex-display=\"false\">A</span>, <span data-katex=\"B\" data-katex-display=\"false\">B</span>, and <span data-katex=\"C\" data-katex-display=\"false\">C</span>. What share of the total increase in good <span data-katex=\"X\" data-katex-display=\"false\">X</span> comes from the substitution effect versus the income effect?",
+        t1Ans: "Initial equilibrium: <span data-katex=\"A = (10.00;\\, 15.00)\" data-katex-display=\"false\">A = (10.00; 15.00)</span>. After <span data-katex=\"P_X\" data-katex-display=\"false\">P_X</span> drops to <span data-katex=\"3.0\" data-katex-display=\"false\">3.0</span>, the Hicksian compensated bundle is <span data-katex=\"B = (14.14;\\, 10.61)\" data-katex-display=\"false\">B = (14.14; 10.61)</span>, and the final equilibrium is <span data-katex=\"C = (20.00;\\, 15.00)\" data-katex-display=\"false\">C = (20.00; 15.00)</span>. The total effect equals <span data-katex=\"\\Delta X_C = +10.00\" data-katex-display=\"false\">\\Delta X_C = +10.00</span> units, consisting of <span data-katex=\"\\Delta X_S = +4.14\" data-katex-display=\"false\">\\Delta X_S = +4.14</span> (41.4%) from substitution and <span data-katex=\"\\Delta X_D = +5.86\" data-katex-display=\"false\">\\Delta X_D = +5.86</span> (58.6%) from higher real income.",
+        t2Title: "Task 2: Inferior good and opposing effects",
+        t2Level: "Intermediate",
+        t2Desc: "Switch the good type to inferior with <span data-katex=\"M = 120\" data-katex-display=\"false\">M = 120</span>, <span data-katex=\"P_{X1} = 8.0\" data-katex-display=\"false\">P_{X1} = 8.0</span>, <span data-katex=\"P_{X2} = 4.0\" data-katex-display=\"false\">P_{X2} = 4.0</span>, and <span data-katex=\"P_Y = 4.0\" data-katex-display=\"false\">P_Y = 4.0</span>. Explain why bundle <span data-katex=\"C\" data-katex-display=\"false\">C</span> lies to the left of bundle <span data-katex=\"B\" data-katex-display=\"false\">B</span> even though final consumption <span data-katex=\"X_C\" data-katex-display=\"false\">X_C</span> exceeds initial consumption <span data-katex=\"X_A\" data-katex-display=\"false\">X_A</span>.",
+        t2Ans: "Lower <span data-katex=\"P_X\" data-katex-display=\"false\">P_X</span> generates a positive substitution effect (<span data-katex=\"X_B > X_A\" data-katex-display=\"false\">X_B &gt; X_A</span>). Simultaneously, higher real purchasing power induces the consumer to shift away from the inferior good toward good <span data-katex=\"Y\" data-katex-display=\"false\">Y</span> (<span data-katex=\"X_C < X_B\" data-katex-display=\"false\">X_C &lt; X_B</span>). Because the substitution effect outweighs the negative income effect (<span data-katex=\"|\\Delta X_D| < \\Delta X_S\" data-katex-display=\"false\">|\\Delta X_D| &lt; \\Delta X_S</span>), net quantity demanded rises (<span data-katex=\"X_C > X_A\" data-katex-display=\"false\">X_C &gt; X_A</span>).",
+        t3Title: "Task 3: Hypothetical Giffen good and demand reversal",
+        t3Level: "Theoretical analysis",
+        t3Desc: "Load the Giffen good case (<span data-katex=\"M = 100\" data-katex-display=\"false\">M = 100</span>, <span data-katex=\"P_{X1} = 6.0\" data-katex-display=\"false\">P_{X1} = 6.0</span>, <span data-katex=\"P_{X2} = 3.0\" data-katex-display=\"false\">P_{X2} = 3.0</span>, <span data-katex=\"P_Y = 4.0\" data-katex-display=\"false\">P_Y = 4.0</span>). Compare the horizontal positions of <span data-katex=\"A\" data-katex-display=\"false\">A</span>, <span data-katex=\"B\" data-katex-display=\"false\">B</span>, and <span data-katex=\"C\" data-katex-display=\"false\">C</span>. Which structural conditions would be required for this theoretical paradox to emerge?",
+        t3Ans: "In the hypothetical Giffen case, bundle <span data-katex=\"C\" data-katex-display=\"false\">C</span> lies to the left of initial bundle <span data-katex=\"A\" data-katex-display=\"false\">A</span> (<span data-katex=\"X_C < X_A\" data-katex-display=\"false\">X_C &lt; X_A</span>). The negative income effect exceeds the positive substitution effect in absolute magnitude (<span data-katex=\"|\\Delta X_D| > \\Delta X_S\" data-katex-display=\"false\">|\\Delta X_D| &gt; \\Delta X_S</span>). Theoretically, this requires a strongly inferior staple good that absorbs a large share of the household budget and lacks close substitutes.",
+        btnLoadPreset: "Load into laboratory",
+        btnShowAns: "Show solution",
+        glossaryTitle: "Notation reference",
+        glBL: "Initial and final budget lines for nominal income <span data-katex=\"M\" data-katex-display=\"false\">M</span>.",
+        glBLH: "Hicksian compensated budget line and adjusted income keeping utility at <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span>.",
+        glEffects: "Substitution effect (<span data-katex=\"X_B - X_A\" data-katex-display=\"false\">X_B - X_A</span>) and income effect (<span data-katex=\"X_C - X_B\" data-katex-display=\"false\">X_C - X_B</span>).",
+        glUtil: "Initial and final indifference curves representing consumer utility levels.",
+        conHicksTag: "Constant utility approach",
+        conHicksTitle: "Hicksian compensation (<span data-katex=\"BL_H\" data-katex-display=\"false\">BL_H</span>)",
+        conHicksDesc: "Hicks adjusts nominal income to <span data-katex=\"M_H\" data-katex-display=\"false\">M_H</span> so the consumer can reach the exact same indifference curve <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span> under the new price ratio <span data-katex=\"P_{X2} / P_Y\" data-katex-display=\"false\">P_{X2} / P_Y</span>. The compensated line <span data-katex=\"BL_H\" data-katex-display=\"false\">BL_H</span> is tangent to <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span> at point <span data-katex=\"B\" data-katex-display=\"false\">B</span>.",
+        conHicksFoot: "Advantage: Directly links to compensated (Hicksian) demand curves and expenditure minimization.",
+        conSlutskyTag: "Constant purchasing power approach",
+        conSlutskyTitle: "Slutsky compensation (comparison)",
+        conSlutskyDesc: "Unlike Hicks, Eugen Slutsky pivots the budget line through the original bundle <span data-katex=\"A\" data-katex-display=\"false\">A</span> so the consumer can afford the exact same basket at new prices. This places the intermediate bundle on a slightly higher indifference curve than <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span>.",
+        conSlutskyFoot: "Advantage: Observable directly from market prices and initial quantities without knowing utility functions.",
+        microCheckTitle: "Intuition micro-check",
+        microCheckSub: "Click a scenario to inspect the classification of substitution and income effects.",
+        mfBtn0: "1. Price of coffee rises (normal good)",
+        mfBtn1: "2. Price of instant noodles falls (inferior good)",
+        mfBtn2: "3. Perfect complements (left and right shoes)",
+        mfBtn3: "4. Quasilinear utility for good <span data-katex=\"X\" data-katex-display=\"false\">X</span>",
+        btnNextQ: "Next question",
+        quizDoneTag: "Assessment complete",
+        btnRestartQuiz: "Start new session",
+        footer_text: "EconLab — Interactive Economics Simulator for Students. All rights reserved."
+      },
+      pl: {
+        subtitle: "Efekt substytucyjny i dochodowy metodą Hicksa",
+        authorLabel: "Autor:",
+        aiSupport: "Wsparcie w implementacji AI: Gemini",
+        tabIntro: "Wprowadzenie",
+        tabLab: "Laboratorium",
+        tabTasks: "Zadania",
+        tabConcepts: "Pojęcia",
+        tabQuiz: "Quiz",
+        heroBadge: "Mikroekonomia I • Teoria wyboru konsumenta",
+        heroTitle: "Dekompozycja efektu cenowego według Hicksa",
+        heroDesc: "Zmiana ceny dobra X zmienia jednocześnie relację cen między dobrami oraz realną siłę nabywczą dochodu nominalnego. Metoda Johna Hicksa rozdziela te dwie siły przy zachowaniu stałego poziomu użyteczności.",
+        ctaLab: "Otwórz laboratorium",
+        ctaTasks: "Zadania warsztatowe",
+        ctaConcepts: "Porównaj pojęcia",
+        eqCardTitle: "Równanie dekompozycji efektu całkowitego",
+        eqCardDesc: "Przejście od początkowego koszyka równowagi <span data-katex=\"A\" data-katex-display=\"false\">A</span> do końcowego koszyka <span data-katex=\"C\" data-katex-display=\"false\">C</span> odbywa się przez pośredni koszyk kompensacyjny <span data-katex=\"B\" data-katex-display=\"false\">B</span> leżący na wyjściowej krzywej obojętności <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span>.",
+        compSubTag: "Efekt substytucyjny",
+        compSubDesc: "Ruch wzdłuż początkowej krzywej obojętności <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span> wywołany wyłącznie nową relacją cen <span data-katex=\"P_{X2} / P_Y\" data-katex-display=\"false\">P_{X2} / P_Y</span>.",
+        compIncTag: "Efekt dochodowy",
+        compIncDesc: "Równoległe przesunięcie od skompensowanej linii budżetowej <span data-katex=\"BL_H\" data-katex-display=\"false\">BL_H</span> do nowej linii budżetowej <span data-katex=\"BL_2\" data-katex-display=\"false\">BL_2</span> po przywróceniu dochodu <span data-katex=\"M\" data-katex-display=\"false\">M</span>.",
+        compTotTag: "Efekt całkowity",
+        compTotDesc: "Łączna zmiana wielkości popytu między równowagą początkową <span data-katex=\"A\" data-katex-display=\"false\">A</span> na linii <span data-katex=\"BL_1\" data-katex-display=\"false\">BL_1</span> a końcową <span data-katex=\"C\" data-katex-display=\"false\">C</span> na linii <span data-katex=\"BL_2\" data-katex-display=\"false\">BL_2</span>.",
+        casesTitle: "Trzy przypadki przy spadku ceny (<span data-katex=\"P_{X2} < P_{X1}\" data-katex-display=\"false\">P_{X2} &lt; P_{X1}</span>)",
+        casesSubtitle: "Kierunek efektu substytucyjnego, dochodowego i całkowitego w zależności od charakteru dobra <span data-katex=\"X\" data-katex-display=\"false\">X</span>.",
+        caseNormalTitle: "Dobro zwykłe (normalne)",
+        caseNormalDesc: "Wyższa siła nabywcza zwiększa konsumpcję dobra <span data-katex=\"X\" data-katex-display=\"false\">X</span>. Efekt substytucyjny i dochodowy działają w tym samym kierunku.",
+        caseInferiorTitle: "Dobro podrzędne",
+        caseInferiorDesc: "Wyższy dochód realny obniża popyt na dobro <span data-katex=\"X\" data-katex-display=\"false\">X</span>, więc efekt dochodowy jest ujemny, ale słabszy od dodatniego efektu substytucyjnego.",
+        caseGiffenTitle: "Dobro Giffena*",
+        caseGiffenDesc: "Teoretyczny przypadek graniczny, w którym silny ujemny efekt dochodowy przewyższa dodatni efekt substytucyjny, obniżając popyt przy spadku ceny.",
+        giffenNote: "*Zastrzeżenie metodologiczne: dobra Giffena są w mikroekonomii konstrukcją teoretyczną. W literaturze brakuje jednoznacznych dowodów empirycznych na trwałe występowanie tego zjawiska na rynkach — pojęcie wyznacza teoretyczną granicę prawa popytu.",
+        controlsTitle: "Parametry modelu",
+        btnReset: "Domyślne",
+        goodTypeLabel: "Charakter dobra X",
+        btnNormal: "Zwykłe",
+        btnInferior: "Podrzędne",
+        btnGiffen: "Giffena*",
+        lblIncome: "Dochód nominalny (<span data-katex=\"M\" data-katex-display=\"false\">M</span>)",
+        lblPx1: "Cena początkowa (<span data-katex=\"P_{X1}\" data-katex-display=\"false\">P_{X1}</span>)",
+        lblPx2: "Cena po zmianie (<span data-katex=\"P_{X2}\" data-katex-display=\"false\">P_{X2}</span>)",
+        lblPy: "Cena dobra Y (<span data-katex=\"P_Y\" data-katex-display=\"false\">P_Y</span>)",
+        giffenSimWarn: "Aktywna strefa paradoksu Giffena: dla tych parametrów ujemny efekt dochodowy przewyższa efekt substytucyjny i odwraca kierunek popytu całkowitego.",
+        giffenOutOfZone: "Poza lokalną strefą Giffena: dobro Giffena występuje wyłącznie w określonym oknie dochodu i cen (duży udział wydatków blisko progu egzystencji). Obniż dochód M lub wczytaj scenariusz Paradoks Giffena*, aby zaobserwować odwrócenie popytu.",
+        presetsTitle: "Szybkie scenariusze",
+        pre1Title: "Spadek ceny o 50%",
+        pre1Sub: "Dobro zwykłe",
+        pre2Title: "Wzrost ceny o 100%",
+        pre2Sub: "Dobro zwykłe",
+        pre3Title: "Przeciwne efekty",
+        pre3Sub: "Dobro podrzędne",
+        pre4Title: "Paradoks Giffena*",
+        pre4Sub: "Odwrócenie popytu",
+        chartOverline: "Krzywe obojętności i linie budżetowe",
+        chartTitle: "Wykres dekompozycji Hicksa",
+        legBL1: "Budżet początkowy <span data-katex=\"BL_1\" data-katex-display=\"false\">BL_1</span>",
+        legBL2: "Budżet nowy <span data-katex=\"BL_2\" data-katex-display=\"false\">BL_2</span>",
+        legBLH: "Linia kompensacyjna <span data-katex=\"BL_H\" data-katex-display=\"false\">BL_H</span>",
+        resSub: "Efekt substytucyjny (<span data-katex=\"\\Delta X_S\" data-katex-display=\"false\">\\Delta X_S</span>)",
+        resInc: "Efekt dochodowy (<span data-katex=\"\\Delta X_D\" data-katex-display=\"false\">\\Delta X_D</span>)",
+        resTot: "Efekt całkowity (<span data-katex=\"\\Delta X_C\" data-katex-display=\"false\">\\Delta X_C</span>)",
+        stepsHeading: "Dekompozycja krok po kroku",
+        tasksTitle: "Zadania warsztatowe",
+        tasksIntro: "Wczytaj scenariusz do laboratorium, przeanalizuj przejście <span data-katex=\"A \\to B \\to C\" data-katex-display=\"false\">A &rarr; B &rarr; C</span> i zweryfikuj swoje wnioski.",
+        taskTab1: "Zadanie 1",
+        taskTab2: "Zadanie 2",
+        taskTab3: "Zadanie 3",
+        t1Title: "Zadanie 1: dobro zwykłe i spadek ceny o połowę",
+        t1Level: "Poziom podstawowy",
+        t1Desc: "Wybierz dobro zwykłe przy dochodzie <span data-katex=\"M = 120\" data-katex-display=\"false\">M = 120</span>, <span data-katex=\"P_{X1} = 6{,}0\" data-katex-display=\"false\">P_{X1} = 6,0</span>, <span data-katex=\"P_{X2} = 3{,}0\" data-katex-display=\"false\">P_{X2} = 3,0</span> oraz <span data-katex=\"P_Y = 4{,}0\" data-katex-display=\"false\">P_Y = 4,0</span>. Odczytaj współrzędne koszyków <span data-katex=\"A\" data-katex-display=\"false\">A</span>, <span data-katex=\"B\" data-katex-display=\"false\">B</span> i <span data-katex=\"C\" data-katex-display=\"false\">C</span>. Jaki udział w całkowitym wzroście konsumpcji dobra <span data-katex=\"X\" data-katex-display=\"false\">X</span> ma efekt substytucyjny, a jaki dochodowy?",
+        t1Ans: "Równowaga początkowa: <span data-katex=\"A = (10{,}00;\\, 15{,}00)\" data-katex-display=\"false\">A = (10,00; 15,00)</span>. Po spadku <span data-katex=\"P_X\" data-katex-display=\"false\">P_X</span> do <span data-katex=\"3{,}0\" data-katex-display=\"false\">3,0</span> koszyk kompensacyjny Hicksa wynosi <span data-katex=\"B = (14{,}14;\\, 10{,}61)\" data-katex-display=\"false\">B = (14,14; 10,61)</span>, a nowa równowaga to <span data-katex=\"C = (20{,}00;\\, 15{,}00)\" data-katex-display=\"false\">C = (20,00; 15,00)</span>. Efekt całkowity wynosi <span data-katex=\"\\Delta X_C = +10{,}00\" data-katex-display=\"false\">\\Delta X_C = +10,00</span> jednostek, z czego <span data-katex=\"\\Delta X_S = +4{,}14\" data-katex-display=\"false\">\\Delta X_S = +4,14</span> (41,4%) przypada na efekt substytucyjny, a <span data-katex=\"\\Delta X_D = +5{,}86\" data-katex-display=\"false\">\\Delta X_D = +5,86</span> (58,6%) na efekt dochodowy.",
+        t2Title: "Zadanie 2: dobro podrzędne i przeciwne kierunki efektów",
+        t2Level: "Poziom średniozaawansowany",
+        t2Desc: "Przełącz typ dobra na podrzędne przy parametrach <span data-katex=\"M = 120\" data-katex-display=\"false\">M = 120</span>, <span data-katex=\"P_{X1} = 8{,}0\" data-katex-display=\"false\">P_{X1} = 8,0</span>, <span data-katex=\"P_{X2} = 4{,}0\" data-katex-display=\"false\">P_{X2} = 4,0</span> oraz <span data-katex=\"P_Y = 4{,}0\" data-katex-display=\"false\">P_Y = 4,0</span>. Wyjaśnij, dlaczego koszyk <span data-katex=\"C\" data-katex-display=\"false\">C</span> leży na lewo od koszyka <span data-katex=\"B\" data-katex-display=\"false\">B</span>, mimo że konsumpcja końcowa <span data-katex=\"X_C\" data-katex-display=\"false\">X_C</span> jest większa od początkowej <span data-katex=\"X_A\" data-katex-display=\"false\">X_A</span>.",
+        t2Ans: "Niższa cena <span data-katex=\"P_X\" data-katex-display=\"false\">P_X</span> wywołuje dodatni efekt substytucyjny (<span data-katex=\"X_B > X_A\" data-katex-display=\"false\">X_B &gt; X_A</span>). Jednocześnie wyższa realna siła nabywcza skłania konsumenta do ograniczenia zakupu dobra podrzędnego na rzecz dobra <span data-katex=\"Y\" data-katex-display=\"false\">Y</span> (<span data-katex=\"X_C < X_B\" data-katex-display=\"false\">X_C &lt; X_B</span>). Ponieważ efekt substytucyjny przewyższa ujemny efekt dochodowy (<span data-katex=\"|\\Delta X_D| < \\Delta X_S\" data-katex-display=\"false\">|\\Delta X_D| &lt; \\Delta X_S</span>), popyt całkowity rośnie (<span data-katex=\"X_C > X_A\" data-katex-display=\"false\">X_C &gt; X_A</span>).",
+        t3Title: "Zadanie 3: hipotetyczne dobro Giffena i odwrócenie popytu",
+        t3Level: "Analiza teoretyczna",
+        t3Desc: "Wczytaj przypadek dobra Giffena (<span data-katex=\"M = 100\" data-katex-display=\"false\">M = 100</span>, <span data-katex=\"P_{X1} = 6{,}0\" data-katex-display=\"false\">P_{X1} = 6,0</span>, <span data-katex=\"P_{X2} = 3{,}0\" data-katex-display=\"false\">P_{X2} = 3,0</span>, <span data-katex=\"P_Y = 4{,}0\" data-katex-display=\"false\">P_Y = 4,0</span>). Porównaj położenie punktów <span data-katex=\"A\" data-katex-display=\"false\">A</span>, <span data-katex=\"B\" data-katex-display=\"false\">B</span> i <span data-katex=\"C\" data-katex-display=\"false\">C</span> na osi poziomej. Jakie warunki strukturalne musiałyby zajść, aby ten teoretyczny paradoks wystąpił?",
+        t3Ans: "W hipotetycznym przypadku dobra Giffena koszyk <span data-katex=\"C\" data-katex-display=\"false\">C</span> leży na lewo od początkowego koszyka <span data-katex=\"A\" data-katex-display=\"false\">A</span> (<span data-katex=\"X_C < X_A\" data-katex-display=\"false\">X_C &lt; X_A</span>). Ujemny efekt dochodowy przewyższa co do wartości bezwzględnej dodatni efekt substytucyjny (<span data-katex=\"|\\Delta X_D| > \\Delta X_S\" data-katex-display=\"false\">|\\Delta X_D| &gt; \\Delta X_S</span>). Teoretycznie wymaga to silnie podrzędnego dobra podstawowego, które pochłania znaczną część budżetu i nie ma bliskich substytutów.",
+        btnLoadPreset: "Wczytaj do laboratorium",
+        btnShowAns: "Pokaż rozwiązanie",
+        glossaryTitle: "Wykaz oznaczeń",
+        glBL: "Początkowa i końcowa linia ograniczenia budżetowego dla dochodu nominalnego <span data-katex=\"M\" data-katex-display=\"false\">M</span>.",
+        glBLH: "Linia kompensacyjna Hicksa i skorygowany dochód utrzymujący użyteczność na poziomie <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span>.",
+        glEffects: "Efekt substytucyjny (<span data-katex=\"X_B - X_A\" data-katex-display=\"false\">X_B - X_A</span>) oraz efekt dochodowy (<span data-katex=\"X_C - X_B\" data-katex-display=\"false\">X_C - X_B</span>).",
+        glUtil: "Początkowa i końcowa krzywa obojętności obrazujące poziomy użyteczności konsumenta.",
+        conHicksTag: "Podejście stałej użyteczności",
+        conHicksTitle: "Kompensacja Hicksa (<span data-katex=\"BL_H\" data-katex-display=\"false\">BL_H</span>)",
+        conHicksDesc: "Hicks koryguje dochód nominalny do poziomu <span data-katex=\"M_H\" data-katex-display=\"false\">M_H</span> tak, aby konsument osiągnął dokładnie tę samą krzywą obojętności <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span> przy nowej relacji cen <span data-katex=\"P_{X2} / P_Y\" data-katex-display=\"false\">P_{X2} / P_Y</span>. Linia kompensacyjna <span data-katex=\"BL_H\" data-katex-display=\"false\">BL_H</span> jest styczna do <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span> w punkcie <span data-katex=\"B\" data-katex-display=\"false\">B</span>.",
+        conHicksFoot: "Zaleta: bezpośredni związek z popytem skompensowanym (Hicksa) i minimalizacją wydatków.",
+        conSlutskyTag: "Podejście stałej siły nabywczej",
+        conSlutskyTitle: "Kompensacja Słuckiego (porównanie)",
+        conSlutskyDesc: "W odróżnieniu od Hicksa, Eugeniusz Słucki obraca linię budżetową wokół pierwotnego koszyka <span data-katex=\"A\" data-katex-display=\"false\">A</span>, aby konsument mógł kupić ten sam zestaw dóbr po nowych cenach. Koszyk pośredni trafia wtedy na nieco wyższą krzywą obojętności niż <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span>.",
+        conSlutskyFoot: "Zaleta: możliwość wyznaczenia wyłącznie z cen rynkowych i ilości początkowych bez znajomości funkcji użyteczności.",
+        microCheckTitle: "Mini-test intuicji",
+        microCheckSub: "Kliknij sytuację rynkową, aby sprawdzić klasyfikację efektu substytucyjnego i dochodowego.",
+        mfBtn0: "1. Wzrost ceny kawy (dobro zwykłe)",
+        mfBtn1: "2. Spadek ceny zup błyskawicznych (dobro podrzędne)",
+        mfBtn2: "3. Dobra doskonale komplementarne (lewy i prawy but)",
+        mfBtn3: "4. Użyteczność quasi-liniowa względem dobra <span data-katex=\"X\" data-katex-display=\"false\">X</span>",
+        btnNextQ: "Następne pytanie",
+        quizDoneTag: "Test zakończony",
+        btnRestartQuiz: "Rozpocznij nowy zestaw",
+        footer_text: "EconLab — Interactive Economics Simulator for Students. All rights reserved."
+      }
+    };
+
+    const miniFacts = [
+      {
+        en: "When the price of coffee rises, coffee becomes relatively more expensive (<span data-katex=\"\\Delta X_S < 0\" data-katex-display=\"false\">\\Delta X_S &lt; 0</span>) and real purchasing power falls (<span data-katex=\"\\Delta X_D < 0\" data-katex-display=\"false\">\\Delta X_D &lt; 0</span> for a normal good). Both effects reduce coffee consumption.",
+        pl: "Gdy cena kawy rośnie, kawa staje się relatywnie droższa (<span data-katex=\"\\Delta X_S < 0\" data-katex-display=\"false\">\\Delta X_S &lt; 0</span>), a realna siła nabywcza spada (<span data-katex=\"\\Delta X_D < 0\" data-katex-display=\"false\">\\Delta X_D &lt; 0</span> dla dobra zwykłego). Oba efekty ograniczają spożycie kawy."
+      },
+      {
+        en: "When the price of instant noodles falls, the substitution effect increases consumption (<span data-katex=\"\\Delta X_S > 0\" data-katex-display=\"false\">\\Delta X_S &gt; 0</span>), whereas higher real income induces consumers to replace noodles with higher-quality meals (<span data-katex=\"\\Delta X_D < 0\" data-katex-display=\"false\">\\Delta X_D &lt; 0</span>).",
+        pl: "Gdy cena zup błyskawicznych spada, efekt substytucyjny zwiększa ich zakup (<span data-katex=\"\\Delta X_S > 0\" data-katex-display=\"false\">\\Delta X_S &gt; 0</span>), natomiast wzrost realnego dochodu skłania konsumentów do zastąpienia ich posiłkami wyższej jakości (<span data-katex=\"\\Delta X_D < 0\" data-katex-display=\"false\">\\Delta X_D &lt; 0</span>)."
+      },
+      {
+        en: "For perfect complements (L-shaped indifference curves), changing relative prices along the same indifference curve causes zero substitution (<span data-katex=\"\\Delta X_S = 0\" data-katex-display=\"false\">\\Delta X_S = 0</span>). The entire price response is a pure income effect.",
+        pl: "Dla dóbr doskonale komplementarnych (krzywe obojętności w kształcie litery L) zmiana relacji cen przy stałej użyteczności nie wywołuje substytucji (<span data-katex=\"\\Delta X_S = 0\" data-katex-display=\"false\">\\Delta X_S = 0</span>). Cała reakcja na cenę jest czystym efektem dochodowym."
+      },
+      {
+        en: "With quasilinear preferences <span data-katex=\"U(X, Y) = v(X) + Y\" data-katex-display=\"false\">U(X, Y) = v(X) + Y</span>, changes in income affect only good <span data-katex=\"Y\" data-katex-display=\"false\">Y</span> (assuming an interior solution). Therefore, the income effect for good <span data-katex=\"X\" data-katex-display=\"false\">X</span> is zero (<span data-katex=\"\\Delta X_D = 0\" data-katex-display=\"false\">\\Delta X_D = 0</span>), and Hicksian and Marshallian demands coincide.",
+        pl: "Przy preferencjach quasi-liniowych <span data-katex=\"U(X, Y) = v(X) + Y\" data-katex-display=\"false\">U(X, Y) = v(X) + Y</span> zmiany dochodu wpływają wyłącznie na dobro <span data-katex=\"Y\" data-katex-display=\"false\">Y</span> (przy rozwiązaniu wewnętrznym). Efekt dochodowy dla dobra <span data-katex=\"X\" data-katex-display=\"false\">X</span> wynosi zero (<span data-katex=\"\\Delta X_D = 0\" data-katex-display=\"false\">\\Delta X_D = 0</span>), a popyt Hicksa pokrywa się z popytem Marshalla."
+      }
+    ];
+
+    const rawQuizQuestions = [
+      {
+        cat_en: "Hicksian method",
+        cat_pl: "Metoda Hicksa",
+        q_en: "What is held constant when isolating the substitution effect in Hicks' decomposition?",
+        q_pl: "Co pozostaje stałe podczas wyznaczania efektu substytucyjnego w dekompozycji Hicksa?",
+        opts_en: [
+          "The consumer's initial level of utility (indifference curve <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span>)",
+          "The consumer's nominal money income <span data-katex=\"M\" data-katex-display=\"false\">M</span>",
+          "The ability to buy the exact initial basket <span data-katex=\"A\" data-katex-display=\"false\">A</span> (Slutsky method)",
+          "The relative price ratio between goods <span data-katex=\"X\" data-katex-display=\"false\">X</span> and <span data-katex=\"Y\" data-katex-display=\"false\">Y</span>"
+        ],
+        opts_pl: [
+          "Początkowy poziom użyteczności konsumenta (krzywa obojętności <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span>)",
+          "Nominalny dochód pieniężny konsumenta <span data-katex=\"M\" data-katex-display=\"false\">M</span>",
+          "Zdolność nabycia dokładnie początkowego koszyka <span data-katex=\"A\" data-katex-display=\"false\">A</span> (metoda Słuckiego)",
+          "Relacja cenowa między dobrami <span data-katex=\"X\" data-katex-display=\"false\">X</span> i <span data-katex=\"Y\" data-katex-display=\"false\">Y</span>"
+        ],
+        exp_en: "Hicks adjusts nominal income to <span data-katex=\"M_H\" data-katex-display=\"false\">M_H</span> so the compensated budget line <span data-katex=\"BL_H\" data-katex-display=\"false\">BL_H</span> remains tangent to the original indifference curve <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span> under the new prices.",
+        exp_pl: "Hicks koryguje dochód nominalny do poziomu <span data-katex=\"M_H\" data-katex-display=\"false\">M_H</span> tak, aby linia kompensacyjna <span data-katex=\"BL_H\" data-katex-display=\"false\">BL_H</span> pozostała styczna do wyjściowej krzywej obojętności <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span> przy nowych cenach."
+      },
+      {
+        cat_en: "Direction of effects",
+        cat_pl: "Kierunek efektów",
+        q_en: "What is the sign of the Hicksian substitution effect for good <span data-katex=\"X\" data-katex-display=\"false\">X</span> when its price decreases?",
+        q_pl: "Jaki znak ma efekt substytucyjny Hicksa dla dobra <span data-katex=\"X\" data-katex-display=\"false\">X</span>, gdy jego cena spada?",
+        opts_en: [
+          "Always positive (<span data-katex=\"\\Delta X_S > 0\" data-katex-display=\"false\">\\Delta X_S &gt; 0</span>)",
+          "Always negative (<span data-katex=\"\\Delta X_S < 0\" data-katex-display=\"false\">\\Delta X_S &lt; 0</span>)",
+          "Positive for normal goods and negative for inferior goods",
+          "Zero whenever the good is a Giffen good"
+        ],
+        opts_pl: [
+          "Zawsze dodatni (<span data-katex=\"\\Delta X_S > 0\" data-katex-display=\"false\">\\Delta X_S &gt; 0</span>)",
+          "Zawsze ujemny (<span data-katex=\"\\Delta X_S < 0\" data-katex-display=\"false\">\\Delta X_S &lt; 0</span>)",
+          "Dodatni dla dóbr zwykłych, a ujemny dla dóbr podrzędnych",
+          "Równy zeru, gdy dobro jest dobrem Giffena"
+        ],
+        exp_en: "Because indifference curves are convex, a flatter budget line (lower <span data-katex=\"P_X\" data-katex-display=\"false\">P_X</span>) always moves the tangency point along <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span> toward a larger quantity of good <span data-katex=\"X\" data-katex-display=\"false\">X</span>.",
+        exp_pl: "Z wypukłości krzywych obojętności wynika, że bardziej płaska linia budżetowa (niższa cena <span data-katex=\"P_X\" data-katex-display=\"false\">P_X</span>) zawsze przesuwa punkt styczności na <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span> w stronę większej ilości dobra <span data-katex=\"X\" data-katex-display=\"false\">X</span>."
+      },
+      {
+        cat_en: "Inferior goods",
+        cat_pl: "Dobra podrzędne",
+        q_en: "For an inferior good (that is not a Giffen good), how does a price decrease affect demand?",
+        q_pl: "W przypadku dobra podrzędnego (niebędącego dobrem Giffena) spadek ceny wywołuje:",
+        opts_en: [
+          "Positive substitution effect and a smaller negative income effect, increasing total demand",
+          "Negative substitution effect and a positive income effect, reducing total demand",
+          "Two positive effects that reinforce each other",
+          "A negative income effect larger than the substitution effect"
+        ],
+        opts_pl: [
+          "Dodatni efekt substytucyjny i mniejszy ujemny efekt dochodowy, zwiększając popyt całkowity",
+          "Ujemny efekt substytucyjny i dodatni efekt dochodowy, obniżając popyt całkowity",
+          "Dwa dodatnie efekty wzmacniające się nawzajem",
+          "Ujemny efekt dochodowy silniejszy od efektu substytucyjnego"
+        ],
+        exp_en: "Lower price raises real income, which reduces demand for an inferior good (<span data-katex=\"\\Delta X_D < 0\" data-katex-display=\"false\">\\Delta X_D &lt; 0</span>), but the positive substitution effect dominates (<span data-katex=\"\\Delta X_S > |\\Delta X_D|\" data-katex-display=\"false\">\\Delta X_S &gt; |\\Delta X_D|</span>).",
+        exp_pl: "Spadek ceny zwiększa realny dochód, co obniża popyt na dobro podrzędne (<span data-katex=\"\\Delta X_D < 0\" data-katex-display=\"false\">\\Delta X_D &lt; 0</span>), ale dodatni efekt substytucyjny przeważa (<span data-katex=\"\\Delta X_S > |\\Delta X_D|\" data-katex-display=\"false\">\\Delta X_S &gt; |\\Delta X_D|</span>)."
+      },
+      {
+        cat_en: "Budget geometry",
+        cat_pl: "Geometria budżetu",
+        q_en: "How is the Hicksian compensated budget line <span data-katex=\"BL_H\" data-katex-display=\"false\">BL_H</span> constructed geometrically?",
+        q_pl: "Jak geometrycznie wyznacza się linię kompensacyjną Hicksa <span data-katex=\"BL_H\" data-katex-display=\"false\">BL_H</span>?",
+        opts_en: [
+          "Parallel to the new budget line <span data-katex=\"BL_2\" data-katex-display=\"false\">BL_2</span> and tangent to the initial indifference curve <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span>",
+          "Passing through the initial equilibrium point <span data-katex=\"A\" data-katex-display=\"false\">A</span> with the new slope",
+          "Parallel to the initial budget line <span data-katex=\"BL_1\" data-katex-display=\"false\">BL_1</span> and tangent to <span data-katex=\"U_2\" data-katex-display=\"false\">U_2</span>",
+          "Connecting the vertical intercept of <span data-katex=\"BL_1\" data-katex-display=\"false\">BL_1</span> with the horizontal intercept of <span data-katex=\"BL_2\" data-katex-display=\"false\">BL_2</span>"
+        ],
+        opts_pl: [
+          "Równolegle do nowej linii budżetowej <span data-katex=\"BL_2\" data-katex-display=\"false\">BL_2</span> i stycznie do początkowej krzywej obojętności <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span>",
+          "Przechodzącą przez początkowy punkt równowagi <span data-katex=\"A\" data-katex-display=\"false\">A</span> z nowym nachyleniem",
+          "Równolegle do początkowej linii budżetowej <span data-katex=\"BL_1\" data-katex-display=\"false\">BL_1</span> i stycznie do <span data-katex=\"U_2\" data-katex-display=\"false\">U_2</span>",
+          "Łączącą punkt przecięcia z osią pionową <span data-katex=\"BL_1\" data-katex-display=\"false\">BL_1</span> z punktem na osi poziomej <span data-katex=\"BL_2\" data-katex-display=\"false\">BL_2</span>"
+        ],
+        exp_en: "<span data-katex=\"BL_H\" data-katex-display=\"false\">BL_H</span> reflects the new relative prices (same slope as <span data-katex=\"BL_2\" data-katex-display=\"false\">BL_2</span>) while keeping utility fixed at <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span> (tangency to <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span>).",
+        exp_pl: "Linia <span data-katex=\"BL_H\" data-katex-display=\"false\">BL_H</span> odzwierciedla nową relację cen (identyczne nachylenie jak <span data-katex=\"BL_2\" data-katex-display=\"false\">BL_2</span>) przy zachowaniu wyjściowego poziomu użyteczności <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span> (styczność do <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span>)."
+      },
+      {
+        cat_en: "Giffen paradox",
+        cat_pl: "Paradoks Giffena",
+        q_en: "Which condition defines a theoretical Giffen good when its price falls?",
+        q_pl: "Jaki warunek definiuje teoretyczne dobro Giffena przy spadku jego ceny?",
+        opts_en: [
+          "<span data-katex=\"\\Delta X_S > 0\" data-katex-display=\"false\">\\Delta X_S &gt; 0</span>, <span data-katex=\"\\Delta X_D < 0\" data-katex-display=\"false\">\\Delta X_D &lt; 0</span>, and <span data-katex=\"|\\Delta X_D| > \\Delta X_S\" data-katex-display=\"false\">|\\Delta X_D| &gt; \\Delta X_S</span> so total consumption falls",
+          "<span data-katex=\"\\Delta X_S < 0\" data-katex-display=\"false\">\\Delta X_S &lt; 0</span> and <span data-katex=\"\\Delta X_D < 0\" data-katex-display=\"false\">\\Delta X_D &lt; 0</span> so both effects reduce consumption",
+          "<span data-katex=\"\\Delta X_S = 0\" data-katex-display=\"false\">\\Delta X_S = 0</span> and <span data-katex=\"\\Delta X_D > 0\" data-katex-display=\"false\">\\Delta X_D &gt; 0</span> due to L-shaped preferences",
+          "<span data-katex=\"\\Delta X_S > 0\" data-katex-display=\"false\">\\Delta X_S &gt; 0</span> and <span data-katex=\"\\Delta X_D > 0\" data-katex-display=\"false\">\\Delta X_D &gt; 0</span> with income elasticity above 1"
+        ],
+        opts_pl: [
+          "<span data-katex=\"\\Delta X_S > 0\" data-katex-display=\"false\">\\Delta X_S &gt; 0</span>, <span data-katex=\"\\Delta X_D < 0\" data-katex-display=\"false\">\\Delta X_D &lt; 0</span> oraz <span data-katex=\"|\\Delta X_D| > \\Delta X_S\" data-katex-display=\"false\">|\\Delta X_D| &gt; \\Delta X_S</span>, przez co konsumpcja całkowita spada",
+          "<span data-katex=\"\\Delta X_S < 0\" data-katex-display=\"false\">\\Delta X_S &lt; 0</span> oraz <span data-katex=\"\\Delta X_D < 0\" data-katex-display=\"false\">\\Delta X_D &lt; 0</span>, więc oba efekty obniżają konsumpcję",
+          "<span data-katex=\"\\Delta X_S = 0\" data-katex-display=\"false\">\\Delta X_S = 0</span> oraz <span data-katex=\"\\Delta X_D > 0\" data-katex-display=\"false\">\\Delta X_D &gt; 0</span> z powodu preferencji w kształcie litery L",
+          "<span data-katex=\"\\Delta X_S > 0\" data-katex-display=\"false\">\\Delta X_S &gt; 0</span> oraz <span data-katex=\"\\Delta X_D > 0\" data-katex-display=\"false\">\\Delta X_D &gt; 0</span> przy dochodowej elastyczności powyżej 1"
+        ],
+        exp_en: "A Giffen good is an extreme inferior good whose negative income effect outweighs the positive substitution effect, causing a positively sloped demand curve.",
+        exp_pl: "Dobro Giffena to skrajne dobro podrzędne, dla którego ujemny efekt dochodowy przewyższa dodatni efekt substytucyjny, prowadząc do dodatnio nachylonej krzywej popytu."
+      },
+      {
+        cat_en: "Special preferences",
+        cat_pl: "Szczególne preferencje",
+        q_en: "For a consumer with perfect complements <span data-katex=\"U(X, Y) = \\min(X, Y)\" data-katex-display=\"false\">U(X, Y) = \\min(X, Y)</span>, what is the substitution effect of a price drop in <span data-katex=\"X\" data-katex-display=\"false\">X</span>?",
+        q_pl: "Dla konsumenta o dobrach doskonale komplementarnych <span data-katex=\"U(X, Y) = \\min(X, Y)\" data-katex-display=\"false\">U(X, Y) = \\min(X, Y)</span> efekt substytucyjny spadku ceny <span data-katex=\"X\" data-katex-display=\"false\">X</span> wynosi:",
+        opts_en: [
+          "Zero (<span data-katex=\"\\Delta X_S = 0\" data-katex-display=\"false\">\\Delta X_S = 0</span>), because the kink of <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span> remains optimal at any positive price ratio",
+          "Equal to the entire total effect (<span data-katex=\"\\Delta X_S = \\Delta X_C\" data-katex-display=\"false\">\\Delta X_S = \\Delta X_C</span>)",
+          "Negative, because good <span data-katex=\"Y\" data-katex-display=\"false\">Y</span> becomes relatively more expensive",
+          "Infinite, as the consumer buys only good <span data-katex=\"X\" data-katex-display=\"false\">X</span>"
+        ],
+        opts_pl: [
+          "Zero (<span data-katex=\"\\Delta X_S = 0\" data-katex-display=\"false\">\\Delta X_S = 0</span>), ponieważ wierzchołek krzywej <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span> pozostaje optymalny przy każdej dodatniej relacji cen",
+          "Równy całemu efektowi całkowitemu (<span data-katex=\"\\Delta X_S = \\Delta X_C\" data-katex-display=\"false\">\\Delta X_S = \\Delta X_C</span>)",
+          "Ujemny, ponieważ dobro <span data-katex=\"Y\" data-katex-display=\"false\">Y</span> staje się relatywnie droższe",
+          "Nieskończony, gdyż konsument kupuje wyłącznie dobro <span data-katex=\"X\" data-katex-display=\"false\">X</span>"
+        ],
+        exp_en: "When indifference curves have a right-angle kink, rotating the budget line around <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span> leaves the optimal tangency at the exact same vertex <span data-katex=\"A = B\" data-katex-display=\"false\">A = B</span>.",
+        exp_pl: "Gdy krzywe obojętności mają załamanie pod kątem prostym, obrót linii budżetowej wokół <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span> pozostawia punkt optymalny dokładnie w tym samym wierzchołku <span data-katex=\"A = B\" data-katex-display=\"false\">A = B</span>."
+      },
+      {
+        cat_en: "Hicks vs Slutsky",
+        cat_pl: "Hicks a Słucki",
+        q_en: "How does the Slutsky compensated budget line differ from the Hicksian compensated line after a price drop?",
+        q_pl: "Czym różni się linia kompensacyjna Słuckiego od linii kompensacyjnej Hicksa po spadku ceny?",
+        opts_en: [
+          "Slutsky's line passes through bundle <span data-katex=\"A\" data-katex-display=\"false\">A</span> and reaches a slightly higher utility than <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span>",
+          "Slutsky's line has the slope of the initial budget line <span data-katex=\"BL_1\" data-katex-display=\"false\">BL_1</span>",
+          "Hicks' line requires more compensated income than Slutsky's line",
+          "Both methods always produce identical intermediate bundles <span data-katex=\"B\" data-katex-display=\"false\">B</span>"
+        ],
+        opts_pl: [
+          "Linia Słuckiego przechodzi przez koszyk <span data-katex=\"A\" data-katex-display=\"false\">A</span> i osiąga nieco wyższą użyteczność niż <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span>",
+          "Linia Słuckiego ma nachylenie początkowej linii budżetowej <span data-katex=\"BL_1\" data-katex-display=\"false\">BL_1</span>",
+          "Linia Hicksa wymaga wyższego dochodu kompensacyjnego niż linia Słuckiego",
+          "Obie metody zawsze wyznaczają identyczny koszyk pośredni <span data-katex=\"B\" data-katex-display=\"false\">B</span>"
+        ],
+        exp_en: "Because bundle <span data-katex=\"A\" data-katex-display=\"false\">A</span> was optimal at old prices, a line through <span data-katex=\"A\" data-katex-display=\"false\">A</span> with new prices cuts <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span> and allows reaching a strictly higher indifference curve than <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span>.",
+        exp_pl: "Ponieważ koszyk <span data-katex=\"A\" data-katex-display=\"false\">A</span> był optymalny przy starych cenach, linia przechodząca przez <span data-katex=\"A\" data-katex-display=\"false\">A</span> z nowym nachyleniem przecina <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span> i pozwala osiągnąć nieco wyższą użyteczność."
+      },
+      {
+        cat_en: "Compensating variation",
+        cat_pl: "Zmiana kompensacyjna",
+        q_en: "When the price of good <span data-katex=\"X\" data-katex-display=\"false\">X</span> decreases, how does Hicksian compensated income <span data-katex=\"M_H\" data-katex-display=\"false\">M_H</span> compare to nominal income <span data-katex=\"M\" data-katex-display=\"false\">M</span>?",
+        q_pl: "Gdy cena dobra <span data-katex=\"X\" data-katex-display=\"false\">X</span> spada, jak skorygowany dochód Hicksa <span data-katex=\"M_H\" data-katex-display=\"false\">M_H</span> ma się do dochodu nominalnego <span data-katex=\"M\" data-katex-display=\"false\">M</span>?",
+        opts_en: [
+          "<span data-katex=\"M_H < M\" data-katex-display=\"false\">M_H &lt; M</span>, because less income is needed to reach initial utility <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span> at a lower price",
+          "<span data-katex=\"M_H > M\" data-katex-display=\"false\">M_H &gt; M</span>, because the consumer needs extra money to buy good <span data-katex=\"Y\" data-katex-display=\"false\">Y</span>",
+          "<span data-katex=\"M_H = M\" data-katex-display=\"false\">M_H = M</span>, because utility does not change",
+          "<span data-katex=\"M_H > M\" data-katex-display=\"false\">M_H &gt; M</span> only when good <span data-katex=\"X\" data-katex-display=\"false\">X</span> is an inferior good"
+        ],
+        opts_pl: [
+          "<span data-katex=\"M_H < M\" data-katex-display=\"false\">M_H &lt; M</span>, ponieważ przy niższej cenie potrzeba mniejszego dochodu do osiągnięcia wyjściowej użyteczności <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span>",
+          "<span data-katex=\"M_H > M\" data-katex-display=\"false\">M_H &gt; M</span>, ponieważ konsument potrzebuje dodatkowych środków na zakup dobra <span data-katex=\"Y\" data-katex-display=\"false\">Y</span>",
+          "<span data-katex=\"M_H = M\" data-katex-display=\"false\">M_H = M</span>, ponieważ poziom użyteczności się nie zmienia",
+          "<span data-katex=\"M_H > M\" data-katex-display=\"false\">M_H &gt; M</span> wyłącznie wtedy, gdy dobro <span data-katex=\"X\" data-katex-display=\"false\">X</span> jest dobrem podrzędnym"
+        ],
+        exp_en: "A price fall expands the budget set; to return the consumer to the initial indifference curve <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span>, income must be reduced (<span data-katex=\"M_H < M\" data-katex-display=\"false\">M_H &lt; M</span>).",
+        exp_pl: "Spadek ceny rozszerza zbiór budżetowy; aby cofnąć konsumenta na początkową krzywą obojętności <span data-katex=\"U_1\" data-katex-display=\"false\">U_1</span>, należy zmniejszyć dochód (<span data-katex=\"M_H < M\" data-katex-display=\"false\">M_H &lt; M</span>)."
+      }
+    ];
+
+    let quizSession = [];
+    let currentQIndex = 0;
+    let quizScore = 0;
+
+    function renderMathFormulas() {
+      if (typeof katex === 'undefined') return;
+      document.querySelectorAll('[data-katex]').forEach(el => {
+        const tex = el.getAttribute('data-katex');
+        const isDisplay = el.getAttribute('data-katex-display') !== 'false';
+        try {
+          katex.render(tex, el, {
+            displayMode: isDisplay,
+            throwOnError: false
+          });
+        } catch (err) {
+          console.warn('KaTeX render error:', err);
+        }
+      });
+    }
+
+    function switchTab(tab) {
+      currentTab = tab;
+      ['intro', 'lab', 'tasks', 'concepts', 'quiz'].forEach(t => {
+        const panel = document.getElementById('tab-' + t);
+        const btn = document.getElementById('nav-btn-' + t);
+        if (t === tab) {
+          panel.classList.remove('hidden');
+          btn.className = 'px-3 py-1.5 rounded-lg transition-all whitespace-nowrap bg-white shadow-sm text-indigo-600 font-bold';
+        } else {
+          panel.classList.add('hidden');
+          btn.className = 'px-3 py-1.5 rounded-lg transition-all whitespace-nowrap text-slate-600 hover:text-slate-900';
+        }
+      });
+      if (tab === 'lab') {
+        updateSim();
+      }
+      renderMathFormulas();
+    }
+
+    function switchTask(num) {
+      currentTask = num;
+      [1, 2, 3].forEach(n => {
+        const panel = document.getElementById('task-panel-' + n);
+        const btn = document.getElementById('task-nav-' + n);
+        if (n === num) {
+          panel.classList.remove('hidden');
+          btn.className = 'px-3 py-1.5 rounded-lg bg-white shadow-sm text-indigo-600 font-bold';
+        } else {
+          panel.classList.add('hidden');
+          btn.className = 'px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900';
+        }
+      });
+    }
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'en' ? 'pl' : 'en';
+      document.documentElement.lang = currentLang;
+      applyTranslations();
+      updateSim();
+      if (selectedMiniFact !== null) {
+        showMiniFact(selectedMiniFact);
+      }
+      renderQuizState();
+    }
+
+    function applyTranslations() {
+      const dict = translations[currentLang];
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key] !== undefined) {
+          el.innerHTML = dict[key];
+        }
+      });
+      renderMathFormulas();
+    }
+
+    function setGoodType(type) {
+      goodType = type;
+      ['normal', 'inferior', 'giffen'].forEach(t => {
+        const btn = document.getElementById('btn-' + t);
+        if (t === type) {
+          btn.className = 'py-1.5 px-2 rounded-lg text-xs font-semibold transition-all bg-white text-indigo-600 shadow-sm';
+        } else {
+          btn.className = 'py-1.5 px-2 rounded-lg text-xs font-semibold transition-all text-slate-600 hover:text-slate-900';
+        }
+      });
+      const warn = document.getElementById('giffen-warning');
+      if (type === 'giffen') {
+        warn.classList.remove('hidden');
+      } else {
+        warn.classList.add('hidden');
+      }
+      updateSim();
+    }
+
+    function resetSim() {
+      document.getElementById('slider-M').value = 120;
+      document.getElementById('slider-Px1').value = 6;
+      document.getElementById('slider-Px2').value = 3;
+      document.getElementById('slider-Py').value = 4;
+      setGoodType('normal');
+    }
+
+    function loadTaskPreset(type, M, Px1, Px2, Py, switchToLab = true) {
+      document.getElementById('slider-M').value = M;
+      document.getElementById('slider-Px1').value = Px1;
+      document.getElementById('slider-Px2').value = Px2;
+      document.getElementById('slider-Py').value = Py;
+      setGoodType(type);
+      if (switchToLab) {
+        switchTab('lab');
+      }
+    }
+
+    function toggleAnswer(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.classList.toggle('hidden');
+      renderMathFormulas();
+    }
+
+    function showMiniFact(idx) {
+      selectedMiniFact = idx;
+      const box = document.getElementById('mini-fact-box');
+      if (!box || !miniFacts[idx]) return;
+      box.innerHTML = miniFacts[idx][currentLang];
+      box.classList.remove('hidden');
+      renderMathFormulas();
+    }
+
+    function logSoftplus(t, tau) {
+      const z = t / tau;
+      if (z > 30) return Math.log(t);
+      if (z < -30) return Math.log(tau) + z;
+      return Math.log(tau * Math.log(1 + Math.exp(z)));
+    }
+
+    function makeSubsistenceUtility(S, k, alpha, tau, eps) {
+      return (x, y) => {
+        const logU = alpha * logSoftplus(x + k * y - S, tau) + (1 - alpha) * Math.log(Math.max(y, 0) + eps);
+        return Math.exp(logU);
+      };
+    }
+
+    function computeEquilibria(M, Px1, Px2, Py, type) {
+      if (type === 'normal') {
+        const alpha = 0.5;
+        const Xa = (alpha * M) / Px1;
+        const Ya = ((1 - alpha) * M) / Py;
+        const U1 = Math.sqrt(Xa * Ya);
+
+        const Xb = U1 * Math.sqrt(Py / Px2);
+        const Yb = U1 * Math.sqrt(Px2 / Py);
+        const Mh = Px2 * Xb + Py * Yb;
+
+        const Xc = (alpha * M) / Px2;
+        const Yc = ((1 - alpha) * M) / Py;
+        const U2 = Math.sqrt(Xc * Yc);
+
+        return {
+          A: { x: Xa, y: Ya },
+          B: { x: Xb, y: Yb },
+          C: { x: Xc, y: Yc },
+          U1,
+          U2,
+          Mh,
+          model: 'cd'
+        };
+      } else if (type === 'inferior') {
+        // Ściśle quasi-wklęsła funkcja z progiem egzystencji (dobro podrzędne: dX_S > 0, dX_D < 0, |dX_D| < dX_S przy spadku P_X)
+        const uFn = makeSubsistenceUtility(9.5, 0.32, 0.19, 0.20, 0.2);
+        return solveNumerical(M, Px1, Px2, Py, uFn);
+      } else {
+        // Ściśle quasi-wklęsła funkcja typu Sørensena z gładkim progiem egzystencji (lokalne dobro Giffena: |dX_D| > dX_S => X_C < X_A przy spadku P_X)
+        const uFn = makeSubsistenceUtility(15.0, 0.38, 0.09, 0.15, 0.2);
+        return solveNumerical(M, Px1, Px2, Py, uFn);
+      }
+    }
+
+    function solveNumerical(M, Px1, Px2, Py, uFn) {
+      function maximizeOnBudget(budget, px, py) {
+        const maxX = budget / px;
+        if (maxX <= 1e-6) {
+          return { x: 0, y: 0, u: uFn(0, 0) };
+        }
+        // Złoty podział na [0, maxX] – funkcja jest ściśle quasi-wklęsła, więc ma jedyne maksimum globalne
+        let a = 0;
+        let b = maxX;
+        const phi = (Math.sqrt(5) - 1) / 2;
+        let c = b - phi * (b - a);
+        let d = a + phi * (b - a);
+        let fc = uFn(c, Math.max(0, (budget - px * c) / py));
+        let fd = uFn(d, Math.max(0, (budget - px * d) / py));
+
+        for (let i = 0; i < 60; i++) {
+          if (fc > fd) {
+            b = d;
+            d = c;
+            fd = fc;
+            c = b - phi * (b - a);
+            fc = uFn(c, Math.max(0, (budget - px * c) / py));
+          } else {
+            a = c;
+            c = d;
+            fc = fd;
+            d = a + phi * (b - a);
+            fd = uFn(d, Math.max(0, (budget - px * d) / py));
+          }
+        }
+        const bestX = (a + b) / 2;
+        const bestY = Math.max(0, (budget - px * bestX) / py);
+        return { x: bestX, y: bestY, u: uFn(bestX, bestY) };
+      }
+
+      const resA = maximizeOnBudget(M, Px1, Py);
+      const resC = maximizeOnBudget(M, Px2, Py);
+
+      // Wyznaczanie dochodu kompensacyjnego Hicksa M_H metodą bisekcji
+      let low = 0.5;
+      let high = M * 3.0;
+      while (maximizeOnBudget(high, Px2, Py).u < resA.u && high < M * 20) {
+        high *= 2;
+      }
+      let mid = M;
+      let resB = resA;
+      for (let iter = 0; iter < 50; iter++) {
+        mid = (low + high) / 2;
+        resB = maximizeOnBudget(mid, Px2, Py);
+        if (resB.u < resA.u) low = mid;
+        else high = mid;
+      }
+
+      return {
+        A: { x: resA.x, y: resA.y },
+        B: { x: resB.x, y: resB.y },
+        C: { x: resC.x, y: resC.y },
+        U1: resA.u,
+        U2: resC.u,
+        Mh: mid,
+        uFn
+      };
+    }
+
+    function updateSim() {
+      const M = parseFloat(document.getElementById('slider-M').value);
+      const Px1 = parseFloat(document.getElementById('slider-Px1').value);
+      const Px2 = parseFloat(document.getElementById('slider-Px2').value);
+      const Py = parseFloat(document.getElementById('slider-Py').value);
+
+      document.getElementById('val-M').textContent = M.toFixed(0);
+      document.getElementById('val-Px1').textContent = Px1.toFixed(1);
+      document.getElementById('val-Px2').textContent = Px2.toFixed(1);
+      document.getElementById('val-Py').textContent = Py.toFixed(1);
+
+      // Synchronized P_X1 reference dot, consumer-perspective delta segment, and % change badge on P_X2 slider
+      const pxMin = 2;
+      const pxMax = 10;
+      const pct1 = ((Px1 - pxMin) / (pxMax - pxMin)) * 100;
+      const pct2 = ((Px2 - pxMin) / (pxMax - pxMin)) * 100;
+      const refDot = document.getElementById('px2-ref-dot');
+      const deltaBar = document.getElementById('px2-delta-bar');
+      const pctBadge = document.getElementById('val-Px2-pct');
+      const px2Slider = document.getElementById('slider-Px2');
+
+      if (refDot) {
+        refDot.style.left = `${pct1.toFixed(2)}%`;
+      }
+      if (deltaBar) {
+        deltaBar.style.left = `${Math.min(pct1, pct2).toFixed(2)}%`;
+        deltaBar.style.width = `${Math.abs(pct2 - pct1).toFixed(2)}%`;
+      }
+
+      const pctChange = ((Px2 - Px1) / Px1) * 100;
+      const absPct = Math.abs(pctChange);
+      const pctNumStr = Math.abs(absPct - Math.round(absPct)) < 0.05
+        ? Math.round(absPct).toString()
+        : absPct.toFixed(1);
+
+      if (Px2 < Px1 - 1e-6) {
+        // Price decrease: consumer benefit (green)
+        if (deltaBar) deltaBar.style.backgroundColor = '#16a34a';
+        if (px2Slider) {
+          px2Slider.classList.remove('range-rose', 'range-slate');
+          px2Slider.classList.add('range-emerald');
+        }
+        if (pctBadge) {
+          pctBadge.textContent = `−${pctNumStr}%`;
+          pctBadge.className = 'font-mono text-[11px] px-1.5 py-0.5 rounded font-bold border whitespace-nowrap bg-emerald-50 text-emerald-700 border-emerald-200';
+          pctBadge.title = currentLang === 'en' ? 'Price decrease (budget expands)' : 'Spadek ceny (wzrost siły nabywczej)';
+        }
+      } else if (Px2 > Px1 + 1e-6) {
+        // Price increase: consumer loss (red)
+        if (deltaBar) deltaBar.style.backgroundColor = '#dc2626';
+        if (px2Slider) {
+          px2Slider.classList.remove('range-emerald', 'range-slate');
+          px2Slider.classList.add('range-rose');
+        }
+        if (pctBadge) {
+          pctBadge.textContent = `+${pctNumStr}%`;
+          pctBadge.className = 'font-mono text-[11px] px-1.5 py-0.5 rounded font-bold border whitespace-nowrap bg-rose-50 text-rose-700 border-rose-200';
+          pctBadge.title = currentLang === 'en' ? 'Price increase (budget shrinks)' : 'Wzrost ceny (spadek siły nabywczej)';
+        }
+      } else {
+        // No change
+        if (deltaBar) deltaBar.style.backgroundColor = 'transparent';
+        if (px2Slider) {
+          px2Slider.classList.remove('range-emerald', 'range-rose');
+          px2Slider.classList.add('range-slate');
+        }
+        if (pctBadge) {
+          pctBadge.textContent = '0%';
+          pctBadge.className = 'font-mono text-[11px] px-1.5 py-0.5 rounded font-bold border whitespace-nowrap bg-slate-100 text-slate-600 border-slate-200';
+          pctBadge.title = currentLang === 'en' ? 'No price change' : 'Brak zmiany ceny';
+        }
+      }
+
+      const eq = computeEquilibria(M, Px1, Px2, Py, goodType);
+      const dSub = eq.B.x - eq.A.x;
+      const dInc = eq.C.x - eq.B.x;
+      const dTot = eq.C.x - eq.A.x;
+
+      const warn = document.getElementById('giffen-warning');
+      if (goodType === 'giffen') {
+        const priceChanged = Math.abs(Px2 - Px1) > 1e-6;
+        const isGiffenNow = !priceChanged || ((Px2 - Px1) * dTot > 0);
+        warn.classList.remove('hidden');
+        warn.innerHTML = isGiffenNow
+          ? translations[currentLang].giffenSimWarn
+          : translations[currentLang].giffenOutOfZone;
+      } else {
+        warn.classList.add('hidden');
+      }
+
+      const fmt = v => (v >= 0 ? '+' : '−') + Math.abs(v).toFixed(2);
+      const fmtTex = v => (v >= 0 ? '+' : '-') + Math.abs(v).toFixed(2);
+      document.getElementById('out-sub').textContent = fmt(dSub);
+      document.getElementById('out-inc').textContent = fmt(dInc);
+      document.getElementById('out-tot').textContent = fmt(dTot);
+
+      document.getElementById('out-sub-pts').innerHTML = `<span data-katex="X_A (${eq.A.x.toFixed(2)}) \\to X_B (${eq.B.x.toFixed(2)})" data-katex-display="false">X_A (${eq.A.x.toFixed(2)}) &rarr; X_B (${eq.B.x.toFixed(2)})</span>`;
+      document.getElementById('out-inc-pts').innerHTML = `<span data-katex="X_B (${eq.B.x.toFixed(2)}) \\to X_C (${eq.C.x.toFixed(2)})" data-katex-display="false">X_B (${eq.B.x.toFixed(2)}) &rarr; X_C (${eq.C.x.toFixed(2)})</span>`;
+      document.getElementById('out-tot-pts').innerHTML = `<span data-katex="X_A (${eq.A.x.toFixed(2)}) \\to X_C (${eq.C.x.toFixed(2)})" data-katex-display="false">X_A (${eq.A.x.toFixed(2)}) &rarr; X_C (${eq.C.x.toFixed(2)})</span>`;
+
+      const compDiff = eq.Mh - M;
+      const compFmt = fmtTex(compDiff);
+      const stepsEl = document.getElementById('math-breakdown');
+
+      if (currentLang === 'en') {
+        stepsEl.innerHTML = `
+          <div class="p-3 rounded-xl bg-slate-50 border border-slate-100">
+            <span class="font-bold text-indigo-700">1. Initial equilibrium (<span data-katex="A" data-katex-display="false">A</span> on <span data-katex="BL_1" data-katex-display="false">BL_1</span>):</span>
+            Budget constraint <span data-katex="${Px1.toFixed(1)}X + ${Py.toFixed(1)}Y = ${M.toFixed(0)}" data-katex-display="false">${Px1.toFixed(1)}X + ${Py.toFixed(1)}Y = ${M.toFixed(0)}</span> yields optimal bundle
+            <span data-katex="A = (${eq.A.x.toFixed(2)};\\, ${eq.A.y.toFixed(2)})" data-katex-display="false">A = (${eq.A.x.toFixed(2)}; ${eq.A.y.toFixed(2)})</span> at utility <span data-katex="U_1 = ${eq.U1.toFixed(2)}" data-katex-display="false">U_1 = ${eq.U1.toFixed(2)}</span>.
+          </div>
+          <div class="p-3 rounded-xl bg-slate-50 border border-slate-100">
+            <span class="font-bold text-amber-700">2. Hicksian compensation (<span data-katex="B" data-katex-display="false">B</span> on <span data-katex="BL_H" data-katex-display="false">BL_H</span>):</span>
+            Under new price <span data-katex="P_{X2} = ${Px2.toFixed(1)}" data-katex-display="false">P_{X2} = ${Px2.toFixed(1)}</span>, maintaining utility <span data-katex="U_1" data-katex-display="false">U_1</span> requires compensated income
+            <span data-katex="M_H = ${eq.Mh.toFixed(2)}" data-katex-display="false">M_H = ${eq.Mh.toFixed(2)}</span> (<span data-katex="\\Delta M = ${compFmt}" data-katex-display="false">\\Delta M = ${compFmt}</span>), giving <span data-katex="B = (${eq.B.x.toFixed(2)};\\, ${eq.B.y.toFixed(2)})" data-katex-display="false">B = (${eq.B.x.toFixed(2)}; ${eq.B.y.toFixed(2)})</span>.
+          </div>
+          <div class="p-3 rounded-xl bg-slate-50 border border-slate-100">
+            <span class="font-bold text-emerald-700">3. Final equilibrium (<span data-katex="C" data-katex-display="false">C</span> on <span data-katex="BL_2" data-katex-display="false">BL_2</span>):</span>
+            Restoring nominal income <span data-katex="M = ${M.toFixed(0)}" data-katex-display="false">M = ${M.toFixed(0)}</span> at <span data-katex="P_{X2} = ${Px2.toFixed(1)}" data-katex-display="false">P_{X2} = ${Px2.toFixed(1)}</span> leads to
+            <span data-katex="C = (${eq.C.x.toFixed(2)};\\, ${eq.C.y.toFixed(2)})" data-katex-display="false">C = (${eq.C.x.toFixed(2)}; ${eq.C.y.toFixed(2)})</span> at utility <span data-katex="U_2 = ${eq.U2.toFixed(2)}" data-katex-display="false">U_2 = ${eq.U2.toFixed(2)}</span>.
+          </div>
+          <div class="p-3 rounded-xl bg-indigo-50/70 border border-indigo-100">
+            <span class="font-bold text-slate-800">4. Decomposition balance:</span>
+            <span data-katex="\\Delta X_C = \\Delta X_S + \\Delta X_D \\implies ${fmtTex(dTot)} = (${fmtTex(dSub)}) + (${fmtTex(dInc)})" data-katex-display="false">\\Delta X_C = \\Delta X_S + \\Delta X_D</span>.
+          </div>
+        `;
+      } else {
+        stepsEl.innerHTML = `
+          <div class="p-3 rounded-xl bg-slate-50 border border-slate-100">
+            <span class="font-bold text-indigo-700">1. Równowaga początkowa (<span data-katex="A" data-katex-display="false">A</span> na linii <span data-katex="BL_1" data-katex-display="false">BL_1</span>):</span>
+            Ograniczenie budżetowe <span data-katex="${Px1.toFixed(1)}X + ${Py.toFixed(1)}Y = ${M.toFixed(0)}" data-katex-display="false">${Px1.toFixed(1)}X + ${Py.toFixed(1)}Y = ${M.toFixed(0)}</span> wyznacza koszyk
+            <span data-katex="A = (${eq.A.x.toFixed(2)};\\, ${eq.A.y.toFixed(2)})" data-katex-display="false">A = (${eq.A.x.toFixed(2)}; ${eq.A.y.toFixed(2)})</span> przy użyteczności <span data-katex="U_1 = ${eq.U1.toFixed(2)}" data-katex-display="false">U_1 = ${eq.U1.toFixed(2)}</span>.
+          </div>
+          <div class="p-3 rounded-xl bg-slate-50 border border-slate-100">
+            <span class="font-bold text-amber-700">2. Kompensacja Hicksa (<span data-katex="B" data-katex-display="false">B</span> na linii <span data-katex="BL_H" data-katex-display="false">BL_H</span>):</span>
+            Przy nowej cenie <span data-katex="P_{X2} = ${Px2.toFixed(1)}" data-katex-display="false">P_{X2} = ${Px2.toFixed(1)}</span> zachowanie użyteczności <span data-katex="U_1" data-katex-display="false">U_1</span> wymaga dochodu kompensacyjnego
+            <span data-katex="M_H = ${eq.Mh.toFixed(2)}" data-katex-display="false">M_H = ${eq.Mh.toFixed(2)}</span> (<span data-katex="\\Delta M = ${compFmt}" data-katex-display="false">\\Delta M = ${compFmt}</span>), co daje <span data-katex="B = (${eq.B.x.toFixed(2)};\\, ${eq.B.y.toFixed(2)})" data-katex-display="false">B = (${eq.B.x.toFixed(2)}; ${eq.B.y.toFixed(2)})</span>.
+          </div>
+          <div class="p-3 rounded-xl bg-slate-50 border border-slate-100">
+            <span class="font-bold text-emerald-700">3. Równowaga końcowa (<span data-katex="C" data-katex-display="false">C</span> na linii <span data-katex="BL_2" data-katex-display="false">BL_2</span>):</span>
+            Przywrócenie dochodu nominalnego <span data-katex="M = ${M.toFixed(0)}" data-katex-display="false">M = ${M.toFixed(0)}</span> przy <span data-katex="P_{X2} = ${Px2.toFixed(1)}" data-katex-display="false">P_{X2} = ${Px2.toFixed(1)}</span> prowadzi do koszyka
+            <span data-katex="C = (${eq.C.x.toFixed(2)};\\, ${eq.C.y.toFixed(2)})" data-katex-display="false">C = (${eq.C.x.toFixed(2)}; ${eq.C.y.toFixed(2)})</span> przy użyteczności <span data-katex="U_2 = ${eq.U2.toFixed(2)}" data-katex-display="false">U_2 = ${eq.U2.toFixed(2)}</span>.
+          </div>
+          <div class="p-3 rounded-xl bg-indigo-50/70 border border-indigo-100">
+            <span class="font-bold text-slate-800">4. Bilans dekompozycji:</span>
+            <span data-katex="\\Delta X_C = \\Delta X_S + \\Delta X_D \\implies ${fmtTex(dTot)} = (${fmtTex(dSub)}) + (${fmtTex(dInc)})" data-katex-display="false">\\Delta X_C = \\Delta X_S + \\Delta X_D</span>.
+          </div>
+        `;
+      }
+
+      drawSvgChart(M, Px1, Px2, Py, eq);
+      renderMathFormulas();
+    }
+
+    function drawSvgChart(M, Px1, Px2, Py, eq) {
+      const W = 680;
+      const H = 420;
+      const pad = { left: 62, right: 34, top: 28, bottom: 58 };
+      const plotW = W - pad.left - pad.right;
+      const plotH = H - pad.top - pad.bottom;
+
+      const maxX = Math.max(M / Px1, M / Px2, eq.Mh / Px2, 32) * 1.12;
+      const maxY = Math.max(M / Py, eq.Mh / Py, 32) * 1.12;
+
+      const toX = x => pad.left + (x / maxX) * plotW;
+      const toY = y => pad.top + plotH - (y / maxY) * plotH;
+
+      const gridG = document.getElementById('grid-group');
+      const areasG = document.getElementById('areas-group');
+      const vectorsG = document.getElementById('vectors-group');
+      const axisG = document.getElementById('axis-group');
+      const baseG = document.getElementById('baseline-curves-group');
+      const activeG = document.getElementById('active-curves-group');
+      const projG = document.getElementById('projections-group');
+      const diseqG = document.getElementById('diseq-group');
+      const eqVecG = document.getElementById('eq-vector-group');
+      const ptsG = document.getElementById('points-group');
+      const lblG = document.getElementById('labels-group');
+
+      gridG.innerHTML = '';
+      areasG.innerHTML = '';
+      vectorsG.innerHTML = '';
+      axisG.innerHTML = '';
+      baseG.innerHTML = '';
+      activeG.innerHTML = '';
+      projG.innerHTML = '';
+      diseqG.innerHTML = '';
+      eqVecG.innerHTML = '';
+      ptsG.innerHTML = '';
+      lblG.innerHTML = '';
+
+      // 1. Grid
+      for (let i = 1; i <= 5; i++) {
+        const gx = pad.left + (plotW * i) / 5;
+        const gy = pad.top + (plotH * i) / 5;
+        gridG.innerHTML += `<line x1="${gx.toFixed(1)}" y1="${pad.top}" x2="${gx.toFixed(1)}" y2="${pad.top + plotH}" stroke="#e2e8f0" stroke-width="1"/>`;
+        gridG.innerHTML += `<line x1="${pad.left}" y1="${gy.toFixed(1)}" x2="${pad.left + plotW}" y2="${gy.toFixed(1)}" stroke="#e2e8f0" stroke-width="1"/>`;
+      }
+
+      // 2. Subtle triangle between BL1 and BL2
+      areasG.innerHTML += `<polygon points="${toX(0).toFixed(1)},${toY(M / Py).toFixed(1)} ${toX(M / Px1).toFixed(1)},${toY(0).toFixed(1)} ${toX(M / Px2).toFixed(1)},${toY(0).toFixed(1)}" fill="#4f46e5" fill-opacity="0.04"/>`;
+
+      // 4. Axes
+      axisG.innerHTML += `<line x1="${pad.left}" y1="${pad.top + plotH}" x2="${pad.left}" y2="${pad.top - 8}" stroke="#475569" stroke-width="2" marker-end="url(#arrow-axis)"/>`;
+      axisG.innerHTML += `<line x1="${pad.left}" y1="${pad.top + plotH}" x2="${pad.left + plotW + 10}" y2="${pad.top + plotH}" stroke="#475569" stroke-width="2" marker-end="url(#arrow-axis)"/>`;
+
+      const yAxisLabel = currentLang === 'en' ? 'Good Y' : 'Dobro Y';
+      const xAxisLabel = currentLang === 'en' ? 'Good X' : 'Dobro X';
+      axisG.innerHTML += `<text x="${pad.left - 36}" y="${pad.top + 4}" transform="rotate(-90, ${pad.left - 36}, ${pad.top + 4})" text-anchor="end" fill="#334155" font-size="12" font-weight="700">${yAxisLabel}</text>`;
+      axisG.innerHTML += `<text x="${pad.left + plotW}" y="${pad.top + plotH + 38}" text-anchor="end" fill="#334155" font-size="12" font-weight="700">${xAxisLabel}</text>`;
+
+      // Indifference curves helper
+      function buildICPath(targetU) {
+        let d = '';
+        let started = false;
+        let lastPt = null;
+        const step = maxX / 240;
+        for (let x = eq.model === 'cd' ? 0.3 : 0; x <= maxX * 0.98; x += step) {
+          let y = -1;
+          if (eq.model === 'cd') {
+            y = (targetU * targetU) / x;
+          } else {
+            const uMin = eq.uFn(x, 0);
+            const uMax = eq.uFn(x, maxY * 1.15);
+            if (uMin > targetU || uMax < targetU) {
+              continue;
+            }
+            let lo = 0;
+            let hi = maxY * 1.15;
+            for (let k = 0; k < 28; k++) {
+              const midY = (lo + hi) / 2;
+              if (eq.uFn(x, midY) < targetU) lo = midY;
+              else hi = midY;
+            }
+            y = (lo + hi) / 2;
+          }
+          if (y >= 0 && y <= maxY * 0.96) {
+            const px = toX(x);
+            const py = toY(y);
+            d += (started ? ` L ${px.toFixed(1)} ${py.toFixed(1)}` : `M ${px.toFixed(1)} ${py.toFixed(1)}`);
+            started = true;
+            lastPt = { x: px, y: py };
+          }
+        }
+        return { d, lastPt };
+      }
+
+      // 5 & 6. Indifference curves U1 & U2 and Budget lines
+      const icU1 = buildICPath(eq.U1);
+      const icU2 = buildICPath(eq.U2);
+      if (icU1.d) activeG.innerHTML += `<path d="${icU1.d}" fill="none" stroke="#94a3b8" stroke-width="2"/>`;
+      if (icU2.d) activeG.innerHTML += `<path d="${icU2.d}" fill="none" stroke="#64748b" stroke-width="2"/>`;
+
+      function drawClippedBudget(budget, px, py, color, width, dash) {
+        let x0 = 0;
+        let y0 = budget / py;
+        if (y0 > maxY) {
+          y0 = maxY;
+          x0 = (budget - py * y0) / px;
+        }
+        let x1 = budget / px;
+        let y1 = 0;
+        if (x1 > maxX) {
+          x1 = maxX;
+          y1 = (budget - px * x1) / py;
+        }
+        if (x0 <= maxX && y1 <= maxY) {
+          const dashAttr = dash ? `stroke-dasharray="${dash}"` : '';
+          return `<line x1="${toX(x0).toFixed(1)}" y1="${toY(y0).toFixed(1)}" x2="${toX(x1).toFixed(1)}" y2="${toY(y1).toFixed(1)}" stroke="${color}" stroke-width="${width}" ${dashAttr}/>`;
+        }
+        return '';
+      }
+
+      baseG.innerHTML += drawClippedBudget(M, Px1, Py, '#2563eb', 2.4, null);
+      activeG.innerHTML += drawClippedBudget(M, Px2, Py, '#16a34a', 2.4, null);
+      activeG.innerHTML += drawClippedBudget(eq.Mh, Px2, Py, '#d97706', 2.2, '6,5');
+
+      // 7. Projections to X-axis
+      const points = [
+        { pt: eq.A, sub: 'A', color: '#2563eb' },
+        { pt: eq.B, sub: 'B', color: '#d97706' },
+        { pt: eq.C, sub: 'C', color: '#16a34a' }
+      ];
+
+      points.forEach(item => {
+        const px = toX(item.pt.x);
+        const py = toY(item.pt.y);
+        projG.innerHTML += `<line x1="${px.toFixed(1)}" y1="${py.toFixed(1)}" x2="${px.toFixed(1)}" y2="${pad.top + plotH}" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="3,3"/>`;
+      });
+
+      // 9. Decomposition vectors along X-axis
+      const yBase = pad.top + plotH;
+      const xA = toX(eq.A.x);
+      const xB = toX(eq.B.x);
+      const xC = toX(eq.C.x);
+
+      if (Math.abs(xB - xA) > 4) {
+        eqVecG.innerHTML += `<line x1="${xA.toFixed(1)}" y1="${yBase - 8}" x2="${xB.toFixed(1)}" y2="${yBase - 8}" stroke="#ffffff" stroke-width="4"/>`;
+        eqVecG.innerHTML += `<line x1="${xA.toFixed(1)}" y1="${yBase - 8}" x2="${xB.toFixed(1)}" y2="${yBase - 8}" stroke="#2563eb" stroke-width="2.2" marker-end="url(#arrow-sub)"/>`;
+      }
+      if (Math.abs(xC - xB) > 4) {
+        eqVecG.innerHTML += `<line x1="${xB.toFixed(1)}" y1="${yBase - 16}" x2="${xC.toFixed(1)}" y2="${yBase - 16}" stroke="#ffffff" stroke-width="4"/>`;
+        eqVecG.innerHTML += `<line x1="${xB.toFixed(1)}" y1="${yBase - 16}" x2="${xC.toFixed(1)}" y2="${yBase - 16}" stroke="#d97706" stroke-width="2.2" marker-end="url(#arrow-inc)"/>`;
+      }
+      if (Math.abs(xC - xA) > 4) {
+        eqVecG.innerHTML += `<line x1="${xA.toFixed(1)}" y1="${yBase - 24}" x2="${xC.toFixed(1)}" y2="${yBase - 24}" stroke="#ffffff" stroke-width="4"/>`;
+        eqVecG.innerHTML += `<line x1="${xA.toFixed(1)}" y1="${yBase - 24}" x2="${xC.toFixed(1)}" y2="${yBase - 24}" stroke="#7c3aed" stroke-width="2.2" marker-end="url(#arrow-tot)"/>`;
+      }
+
+      // 10 & 11. Equilibrium points and top-layer labels (collision-aware X-axis offsets)
+      const sortedForLabels = points
+        .map((item, idx) => ({ ...item, idx, px: toX(item.pt.x), py: toY(item.pt.y) }))
+        .sort((a, b) => a.px - b.px);
+
+      const yOffsets = {};
+      sortedForLabels.forEach((item, orderIdx) => {
+        yOffsets[item.sub] = orderIdx === 1 ? 28 : 15;
+      });
+
+      points.forEach((item, idx) => {
+        const px = toX(item.pt.x);
+        const py = toY(item.pt.y);
+        const pulseClass = idx === 2 ? 'pulse-node' : '';
+        ptsG.innerHTML += `<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="6" fill="${item.color}" stroke="#ffffff" stroke-width="2" class="${pulseClass}"/>`;
+
+        lblG.innerHTML += `<text x="${(px + 8).toFixed(1)}" y="${(py - 8).toFixed(1)}" fill="#0f172a" font-size="13" font-weight="800">${item.sub}</text>`;
+
+        const yOffset = yOffsets[item.sub];
+        lblG.innerHTML += `<text x="${px.toFixed(1)}" y="${(yBase + yOffset).toFixed(1)}" text-anchor="middle" fill="${item.color}" font-size="11" font-weight="700">X<tspan baseline-shift="sub" font-size="8">${item.sub}</tspan>=${item.pt.x.toFixed(1)}</text>`;
+      });
+
+      // Curve labels U1 & U2 near right end of plotted indifference curves
+      if (icU1.lastPt) {
+        lblG.innerHTML += `<text x="${Math.min(icU1.lastPt.x + 4, W - 26).toFixed(1)}" y="${Math.max(icU1.lastPt.y - 4, pad.top + 12).toFixed(1)}" fill="#64748b" font-size="11" font-weight="700">U<tspan baseline-shift="sub" font-size="8">1</tspan></text>`;
+      }
+      if (icU2.lastPt) {
+        lblG.innerHTML += `<text x="${Math.min(icU2.lastPt.x + 4, W - 26).toFixed(1)}" y="${Math.max(icU2.lastPt.y - 4, pad.top + 12).toFixed(1)}" fill="#475569" font-size="11" font-weight="700">U<tspan baseline-shift="sub" font-size="8">2</tspan></text>`;
+      }
+    }
+
+    function shuffleArray(arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    function initializeQuizSession() {
+      quizSession = shuffleArray(rawQuizQuestions).map(q => {
+        const indices = shuffleArray([0, 1, 2, 3]);
+        const correctShuffledIdx = indices.indexOf(0);
+        return {
+          ...q,
+          shuffledIndices: indices,
+          correctIdx: correctShuffledIdx,
+          answered: false,
+          selectedIdx: null
+        };
+      });
+      currentQIndex = 0;
+      quizScore = 0;
+      document.getElementById('quiz-result-view').classList.add('hidden');
+      document.getElementById('quiz-active-view').classList.remove('hidden');
+      renderQuizState();
+    }
+
+    function renderQuizState() {
+      if (!quizSession.length) return;
+      if (currentQIndex >= quizSession.length) {
+        showQuizCompletion();
+        return;
+      }
+
+      const item = quizSession[currentQIndex];
+      const total = quizSession.length;
+      const counterLabel = currentLang === 'en' ? `Question ${currentQIndex + 1}/${total}` : `Pytanie ${currentQIndex + 1}/${total}`;
+      const scoreLabel = currentLang === 'en' ? `Your score: ${quizScore} / ${total}` : `Twój wynik: ${quizScore} / ${total}`;
+
+      document.getElementById('quiz-counter').textContent = counterLabel;
+      document.getElementById('quiz-category').textContent = currentLang === 'en' ? item.cat_en : item.cat_pl;
+      document.getElementById('quiz-score-badge').textContent = scoreLabel;
+      document.getElementById('quiz-question-text').innerHTML = currentLang === 'en' ? item.q_en : item.q_pl;
+
+      const optsSource = currentLang === 'en' ? item.opts_en : item.opts_pl;
+      const letters = ['A', 'B', 'C', 'D'];
+      const listEl = document.getElementById('quiz-options-list');
+
+      listEl.innerHTML = item.shuffledIndices.map((origIdx, dispIdx) => {
+        let style = 'border-slate-200 hover:border-indigo-300 hover:bg-slate-50 text-slate-700';
+        let badgeStyle = 'bg-slate-100 text-slate-600';
+
+        if (item.answered) {
+          if (dispIdx === item.correctIdx) {
+            style = 'border-emerald-500 bg-emerald-50 text-emerald-950 font-medium';
+            badgeStyle = 'bg-emerald-600 text-white';
+          } else if (dispIdx === item.selectedIdx) {
+            style = 'border-rose-500 bg-rose-50 text-rose-950';
+            badgeStyle = 'bg-rose-600 text-white';
+          } else {
+            style = 'border-slate-200 opacity-60 text-slate-500';
+          }
+        }
+
+        const disabledAttr = item.answered ? 'disabled' : '';
+        return `
+          <button onclick="selectQuizAnswer(${dispIdx})" ${disabledAttr} class="w-full text-left p-3.5 rounded-xl border transition-all flex items-center justify-between gap-3 ${style}">
+            <span class="text-xs sm:text-sm leading-snug">${optsSource[origIdx]}</span>
+            <span class="w-6 h-6 rounded-full text-xs font-bold flex items-center justify-center shrink-0 ${badgeStyle}">${letters[dispIdx]}</span>
+          </button>
+        `;
+      }).join('');
+
+      const expEl = document.getElementById('quiz-explanation');
+      const nextBtn = document.getElementById('quiz-next-btn');
+
+      if (item.answered) {
+        expEl.innerHTML = currentLang === 'en' ? item.exp_en : item.exp_pl;
+        expEl.classList.remove('hidden');
+        nextBtn.classList.remove('hidden');
+        nextBtn.textContent = currentQIndex === total - 1
+          ? (currentLang === 'en' ? 'Finish quiz' : 'Zakończ quiz')
+          : (currentLang === 'en' ? 'Next question' : 'Następne pytanie');
+      } else {
+        expEl.classList.add('hidden');
+        nextBtn.classList.add('hidden');
+      }
+      renderMathFormulas();
+    }
+
+    function selectQuizAnswer(dispIdx) {
+      const item = quizSession[currentQIndex];
+      if (item.answered) return;
+      item.answered = true;
+      item.selectedIdx = dispIdx;
+      if (dispIdx === item.correctIdx) {
+        quizScore++;
+      }
+      renderQuizState();
+    }
+
+    function nextQuizQuestion() {
+      currentQIndex++;
+      if (currentQIndex >= quizSession.length) {
+        showQuizCompletion();
+      } else {
+        renderQuizState();
+      }
+    }
+
+    function showQuizCompletion() {
+      document.getElementById('quiz-active-view').classList.add('hidden');
+      document.getElementById('quiz-result-view').classList.remove('hidden');
+      const total = quizSession.length;
+      const pct = Math.round((quizScore / total) * 100);
+      document.getElementById('quiz-final-pct').textContent = `${pct}%`;
+      document.getElementById('quiz-final-summary').textContent = currentLang === 'en'
+        ? `You answered ${quizScore} out of ${total} questions correctly.`
+        : `Udzielono poprawnych odpowiedzi na ${quizScore} z ${total} pytań.`;
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      applyTranslations();
+      updateSim();
+      initializeQuizSession();
+      renderMathFormulas();
+    });
+  </script>
+</body>
+</html>
